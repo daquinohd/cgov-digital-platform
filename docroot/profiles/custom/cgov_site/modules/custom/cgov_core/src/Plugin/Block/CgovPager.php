@@ -144,12 +144,25 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       foreach ($entity_ids as $nid) {
         $node = $node_storage->load($nid);
         // $posted[$nid] = $node->field_date_posted->value;.
-        $ass_array['nid'][] = $nid;
-        $ass_array['date'][] = $node->field_date_posted->value;
+        $ass_array[] = [
+          'nid' => $nid,
+          'date' => $node->field_date_posted->value,
+        ];
       }
+
+      ksm($ass_array);
+
+      foreach ($ass_array as $index => $ass) {
+        if ($ass['nid'] == $content_id) {
+          ksm($ass);
+          ksm($ass_array[$index]);
+          ksm($ass_array[$index + 1]);
+          ksm($ass_array[$index - 1]);
+        }
+      }
+
     }
 
-    ksm($ass_array);
     // Build custom pager based on type.
     switch ($content_type) {
       case 'cgov_blog_post':
