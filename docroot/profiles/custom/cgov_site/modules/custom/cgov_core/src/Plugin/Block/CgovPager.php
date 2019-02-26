@@ -6,7 +6,6 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,13 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
 
   /**
    * The route matcher.
@@ -59,8 +51,6 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
-   *   The language manager.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_matcher
    *   The route matcher.
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
@@ -72,13 +62,11 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     array $configuration,
     $plugin_id,
     $plugin_definition,
-    LanguageManagerInterface $language_manager,
     RouteMatchInterface $route_matcher,
     QueryFactory $entity_query,
     EntityTypeManagerInterface $entity_type_manager
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->languageManager = $language_manager;
     $this->routeMatcher = $route_matcher;
     $this->entityQuery = $entity_query;
     $this->entityTypeManager = $entity_type_manager;
@@ -92,7 +80,6 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('language_manager'),
       $container->get('current_route_match'),
       $container->get('entity.query'),
       $container->get('entity_type.manager')
@@ -127,22 +114,46 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     if ($curr_entity = $this->getCurrEntity()) {
       $content_type = $curr_entity->bundle();
       $content_id = $curr_entity->id();
-
-      // Build our query.
-      $query = $this->entityQuery->get('node');
-      $query->condition('status', 1);
-      $query->condition('type', $content_type);
-      $query->sort('field_date_posted');
-      $entity_ids = $query->execute();
-
-      // Using entity ID, build array of values sorted by date.
       $node_storage = $this->entityTypeManager->getStorage('node');
-      $ass_array = [];
     }
 
-    // Build custom pager based on type.
+    // Build our query object. TODO: move this into the function.
+    $query = $this->entityQuery->get('node');
+    $query->condition('status', 1);
+    $query->condition('type', $content_type);
+
+    // Retrieve our pager markup based on content type.
     switch ($content_type) {
       case 'cgov_blog_post':
+        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $query, $node_storage);
+        break;
+
+      default:
+        break;
+    }
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Make cacheable in https://www.drupal.org/node/2232375.
+   */
+  public function getCacheMaxAge() {
+    return 0;
+  }
+
+  /**
+   * Draw Older/Newer links for Blog Post.
+   */
+  private function drawBlogPostOlderNewer($content_id, $query, $node_storage) {
+    $query->sort('field_date_posted');
+    $entity_ids = $query->execute();
+
+    // Using entity ID, build array of values sorted by date.
+    $ass_array = [];
+
 
         // Build associative array.
         foreach ($entity_ids as $nid) {
@@ -155,51 +166,34 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
         }
 
         // Debug the whole thing.
-        ksm($content_id);
-        ksm($ass_array);
+        // Ksm($content_id);.
+        // Ksm($ass_array);.
         $prev_link = '';
         $next_link = '';
+        $markup = '';
 
         // Draw our prev/next links.
         foreach ($ass_array as $index => $ass) {
           if ($ass['nid'] == $content_id) {
-            $build['#markup'] = '';
             $length = count($ass_array);
 
             if ($index > 0) {
               $prev_link = $ass_array[$index - 1];
-              $build['#markup'] .= "
+              $markup .= "
                 <a href=/prev>" . $prev_link['date'] . "</a>
               ";
             }
 
             if ($index < ($length - 1)) {
               $next_link = $ass_array[$index + 1];
-              $build['#markup'] .= "
+              $markup .= "
                 <a href=/next>" . $next_link['date'] . "</a>
               ";
             }
             break;
           }
         }
-        break;
-
-      default:
-        $build['#markup'] = '<b>not a blog post</b>';
-    }
-
-    // Debug build object.
-    // Xksm($build);!
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * @todo Make cacheable in https://www.drupal.org/node/2232375.
-   */
-  public function getCacheMaxAge() {
-    return 0;
+        return $markup;
   }
 
 }
