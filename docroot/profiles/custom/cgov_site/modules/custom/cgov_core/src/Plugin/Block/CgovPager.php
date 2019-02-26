@@ -140,14 +140,14 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
   }
 
   /**
-   * Draw Older/Newer links for Blog Post.
+   * Get an array of field collections to use for Blog Post pagination links.
    *
    * @param string $cid
    *   The nid of the current content item.
    * @param string $content_type
    *   The content type machine name.
    */
-  private function drawBlogPostOlderNewer($cid, $content_type) {
+  private function getBlogPostPagerLinks($cid, $content_type) {
     // Build our query object.
     $query = $this->entityQuery->get('node');
     $query->condition('status', 1);
@@ -160,18 +160,32 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     $filter_series = $filter_node->field_blog_series->target_id;
 
     // Build associative array.
-    foreach ($entity_ids as $eid) {
-      $node = $this->getNodeStorage()->load($eid);
+    foreach ($entity_ids as $entid) {
+      $node = $this->getNodeStorage()->load($entid);
       $node_series = $node->field_blog_series->target_id;
 
       if ($node_series == $filter_series) {
         $blog_links[] = [
-          'nid' => $eid,
+          'nid' => $entid,
           'date' => $node->field_date_posted->value,
           'title' => $node->title->value,
         ];
       }
     }
+    return $blog_links;
+  }
+
+  /**
+   * Draw Older/Newer links for Blog Post.
+   *
+   * @param string $cid
+   *   The nid of the current content item.
+   * @param string $content_type
+   *   The content type machine name.
+   */
+  private function drawBlogPostOlderNewer($cid, $content_type) {
+    // Get an array of blog field collections to populate links.
+    $blog_links = $this->getBlogPostPagerLinks($cid, $content_type);
 
     // Open Blog Post pagination div.
     $markup = "<div id='cgov-blog-post-pagination>";
@@ -179,8 +193,10 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Draw our prev/next links.
     // TODO: hook up translation.
     foreach ($blog_links as $index => $blog_link) {
+
+      // Look for the entry that matches the current node.
+      // TODO: use pretty URLs, not node #s.
       if ($blog_link['nid'] == $cid) {
-        $length = count($blog_links);
 
         // Link previous post if exists.
         if ($index > 0) {
@@ -194,7 +210,7 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
         }
 
         // Link next post if exists.
-        if ($index < ($length - 1)) {
+        if ($index < (count($blog_links) - 1)) {
           $next = $blog_links[$index + 1];
           $markup .= "
             <div class='blog-post-newer'>
