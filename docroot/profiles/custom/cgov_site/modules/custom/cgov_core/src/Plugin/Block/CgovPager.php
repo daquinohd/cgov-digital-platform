@@ -4,12 +4,12 @@ namespace Drupal\cgov_core\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -52,6 +52,13 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
   protected $entityQuery;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Constructs a CgovPager object.
    *
    * @param array $configuration
@@ -68,6 +75,8 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
    *   The route matcher.
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
    *   An entity query.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
    */
   public function __construct(
     array $configuration,
@@ -76,13 +85,15 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     LanguageManagerInterface $language_manager,
     PathMatcherInterface $path_matcher,
     RouteMatchInterface $route_matcher,
-    QueryFactory $entity_query
+    QueryFactory $entity_query,
+    EntityTypeManagerInterface $entity_type_manager
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->languageManager = $language_manager;
     $this->pathMatcher = $path_matcher;
     $this->routeMatcher = $route_matcher;
     $this->entityQuery = $entity_query;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -96,7 +107,8 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       $container->get('language_manager'),
       $container->get('path.matcher'),
       $container->get('current_route_match'),
-      $container->get('entity.query')
+      $container->get('entity.query'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -134,10 +146,11 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       $entity_ids = $query->execute();
 
       // Using entity ID, build array of values sorted by date.
+      $node_storage = $this->entityTypeManager->getStorage('node');
       foreach ($entity_ids as $nid) {
-        $posted[] = $nid . ', ' . Node::load($nid)->field_date_posted->value;
+        $node = $node_storage->load($nid);
+        $posted[] = $nid . ', ' . $node->field_date_posted->value;
       }
-
     }
 
     // Build custom pager based on type.
