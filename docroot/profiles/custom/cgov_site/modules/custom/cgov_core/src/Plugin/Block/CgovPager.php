@@ -126,6 +126,10 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Debug entity object.
     if ($curr_entity = $this->getCurrEntity()) {
       $content_type = $curr_entity->bundle();
+      $content_id = $curr_entity->id();
+      ksm($content_id);
+
+      // Build our query.
       $query = $this->entityQuery->get('node');
       $query->condition('status', 1);
       $query->condition('type', $content_type);
@@ -134,16 +138,21 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
 
       // Using entity ID, build array of values sorted by date.
       $node_storage = $this->entityTypeManager->getStorage('node');
+      $ass_array = [];
+
+      // Build associative array.
       foreach ($entity_ids as $nid) {
         $node = $node_storage->load($nid);
-        $posted[] = $nid . ' | ' . $node->field_date_posted->value;
+        // $posted[$nid] = $node->field_date_posted->value;.
+        $ass_array['nid'][] = $nid;
+        $ass_array['date'][] = $node->field_date_posted->value;
       }
     }
 
+    ksm($ass_array);
     // Build custom pager based on type.
     switch ($content_type) {
       case 'cgov_blog_post':
-        ksm($posted);
         $build['#markup'] = '<b>blog post</b>';
         break;
 
