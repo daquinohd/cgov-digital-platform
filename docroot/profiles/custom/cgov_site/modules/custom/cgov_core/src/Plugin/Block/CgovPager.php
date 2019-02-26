@@ -167,13 +167,18 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Build associative array.
     foreach ($entity_ids as $nid) {
       $node = $this->getNodeStorage()->load($nid);
-      $blog_links[] = [
-        'nid' => $nid,
-        'date' => $node->field_date_posted->value,
-        'title' => $node->title->value,
-        'series_filter' => $ser,
-        'series' => $node->field_blog_series->target_id,
-      ];
+      $series_filter = $ser;
+      $series = $node->field_blog_series->target_id;
+
+      if ($series_filter == $series) {
+        $blog_links[] = [
+          'nid' => $nid,
+          'date' => $node->field_date_posted->value,
+          'title' => $node->title->value,
+          'series_filter' => $series_filter,
+          'series' => $series,
+        ];
+      }
     }
 
     // Debug node objs.
@@ -185,7 +190,7 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Draw our prev/next links.
     // TODO: hook up translation.
     foreach ($blog_links as $index => $blog_link) {
-      if ($blog_link['nid'] == $cid && $blog_link['series'] == $blog_link['series_filter']) {
+      if ($blog_link['nid'] == $cid) {
         $length = count($blog_links);
 
         // Link previous post if exists.
