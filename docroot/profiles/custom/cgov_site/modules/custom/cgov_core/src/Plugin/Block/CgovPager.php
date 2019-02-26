@@ -163,15 +163,21 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
         // Draw our prev/next links.
         foreach ($ass_array as $index => $ass) {
           if ($ass['nid'] == $content_id) {
+            $build['#markup'] = '';
             $length = count($ass_array);
 
             if ($index > 0) {
               $prev_link = $ass_array[$index - 1];
-              ksm($prev_link);
+              $build['#markup'] .= "
+                <a href=/prev>" . $prev_link['date'] . "</a>
+              ";
             }
+
             if ($index < ($length - 1)) {
               $next_link = $ass_array[$index + 1];
-              ksm($next_link);
+              $build['#markup'] .= "
+                <a href=/next>" . $next_link['date'] . "</a>
+              ";
             }
             break;
           }
