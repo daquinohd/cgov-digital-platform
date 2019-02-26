@@ -9,7 +9,7 @@ use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-// Uuse Drupal\node\Entity\Node;.
+use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -130,23 +130,25 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       $query = $this->entityQuery->get('node');
       $query->condition('status', 1);
       $query->condition('type', $content_type);
-      // S$entity_ids = $query->execute();.
-      /*
-      foreach($entity_ids as $nid) {
-      $title = Node::load($nid)->title->value;
-      ksm($entity_ids);
+      $query->sort('field_date_posted');
+      $entity_ids = $query->execute();
+
+      // Using entity ID, build array of values sorted by date.
+      foreach ($entity_ids as $nid) {
+        $posted[] = $nid . ', ' . Node::load($nid)->field_date_posted->value;
       }
-       */
+
     }
 
     // Build custom pager based on type.
     switch ($content_type) {
       case 'cgov_blog_post':
-        $build['#markup'] = 'Hello, meatloaf';
+        ksm($posted);
+        $build['#markup'] = '<b>blog post</b>';
         break;
 
       default:
-        $build['#markup'] = 'its a-me, Mario';
+        $build['#markup'] = '<b>not a blog post</b>';
     }
 
     // Debug build object.
