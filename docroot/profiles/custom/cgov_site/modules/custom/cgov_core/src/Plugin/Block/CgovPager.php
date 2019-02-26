@@ -104,35 +104,105 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
   }
 
   /**
+   * Create a new node storage instance.
+   *
+   * @return Drupal\Core\Entity\EntityStorageInterface
+   *   The node storage or NULL.
+   */
+  private function getNodeStorage() {
+    $node_storage = $this->entityTypeManager->getStorage('node');
+    return isset($node_storage) ? $node_storage : NULL;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function build() {
-    // Initialize the render array response to be empty.
-    $build = [];
-
-    // Debug entity object.
+    // If our entity exists, get the nid (content id) and bundle (content type).
     if ($curr_entity = $this->getCurrEntity()) {
-      $content_type = $curr_entity->bundle();
       $content_id = $curr_entity->id();
-      $node_storage = $this->entityTypeManager->getStorage('node');
+      $content_type = $curr_entity->bundle();
     }
 
-    // Build our query object. TODO: move this into the function.
-    $query = $this->entityQuery->get('node');
-    $query->condition('status', 1);
-    $query->condition('type', $content_type);
-
-    // Retrieve our pager markup based on content type.
+    // Render our pager markup based on content type.
+    // Note: wherever pssible, we should use out-of-the box pagination from
+    // the view. This plugin is currently being used by Blog Posts only.
     switch ($content_type) {
       case 'cgov_blog_post':
-        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $query, $node_storage);
+        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $content_type);
         break;
 
       default:
+        $build['#markup'] = '';
         break;
     }
-
     return $build;
+  }
+
+  /**
+   * Draw Older/Newer links for Blog Post.
+   *
+   * @param string $cid
+   *   The nid of the current content item.
+   * @param string $type
+   *   The content type machine name.
+   */
+  private function drawBlogPostOlderNewer($cid, $type) {
+    // TODO: filter by series.
+    // Build our query object.
+    $query = $this->entityQuery->get('node');
+    $query->condition('status', 1);
+    $query->condition('type', $type);
+    $query->sort('field_date_posted');
+    $entity_ids = $query->execute();
+
+    // Build associative array.
+    foreach ($entity_ids as $nid) {
+      $node = $this->getNodeStorage()->load($nid);
+      $blog_links[] = [
+        'nid' => $nid,
+        'date' => $node->field_date_posted->value,
+        'title' => $node->title->value,
+      ];
+    }
+
+    // Open Blog Post pagination div.
+    $markup = "<div id='cgov-blog-post-pagination>";
+
+    // Draw our prev/next links.
+    // TODO: hook up translation.
+    foreach ($blog_links as $index => $blog_link) {
+      if ($blog_link['nid'] == $cid) {
+        $length = count($blog_links);
+
+        // Link previous post if exists.
+        if ($index > 0) {
+          $prev = $blog_links[$index - 1];
+          $markup .= "
+            <div class='blog-post-older'>
+              <a href=/node/" . $prev['nid'] . ">&lt; Older Post</a>
+              <p><i>" . $prev['title'] . "</i></p>
+            </div>
+          ";
+        }
+
+        // Link next post if exists.
+        if ($index < ($length - 1)) {
+          $next = $blog_links[$index + 1];
+          $markup .= "
+            <div class='blog-post-newer'>
+              <a href=/node/" . $next['nid'] . ">Newer Post &gt;</a>
+              <p><i>" . $next['title'] . "</i></p>
+            </div>
+          ";
+        }
+        break;
+      }
+    }
+
+    // Close pagination div and return HTML.
+    $markup .= "</div>";
+    return $markup;
   }
 
   /**
@@ -142,57 +212,6 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function getCacheMaxAge() {
     return 0;
-  }
-
-  /**
-   * Draw Older/Newer links for Blog Post.
-   */
-  private function drawBlogPostOlderNewer($content_id, $query, $node_storage) {
-    $query->sort('field_date_posted');
-    $entity_ids = $query->execute();
-
-    // Using entity ID, build array of values sorted by date.
-    $ass_array = [];
-
-    // Build associative array.
-    foreach ($entity_ids as $nid) {
-      $node = $node_storage->load($nid);
-      // $posted[$nid] = $node->field_date_posted->value;.
-      $ass_array[] = [
-        'nid' => $nid,
-        'date' => $node->field_date_posted->value,
-      ];
-    }
-
-    // Debug the whole thing.
-    // Ksm($content_id);.
-    // Ksm($ass_array);.
-    $prev_link = '';
-    $next_link = '';
-    $markup = '';
-
-    // Draw our prev/next links.
-    foreach ($ass_array as $index => $ass) {
-      if ($ass['nid'] == $content_id) {
-        $length = count($ass_array);
-
-        if ($index > 0) {
-          $prev_link = $ass_array[$index - 1];
-          $markup .= "
-            <a href=/prev>" . $prev_link['date'] . "</a>
-          ";
-        }
-
-        if ($index < ($length - 1)) {
-          $next_link = $ass_array[$index + 1];
-          $markup .= "
-            <a href=/next>" . $next_link['date'] . "</a>
-          ";
-        }
-        break;
-      }
-    }
-    return $markup;
   }
 
 }
