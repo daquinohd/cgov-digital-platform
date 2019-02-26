@@ -154,46 +154,45 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Using entity ID, build array of values sorted by date.
     $ass_array = [];
 
+    // Build associative array.
+    foreach ($entity_ids as $nid) {
+      $node = $node_storage->load($nid);
+      // $posted[$nid] = $node->field_date_posted->value;.
+      $ass_array[] = [
+        'nid' => $nid,
+        'date' => $node->field_date_posted->value,
+      ];
+    }
 
-        // Build associative array.
-        foreach ($entity_ids as $nid) {
-          $node = $node_storage->load($nid);
-          // $posted[$nid] = $node->field_date_posted->value;.
-          $ass_array[] = [
-            'nid' => $nid,
-            'date' => $node->field_date_posted->value,
-          ];
+    // Debug the whole thing.
+    // Ksm($content_id);.
+    // Ksm($ass_array);.
+    $prev_link = '';
+    $next_link = '';
+    $markup = '';
+
+    // Draw our prev/next links.
+    foreach ($ass_array as $index => $ass) {
+      if ($ass['nid'] == $content_id) {
+        $length = count($ass_array);
+
+        if ($index > 0) {
+          $prev_link = $ass_array[$index - 1];
+          $markup .= "
+            <a href=/prev>" . $prev_link['date'] . "</a>
+          ";
         }
 
-        // Debug the whole thing.
-        // Ksm($content_id);.
-        // Ksm($ass_array);.
-        $prev_link = '';
-        $next_link = '';
-        $markup = '';
-
-        // Draw our prev/next links.
-        foreach ($ass_array as $index => $ass) {
-          if ($ass['nid'] == $content_id) {
-            $length = count($ass_array);
-
-            if ($index > 0) {
-              $prev_link = $ass_array[$index - 1];
-              $markup .= "
-                <a href=/prev>" . $prev_link['date'] . "</a>
-              ";
-            }
-
-            if ($index < ($length - 1)) {
-              $next_link = $ass_array[$index + 1];
-              $markup .= "
-                <a href=/next>" . $next_link['date'] . "</a>
-              ";
-            }
-            break;
-          }
+        if ($index < ($length - 1)) {
+          $next_link = $ass_array[$index + 1];
+          $markup .= "
+            <a href=/next>" . $next_link['date'] . "</a>
+          ";
         }
-        return $markup;
+        break;
+      }
+    }
+    return $markup;
   }
 
 }
