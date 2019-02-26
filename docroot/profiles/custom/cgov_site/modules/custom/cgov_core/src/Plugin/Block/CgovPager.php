@@ -129,7 +129,13 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // the view. This plugin is currently being used by Blog Posts only.
     switch ($content_type) {
       case 'cgov_blog_post':
-        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $content_type);
+
+        // TODO: get series value from node obj and pass in. Maybe.
+        $my_node = $this->getNodeStorage()->load($content_id);
+        $my_series = $my_node->field_blog_series->target_id;
+        ksm($my_series);
+
+        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $content_type, $my_series);
         break;
 
       default:
@@ -146,8 +152,10 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
    *   The nid of the current content item.
    * @param string $type
    *   The content type machine name.
+   * @param string $ser
+   *   The series.
    */
-  private function drawBlogPostOlderNewer($cid, $type) {
+  private function drawBlogPostOlderNewer($cid, $type, $ser) {
     // TODO: filter by series.
     // Build our query object.
     $query = $this->entityQuery->get('node');
@@ -163,8 +171,13 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
         'nid' => $nid,
         'date' => $node->field_date_posted->value,
         'title' => $node->title->value,
+        'series_filter' => $ser,
+        'series' => $node->field_blog_series->target_id,
       ];
     }
+
+    // Debug node objs.
+    ksm($blog_links);
 
     // Open Blog Post pagination div.
     $markup = "<div id='cgov-blog-post-pagination>";
@@ -172,7 +185,7 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // Draw our prev/next links.
     // TODO: hook up translation.
     foreach ($blog_links as $index => $blog_link) {
-      if ($blog_link['nid'] == $cid) {
+      if ($blog_link['nid'] == $cid && $blog_link['series'] == $blog_link['series_filter']) {
         $length = count($blog_links);
 
         // Link previous post if exists.
