@@ -127,7 +127,6 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     if ($curr_entity = $this->getCurrEntity()) {
       $content_type = $curr_entity->bundle();
       $content_id = $curr_entity->id();
-      ksm($content_id);
 
       // Build our query.
       $query = $this->entityQuery->get('node');
@@ -139,34 +138,44 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
       // Using entity ID, build array of values sorted by date.
       $node_storage = $this->entityTypeManager->getStorage('node');
       $ass_array = [];
-
-      // Build associative array.
-      foreach ($entity_ids as $nid) {
-        $node = $node_storage->load($nid);
-        // $posted[$nid] = $node->field_date_posted->value;.
-        $ass_array[] = [
-          'nid' => $nid,
-          'date' => $node->field_date_posted->value,
-        ];
-      }
-
-      ksm($ass_array);
-
-      foreach ($ass_array as $index => $ass) {
-        if ($ass['nid'] == $content_id) {
-          ksm($ass);
-          ksm($ass_array[$index]);
-          ksm($ass_array[$index + 1]);
-          ksm($ass_array[$index - 1]);
-        }
-      }
-
     }
 
     // Build custom pager based on type.
     switch ($content_type) {
       case 'cgov_blog_post':
-        $build['#markup'] = '<b>blog post</b>';
+
+        // Build associative array.
+        foreach ($entity_ids as $nid) {
+          $node = $node_storage->load($nid);
+          // $posted[$nid] = $node->field_date_posted->value;.
+          $ass_array[] = [
+            'nid' => $nid,
+            'date' => $node->field_date_posted->value,
+          ];
+        }
+
+        // Debug the whole thing.
+        ksm($content_id);
+        ksm($ass_array);
+        $prev_link = '';
+        $next_link = '';
+
+        // Draw our prev/next links.
+        foreach ($ass_array as $index => $ass) {
+          if ($ass['nid'] == $content_id) {
+            $length = count($ass_array);
+
+            if ($index > 0) {
+              $prev_link = $ass_array[$index - 1];
+              ksm($prev_link);
+            }
+            if ($index < ($length - 1)) {
+              $next_link = $ass_array[$index + 1];
+              ksm($next_link);
+            }
+            break;
+          }
+        }
         break;
 
       default:
