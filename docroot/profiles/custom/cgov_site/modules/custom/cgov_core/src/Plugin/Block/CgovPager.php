@@ -129,13 +129,7 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
     // the view. This plugin is currently being used by Blog Posts only.
     switch ($content_type) {
       case 'cgov_blog_post':
-
-        // TODO: get series value from node obj and pass in. Maybe.
-        $my_node = $this->getNodeStorage()->load($content_id);
-        $my_series = $my_node->field_blog_series->target_id;
-        ksm($my_series);
-
-        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $content_type, $my_series);
+        $build['#markup'] = $this->drawBlogPostOlderNewer($content_id, $content_type);
         break;
 
       default:
@@ -150,39 +144,34 @@ class CgovPager extends BlockBase implements ContainerFactoryPluginInterface {
    *
    * @param string $cid
    *   The nid of the current content item.
-   * @param string $type
+   * @param string $content_type
    *   The content type machine name.
-   * @param string $ser
-   *   The series.
    */
-  private function drawBlogPostOlderNewer($cid, $type, $ser) {
-    // TODO: filter by series.
+  private function drawBlogPostOlderNewer($cid, $content_type) {
     // Build our query object.
     $query = $this->entityQuery->get('node');
     $query->condition('status', 1);
-    $query->condition('type', $type);
+    $query->condition('type', $content_type);
     $query->sort('field_date_posted');
     $entity_ids = $query->execute();
 
-    // Build associative array.
-    foreach ($entity_ids as $nid) {
-      $node = $this->getNodeStorage()->load($nid);
-      $series_filter = $ser;
-      $series = $node->field_blog_series->target_id;
+    // Create series filter.
+    $filter_node = $this->getNodeStorage()->load($cid);
+    $filter_series = $filter_node->field_blog_series->target_id;
 
-      if ($series_filter == $series) {
+    // Build associative array.
+    foreach ($entity_ids as $eid) {
+      $node = $this->getNodeStorage()->load($eid);
+      $node_series = $node->field_blog_series->target_id;
+
+      if ($node_series == $filter_series) {
         $blog_links[] = [
-          'nid' => $nid,
+          'nid' => $eid,
           'date' => $node->field_date_posted->value,
           'title' => $node->title->value,
-          'series_filter' => $series_filter,
-          'series' => $series,
         ];
       }
     }
-
-    // Debug node objs.
-    ksm($blog_links);
 
     // Open Blog Post pagination div.
     $markup = "<div id='cgov-blog-post-pagination>";
