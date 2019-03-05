@@ -36,12 +36,12 @@ install:
   - cgov_media
   - cgov_image
   - cgov_list
+  - cgov_promo
   - cgov_article
   - cgov_blog
   - cgov_home_landing
   - cgov_content_block
   - cgov_press_release
-  - cgov_promo
   - cgov_site_section
   - cgov_video
   - pdq_cancer_information_summary
