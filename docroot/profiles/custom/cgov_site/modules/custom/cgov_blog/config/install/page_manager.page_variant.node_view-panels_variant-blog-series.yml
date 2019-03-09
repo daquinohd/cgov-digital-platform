@@ -11,29 +11,40 @@ label: 'Blog Series'
 variant: panels_variant
 variant_settings:
   blocks:
-    f8946f29-8bb4-4c63-ace3-9d5861e1f940:
+    63b0f70d-9bde-4a42-9e68-6511a6586d43:
       id: 'entity_view:node'
       label: 'Blog Series Page Content'
       provider: ctools
       label_display: '0'
       view_mode: full
-      region: content
+      region: blog_content
       weight: 0
-      uuid: f8946f29-8bb4-4c63-ace3-9d5861e1f940
+      uuid: 63b0f70d-9bde-4a42-9e68-6511a6586d43
+      context_mapping:
+        entity: node
+    607fab1a-adac-445f-8f06-bd4dab401bb6:
+      id: 'entity_view:node'
+      label: placeholder
+      provider: ctools
+      label_display: '0'
+      view_mode: full
+      region: blog_right_rail
+      weight: 0
+      uuid: 607fab1a-adac-445f-8f06-bd4dab401bb6
       context_mapping:
         entity: node
   id: panels_variant
-  uuid: 489b60a1-9116-4f9d-a6e1-f4cfd8c1ee7c
+  uuid: 19f2638d-acd8-4b28-baea-8ff0127cceab
   label: null
   weight: 0
-  layout: layout_onecol
+  layout: cgov_blog
   layout_settings: {  }
   page_title: ''
   storage_type: page_manager
   storage_id: node_view-panels_variant-blog-series
   builder: standard
 page: node_view
-weight: -10
+weight: 0
 selection_criteria:
   -
     id: 'entity_bundle:node'
