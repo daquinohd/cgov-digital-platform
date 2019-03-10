@@ -28,17 +28,17 @@ START OF BLOG SERIES
       {{ content.body }}
     </div>
 
-    === Debug ===
-    <div>
-      <div class="dynamic list">
-        <ul>
-          {{ drupal_view('cgov_block_blog_posts','block_bp_list',node.id) }}
-        </ul>
-      </div>
-      {{ content.field_blog_series }}
-      {{ content.field_blog_topics }}
+    <div class="dynamic list">
+      <ul>
+        {{ drupal_view('cgov_block_blog_posts','block_bp_list',node.id) }}
+      </ul>
     </div>
-    === End debug ===
+    <!-- TODO: fix left spacing, thumbnail image -->
+
+    === Debug series and topics: ===
+    {{ content.field_blog_series }}
+    {{ content.field_blog_topics }}
+    === End debug series and topics ===
 
   </div>
 
