@@ -19,13 +19,13 @@ variant_settings:
       label_display: '0'
       view_mode: full
       region: blog_content
-      weight: 0
+      weight: -10
       uuid: 63b0f70d-9bde-4a42-9e68-6511a6586d43
       context_mapping:
         entity: node
     fb6d7671-80e0-408a-a050-39865f43812a:
       id: cgov_blog_featured_posts
-      label: 'Blog Right Rail - Categories'
+      label: 'Blog Categories Block'
       provider: cgov_blog
       label_display: '0'
       region: blog_right_rail
