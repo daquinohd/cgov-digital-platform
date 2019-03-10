@@ -31,6 +31,9 @@ msgstr "Recursos relacionados"
 msgid "On This Page"
 msgstr "En Esta Página"
 
+msgid "Continue Reading"
+msgstr "Leer mas"
+
 msgctxt "Long month name"
 msgid "January"
 msgstr "enero"

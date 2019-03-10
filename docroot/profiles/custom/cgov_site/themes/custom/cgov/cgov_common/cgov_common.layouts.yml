@@ -1,4 +1,4 @@
-cgov_blog:
+layout_twocol:
   label: 'Cgov Blog'
   category: 'Cgov Layouts'
   template: templates/blog/layout--cgov-blog
