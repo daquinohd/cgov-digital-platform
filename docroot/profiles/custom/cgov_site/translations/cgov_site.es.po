@@ -32,7 +32,7 @@ msgid "On This Page"
 msgstr "En Esta Página"
 
 msgid "Continue Reading"
-msgstr "Leer mas"
+msgstr "Siga leyendo"
 
 msgctxt "Long month name"
 msgid "January"
