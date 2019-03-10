@@ -1,7 +1,7 @@
 cgov_blog:
   label: 'Cgov Blog'
   category: 'Cgov Layouts'
-  template: templates/blog/layout-cgov-blog
+  template: templates/blog/layout--cgov-blog
   regions:
     blog_content:
       label: 'Content'
