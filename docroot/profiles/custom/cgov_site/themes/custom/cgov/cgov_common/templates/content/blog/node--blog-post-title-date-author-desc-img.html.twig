@@ -1,28 +1,20 @@
-{% import '@cgov_common/content_page_macros.twig' as contentPageMacros %}
+{% import '@cgov_common/content/blog/blog_macros.twig' as blogMacros %}
 <!-- ********************** Blog Post List Item + Thumb ********************** -->
-{% macro getImage(content) %}
-  {% if content.field_image_promotional and content.field_image_promotional[0] %}
-    {{content.field_image_promotional}}
-  {% elseif content.field_image_article and content.field_image_article[0] %}
-    {{content.field_image_article}}
-  {% else %}
-    {# TODO: Use old placeholder image. #}
-  {% endif %}
-{% endmacro %}
-
 {% if content %}
   <li class="general-list-item general list-item">
     <div class="list-item-image image container">
         <a class="item-image image" href="{{ url }}">
-          {{ _self.getImage(content) }}
+          {{ blogMacros.getImage(content) }}
         </a>
     </div>
     <div class="title-and-desc title desc container">
         <a class="title" href="{{ url }}" onclick="">{{ label }}</a>
         <div class="description">
-          {{ contentPageMacros.displayDates(node, content) }}
+          <div class="date-author">
+            {{ content.field_date_posted }}, by {{ blogMacros.getAuthor(content) }}
+          </div>
           <p>{{ content.field_list_description }}</p>
-          <p><a href="{{ url }}">{{ 'Continue Reading'|t }} &gt;</a></p>
+          <p><a href="{{ url }}">{{ 'Continue Reading'|trans }} &gt;</a></p>
         </div>
     </div>
   </li>
