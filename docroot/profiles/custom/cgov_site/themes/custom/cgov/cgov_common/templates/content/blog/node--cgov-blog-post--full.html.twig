@@ -2,7 +2,6 @@
 <!-- ********************************* BEGIN Blog Post Page Full Content ********************************** -->
 <article>
   <div class="resize-content">
-    {{ content.field_press_release_type }}
     <h1>
       {{ node.label }}
     </h1>
@@ -11,9 +10,7 @@
     </div>
 
     <div id="cgvBody">
-      <!-- TODO: reuse existing date widget if possible. -->
-      <!-- TODO: figure out why the ... trim() breaks. -->      
-      <p class="blog-post-publishing-info">{{ content.field_date_posted }}, by {{ content.field_author }}</p>
+      {{ contentPageMacros.displayDates(node, content) }}
       {{ content.field_image_article }}
       {{ content.field_intro_text }}
       {{ content.body }}

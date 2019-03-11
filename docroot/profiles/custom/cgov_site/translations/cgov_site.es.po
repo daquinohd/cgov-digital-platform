@@ -31,9 +31,6 @@ msgstr "Recursos relacionados"
 msgid "On This Page"
 msgstr "En Esta Página"
 
-msgid "Continue Reading"
-msgstr "Siga leyendo"
-
 msgctxt "Long month name"
 msgid "January"
 msgstr "enero"
@@ -81,6 +78,18 @@ msgstr "noviembre"
 msgctxt "Long month name"
 msgid "December"
 msgstr "diciembre"
+
+msgctxt "CGov Blog"
+msgid "by"
+msgstr "por"
+
+msgctxt "CGov Blog"
+msgid "Continue Reading"
+msgstr "Siga leyendo"
+
+msgctxt "CGov Blog"
+msgid "NCI Staff"
+msgstr "Equipo del NCI"
 
 msgctxt "CGov UI"
 msgid "Posted"
