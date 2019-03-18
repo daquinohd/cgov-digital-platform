@@ -18,7 +18,10 @@
       {{ content.field_image_article }}
       {{ content.field_intro_text }}
       {{ content.body }}
-      {{ content.field_recommended_content }}
+      <div id="recommended-content-cards">
+        <h4>{% trans %}Recommended Content{% endtrans %}</h4>
+        {{ content.field_recommended_content }}
+      <div>
     </div>
 
     <hr/>
