@@ -16,6 +16,9 @@ msgstr "Ampliar"
 msgid "Menu"
 msgstr "Menú"
 
+msgid "Categories"
+msgstr "Categorías"
+
 msgid "Contact"
 msgstr "Contacto"
 
