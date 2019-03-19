@@ -82,6 +82,9 @@ msgctxt "Long month name"
 msgid "December"
 msgstr "diciembre"
 
+msgid "Archive"
+msgstr "Archivo"
+
 msgid "Newer Post"
 msgstr "Artículo siguiente"
 
