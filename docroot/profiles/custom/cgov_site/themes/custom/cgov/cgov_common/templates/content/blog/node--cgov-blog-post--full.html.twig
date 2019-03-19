@@ -19,17 +19,11 @@
       {{ content.field_intro_text }}
       {{ content.body }}
       <div id="recommended-content-cards">
-        <h4>{% trans %}Recommended Content{% endtrans %}</h4>
+        <h4>{{ node.field_blog_series.entity.field_recommended_content_header.value }}</h4>
+        <i>Debug content.field_blog_series: {{ content.field_blog_series }}</i><br/>
         {{ content.field_recommended_content }}
       <div>
     </div>
-
-    <hr/>
-      <i>
-      === Debug ===
-      <br/>content.field_blog_series: {{ content.field_blog_series }}
-      </i>
-    <hr/>
 
   </div>
 
