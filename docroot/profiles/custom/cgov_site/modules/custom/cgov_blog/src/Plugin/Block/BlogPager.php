@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,6 +21,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The path alias manager.
+   *
+   * @var \Drupal\Core\Path\AliasManagerInterface
+   */
+  protected $aliasManager;
 
   /**
    * The route matcher.
@@ -51,6 +59,8 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
+   *   The path alias manager.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_matcher
    *   The route matcher.
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
@@ -62,11 +72,13 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
     array $configuration,
     $plugin_id,
     $plugin_definition,
+    AliasManagerInterface $alias_manager,
     RouteMatchInterface $route_matcher,
     QueryFactory $entity_query,
     EntityTypeManagerInterface $entity_type_manager
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->aliasManager = $alias_manager;
     $this->routeMatcher = $route_matcher;
     $this->entityQuery = $entity_query;
     $this->entityTypeManager = $entity_type_manager;
@@ -80,6 +92,7 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('path.alias_manager'),
       $container->get('current_route_match'),
       $container->get('entity.query'),
       $container->get('entity_type.manager')
@@ -130,12 +143,13 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
     switch ($content_type) {
       case 'cgov_blog_post':
         $markup = $this->drawBlogPostOlderNewer($content_id, $content_type);
-        $build['#prev_node'] = $markup['prev_node'] ?? '';
-        $build['#prev_text'] = $markup['prev_text'] ?? '';
+        $langcode = $curr_entity->language()->getId();
+        $build['#prev_nid'] = $markup['prev_nid'] ?? '';
         $build['#prev_title'] = $markup['prev_title'] ?? '';
-        $build['#next_node'] = $markup['next_node'] ?? '';
-        $build['#next_text'] = $markup['next_text'] ?? '';
+        $build['#prev_link'] = $this->aliasManager->getAliasByPath('/node/' . $build['#prev_nid'], $langcode);
+        $build['#next_nid'] = $markup['next_nid'] ?? '';
         $build['#next_title'] = $markup['next_title'] ?? '';
+        $build['#next_link'] = $this->aliasManager->getAliasByPath('/node/' . $build['#next_nid'], $langcode);
         break;
 
       default:
@@ -155,6 +169,7 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
    */
   private function getBlogPostPagerLinks($cid, $content_type) {
     // Build our query object.
+    // TODO: Filter by locale.
     $query = $this->entityQuery->get('node');
     $query->condition('status', 1);
     $query->condition('type', $content_type);
@@ -198,23 +213,20 @@ class BlogPager extends BlockBase implements ContainerFactoryPluginInterface {
     foreach ($blog_links as $index => $blog_link) {
 
       // Look for the entry that matches the current node.
-      // TODO: use pretty URLs, not node #s.
       if ($blog_link['nid'] == $cid) {
 
         // Link previous post if exists.
         if ($index > 0) {
           $p = $blog_links[$index - 1];
-          $markup['prev_node'] = $p['nid'];
+          $markup['prev_nid'] = $p['nid'];
           $markup['prev_title'] = $p['title'];
-          $markup['prev_text'] = $this->t('Older Post');
         }
 
         // Link next post if exists.
         if ($index < (count($blog_links) - 1)) {
           $n = $blog_links[$index + 1];
-          $markup['next_node'] = $n['nid'];
+          $markup['next_nid'] = $n['nid'];
           $markup['next_title'] = $n['title'];
-          $markup['next_text'] = $this->t('Newer Post');
         }
         break;
       }
