@@ -5,13 +5,15 @@
 
    {% if content['#archive_granularity'] == 'month' %}
       <div id="blog-archive-accordion-year" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion ui-widget" aria-labelledby="archive" role="tablist">
-         {% for year, info in content['#archive_data'] %}
+         {% for year, month in content['#archive_data'] %}
             <h4 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons">
                <span class="ui-accordion-header-icon ui-icon toggle"></span>{{ year }}
             </h4>
             <ul class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-13" aria-labelledby="ui-id-12" role="tabpanel">
-               {% for i in info %}               
-               {{ kint(i) }}
+               {% for name, count in month %}
+                  <li class="month">
+                     <a class="" href="?filter[year]={{year}}&filter[month]={{name}}">{{ name }}</a> ({{ count }})
+                  </li>
                {% endfor %}
             </ul>
          {% endfor %}

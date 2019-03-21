@@ -207,8 +207,7 @@ class BlogArchive extends BlockBase implements ContainerFactoryPluginInterface {
 
         // Only add items up to the selected years_back.
         if (intval($year) > $min_year) {
-          $archive[$year]['#month'][] = $month;
-          $archive[$year]['#count'][] = $count;
+          $archive[$year][$month] = $count;
         }
       }
 
