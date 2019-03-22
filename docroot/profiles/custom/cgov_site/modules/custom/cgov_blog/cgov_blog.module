@@ -52,9 +52,8 @@ function cgov_blog_views_pre_view(ViewExecutable $view, $display_id, array &$arg
   // If this is a list in a Blog Series, use 'items per page' field.
   if ($display_id == 'block_bp_list' || $display_id == 'block_bp_list_th') {
     $node = Drupal::entityTypeManager()->getStorage('node')->load($args[0]);
-    if ($node->bundle() == 'cgov_blog_series') {
-      $num_display = isset($node->field_num_display_posts) ? $node->field_num_display_posts : 20;
-      $view->setItemsPerPage($num_display);
+    if ($node->bundle() == 'cgov_blog_series' && isset($node->field_num_display_posts)) {
+      $view->setItemsPerPage($node->field_num_display_posts->value);
     }
   }
 }
