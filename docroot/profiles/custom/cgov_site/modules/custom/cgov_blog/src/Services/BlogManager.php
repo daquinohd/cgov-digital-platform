@@ -5,6 +5,7 @@ namespace Drupal\cgov_blog\Services;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -34,6 +35,13 @@ class BlogManager implements BlogManagerInterface {
   protected $routeMatcher;
 
   /**
+   * The path alias manager.
+   *
+   * @var \Drupal\Core\Path\AliasManagerInterface
+   */
+  protected $aliasManager;
+
+  /**
    * Constructor for BlogManager object.
    *
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
@@ -42,15 +50,19 @@ class BlogManager implements BlogManagerInterface {
    *   The entity type manager service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_matcher
    *   The route matcher.
+   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
+   *   The path alias manager.
    */
   public function __construct(
     QueryFactory $entity_query,
     EntityTypeManagerInterface $entity_type_manager,
-    RouteMatchInterface $route_matcher
+    RouteMatchInterface $route_matcher,
+    AliasManagerInterface $alias_manager
   ) {
     $this->entityQuery = $entity_query;
     $this->entityTypeManager = $entity_type_manager;
     $this->routeMatcher = $route_matcher;
+    $this->aliasManager = $alias_manager;
   }
 
   /* ======= BEGIN concrete methods ======= */
@@ -138,8 +150,9 @@ class BlogManager implements BlogManagerInterface {
    * The the URL path for the blog series.
    */
   public function getSeriesPath() {
-    $taxonomy = $this->getTaxonomyStorage()->loadTree('cgov_blog_topics');
-    return $taxonomy;
+    $nid = $this->getSeriesId();
+    $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+    return $path;
   }
 
   /**

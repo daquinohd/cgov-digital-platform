@@ -63,6 +63,7 @@ class BlogArchive extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
+    $build = [];
 
     // If our entity exists, get the nid (content id) and bundle (content type).
     if ($curr_entity = $this->blogManager->getCurrentEntity()) {
@@ -71,22 +72,19 @@ class BlogArchive extends BlockBase implements ContainerFactoryPluginInterface {
       $group_by = $series->field_archive_group_by->getValue()['0']['value'];
       $years_back = $series->field_archive_back_years->getValue()['0']['value'];
     }
-    else {
-      return [];
-    }
 
     // Set return values by Archive field selection.
     if (isset($group_by) && isset($years_back)) {
       $archive = $this->drawArchiveData($content_id, $years_back, $group_by);
+      $path = $this->blogManager->getSeriesPath();
       $build = [
         '#archive_data' => $archive,
         '#archive_granularity' => $group_by,
+        '#archive_path' => $path,
       ];
     }
-    else {
-      $build = [];
-    }
 
+    kint($build);
     return $build;
   }
 

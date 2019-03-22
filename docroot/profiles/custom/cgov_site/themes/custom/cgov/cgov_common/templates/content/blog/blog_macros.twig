@@ -37,10 +37,10 @@
  # @param array monthInfo
  # @param string monthInfo
  #}
-{% macro getMonthLinks(monthInfo, year) %}
+{% macro getMonthLinks(monthInfo, year, path) %}
   {% for month, count in monthInfo %}
     <li class="month">
-      <a class="" href="?filter[year]={{year}}&filter[month]={{month}}">
+      <a href="{{path}}?filter[year]={{year}}&filter[month]={{month}}">
         {{ _self.transformMonthName(month) }}
       </a> ({{ count }})
     </li>
@@ -51,10 +51,10 @@
  # Draw archive list item for year type.
  # @param array yearInfo
  #}
-{% macro getYearLinks(yearInfo) %}
+{% macro getYearLinks(yearInfo, path) %}
   {% for year, count in yearInfo %}
       <li class="year">
-        <a class="" href="?filter[year]={{year}}">{{year}}</a> ({{count}})
+        <a href="{{path}}?filter[year]={{year}}">{{year}}</a> ({{count}})
       </li>
   {% endfor %}
 {% endmacro %}
