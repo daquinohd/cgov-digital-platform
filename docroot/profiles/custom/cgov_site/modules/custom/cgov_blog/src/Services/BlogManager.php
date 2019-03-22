@@ -135,6 +135,14 @@ class BlogManager implements BlogManagerInterface {
   /* ======= BEGIN Blog Series field methods ======= */
 
   /**
+   * The the URL path for the blog series.
+   */
+  public function getSeriesPath() {
+    $taxonomy = $this->getTaxonomyStorage()->loadTree('cgov_blog_topics');
+    return $taxonomy;
+  }
+
+  /**
    * Get the Blog Series ID.
    */
   public function getSeriesCategories() {
