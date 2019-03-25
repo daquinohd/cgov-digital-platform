@@ -158,7 +158,18 @@ class BlogManager implements BlogManagerInterface {
    */
   public function getSeriesFeaturedPosts() {
     $series = $this->getSeriesEntity();
-    return $series->field_featured_posts;
+    return $series->field_featured_posts->referencedEntities();
+  }
+
+  /**
+   * The the URL path for a node based on NID.
+   *
+   * @param string $nid
+   *   Node ID of content item.
+   */
+  public function getBlogPathFromNid($nid) {
+    $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+    return $path;
   }
 
   /**

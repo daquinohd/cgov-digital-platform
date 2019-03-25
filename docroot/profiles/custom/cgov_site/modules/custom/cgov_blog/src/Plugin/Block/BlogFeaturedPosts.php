@@ -65,16 +65,29 @@ class BlogFeaturedPosts extends BlockBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public function build() {
-    $my_featured = $this->blogManager->getSeriesFeaturedPosts()->referencedEntities();
-    $i = 0;
-    foreach ($my_featured as $feat) {
-      $featured[$i] = [
-        'title' => $feat->bundle(),
-        'href' => 'blah',
-        'date' => $feat->field_date_posted->value,
-        'author' => $feat->field_author->value,
-      ];
-      $i++;
+    $build = $this->drawFeaturedPosts();
+    return $build;
+  }
+
+  /**
+   * Retrieve the title, URL, date, and author from each Featured Post.
+   */
+  private function drawFeaturedPosts() {
+    $featured = [];
+    $featured_nodes = $this->blogManager->getSeriesFeaturedPosts();
+
+    // If we have featured posts, get the node data.
+    if (!empty($featured_nodes)) {
+      $i = 0;
+      foreach ($featured_nodes as $node) {
+        $featured[$i] = [
+          'title' => $node->title->value,
+          'href' => $this->blogManager->getBlogPathFromNid($node->id()),
+          'date' => $node->field_date_posted->value,
+          'author' => $node->field_author->value,
+        ];
+        $i++;
+      }
     }
 
     $build = [
