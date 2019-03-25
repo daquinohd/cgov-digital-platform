@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -56,6 +57,45 @@ function cgov_blog_views_pre_view(ViewExecutable $view, $display_id, array &$arg
       $view->setItemsPerPage($node->field_num_display_posts->value);
     }
   }
+}
+
+/**
+ * Implements hook_token_info().
+ *
+ * Adds blog-post-path to cgov_tokens (see cgov_site_section.tokens.inc).
+ */
+function cgov_blog_token_info() {
+  $info = [];
+
+  $info['tokens']['cgov_tokens']['blog-post-path'] = [
+    'name' => t('Blog Post Path'),
+    'description' => t('The computed path of a Blog Post.'),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ *
+ * Generates a custom token which fetches a blog post path from the owner
+ * series.
+ *
+ * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+ *   Error for missing data.
+ */
+function cgov_blog_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+
+      case 'blog-post-path':
+        $replacements[$original] = 'my/blog/series';
+        break;
+
+    }
+  }
+  return $replacements;
 }
 
 /**
