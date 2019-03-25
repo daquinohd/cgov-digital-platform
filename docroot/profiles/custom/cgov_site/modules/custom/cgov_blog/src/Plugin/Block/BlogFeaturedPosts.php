@@ -65,6 +65,15 @@ class BlogFeaturedPosts extends BlockBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public function build() {
+    $my_featured = $this->blogManager->getSeriesFeaturedContent();
+
+    $i = 0;
+    foreach ($my_featured as $feat) {
+      $feat = $i;
+      kint('debug: ' . $feat);
+      $i = $i + 1;
+    }
+
     $featured[0] = [
       'title' => 'New Lung Cancer Target',
       'href' => 'xpol-kras-lung-target/',

@@ -158,7 +158,7 @@ class BlogManager implements BlogManagerInterface {
    */
   public function getSeriesFeaturedContent() {
     $series = $this->getSeriesEntity();
-    return $series->field_featured_content->referencedEntitites();
+    return $series->field_featured_posts;
   }
 
   /**
