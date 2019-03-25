@@ -156,7 +156,7 @@ class BlogManager implements BlogManagerInterface {
   /**
    * Get the Blog Featured content nodes.
    */
-  public function getSeriesFeaturedContent() {
+  public function getSeriesFeaturedPosts() {
     $series = $this->getSeriesEntity();
     return $series->field_featured_posts;
   }

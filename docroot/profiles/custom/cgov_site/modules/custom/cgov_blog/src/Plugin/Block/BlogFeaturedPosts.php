@@ -65,33 +65,17 @@ class BlogFeaturedPosts extends BlockBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public function build() {
-    $my_featured = $this->blogManager->getSeriesFeaturedContent();
-
+    $my_featured = $this->blogManager->getSeriesFeaturedPosts()->referencedEntities();
     $i = 0;
     foreach ($my_featured as $feat) {
-      $feat = $i;
-      kint('debug: ' . $feat);
-      $i = $i + 1;
+      $featured[$i] = [
+        'title' => $feat->bundle(),
+        'href' => 'blah',
+        'date' => $feat->field_date_posted->value,
+        'author' => $feat->field_author->value,
+      ];
+      $i++;
     }
-
-    $featured[0] = [
-      'title' => 'New Lung Cancer Target',
-      'href' => 'xpol-kras-lung-target/',
-      'date' => $this->t('February 2, 2017'),
-      'author' => 'Amy E. Blum, M.A.',
-    ];
-    $featured[1] = [
-      'title' => 'A tour of GDC DAVE',
-      'href' => 'gdc-dave-tour/',
-      'date' => $this->t('September 12, 2017'),
-      'author' => 'Zhining Wang, Ph.D.',
-    ];
-    $featured[2] = [
-      'title' => 'TCGA&apos;s PanCanAtlas',
-      'href' => 'tcga-pancan-atlas/',
-      'date' => $this->t('January 9, 2017'),
-      'author' => 'Amy E. Blum, M.A.',
-    ];
 
     $build = [
       '#featured' => $featured,
