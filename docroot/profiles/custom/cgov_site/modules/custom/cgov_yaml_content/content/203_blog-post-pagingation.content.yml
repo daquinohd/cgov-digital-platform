@@ -1,0 +1,600 @@
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Nature’s Bounty: Revitalizing the Discovery of New Cancer Drugs from Natural Products"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Biology'
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Clinical Trial Results'
+  field_short_title:
+    value: "Nature’s Bounty: Revitalizing the Discovery of New Cancer Drugs from Natural Products"
+  body:
+    - format: "full_html"
+      value: |
+        <p>Most people wouldn’t expect to find a meat grinder in a research laboratory. But, according to Tanja Grkovic, Ph.D., it’s the perfect tool for grinding up frozen marine organisms.</p>
+        <p>“It really does the job!” she said.</p>
+        <p>Dr. Grkovic, a Croatian-born chemist, should know. As a senior scientist in the Natural Products Support Group, she has spent the last several years intimately involved in improving processes for analyzing products of nature—from marine creatures to soil-dwelling <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000044571&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000044571&amp;version=Patient&amp;language=English">fungi</a> to plant leaves—to see whether chemical <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000422394&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000422394&amp;version=Patient&amp;language=English">compounds</a> within them might be starting blocks for new cancer drugs. (The Natural Products Support Group is part of the Frederick National Laboratory for Cancer Research, an NCI-sponsored contractor-operated facility.)</p>
+        <p>The work has been part of an ambitious, <u><a href="https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative">Cancer Moonshot<sup>SM</sup></a></u>-funded initiative, called the NCI Program for Natural Products Discovery (NPNPD), to make it easier for other researchers to <a href="https://www.ncbi.nlm.nih.gov/pubmed/29812901">mine nature for leads on new cancer drugs</a>.</p>
+        <p>A big part of that story has taken place in the well-worn home of NCI’s <span><a href="https://dtp.cancer.gov/organization/npb/default.htm">Natural Products Branch</a></span>, on the NCI campus in Frederick, MD.</p>
+        <p>On a tour of the building, Dr. Grkovic showed off freezer rooms filled with samples of natural products collected from across the globe, all the while explaining the highly complex process of converting those samples from their original states to a few grams of material in bar-coded test tubes.</p>
+        <p>Natural products have been a bedrock of drug discovery for many decades, she said. It’s estimated that more than half of all cancer drugs and antibiotics originated from a chemical compound discovered in a natural product.</p>
+        <p><span><a href="/about-cancer/treatment/drugs/paclitaxel" title="">Paclitaxel (Taxol)</a></span>, for example, one of the most commonly used chemotherapy drugs, was derived from the bark of the Pacific yew tree; <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045296&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045296&amp;version=Patient&amp;language=English">penicillin</a>, one of the first antibiotics, from a mold; and drugs to lower cholesterol from compounds found in fungi.</p>
+        <p>However, Barry O’Keefe, Ph.D., who heads the Natural Products Branch, explained that, despite this impressive track record, natural products have fallen out of favor as a source for new drug discovery. That’s largely because of the extensive time and effort needed to go from a bit of algae or sliver of tree bark to a compound that can be tested for its ability to kill cancer cells.</p>
+        <figure class="image-right-medium centered-set">
+          <div class="centered-element">
+            <img src="/PublishedContent/Images/research/key-initiatives/ras/Streptomyces-peucetius-Article.__v100679178.jpg" alt="Image of the Streptomyces peucetius bacterium"><!--Comment-->
+          </div>
+          <figcaption>
+            <div class="caption-container no-resize">
+              <p><span>Streptomyces peucetius, a bacterium from which the chemotherapy drug daunorubicin is derived.</span></p>
+              <div class="image-photo-credit">Credit: National Cancer Institute</div>
+            </div>
+          </figcaption>
+        </figure>
+        <p>“Most people just don’t want to work with natural products anymore; it’s too challenging,” Dr. O’Keefe said. Instead, many researchers and pharmaceutical companies now rely primarily on large “libraries” of man-made, chemically synthesized compounds for cancer drug discovery.</p>
+        <p>But given the great potential and unmatched chemical diversity found in nature, in 2015, NCI leadership decided that the institute should launch an effort to encourage the research community to rediscover natural products. The NPNPD was established not long after.</p>
+        <p>“We knew it would be a big undertaking,” Dr. O’Keefe said. “But if we did it, we thought, it could change everything.”</p>
+        <h2 id="ui-id-2">A National Treasure</h2>
+        <p>Beginning in the mid-1980s, the Natural Products Branch—housed on the grounds of NCI’s campus at Fort Detrick, an active military base in Frederick—collected more than 100,000 samples of plants and marine organisms from 25 tropical and subtropical countries across the globe, from the forests of Madagascar to the coastal waters of Thailand.</p>
+        <p>“The idea was to capture a great diversity of species,” Dr. Grkovic said.</p>
+        <p>The samples were collected via contractual arrangements, typically with organizations that study and preserve the natural world, such as international and state botanical gardens and marine science institutes.</p>
+        <p>Those collections were all performed under legal agreements that ensured that any given country’s natural resources would not be depleted or damaged in any way. The agreements also stipulated that, should the products lead to any marketable discoveries—namely, a new drug—the country from which the original product came would share in any profits.</p>
+        <p>But what makes natural products such a promising avenue of drug discovery in the first place?</p>
+        <p>One particularly enticing feature of natural products is their ability to produce molecules that can have a biological effect on other organisms, said Susan Mooberry, Ph.D., a professor of pharmacology at UT Health San Antonio, who specializes in drug discovery using natural products.</p>
+        <p>Take self-defense, for example.</p>
+        <p>“Plants can’t move. Sponges can’t move. So they have to develop mechanisms to protect themselves,” Dr. Mooberry said. Marine organisms known as tunicates (also called sea squirts), for instance, which spend much of their life anchored to rocks and docks, produce an arsenal of toxins to ward off predators.</p>
+        <p>Such chemical compounds are “information rich,” said Daniel Romo, Ph.D., of Baylor University,&nbsp;who specializes in chemically&nbsp;synthesizing potential drug leads derived from natural products. For example, Dr. Romo continued, “they can interact with cellular proteins in new and interesting ways, and that’s often what can lead to the development of new drug targets and drugs.”</p>
+        <p>But even as NCI and other organizations and companies have continued to make samples of natural products available to the research community—in the form of minimally processed materials known as crude extracts—their use in drug discovery has declined dramatically.</p>
+        <p>The chief reason? Unlike crude extracts from natural products, libraries of human-created synthesized compounds are tailor-made for high-throughput screening: highly automated systems for rapidly testing the effects of chemical compounds on biological material.</p>
+        <p>To be suitable for high-throughput screening, on the other hand, natural product extracts must undergo a process known as fractionation, whereby they are transformed into a more purified state that allows for the compounds within them to be more easily isolated.</p>
+        <p>Think of individual crude extracts as a forest full of trees, said Dr. Grkovic.</p>
+        <p>“The fractions from those extracts are like single trees in that forest,” she continued. “A pure compound [in a fraction] is like a single leaf from one of the trees.”</p>
+        <p>The fractionation process also helps to weed out what are often called “nuisance compounds” and other molecules that can make the results from high-throughput screening unreliable, Dr. Mooberry said.</p>
+        <p>Few labs have the ability or resources to fractionate crude extracts, she noted. So over time, researchers and drug companies instead turned to the more economical libraries of human-synthesized compounds.</p>
+        <p>Recognizing this trend, shortly after Dr. O’Keefe became chief of NCI’s natural products program in 2015, he proposed a way to reinvigorate the use of nature’s bounty for drug discovery: do the up-front work for researchers by prefractionating NCI’s treasure trove of natural product crude extracts. Those fractions would then be made available to anybody with a viable research plan to mine them for potentially promising compounds.</p>
+        <p>“Now the research community is going to have access to more chemical diversity than has ever been available in history,” he said. “And it’s free.”</p>
+        <h2 id="ui-id-3">From Months and Months to Weeks</h2>
+        <p>A short walk from the original Natural Products Branch labs, the new NPNPD facility is the antithesis of the old labs: high ceilings, bright lights, loads of stainless steel, and a host of high-tech machines and devices (robots abound) for transforming crude extracts into fractions and preparing those fractions for high-throughput screening.</p>
+        <figure class="image-center centered-set">
+          <div class="centered-element">
+            <img src="/PublishedContent/Images/research/key-initiatives/ras/Tecan-wide_FNL3525-Article.__v200285234.jpg" alt="A Tecan device used to fractionate crude extracts"><!--Comment-->
+          </div>
+          <figcaption>
+            <div class="caption-container no-resize">
+              <p><span>A Tecan Freedom Evo 200, which is used to perform the fractionation of crude extracts from natural products</span></p>
+              <div class="image-photo-credit">Credit: National Cancer Institute</div>
+            </div>
+          </figcaption>
+        </figure>
+        <p></p>
+        <p></p>
+        <p>The lab’s centerpiece is a massive vault-like storage room that will eventually house more than 1 million bar-coded test tubes containing fractions from more than 140,000 crude extracts in NCI’s collection.</p>
+        <p>Within the temperature-controlled vault is a large robotic arm that can travel the 40-foot length and 15-foot height of the room, quickly pulling tubes from thousands of custom-designed racks stacked in shelves from floor to ceiling.</p>
+        <p>The facility is the proving ground for the processes NPNPD staff have developed and refined for fractionating natural product crude extracts, Dr. O’Keefe said. That work has reduced what used to be a months-long, largely manual process to something that is now highly automated and can be completed in a few weeks.</p>
+        <p>“We worked through methods for dealing with each type of source material—marine, plant, microbial—how best to go about purification of this material, and how best to automate that process,” he said.</p>
+        <p>That effort extended to the process for preparing fractions in the test tubes to be sent out for screening. In a matter of days, the samples in those tubes can undergo additional processing (more robots), eventually winding up on tiny plates with hundreds of dimples, or wells—each with a few milliliters of different fractions—and then delivered to a requesting lab, ready for testing.</p>
+        <p>In late January, NPNPD fulfilled the first order for prefractionated samples from its library.</p>
+        <p>“We’ve had interest from large academic labs and researchers from around the world,” Dr. O’Keefe said.</p>
+        <h2 id="ui-id-4">More Than Just a Supply House</h2>
+        <p>As efficient as NPNPD’s prefractionation process is, the fractions still have some complexity about them. Based on testing done at NPNPD, Dr. Grkovic explained, on average, the prefractionated samples contain approximately 20 active chemical compounds.</p>
+        <p>So if a high-throughput screen does show that a fraction being tested kills, say, breast cancer or leukemia cells, it can take a few more rounds of testing to isolate the compound responsible for the cell-killing activity.</p>
+        <p>The NPNPD has the capacity and expertise to conduct those additional analyses, Dr. O’Keefe said, and can work with researchers to perform them.</p>
+        <p>Using technologies like liquid <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000655048&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000655048&amp;version=Patient&amp;language=English">chromatography</a>–mass spectrometry and nuclear <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000269422&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000269422&amp;version=Patient&amp;language=English">magnetic resonance spectroscopy</a>, NPNPD scientists can take an active compound identified by a screening lab and, in a matter of weeks, determine its precise chemical structure. That information is important if a researcher wants to understand how the compound kills cancer cells or wants to modify, or optimize, the compound for further studies and drug development.</p>
+        <p>“So, because we have the capacity and we have the throughput, we now have information on [a compound’s] chemical structure only two steps removed from a crude extract,” Dr. Grkovic said.</p>
+        <h2 id="ui-id-5">Backyard Citizen Science</h2>
+        <p>An area of focus moving forward for the NPNPD is hunting for cancer-killing compounds produced by microbes and fungi found in soil.</p>
+        <p>That decision was borne out of a social media post that went viral. In March 2015, a user on the popular social media site Reddit posted about the University of Oklahoma’s Citizen Science Soil Collection Program and its goal of using a “scoop of dirt” from backyards across the country to discover new drugs. The post caught fire, and in the ensuing weeks and months the program was flooded with backyard soil samples from across the United States.</p>
+        <figure class="image-right-medium centered-set">
+          <div class="centered-element">
+            <img src="/PublishedContent/Images/research/key-initiatives/ras/fungi-cheerios-Article.__v200374365.jpg" alt="A test tube of fungi being cultured on Cheerios"><!--Comment-->
+          </div>
+          <figcaption>
+            <div class="caption-container no-resize">
+              <p><span>The University of Oklahoma’s Citizen Science Soil Collection Program grows, or cultures, fungi using Cheerios breakfast cereal.</span></p>
+              <div class="image-photo-credit">Credit: Used with permission from Robert Cichewicz, Ph.D</div>
+            </div>
+          </figcaption>
+        </figure>
+        <p>Faced with more samples than he knew what to do with, the program’s leader, Robert H. Cichewicz, Ph.D., connected with Dr. O’Keefe to see if NCI was interested in taking advantage of this abundance of dirt. Fast forward a few years, and one part of the new NPNPD laboratory is dedicated to prefractionation of crude extracts from soil microbes.</p>
+        <p>Dr. Mooberry’s work is an example of soil’s potential to generate leads for cancer drugs. Several years ago, her lab tested a compound from a fungus in a soil sample submitted to the Oklahoma program from a person in Alaska. It showed <span><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4958493/">an impressive ability to kill one type of triple-negative breast cancer cells</a></span>.</p>
+        <p>Although that particular compound is not moving forward into further studies, more recently&nbsp;her lab showed&nbsp;that a different compound isolated from a soil-derived fungi from the Oklahoma program could specifically kill&nbsp;<a href="/types/bone/patient/ewing-treatment-pdq" title="">Ewing sarcoma</a> cells. A rare and hard-to-treat cancer, Ewing sarcoma is most commonly diagnosed in children and young adults.</p>
+        <p>Results from the studies have yet to be published, Dr. Mooberry noted, but she’s hopeful that the compound may help researchers identify a vulnerability in Ewing sarcoma cells against which new targeted therapies can be developed.</p>
+        <h2 id="ui-id-6">A New Opportunity</h2>
+        <p>The timing of the NPNPD’s launch is good, Dr. Romo said. Libraries of synthesized compounds have not been as successful at producing new drugs as many had hoped, he noted. And <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000462950&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000462950&amp;version=Patient&amp;language=English">synthetic</a> chemists have become much more adept at creating new, highly complex chemical compounds based on promising leads generated from natural products.</p>
+        <p>“We’re getting better at making more and more complex molecules,” he said.</p>
+        <p>Of course, there’s no certainty that any compound, even one that shows great promise in lab studies, will prove to be effective at treating cancer in humans, Dr. Mooberry stressed. But the history of success with drugs derived from natural products cannot be discounted, she continued.</p>
+        <p>And now, with the NPNPD, she said, “we have a new opportunity to make a difference if more people start screening these fractions.”</p>
+        <p>The younger generation of researchers may take up that challenge, Dr. O’Keefe said. Over the past year, he has given presentations on the NPNPD around the country. Almost uniformly, he continued, the most excited response has come from young investigators.</p>
+        <p>As he explained: “Young researchers keep coming up to me, saying ‘Thank you so much because nobody was going to give me funding to go out into the field to do collections or to conduct extractions. Now that I have this resource, I can just start my research.’”</p>
+  field_page_description:
+    value: 'natures bounty'
+  field_feature_card_description:
+    value: 'NCI has launched an ambitious initiative, called the NCI Program for Natural Products Discovery (NPNPD) and funded by the Cancer Moonshot℠, to make it easier for researchers to mine nature for leads on new cancer drugs.'
+  field_list_description:
+    value: 'NCI has launched an ambitious initiative, called the NCI Program for Natural Products Discovery (NPNPD) and funded by the Cancer Moonshot℠, to make it easier for researchers to mine nature for leads on new cancer drugs.'
+  field_pretty_url:
+    value: "cancer-drugs-natural-products-nci-program"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2019-03-22"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ocean Sunset View Mykonos'
+  field_image_promotional:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ocean Sunset View Mykonos'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Partnering with Small Business to Advance Innovation in Cancer Research and Care"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Partnering with Small Business to Advance Innovation in Cancer Research and Care"
+  field_author:
+    value: 'Norman E. Sharpless, M.D.'
+  body:
+    - format: "full_html"
+      value: |
+        <p>NCI is the federal government's principal agency for cancer research. To advance that mission, NCI leads many highly visible activities related to basic research, clinical trials, training, and coordination of a national cancer plan.</p>
+        <p>Perhaps less well-known are robust NCI programs specifically set up to help small businesses develop and commercialize innovative devices, diagnostics, algorithms, and therapeutics to improve cancer research, prevention, detection, and care. Early in my career as an independent scientist, I remember being surprised not only by the existence of these programs, but also by their scale. I then very quickly came to learn, through personal experience, of their importance.</p>
+        <p>NCI’s <span><a href="https://sbir.cancer.gov/">Small Business Innovation Research (SBIR) and Small Business Technology Transfer (STTR)</a></span>&nbsp;programs have been in existence for several decades. The programs provide seed funds to encourage small, innovative companies to participate in research and development activities that have the potential for private-sector commercialization and public benefit.</p>
+        <p>Last week marked two important moments for NCI’s SBIR/STTR programs. One was the presentation of a report from a working group, convened under the <a href="https://deainfo.nci.nih.gov/advisory/ncab/ncab.htm">National Cancer Advisory Board</a> (NCAB), with recommendations on how to improve and strengthen the programs. And the second was the release of a study, commissioned by NCI, to help&nbsp;<span><a href="https://sbir.cancer.gov/sites/default/files/documents/NCI_SBIR_ImpactStudy_FullReport.pdf">evaluate the economic impact of these programs</a></span>.</p>
+        <p>The report and study provide insight into a strong set of NCI programs that many in the cancer community may not be familiar with.</p>
+        <h2 id="ui-id-2">My Personal Experience with SBIR</h2>
+        <p>All federal agencies that provide at least $100 million in funding for research and development are required by law to set aside a portion of their extramural research budget for SBIR and STTR programs. In fiscal year (FY) 2019, the SBIR/STTR set-aside is 3.65% of NCI’s extramural budget, that is, approximately $160 million for commercialization activities. This policy makes these&nbsp;programs one of the largest sources of financing for early-stage cancer biotechnology in the United States.</p>
+        <p>Before becoming NCI director, I was able to experience firsthand just how invaluable these startup funds can be for getting novel ideas off the ground.</p>
+        <p>When I was at the University of North Carolina Lineberger Comprehensive Cancer Center, we were studying compounds that inhibit <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000046081&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046081&amp;version=Patient&amp;language=English">enzymes</a> involved in cell division. Not only did these compounds cause healthy <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045622&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045622&amp;version=Patient&amp;language=English">bone marrow cells</a> to stop dividing temporarily, which we called “pharmacological quiescence,” but they also made them resistant to DNA-damaging agents like radiation and chemotherapy.</p>
+        <p>Although radiation and chemotherapy are important cornerstones of cancer therapy, as anybody who has ever received them can tell you, they can do more than just kill tumor cells. Both also damage healthy cells, particularly dividing cells in the bone marrow. This bone marrow damage leads to many of the most common and most important toxicities of cytotoxic chemotherapy: anemia, susceptibility to infection, and increased bleeding risk.</p>
+        <p>The results of our work suggested that the compounds we were studying might prevent or limit the damage to bone marrow caused by standard cancer therapies, like radiation and cytotoxic chemotherapy.</p>
+        <p>Hoping to advance this approach toward clinical trials and ultimately develop a nontoxic drug that could prevent the damaging side effects of radiation, I applied for a basic research R01 grant from the <span>National Institute for Allergy and Infectious Diseases (NIAID)</span>. While waiting for&nbsp;NIAID to decide&nbsp;whether to fund the proposal, I was told by a NIAID program officer that, while they liked my proposal, they thought it represented a commercial opportunity and therefore was better suited for an SBIR award.</p>
+        <p>This was the first I had heard of these commercialization awards and I recall my exact words during that phone call: “What’s an SBIR?”</p>
+        <p>After learning more about these programs, it became clear this would be a good approach to develop our ideas. In 2008, I joined with several colleagues to launch a startup company that applied for <span><a href="https://www.niaid.nih.gov/grants-contracts/small-businesses">NIAID SBIR</a></span> funds. We received our first SBIR award in 2009 and, over the next few years, received approximately $5 million in additional SBIR funds from NIAID, NCI, and the <span><a href="https://www.niddk.nih.gov/research-funding/research-programs/small-business">National Institute of Diabetes and Digestive and Kidney Diseases</a></span> to advance our research.</p>
+        <p>This early SBIR funding allowed our early-stage research to grow rapidly and achieve important scientific milestones, enabling it to subsequently garner venture capital backing from the private sector. Although the amount of funds eventually raised privately for this effort was many times larger than the SBIR support, it is important to note that the early support from the SBIR program made the later success possible.</p>
+        <p>Fast forward to the present and the company is now a publicly traded company, has conducted successful <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045831&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045831&amp;version=Patient&amp;language=English">phase II clinical trials</a> in small cell lung cancer and triple-negative breast cancer, and is currently testing three clinical-stage compounds for use in cancer patients.</p>
+        <p>It is still unclear whether this line of studies will lead to a new FDA-approved therapy for patients with cancer or other indications (the vast majority of efforts to develop oncologic therapeutics from scratch ultimately fail), but the results thus far have exceeded my own expectations.&nbsp;</p>
+        <h2 id="ui-id-3">How SBIR/STTR Programs Are Helping the Broader Community</h2>
+        <p>Based on these experiences, I have been enthusiastic about the NIH SBIR/STTR programs for many years and consider them to be true “engines of innovation” for biotech companies.</p>
+        <div class="callout-box-right">
+            <h3>Success Stories</h3>
+            <p>Learn how NCI’s SBIR/STTR programs have helped <a href="https://sbir.cancer.gov/about/successstories">some small businesses advance their products and technologies</a>.</p>
+        </div>
+        <p>Once I became NCI director (which required divesting from all industry relationships to enter federal service), I came to learn about the exciting technologies and therapies NCI’s SBIR/STTR programs are supporting.</p>
+        <p>These programs are an integral component of our mission to bring cancer medicine and technology to patients as quickly and effectively as possible. And, having had a positive personal experience with NIH SBIR/STTR programs, I wanted to better understand how NCI’s SBIR/STTR programs were helping the broader community and whether we might be able to strengthen the programs.</p>
+        <p>Toward that end, we took on an assessment of the NCI SBIR/STTR programs’ overall contribution to cancer research and the national economy. NCI commissioned an economic impact study last year that looked at how NCI SBIR/STTR investments from 1998–2010 translated into economic and scientific impact today. Although I encourage you to read the full report, here are some of the study’s highlights:</p>
+        <ul>
+            <li>Between 1998 and 2010, NCI’s investment of $787 million in SBIR/STTR funds in 444 companies led to 247 technologies and agents that are commercially available today, including 71 FDA-approved products.</li>
+            <li>NCI's SBIR/STTR programs led to an estimated $26.1 billion in total economic output nationwide, including product sales, tax revenue, and job creation. That’s a 33:1 return on investment.</li>
+            <li>During the period 1998 through 2010, more than 400 (65%) of the surveyed technologies supported by the SBIR/STTR programs were developing a treatment option for a subgroup of patients who previously lacked options.</li>
+        </ul>
+        <figure class="image-center centered-set">
+            <div class="centered-element"> <img src="/PublishedContent/Images/news-events/cancer-currents-blog/2019/sbir-working-group-report-article.__v20089209.jpg" alt="">
+                <!--Comment-->
+            </div>
+        </figure>
+        <p>One example of a product developed with support from NCI’s SBIR/STTR program is the Infinium assay for genotyping, which is being used in the <span><a href="https://allofus.nih.gov/">NIH All of Us Research Program</a></span>, in other basic and clinical research, as well as by commercial companies like 23andMe and <a class="vglnk" href="http://Ancestry.com" rel="nofollow"><span>Ancestry</span><span>.</span><span>com</span></a>. The NCI SBIR/STTR grantee, Illumina, developed the base technology for this assay.</p>
+        <p>The array of technologies and therapies, from advanced imaging approaches to cutting-edge immunotherapies, that SBIR/STTR programs support is impressive. And the economic impact study’s findings reveal the compelling story behind these efforts, one that supports continued investment in small businesses’ early-stage development of new cancer-related technologies and therapies. &nbsp;</p>
+        <h2 id="ui-id-4">Working Group Recommendations</h2>
+        <p>In the spirit of continuous improvement, I asked the NCAB to convene a working group of NCAB members, along with individuals with expertise in small business, technology development, and <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000561724&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000561724&amp;version=Patient&amp;language=English">translational research</a>, to advise NCI on several strategic questions related to the SBIR/STTR programs. Examining such questions in a focused way would yield a fresh perspective and constructive suggestions on how to make a good program even better. &nbsp;</p>
+        <p>Last week, at a regularly scheduled <span><a href="https://videocast.nih.gov/summary.asp?live=30342&amp;bhcp=1">NCAB meeting</a></span>, the <span><a href="https://deainfo.nci.nih.gov/advisory/ncab/0219/Jaffee.pdf">working group presented its findings</a></span>. Their recommendations to strengthen the SBIR/STTR programs included increasing award size, broadening diversity of participants and peer reviewers, enhancing assistance to grantees, improving metrics for continuous evaluation, and expanding awareness of the programs. NCI leadership embraces the working group’s report and will work toward implementing its&nbsp;recommendations.</p>
+        <p>We encourage small biotech businesses to learn more about the <span><a href="https://sbir.cancer.gov/about">SBIR/STTR programs at NCI</a></span> and join the many companies that have already experienced the benefits of SBIR/STTR funding to advance their early-in-development innovative ideas.</p>
+        <p>We believe these efforts to commercialize cutting-edge cancer science are economically significant, but most importantly, these programs demonstrably provide a means of getting novel technologies from the bench into broad clinical use in a way that will directly help patients with cancer.</p>
+  field_page_description:
+    value: 'natures bounty'
+  field_feature_card_description:
+    value: 'NCI Director Dr. Norman Sharpless describes how NCI’s Small Business Innovation Research and Small Business Technology Transfer Programs act as “engines of innovation” and shares recommendations from a federal working group for strengthening the programs.'
+  field_list_description:
+    value: 'NCI Director Dr. Norman Sharpless describes how NCI’s Small Business Innovation Research and Small Business Technology Transfer Programs act as “engines of innovation” and shares recommendations from a federal working group for strengthening the programs.'
+  field_pretty_url:
+    value: "nci-sbir-working-with-small-business"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2019-02-21"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ned Sharpless headshot photo'
+  field_image_promotional:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ned Sharpless headshot photo'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Darolutamide Delays the Spread of Some Prostate Cancers"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Darolutamide Delays the Spread of Some Prostate Cancers"
+  body:
+    - format: "full_html"
+      value: |
+        <p>NCI is the federal government's principal agency for cancer research. To advance that mission, NCI leads many highly visible activities related to basic research, clinical trials, training, and coordination of a national cancer plan.</p>
+        <p>Perhaps less well-known are robust NCI programs specifically set up to help small businesses develop and commercialize innovative devices, diagnostics, algorithms, and therapeutics to improve cancer research, prevention, detection, and care. Early in my career as an independent scientist, I remember being surprised not only by the existence of these programs, but also by their scale. I then very quickly came to learn, through personal experience, of their importance.</p>
+        <p>NCI’s <span><a href="https://sbir.cancer.gov/">Small Business Innovation Research (SBIR) and Small Business Technology Transfer (STTR)</a></span>&nbsp;programs have been in existence for several decades. The programs provide seed funds to encourage small, innovative companies to participate in research and development activities that have the potential for private-sector commercialization and public benefit.</p>
+        <p>Last week marked two important moments for NCI’s SBIR/STTR programs. One was the presentation of a report from a working group, convened under the <a href="https://deainfo.nci.nih.gov/advisory/ncab/ncab.htm">National Cancer Advisory Board</a> (NCAB), with recommendations on how to improve and strengthen the programs. And the second was the release of a study, commissioned by NCI, to help&nbsp;<span><a href="https://sbir.cancer.gov/sites/default/files/documents/NCI_SBIR_ImpactStudy_FullReport.pdf">evaluate the economic impact of these programs</a></span>.</p>
+        <p>The report and study provide insight into a strong set of NCI programs that many in the cancer community may not be familiar with.</p>
+        <h2 id="ui-id-2">My Personal Experience with SBIR</h2>
+        <p>All federal agencies that provide at least $100 million in funding for research and development are required by law to set aside a portion of their extramural research budget for SBIR and STTR programs. In fiscal year (FY) 2019, the SBIR/STTR set-aside is 3.65% of NCI’s extramural budget, that is, approximately $160 million for commercialization activities. This policy makes these&nbsp;programs one of the largest sources of financing for early-stage cancer biotechnology in the United States.</p>
+        <p>Before becoming NCI director, I was able to experience firsthand just how invaluable these startup funds can be for getting novel ideas off the ground.</p>
+        <p>When I was at the University of North Carolina Lineberger Comprehensive Cancer Center, we were studying compounds that inhibit <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000046081&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046081&amp;version=Patient&amp;language=English">enzymes</a> involved in cell division. Not only did these compounds cause healthy <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045622&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045622&amp;version=Patient&amp;language=English">bone marrow cells</a> to stop dividing temporarily, which we called “pharmacological quiescence,” but they also made them resistant to DNA-damaging agents like radiation and chemotherapy.</p>
+        <p>Although radiation and chemotherapy are important cornerstones of cancer therapy, as anybody who has ever received them can tell you, they can do more than just kill tumor cells. Both also damage healthy cells, particularly dividing cells in the bone marrow. This bone marrow damage leads to many of the most common and most important toxicities of cytotoxic chemotherapy: anemia, susceptibility to infection, and increased bleeding risk.</p>
+        <p>The results of our work suggested that the compounds we were studying might prevent or limit the damage to bone marrow caused by standard cancer therapies, like radiation and cytotoxic chemotherapy.</p>
+        <p>Hoping to advance this approach toward clinical trials and ultimately develop a nontoxic drug that could prevent the damaging side effects of radiation, I applied for a basic research R01 grant from the <span>National Institute for Allergy and Infectious Diseases (NIAID)</span>. While waiting for&nbsp;NIAID to decide&nbsp;whether to fund the proposal, I was told by a NIAID program officer that, while they liked my proposal, they thought it represented a commercial opportunity and therefore was better suited for an SBIR award.</p>
+        <p>This was the first I had heard of these commercialization awards and I recall my exact words during that phone call: “What’s an SBIR?”</p>
+        <p>After learning more about these programs, it became clear this would be a good approach to develop our ideas. In 2008, I joined with several colleagues to launch a startup company that applied for <span><a href="https://www.niaid.nih.gov/grants-contracts/small-businesses">NIAID SBIR</a></span> funds. We received our first SBIR award in 2009 and, over the next few years, received approximately $5 million in additional SBIR funds from NIAID, NCI, and the <span><a href="https://www.niddk.nih.gov/research-funding/research-programs/small-business">National Institute of Diabetes and Digestive and Kidney Diseases</a></span> to advance our research.</p>
+        <p>This early SBIR funding allowed our early-stage research to grow rapidly and achieve important scientific milestones, enabling it to subsequently garner venture capital backing from the private sector. Although the amount of funds eventually raised privately for this effort was many times larger than the SBIR support, it is important to note that the early support from the SBIR program made the later success possible.</p>
+        <p>Fast forward to the present and the company is now a publicly traded company, has conducted successful <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045831&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045831&amp;version=Patient&amp;language=English">phase II clinical trials</a> in small cell lung cancer and triple-negative breast cancer, and is currently testing three clinical-stage compounds for use in cancer patients.</p>
+        <p>It is still unclear whether this line of studies will lead to a new FDA-approved therapy for patients with cancer or other indications (the vast majority of efforts to develop oncologic therapeutics from scratch ultimately fail), but the results thus far have exceeded my own expectations.&nbsp;</p>
+        <h2 id="ui-id-3">How SBIR/STTR Programs Are Helping the Broader Community</h2>
+        <p>Based on these experiences, I have been enthusiastic about the NIH SBIR/STTR programs for many years and consider them to be true “engines of innovation” for biotech companies.</p>
+        <div class="callout-box-right">
+            <h3>Success Stories</h3>
+            <p>Learn how NCI’s SBIR/STTR programs have helped <a href="https://sbir.cancer.gov/about/successstories">some small businesses advance their products and technologies</a>.</p>
+        </div>
+        <p>Once I became NCI director (which required divesting from all industry relationships to enter federal service), I came to learn about the exciting technologies and therapies NCI’s SBIR/STTR programs are supporting.</p>
+        <p>These programs are an integral component of our mission to bring cancer medicine and technology to patients as quickly and effectively as possible. And, having had a positive personal experience with NIH SBIR/STTR programs, I wanted to better understand how NCI’s SBIR/STTR programs were helping the broader community and whether we might be able to strengthen the programs.</p>
+        <p>Toward that end, we took on an assessment of the NCI SBIR/STTR programs’ overall contribution to cancer research and the national economy. NCI commissioned an economic impact study last year that looked at how NCI SBIR/STTR investments from 1998–2010 translated into economic and scientific impact today. Although I encourage you to read the full report, here are some of the study’s highlights:</p>
+        <ul>
+            <li>Between 1998 and 2010, NCI’s investment of $787 million in SBIR/STTR funds in 444 companies led to 247 technologies and agents that are commercially available today, including 71 FDA-approved products.</li>
+            <li>NCI's SBIR/STTR programs led to an estimated $26.1 billion in total economic output nationwide, including product sales, tax revenue, and job creation. That’s a 33:1 return on investment.</li>
+            <li>During the period 1998 through 2010, more than 400 (65%) of the surveyed technologies supported by the SBIR/STTR programs were developing a treatment option for a subgroup of patients who previously lacked options.</li>
+        </ul>
+        <figure class="image-center centered-set">
+            <div class="centered-element"> <img src="/PublishedContent/Images/news-events/cancer-currents-blog/2019/sbir-working-group-report-article.__v20089209.jpg" alt="">
+                <!--Comment-->
+            </div>
+        </figure>
+        <p>One example of a product developed with support from NCI’s SBIR/STTR program is the Infinium assay for genotyping, which is being used in the <span><a href="https://allofus.nih.gov/">NIH All of Us Research Program</a></span>, in other basic and clinical research, as well as by commercial companies like 23andMe and <a class="vglnk" href="http://Ancestry.com" rel="nofollow"><span>Ancestry</span><span>.</span><span>com</span></a>. The NCI SBIR/STTR grantee, Illumina, developed the base technology for this assay.</p>
+        <p>The array of technologies and therapies, from advanced imaging approaches to cutting-edge immunotherapies, that SBIR/STTR programs support is impressive. And the economic impact study’s findings reveal the compelling story behind these efforts, one that supports continued investment in small businesses’ early-stage development of new cancer-related technologies and therapies. &nbsp;</p>
+        <h2 id="ui-id-4">Working Group Recommendations</h2>
+        <p>In the spirit of continuous improvement, I asked the NCAB to convene a working group of NCAB members, along with individuals with expertise in small business, technology development, and <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000561724&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000561724&amp;version=Patient&amp;language=English">translational research</a>, to advise NCI on several strategic questions related to the SBIR/STTR programs. Examining such questions in a focused way would yield a fresh perspective and constructive suggestions on how to make a good program even better. &nbsp;</p>
+        <p>Last week, at a regularly scheduled <span><a href="https://videocast.nih.gov/summary.asp?live=30342&amp;bhcp=1">NCAB meeting</a></span>, the <span><a href="https://deainfo.nci.nih.gov/advisory/ncab/0219/Jaffee.pdf">working group presented its findings</a></span>. Their recommendations to strengthen the SBIR/STTR programs included increasing award size, broadening diversity of participants and peer reviewers, enhancing assistance to grantees, improving metrics for continuous evaluation, and expanding awareness of the programs. NCI leadership embraces the working group’s report and will work toward implementing its&nbsp;recommendations.</p>
+        <p>We encourage small biotech businesses to learn more about the <span><a href="https://sbir.cancer.gov/about">SBIR/STTR programs at NCI</a></span> and join the many companies that have already experienced the benefits of SBIR/STTR funding to advance their early-in-development innovative ideas.</p>
+        <p>We believe these efforts to commercialize cutting-edge cancer science are economically significant, but most importantly, these programs demonstrably provide a means of getting novel technologies from the bench into broad clinical use in a way that will directly help patients with cancer.</p>
+  field_page_description:
+    value: 'natures bounty'
+  field_feature_card_description:
+    value: 'The investigational drug darolutamide can help delay the spread of prostate cancer in some men with the disease, a recent clinical trial shows. In addition, the drug caused fewer side effects than similar prostate cancer drugs.'
+  field_list_description:
+    value: 'The investigational drug darolutamide can help delay the spread of prostate cancer in some men with the disease, a recent clinical trial shows. In addition, the drug caused fewer side effects than similar prostate cancer drugs.'
+  field_pretty_url:
+    value: "darolutamide-delays-prostate-cancer-spread"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2019-03-15"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'vitamin-d-article'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "An Important Moment in Tobacco Control"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "An Important Moment in Tobacco Control"
+  field_author:
+    value: 'Robert Croyle, Ph.D., Michele Bloch, M.D., Ph.D.'
+  body:
+    - format: "full_html"
+      value: |
+          <p>This past Sunday, November 26, 2017, marked a unique moment in the history of public health in the United States. On this day, in major newspapers (online and print), the three major US tobacco companies issued the first in what will be a series of <a href="https://www.tobaccofreekids.org/assets/content/what_we_do/industry_watch/doj/corrective_statements/2017_10_corrective_statements.pdf">five "corrective statements" about their products</a>.</p>
+          <p>Over the next year, the same statements will also run as TV spots during prime-time viewing hours.</p>
+          <p>Stemming from a 17-year legal battle, these <a href="https://www.justice.gov/opa/pr/tobacco-companies-begin-issuing-court-ordered-statements-tobacco-racketeering-suit">court-ordered statements</a>&mdash;which cover five different topic areas&mdash;will explain in plain language the reality of the harms inflicted by tobacco products and address many common misconceptions about cigarettes.</p>
+          <p>The corrective statements are the result of a federal racketeering lawsuit brought against the tobacco companies in 1999 by the Department of Justice (DOJ). The companies were initially ordered to publish corrective statements in 2006, but they have been delayed for more than a decade by legal appeals.</p>
+          <p>With the appeals finally resolved for the time being, the statements have now begun to appear.</p>
+          <p>And it's safe to say that, as one of the largest supporters of research on the harm of tobacco products as well as on ways to prevent and control tobacco use, NCI made important contributions to this case.</p>
+          <h2>'Decades of Deliberate Deception'</h2>
+          <p>The court-ordered corrective statements are just one component of a judgment entered against the tobacco companies&mdash;Altria; its subsidiary Philip Morris USA; R.J. Reynolds Tobacco; and Lorillard, whose brands are now sold by R.J. Reynolds and by ITG Brands.</p>
+          <div class="callout-box">
+          <h3>Areas Covered by Corrective Statements</h3>
+          <ul>
+          <li>Adverse health effects of cigarette smoking</li>
+          <li>Addictiveness of cigarette smoking and nicotine</li>
+          <li>No health benefit from smoking "low tar," "light," "ultra light," "mild," and "natural" cigarettes</li>
+          <li>Tobacco companies&rsquo; manipulation of cigarette design and composition to enhance nicotine delivery</li>
+          <li>Adverse health effects of exposure to secondhand smoke.</li>
+          </ul>
+          </div>
+          <p>Six public-health organizations were allowed by the court to join the lawsuit against the tobacco companies as "intervenors." The intervenor groups include the American Cancer Society, the American Lung Association, the American Heart Association, Tobacco-Free Kids Action Fund, Americans for Nonsmokers' Rights, and the National African American Tobacco Prevention Network.</p>
+          <p>The corrective statements are one of four legal remedies included in the judgment to "prevent and restrain" the tobacco companies from continuing their long-standing actions to obscure the truth about the health effects and addictive nature of their products.</p>
+          <p>As the judge overseeing the case, Gladys Kessler, wrote in her nearly 1,700-page opinion, "Defendants have known many of these facts for at least 50 years or more. Despite that knowledge, they have consistently, repeatedly, and with enormous skill and sophistication, denied these facts to the public, to the Government, and to the public health community."</p>
+          <p>Under the court's judgment, the companies must: 1) publish the corrective statements as full-page ads in at least 50 newspapers across the country, in five issues appearing from late November to early March; and 2) once a week for one year, broadcast them as 30- and 45-second prime-time spots on the major television networks.</p>
+          <h2>Supporting Tobacco Research, Providing Solid Evidence</h2>
+          <p>As a research agency, NCI did not have a direct role in this lawsuit. However, NCI-funded research was cited often in the case and many NCI-funded researchers were asked to testify about their research findings.</p>
+          <p>This research included findings on tobacco's harmful health effects, how the tobacco companies manipulate their products to make them more addictive and use marketing and other means to target teens, and on the deadly impact of secondhand smoke exposure.</p>
+          <p>For example, as Judge Kessler found, over the decades, the tobacco companies crafted and implemented "a broad strategy to undermine and distort the evidence" of secondhand smoke as a health hazard in order "to deceive the public, distort the scientific record, avoid adverse findings by government agencies, and forestall indoor air restrictions."</p>
+          <p>An NCI tobacco control monograph used during the trial, however, showed that <a href="https://cancercontrol.cancer.gov/brp/tcrb/monographs/10/index.html">exposure of nonsmokers to secondhand smoke</a> is associated with serious health problems, including respiratory and cardiovascular conditions, cancer, and developmental effects in babies.</p>
+          <p>The tobacco companies also have marketed cigarettes with health descriptors such as "light" and "low-tar," among others, to discourage smokers from quitting, by suggesting that they were safer than conventional cigarettes. NCI-supported research, however, firmly established that using these cigarettes <a href="https://cancercontrol.cancer.gov/brp/tcrb/monographs/13/index.html">is indeed just as toxic and dangerous as using conventional cigarettes</a>, and Judge Kessler found that, "[as] the National Cancer Institute concluded in Monograph 13, [health] descriptors are inherently deceptive."</p>
+          <p>As part of the case, DOJ also asked NCI to evaluate potential wording for the corrective statements, to help provide the court with a scientific foundation for determining how the proposed statements would affect consumers. The research would also determine whether the statements that were tested could have potential unintended consequences, such as "boomerang effects," which occur when a campaign has the opposite of its intended effect.</p>
+          <p>The analysis was led by Kelly Blake, Sc.D., of the Division of Cancer Control and Population Sciences' Behavioral Research Program, and was conducted in 2010-2011 and filed as an Expert Report in the case. Although the court did not rely on Dr. Blake's report, the research provides a foundation for NCI and extramural researchers to consider how the court-ordered statements will be received by the public.</p>
+          <h2>An Ongoing Challenge</h2>
+          <figure class="image-right-small centered-set"><div class="centered-element"><img src="/PublishedContent/Images/images/nci/people/bob-croyle-michele-bloch-article.__v30027872.jpg" alt=""><!--Comment--></img></div>
+          <figcaption>
+          <div class="caption-container no-resize">
+          <p>Robert Croyle, Ph.D., Director, NCI Division of Cancer Control and Population Sciences, and&nbsp;Michele Bloch, M.D., Ph.D., Chief, NCI Tobacco Control Research Branch</p></div>
+          </figcaption>
+          </figure>
+          <p>NCI's role in this lawsuit is just one small part of our larger and sustained commitment to reducing smoking rates in the United States and beyond.</p>
+          <p>For example, we are funding research to address the continued high tobacco use rates among people of lower socioeconomic status and certain racial/ethnic groups. This is important because, as explained in the recently published NCI Tobacco Control Monograph, <em><a href="https://cancercontrol.cancer.gov/brp/tcrb/monographs/22/index.html">A Socioecological Approach to Addressing Tobacco-Related Health Disparities</a></em>, research to understand and address tobacco-related health disparities is of increasing importance to reducing the cancer burden in the United States.</p>
+          <p>We have also launched a new initiative <a href="https://www.cancer.gov/news-events/cancer-currents-blog/2017/smoking-cessation-nci-cancer-centers">to help smokers who are diagnosed with cancer quit</a>, which studies have shown can improve their outcomes. And we continue to add new resources and tools to our comprehensive smoking cessation website, <a href="http://www.smokefree.gov/">www.smokefree.gov</a>.</p>
+          <p>These are just some examples of the work we're doing to drive down rates of tobacco use among youth and adults. And that's important, because despite our success in dramatically reducing smoking rates over the past several decades, we can't afford to become complacent: In 2015, <a href="https://www.cdc.gov/mmwr/volumes/66/wr/mm6644a2.htm">36.5 million American adults (15.1%) smoked cigarettes</a>, and so are at high risk of developing cancer and other serious diseases.</p>
+          <p>As we have seen, tobacco use is an ongoing challenge, but it's one we're committed to addressing now and well into the future.</p>
+  field_page_description:
+    value: 'tobacco control'
+  field_feature_card_description:
+    value: 'November 26, 2017, marked a unique moment in US public health history, with the major US tobacco companies issuing the first in a series of court-ordered "corrective statements" about their products.'
+  field_list_description:
+    value: 'November 26, 2017, marked a unique moment in US public health history, with the major US tobacco companies issuing the first in a series of court-ordered "corrective statements" about their products.'
+  field_pretty_url:
+    value: "tobacco-corrective-statements"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2017-11-28"
+  field_image_promotional:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'vitamin-d-article'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Dabrafenib–Trametinib Combination Approved for Melanoma, Anaplastic Thyroid Cancer"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Dabrafenib–Trametinib Combination Approved for Melanoma, Anaplastic Thyroid Cancer"
+  body:
+    - format: "full_html"
+      value: |
+          <p>The Food and Drug Administration (FDA) recently approved the combination of two targeted drugs, <a href="/about-cancer/treatment/drugs/dabrafenib" title="">dabrafenib (Tafinlar)</a> and <a href="/about-cancer/treatment/drugs/trametinib" title="">trametinib (Mekinist)</a>, for the treatment of two different types of cancer.</p>
+          <p>The first approval, announced on April 30, covers the use of the two-drug combination in some patients with advanced melanoma. The second approval, announced on May 4, covers a subset of patients with a rare and aggressive form of thyroid cancer called <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000044541&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000044541&amp;version=Patient&amp;language=English">anaplastic thyroid cancer</a>. The approval is the first time a therapy has been approved specifically for the treatment of anaplastic thyroid cancer.</p>
+          <p>For patients to be able to receive the dabrafenib–trametinib combination for either type of cancer, their tumors must have a specific mutation in a gene called <em>BRAF</em>. This mutation, called <em>BRAF </em>V600, can increase the growth and spread of cancer cells.</p>
+          <p>Both drugs play a specific, well-understood role in attacking tumors, explained Larissa Korde, M.D.,&nbsp;of&nbsp;NCI's <a href="https://ctep.cancer.gov/">Cancer Therapy Evaluation Program</a>.</p>
+          <p>"Dabrafenib inhibits the enzyme produced by the <em>BRAF</em> gene, which is 'turned on' in tumors that harbor mutations in the gene. But tumors can develop resistance to this drug by turning on other cell <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000561720&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000561720&amp;version=Patient&amp;language=English">signaling pathways</a>," Dr. Korde said. "The addition of trametinib blocks one of these pathways of resistance, leading to better activity."</p>
+          <h2 id="ui-id-2">Using Combination Therapy Earlier in Melanoma Treatment</h2>
+          <p>FDA had previously approved the dabrafenib–trametinib combination for the treatment of <em>BRAF</em> mutation–positive <a href="/news-events/cancer-currents-blog/2017/fda-trametinib-dabrafenib-lung-cancer" title="">non-small cell lung cancer</a> and <a href="/news-events/cancer-currents-blog/2017/melanoma-adjuvant-immunotherapy-targeted-therapy" title="">melanoma</a> that has spread elsewhere in the body (metastasized) or that cannot be removed by surgery.</p>
+          <p>The new approval for melanoma expands the use of the drug combination as a post-surgical, or adjuvant, treatment in patients who have cancer cells found in lymph nodes near a surgically removed tumor.</p>
+          <p>In the clinical trial on which the new melanoma approval was based, which was funded by Novartis Pharmaceuticals, almost 60% of patients given the drug combination after surgery remained disease-free after 3 years, compared with about 40% of those who received a placebo combination.</p>
+          <p>The combination also appeared to be safer, at least in one way, than dabrafenib alone: compared with what had been seen in earlier trials of the single drug, in this trial a smaller percentage of patients who took the combination developed a <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000046658&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046658&amp;version=Patient&amp;language=English">second cancer</a> due to therapy.</p>
+          <p>The second cancers seen in earlier trials of dabrafenib alone may be driven by the same pathway that trametinib blocks, said Dr. Korde. Therefore, adding trametinib could reduce the risk of this side effect, she explained.</p>
+          <p>The most common side effects from the two-drug combination are fever, fatigue, and nausea.</p>
+          <h2 id="ui-id-3">A Meaningful Treatment Option for a Rare Cancer</h2>
+          <p>The approval for anaplastic thyroid cancer was based on results from a clinical trial that enrolled patients with any one of nine types of cancer with a <em>BRAF </em>V600 mutation. Out of 23 patients with anaplastic thyroid cancer enrolled in that trial, which was also funded by Novartis, 57% had at least some reduction in the size of their tumors during treatment, and&nbsp;4% saw their tumors disappear completely.</p>
+          <p>So-called basket trials, such as <a href="/about-cancer/treatment/clinical-trials/nci-supported/nci-match" title="">NCI-MATCH</a>, which recruit patients based on the molecular makeup of their tumors instead of where in the body the cancer arose, are growing more common in the era of targeted therapies.</p>
+          <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791845/">In a paper published in the <em>Journal of Clinical Oncology</em> before the FDA approval</a>, the study authors estimated that 80% of patients who received dabrafenib and trametinib would be alive a year after treatment started. In comparison, only about 20% to 40% of patients with anaplastic thyroid cancer live for a year after diagnosis when given other therapies, such as radiation or chemotherapy. The researchers will keep following the trial participants to measure survival rates at 1 year and beyond.</p>
+          <p>"A significant subpopulation of patients with anaplastic thyroid cancer now have a very meaningful treatment option, and for us that is a really big deal, because this disease has a grim prognosis," commented Barbara Murphy, M.D., director of Head and Neck Oncology at Vanderbilt-Ingram Cancer Center, who was not involved in the trial.</p>
+          <p>About one in four anaplastic thyroid cancers carry a <em>BRAF </em>V600 mutation, she said, and testing for this mutation will rapidly become part of standard care for patients with this cancer.</p>
+          <h2 id="ui-id-4">A Molecular Approach to Trial Design</h2>
+          <p>The trial that led to the approval for anaplastic thyroid cancer "is a really phenomenal example of how these rare tumors are well-served by a rational approach to therapeutic investigation," in which drugs are tested based on the knowledge of specific molecular pathways that can drive cancer, said Dr. Murphy.</p>
+          <p>"For uncommon tumors, you're never going to be able to accrue enough patients for a large randomized phase 3 trial. But basket trials serve these patients with rare cancers well," she added.</p>
+          <p>Dr. Murphy is hopeful that as more basket trials are conducted, oncologists in the community will be more willing to suggest them to their patients with rare cancers. These patients have had few opportunities to join trials in the past, and it’s important that oncologists refer these patients to the hospitals running such studies, she continued.</p>
+          <p>"Basket trials can identify therapies for rare tumors, but patients have to be referred to studies to allow those results to accumulate," said Dr. Murphy</p>
+          <p>Results from ongoing clinical trials may also answer questions about targeting BRAF and associated pathways in melanoma, Dr. Korde said. For example, <a href="/about-cancer/treatment/drugs/nivolumab" title="">nivolumab (Opdivo)</a>, a type of immunotherapy called an <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000772606&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000772606&amp;version=Patient&amp;language=English">immune checkpoint inhibitor</a>, received FDA approval in December 2017 for use as an <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000045587&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045587&amp;version=Patient&amp;language=English">adjuvant therapy</a> in melanoma.</p>
+          <p>Both nivolumab and the dabrafenib–trametinib combination are effective therapies in melanoma, she continued, "[but] for patients with a <em>BRAF</em> mutation, we don’t know whether it is better to start with one or the other of these treatments," said Dr. Korde.</p>
+          <p>Researchers are also looking into launching trials targeting other mechanisms of drug resistance in these <em>BRAF</em> mutant tumors, which can arise even with the addition of trametinib.</p>
+          <p>"As we learn more about what specific gene alterations or characteristics drive cancers to grow, we will likely see more drug approvals based on molecular traits," concluded Dr. Korde.</p>
+  field_page_description:
+    value: 'FDA recently approved the targeted-drug combination to treat patients with advanced melanoma and a subset of patients with a rare and aggressive form of thyroid cancer whose tumors have a specific mutation in the BRAF gene.'
+  field_feature_card_description:
+    value: 'FDA recently approved the targeted-drug combination to treat patients with advanced melanoma and a subset of patients with a rare and aggressive form of thyroid cancer whose tumors have a specific mutation in the BRAF gene.'
+  field_list_description:
+    value: 'FDA recently approved the targeted-drug combination to treat patients with advanced melanoma and a subset of patients with a rare and aggressive form of thyroid cancer whose tumors have a specific mutation in the BRAF gene.'
+  field_pretty_url:
+    value: "fda-combo"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2018-05-25"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Zedd Octopus'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Developing Biomarkers for Immunotherapy: A Conversation with Drs. Magdalena Thurin and Helen Chen"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Developing Biomarkers for Immunotherapy: A Conversation with Drs. Magdalena Thurin and Helen Chen"
+  body:
+    - format: "full_html"
+      value: |
+        <p><strong>What is the goal of the research network?</strong></p>
+        <p><strong>Dr. Thurin:</strong> The long-term goal is to identify molecular signatures or biomarkers that, in the future, doctors can use to identify patients with cancer who are likely to respond to immunotherapy.</p>
+        <p><strong>Dr. Chen:</strong> Biomarkers identified as a result of this project could also be used to help investigate mechanisms of resistance to immunotherapy, which may guide the development of combination therapies that may overcome this resistance. In addition, biomarkers could be identified that help to monitor patients&rsquo; responses to treatment.&nbsp;&nbsp;</p>
+        <p><strong>How will the new network of laboratory centers and the data center achieve this goal?</strong></p>
+        <p><strong>Dr. Thurin:</strong> The four centers, or CIMACs, will use state-of-the-art technologies to perform a range of molecular and cell-based testing on biospecimens&mdash;such as blood and tumor samples<span>&mdash;</span>from patients enrolled in early-phase immunotherapy clinical trials&mdash;phase 1 and phase 2&mdash;that are funded by NCI. These test results and clinical information about patients will be stored in the CIDC, which researchers can then use in follow-up studies to identify potential biomarkers.</p>
+        <p><strong>Dr. Chen:</strong> The four CIMACs will use standardized assays for analyzing biospecimens collected from these immunotherapy clinical trials. That will ensure that there is a uniformity in their work and the results they produce, and it will give us more statistical power and provide greater confidence in any potential biomarkers that are identified.</p>
+        <p><strong>Can you explain how the CIMACs are set up?</strong></p>
+        <p><strong>Dr. Chen:</strong> Each of the four CIMACs&mdash;Dana-Farber Cancer Institute, Stanford University, MD Anderson Cancer Center, and Icahn School of Medicine at Mount Sinai&mdash;has a multidisciplinary team with expertise in immunology, clinical investigation, pathology, bioassays, and bioinformatics.</p>
+        <p>These teams will work closely with the clinical investigators who are leading the early-stage immunotherapy trials to design their biomarker studies, apply different assays for identifying potential biomarkers, and analyze the results.</p>
+        <p><strong>Why are biomarkers of response to immunotherapy needed?</strong></p>
+        <p><strong>Dr. Chen:</strong> Currently, a minority of patients with cancer benefit from immunotherapies. But we don&rsquo;t know why only some patients respond to immunotherapy, and we cannot reliably predict which patients will benefit from the therapy. Validated biomarkers could help guide treatment decisions for patients and doctors who are considering immunotherapy.</p>
+        <p><strong>Dr. Thurin:</strong> In addition, to improve the effectiveness of immunotherapies, we need to develop a better understanding of how the immune system interacts with tumors, which can help us&nbsp;develop tools for selecting the appropriate patients for a specific immunotherapy or combination therapy.</p>
+        <p><strong>Do any biomarkers exist that can help guide treatment decisions about immunotherapy?</strong></p>
+        <p><strong>Dr. Chen:</strong> In recent years, several potential biomarkers have emerged, such as levels of a protein called <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000777027&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000777027&amp;version=Patient&amp;language=English">PD-L1</a> expressed on tumor cells and immune cells in the tumor microenvironment. Another biomarker is tumor mutational burden, which is an assessment of the number of genetic mutations in a tumor. But we still need biomarkers that are more precise.</p>
+        <p><strong>What is the CIDC&rsquo;s role?</strong></p>
+        <p><strong>Dr. Thurin:</strong> The CIDC is hosted at Dana-Farber Cancer Institute and has multiple functions. But its primary role is to collect the biomarker data generated at the four CIMACs and to provide a platform for&nbsp;integrating&nbsp;patients&rsquo; clinical data&mdash;such as age, prior treatments, response to treatment, side effects&mdash;with data on the biospecimens. Having all of this information in the CIDC will help other researchers explore the data for biomarkers.</p>
+        <p>The CIDC&nbsp;will also provide some of the informatics tools for the analyses of the data. In the future, the CIDC is expected to serve the cancer research community in a manner similar to NCI&rsquo;s <a href="https://gdc.cancer.gov/">Genomic Data Commons</a>.</p>
+  field_page_description:
+    value: 'NCI is supporting a new research network to develop biomarkers for cancer immunotherapy. In this interview, NCI’s Dr. Helen Chen and Magdalena Thurin explain the networks’ structure and its goals.'
+  field_feature_card_description:
+    value: 'NCI is supporting a new research network to develop biomarkers for cancer immunotherapy. In this interview, NCI’s Dr. Helen Chen and Magdalena Thurin explain the networks’ structure and its goals.'
+  field_list_description:
+    value: 'NCI is supporting a new research network to develop biomarkers for cancer immunotherapy. In this interview, NCI’s Dr. Helen Chen and Magdalena Thurin explain the networks’ structure and its goals.'
+  field_pretty_url:
+    value: "immunotherapy-biomarkers-research-network"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2018-07-27"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Shady Grove Campus'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "muh title"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "muh title"
+  field_author:
+    value: 'muh author'
+  body:
+    - format: "full_html"
+      value: |
+        <p>NCI is the federal government's principal agency for cancer research. To advance that mission, NCI leads many highly visible activities related to basic research, clinical trials, training, and coordination of a national cancer plan.</p>
+        <p>Perhaps less well-known are robust NCI programs specifically set up to help small businesses develop and commercialize innovative devices, diagnostics, algorithms, and therapeutics to improve cancer research, prevention, detection, and care. Early in my career as an independent scientist, I remember being surprised not only by the existence of these programs, but also by their scale. I then very quickly came to learn, through personal experience, of their importance.</p>
+        /a></span> and join the many companies that have already experienced the benefits of SBIR/STTR funding to advance their early-in-development innovative ideas.</p>
+        <p>We believe these efforts to commercialize cutting-edge cancer science are economically significant, but most importantly, these programs demonstrably provide a means of getting novel technologies from the bench into broad clinical use in a way that will directly help patients with cancer.</p>
+  field_page_description:
+    value: 'muh desc'
+  field_feature_card_description:
+    value: 'muh desc'
+  field_list_description:
+    value: 'muh desc'
+  field_pretty_url:
+    value: "muh url"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2020-02-02"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'vitamin-d-article'
+  field_image_promotional:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'vitamin-d-article'
