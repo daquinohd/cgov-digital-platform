@@ -12,7 +12,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_snugs_article.jpg'
-      alt: 'Snuggles: King of the Chubs'
+      alt: 'Snuggles'
   field_override_img_featured:
     - '#process':
         callback: 'file'
@@ -20,7 +20,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_snugs_featured.jpg'
-      alt: 'Snuggles: King of the Chubs'
+      alt: 'Snuggles'
   field_override_img_thumbnail:
     - '#process':
         callback: 'file'
@@ -28,7 +28,9 @@
           - 'image'
           - type: 'module'
             filename: 'pet_snugs_thumb.jpg'
-      alt: 'Snuggles: King of the Chubs'
+      alt: 'Snuggles'
+  field_caption:
+    value: 'Snuggles: King of the Chubs.'
   field_credit:
     value: "Dion D."
 - entity: "media"
@@ -45,7 +47,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_smoo_article.jpg'
-      alt: "Cat-Cat: Wet Bandit"
+      alt: "Cat-Cat"
   field_override_img_featured:
     - '#process':
         callback: 'file'
@@ -53,7 +55,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_smoo_featured.jpg'
-      alt: "Cat-Cat: Wet Bandit"
+      alt: "Cat-Cat"
   field_override_img_thumbnail:
     - '#process':
         callback: 'file'
@@ -61,7 +63,9 @@
           - 'image'
           - type: 'module'
             filename: 'pet_smoo_thumb.jpg'
-      alt: "Cat-Cat: Wet Bandit"
+      alt: "Cat-Cat"
+  field_caption:
+    value: 'Cat-Cat: The Wet Bandit.'
   field_credit:
     value: "Dion D."
 - entity: "media"
@@ -78,7 +82,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_mm_article.jpg'
-      alt: 'Minnie: Lap Aficionado'
+      alt: 'Minnie'
   field_override_img_featured:
     - '#process':
         callback: 'file'
@@ -86,7 +90,7 @@
           - 'image'
           - type: 'module'
             filename: 'pet_mm_featured.jpg'
-      alt: 'Minnie: Lap Aficionado'
+      alt: 'Minnie'
   field_override_img_thumbnail:
     - '#process':
         callback: 'file'
@@ -94,7 +98,9 @@
           - 'image'
           - type: 'module'
             filename: 'pet_mm_thumb.jpg'
-      alt: 'Minnie: Lap Aficionado'
+      alt: 'Minnie'
+  field_caption:
+    value: 'Minnie: Fuzzy Pumpkin, Lap Aficionado.'
   field_credit:
     value: "Dion D."
 
@@ -646,7 +652,7 @@
 
 - entity: "node"
   type: "cgov_blog_post"
-  title: "muh title"
+  title: "Symposium Brings Rising Global Cancer Burden into Focus"
   langcode: en
   status: 1
   moderation_state:
@@ -660,28 +666,40 @@
           - type: 'cgov_blog_series'
             title: 'Cancer Currents Blog'
   field_short_title:
-    value: "muh title"
-  field_author:
-    value: 'muh author'
+    value: "Symposium Brings Rising Global Cancer Burden into Focus"
   body:
     - format: "full_html"
       value: |
-        <p>NCI is the federal government's principal agency for cancer research. To advance that mission, NCI leads many highly visible activities related to basic research, clinical trials, training, and coordination of a national cancer plan.</p>
-        <p>Perhaps less well-known are robust NCI programs specifically set up to help small businesses develop and commercialize innovative devices, diagnostics, algorithms, and therapeutics to improve cancer research, prevention, detection, and care. Early in my career as an independent scientist, I remember being surprised not only by the existence of these programs, but also by their scale. I then very quickly came to learn, through personal experience, of their importance.</p>
-        /a></span> and join the many companies that have already experienced the benefits of SBIR/STTR funding to advance their early-in-development innovative ideas.</p>
-        <p>We believe these efforts to commercialize cutting-edge cancer science are economically significant, but most importantly, these programs demonstrably provide a means of getting novel technologies from the bench into broad clinical use in a way that will directly help patients with cancer.</p>
+        <p><span>Experts gathered last month to discuss a topic that is garnering greater attention and interest by world health groups and within the cancer community: the expanding global burden of cancer, particularly in low- and middle-income countries (LMICs).</span></p>
+        <p><span>Until recently, cancer in many of these countries has been a secondary health concern, with public health efforts focused more on communicable diseases like malaria or HIV.</span></p>
+        <p><span>But as the research presented at the NCI Global Cancer Research Symposium in Rockville, MD, made clear, that can no longer be the case. By 2030,&nbsp;the global number of cancer deaths is expected to skyrocket, increasing by 80% compared with recent levels. Many of these deaths will occur in LMICs.</span></p>
+        <p><span>Attendees at the meeting called for concerted action to tackle this problem head on.</span></p>
+        <p><span>“The United States has an obligation, as part of the community of man, to help other countries in their cancer control efforts,” said Barry Kramer, M.D., director of NCI’s </span><a href="https://prevention.cancer.gov/">Division of Cancer Prevention</a><span>, during the symposium's keynote address.</span></p>
+        <h2 id="ui-id-2">The Tobacco Threat</h2>
+        <p><span>The aim of the event, hosted by NCI’s <a href="/about-nci/organization/cgh" title="">Center for Global Health (CGH)</a></span><span>, was to increase opportunities for new research collaborations and strengthen existing collaborations, with a focus on cancer prevention and screening.</span></p>
+        <p><span>One area where collaborative efforts are already taking shape is tobacco control. Use of cigarettes and other tobacco products is booming in many countries. Worldwide, nearly 20% of cancer deaths and about 70% of lung cancer deaths are attributable to tobacco use, Dr. Kramer stressed. And unless this trend is reversed, he continued, cancer incidence and mortality rates in many countries will continue to rise.</span></p>
+        <p><span>Tobacco’s impact is being felt especially acutely in China, the world’s most populous country. In 2013, the average smoker in China smoked 22 cigarettes a day, a nearly 50% increase from 1980. Indeed, people in China smoked about a trillion cigarettes in 1980 and that number is now approaching 2.5 trillion.</span></p>
+        <p><span>In addition to finding ways to deter people from using tobacco products, researchers are trying to develop approaches for early cancer detection that can help reduce deaths from tobacco-related cancers. </span></p>
+        <p><span>Dr. Kramer, for example, described a collaboration in which NCI is working with Chinese health officials to conduct the ongoing China Cancer Screening Feasibility Study. A follow-up to the U.S.&nbsp;</span><a href="/types/lung/research/nlst" title="">National Lung Screening Trial</a><span></span><span>—which showed a 20% decrease in the risk of death from lung cancer with <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000044983&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000044983&amp;version=Patient&amp;language=English'); return false;">spiral CT</a> screening compared to x-rays for heavy smokers—this study is designed to&nbsp;obtain the information needed for Chinese investigators to design a large screening trial in their country for lung as well as colorectal cancer, Dr. Kramer explained.&nbsp;</span></p>
+        <h2 id="ui-id-3">Large Role for Vaccines</h2>
+        <p><span>Another major area of focus in reducing the global cancer burden has been increasing the use and uptake of cancer prevention vaccines. At the forefront of these efforts is expanding the availability of <a href="/about-cancer/causes-prevention/risk/infectious-agents/hpv-vaccine-fact-sheet" title="">HPV vaccines</a> in many LMICs, particularly those with high cervical cancer rates.</span></p>
+        <p><span>John Schiller, M.D., of NCI’s </span><a href="https://ccr.cancer.gov/">Center for Cancer Research</a><span>, discussed follow-up studies from the&nbsp;NCI </span><a href="http://dceg.cancer.gov/research/who-we-study/cohorts/costa-rica-vaccine-trial"><span>HPV Vaccine Trial in Costa Rica</span></a><span>, which helped to establish both the safety and efficacy of HPV vaccination in preventing cervical cancer caused by several strains of HPV.</span></p>
+        <p><span>Ongoing studies, including those conducted and supported by NCI’s </span><a href="https://dceg.cancer.gov/">Division of Cancer Epidemiology and Genetics</a><span>, have shown that two doses—and possibly just a single dose—of the vaccine appear to be as effective as three doses.</span></p>
+        <p><span>In fact, just weeks after this symposium, the Centers for Disease Control and Prevention’s Advisory Committee on Immunization Practices </span><a href="https://www.cdc.gov/media/releases/2016/p1020-hpv-shots.html">altered its recommendation</a><span> on HPV vaccination, saying that only two doses are needed for those younger than age 15. Many European Union countries, as well as Mexico and Canada, also currently recommend using just two doses in this age group.</span></p>
+        <p><span>As a&nbsp;</span><a href="https://deainfo.nci.nih.gov/advisory/pcp/annualReports/HPV/index.htm"><span>recent report from the President’s Cancer Panel</span></a><span>&nbsp;stressed, decreasing the number of HPV vaccine doses and the cost of the vaccine could be particularly beneficial in many LMICs, where limited financial resources and public health infrastructure have proven to be major barriers to administering three doses.</span></p>
+        <p><span>Dr. Schiller noted that the biological basis for vaccine efficacy is also being studied to better understand the results from some studies that have found that a single dose could be as effective as three doses. </span></p>
   field_page_description:
-    value: 'muh desc'
+    value: 'An NCI Cancer Currents blog post about the NCI Global Cancer Research Symposium, which examined ways of increasing research collaboration, particularly in cancer prevention and screening, to reduce the cancer burden.'
   field_feature_card_description:
-    value: 'muh desc'
+    value: 'An NCI Cancer Currents blog post about the NCI Global Cancer Research Symposium, which examined ways of increasing research collaboration, particularly in cancer prevention and screening, to reduce the cancer burden.'
   field_list_description:
-    value: 'muh desc'
+    value: 'An NCI Cancer Currents blog post about the NCI Global Cancer Research Symposium, which examined ways of increasing research collaboration, particularly in cancer prevention and screening, to reduce the cancer burden.'
   field_pretty_url:
-    value: "muh url"
+    value: "global-cancer-symposium"
   field_public_use: 1
   field_search_engine_restrictions: 0
   field_date_posted:
-    value: "2020-02-02"
+    value: "2016-11-09"
   field_image_article:
     - target_type: 'media'
       '#process':
@@ -698,3 +716,309 @@
           - 'media'
           - bundle: 'cgov_image'
             name: 'Cat-Cat'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Targeted Therapy–Immunotherapy Combinations Effective for Advanced Kidney Cancer"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Targeted Therapy–Immunotherapy Combinations Effective for Advanced Kidney Cancer"
+  body:
+    - format: "full_html"
+      value: |
+        <p>Results from two large clinical trials are expected to change the initial treatment for many people with newly diagnosed advanced kidney cancer.</p>
+        <p>The Food and Drug Administration (FDA) <a href="/news-events/cancer-currents-blog/2018/kidney-cancer-fda-nivolumab-ipilimumab-first-line" title="">has <span>already approved one immunotherapy combination</span></a><span></span> as an initial, or first-line, treatment for people with advanced kidney cancer. And, based on these new data, several experts on the disease said further approvals for these patients are likely to be forthcoming.</p>
+        <p>“There’s a lot of exciting data. The treatment landscape is changing quickly,” said David McDermott, M.D., chief of medical oncology at Beth Israel Deaconess Medical Center, who has been involved in kidney cancer immunotherapy studies.</p>
+        <h2 id="ui-id-2">Evolving Treatment Strategies for Advanced Renal-Cell Cancer</h2>
+        <p>In the last 12 years, the treatment of metastatic renal-cell cancer “has been revolutionized twice,” wrote&nbsp;Bernard Escudier, M.D., of the Gustave Roussy Cancer Campus in France, in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30779526">an editorial accompanying the two papers</a> in <em>NEJM.</em></p>
+        <p>The first big change occurred more than a decade ago with the advent of targeted therapy. Sunitinib and, later, axitinib and similar drugs were developed that block a protein called the vascular endothelial growth factor receptor (VEGFR), which plays an important role&nbsp;in kidney&nbsp;cancer.</p>
+        <p>These targeted treatments were shown to be more effective than what was then the first-line treatment, interferon alpha, a treatment that worked only in a small number of patients and had serious side effects.</p>
+        <p>A second big change came in 2015, Dr. Escudier wrote, when the immune checkpoint inhibitor <span><a href="/about-cancer/treatment/drugs/nivolumab" title="">nivolumab (Opdivo)</a></span> was <span><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5719487/">shown to be effective in patients with advanced kidney cancer</a></span> that had progressed after their initial treatment, soon after becoming the standard of care for these patients.</p>
+        <p>In 2018, FDA approved the combination of nivolumab and <a href="/about-cancer/treatment/drugs/ipilimumab" title="">ipilimumab (Yervoy)</a>, two immune checkpoint inhibitors, as an initial treatment for the disease, after <span>a large clinical trial showed that the approach led to <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5972549/">better survival compared with patients treated with sunitinib</a></span>.</p>
+        <h2 id="ui-id-3">Combining Targeted Therapy and Immunotherapy</h2>
+        <p>The new trials took a different approach, combining the two strategies—a VEGFR inhibitor (axitinib) and an immune checkpoint inhibitor—that have been effective in treating kidney cancer on their own. &nbsp;</p>
+        <p>The studies used different immunotherapy agents but were otherwise very similar. Both trials enrolled more than 800 patients with previously untreated advanced clear-cell renal-cell carcinoma.</p>
+        <p>Earlier, smaller studies had shown that axitinib could be combined with either avelumab or pembrolizumab, all at full dose without causing unacceptable levels of toxicity in the liver. In contrast, combining sunitinib with an immune checkpoint inhibitor caused severe side effects, Dr. Choueiri said.</p>
+        <p>Axitinib targets VEGFR more specifically than sunitinib does, explained Brian Rini, M.D., of the Cleveland Clinic, a lead investigator on the pembrolizumab–axitinib study. “Axitinib is more potent and better tolerated, and made a better combination partner,” Dr. Rini said.</p>
+        <p>But some of “the most impressive data to date” for treating advanced kidney cancer are from the pembrolizumab–axitinib study, Dr. McDermott said.&nbsp;</p>
+        <p>Follow-up of patients in both studies will continue to monitor&nbsp;survival and long-term side effects, investigators from both trials said. Rates of side effects were high in all treatment groups in both trials, with high blood pressure and diarrhea being among the most common side effects.</p>
+        <h2 id="ui-id-4">The Shifting Treatment Landscape for Kidney Cancer</h2>
+        <p>Combination treatments have “essentially been proven” to be superior to VEGFR inhibition alone as first-line therapy, Dr. McDermott said. Combination treatments have clear benefits, although they are more costly and cause more side effects, he added.</p>
+        <p>As for which combination treatment will be the best for which patients, that’s still unclear, Dr. Rini said. “There are subtleties. We don’t know the right answer yet,” Dr. Rini said. “We hope to sort this out over the next several years.”</p>
+        <p>Before the advent of drugs like sunitinib, kidney cancer had a poor prognosis, with a median overall survival of less than a year, Dr. Motzer noted. With the use of VEGFR inhibitors, median survival improved to about 30 months.</p>
+        <p>And now immunotherapies are helping extend survival beyond 3 years, he said.</p>
+        <p>Treatments will continue to be given in sequence, he explained, as the existing treatments eventually&nbsp;stop working for most patients with advanced kidney cancer and their&nbsp;disease progresses.</p>
+        <p>In addition to studying different treatment sequences, researchers are also investigating whether they can identify features of tumors, or <span>biomarkers</span>, that can help predict which therapy might work better in different individuals, Dr. Motzer said.</p>
+        <p>“Ultimately, what’s most important to patients is the impact of these new approaches on long-term survival. How many patients have remissions? Are any patients actually cured of their kidney cancer?” Dr. McDermott said. “It’s going to take some time to figure those things out.”</p>
+        <p>The adjuvant trials are currently enrolling patients, Dr. McDermott said, and he encouraged physicians and patients to consider joining the available&nbsp;trials.</p>
+  field_page_description:
+    value: 'In two clinical trials, combination treatments immune checkpoint inhibitor and axitinib outcomes for patients with advanced kidney cancer than treatment with sunitinib'
+  field_feature_card_description:
+    value: 'In two clinical trials, combination treatments that included an immune checkpoint inhibitor and axitinib (Inlyta) led to better outcomes for patients with advanced kidney cancer than treatment with sunitinib (Sutent), the standard initial therapy.'
+  field_list_description:
+    value: 'In two clinical trials, combination treatments that included an immune checkpoint inhibitor and axitinib (Inlyta) led to better outcomes for patients with advanced kidney cancer than treatment with sunitinib (Sutent), the standard initial therapy.'
+  field_pretty_url:
+    value: "cancer-immunotherapy-targeted-therapy-combination"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2019-03-19"
+  field_image_promotional:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Snuggles'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Making Cancer Clinical Trials Available to More Patients"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Making Cancer Clinical Trials Available to More Patients"
+  field_author:
+    value: 'P. Ivy, A. Denicoff, G. Mishkin & F. Arnaldez'
+  body:
+    - format: "full_html"
+      value: |
+        <p>With so many new and promising cancer treatments being developed, the need for clinical trials to efficiently and effectively test them has never been greater.</p>
+        <p>Maximizing the number of patients who are eligible for clinical trials, while still maintaining an appropriate level of safety, is a top priority for NCI leadership, given the challenges of enrolling enough patients in clinical trials. <a class="definition" onclick="javascript:popWindow('defbyid','CDR0000346518&amp;version=Patient&amp;language=English'); return false;" href="/Common/PopUps/popDefinition.aspx?id=CDR0000346518&amp;version=Patient&amp;language=English">Eligibility criteria</a>—the requirements that must be met before a person can enroll in a trial—have not kept pace with the modernization of clinical trials. Restrictive criteria have not only been a significant hurdle for many patients who have wanted to participate in trials, but they have also limited the generalizability of study findings.</p>
+        <p>Over the past several years, NCI has made efforts to address the issue of trial eligibility by working to broaden the criteria for some NCI-funded trials. For example, researchers are encouraged to relax the use of upper age limits in adult trials and <a href="/news-events/cancer-currents-blog/2017/immunotherapy-cancer-HIV" title="">allow people with cancer who are HIV+ to enroll in trials</a>, as appropriate.</p>
+        <p>Beginning in 2016, the American Society of Clinical Oncology (ASCO) and the advocacy organization Friends of Cancer Research (Friends) launched an effort to further expand eligibility criteria for cancer clinical trials in the hope that more patients will be able to join trials, leading to more rapid advances in cancer treatment.</p>
+        <p>NCI and Food and Drug Administration (FDA) staff have been key contributors to the ongoing effort. The project has led to new and expanded eligibility recommendations, which NCI translated into language that can be used more easily in clinical trial protocols. This new language is now being used by the NCI-sponsored <a href="/research/areas/clinical-trials/nctn" title="">National Clinical Trials Network (NCTN)</a> and <a href="https://ctep.cancer.gov/initiativesprograms/etctn.htm">Experimental Therapeutics Clinical Trials Network (ETCTN)</a>.</p>
+        <h2 id="ui-id-2"><strong>Why Are Eligibility Criteria Necessary?</strong></h2>
+        <p>Eligibility criteria are an important part of clinical trials. They help ensure that participants in a trial are alike&nbsp;in terms of specific factors, such as type and stage of cancer, general health, and previous treatment received. When all participants meet the same eligibility criteria, it is more likely that the trial’s outcomes are the result of the intervention being tested than of other factors, such as health conditions or chance. Eligibility requirements are also important for patient safety. They decrease the chances that patients who might experience dangerous side effects from a study drug are enrolled in the trial.</p>
+        <p>In 2016, ASCO–Friends assembled four working groups to develop new recommendations for expanding eligibility criteria. Each group focused on one of four variables that most often exclude a patient’s participation in a trial: brain metastases, HIV/AIDS, organ dysfunction and prior and concurrent cancers, and minimum age for enrollment.</p>
+        <p>Working group members, which included scientists, regulators, patient advocates, and industry representatives, used an extensive review process that&nbsp;included an&nbsp;examination of the scientific literature and available clinical results. They analyzed variables such as the number of potential patients who were excluded from enrolling in trials and whether trials that had less restrictive eligibility criteria had higher rates of serious adverse events.</p>
+        <p>Members developed recommendations for new eligibility criteria that would be appropriate for both early- and late-phase trials. However, some differences in the criteria for trials of different phases were unavoidable. For example, in early-phase trials, because less is known about the drugs being tested, stricter eligibility criteria are necessary to help ensure that patients are not put at undue risk.</p>
+        <p>Once the ASCO–Friends working groups’ recommendations were agreed upon, NCI compiled them into a final document that outlined new <a href="https://ctep.cancer.gov/protocolDevelopment/docs/NCI_ASCO_Friends_Eligibility_Criteria.pdf">inclusion/exclusion criteria required for&nbsp;NCTN and ETCTN clinical trials</a>. These criteria were implemented in November 2018.</p>
+        <p>In developing the final document, NCI also broadened the focus. For instance, the NCI language addresses eligibility of not only patients with HIV but also patients with other viral infections, including hepatitis B and C. All ETCTN and NCTN trials must follow the new eligibility criteria unless researchers provide strong scientific rationale not to do so.</p>
+        <p>Patients in clinical trials that are now following the new inclusion criteria will be more representative of the real-world patient population, thus translating into trial results that are more applicable and meaningful to patients treated in everyday practice.</p>
+        <h2 id="ui-id-3"><strong>Other Barriers to Clinical Trial Enrollment</strong></h2>
+        <p>Although restrictive eligibility criteria can exclude patients from participating in clinical trials, there are many other barriers to participation.</p>
+        <p>Health care providers may not&nbsp;offer their patients the opportunity to participate in a trial for many reasons. For example, patients may have comorbidities—other medical conditions—that may make it difficult for them to tolerate aggressive therapy.</p>
+        <p>And some clinicians may not offer a clinical trial to a patient based on assumptions about the patient. For instance, a provider may assume that a patient lives too far away from the trial location and would have trouble making it&nbsp;to the clinic for trial visits. Or a provider might assume that a patient does not have the social support to adhere to the treatment regimen or would have trouble understanding a very complex trial protocol and be unable to decide whether to participate.</p>
+        <p>NCI encourages health care providers to question these assumptions. We believe that clinicians should present the option to participate in clinical trials to their patients so that they can make informed decisions about trial participation together. Clinicians should not make this decision for their patients.</p>
+        <p>Educating and raising clinicians’ awareness are essential to promoting clinical trial enrollment. To this end,&nbsp;NCI and many other organizations provide educational opportunities to enhance clinicians’ understanding of clinical trials and patient enrollment. It is important that health care providers be aware of available clinical trials and talk to their patients when a clinical trial might be an appropriate option for them. Patients themselves can <a href="/about-cancer/treatment/clinical-trials" title="">learn more about clinical trials</a> and how to ask their providers about participation.</p>
+        <h2 id="ui-id-4"><strong>Expanding Criteria while Ensuring Patient Safety: Finding the Right Balance</strong></h2>
+        <p>Because the new NCI eligibility criteria were just implemented, it will take some time before we can evaluate the impact of these specific changes. And other changes to the inclusion criteria may be on the way, given that ASCO–Friends are convening additional meetings to address eligibility criteria that were not the focus of the initial effort. These include how much treatment patients may have had before entering a trial and what medications a patient might be using to treat other health conditions.</p>
+        <p>Clinical trial enrollment is a complex issue and ongoing critical assessment of clinical trial eligibility criteria is essential to achieve the right balance between expanding criteria while ensuring patient safety. With less restrictive criteria translating into study conclusions that are more relevant to the broader patient population, we can make faster progress in the discovery of new targeted cancer treatments and immunotherapies that will benefit more people.</p>
+  field_page_description:
+    value: 'NCI is expanding eligibility criteria for its cancer clinical trials in the hope that more patients will join, leading to more rapid advances. The goal is to maximize the number of patients who are eligible to enroll while maintaining their safety.'
+  field_feature_card_description:
+    value: 'NCI is expanding eligibility criteria for its cancer clinical trials in the hope that more patients will join, leading to more rapid advances. The goal is to maximize the number of patients who are eligible to enroll while maintaining their safety.'
+  field_list_description:
+    value: 'NCI is expanding eligibility criteria for its cancer clinical trials in the hope that more patients will join, leading to more rapid advances. The goal is to maximize the number of patients who are eligible to enroll while maintaining their safety.'
+  field_pretty_url:
+    value: "expanding-clinical-trial-eligibility-criteria"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2019-03-07"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Minnie'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Enhancements to NCI’s SEER Program Creating New Research Opportunities"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  body:
+    - format: "full_html"
+      value: |
+        <p>When we set about to enhance SEER, we worked with and sought feedback from many groups and experts. This outreach allowed us to better understand the cancer research community’s needs and the opportunities that could be created through strategic, targeted enhancements to SEER.</p>
+        <p>In those discussions and forums, the main data needs that were identified included those that cover:</p>
+        <ul>
+        <li>All treatments received by individual patients from diagnosis until their death</li>
+        <li>Outcomes other than incidence and mortality<span>—</span>in particular, recurrences</li>
+        <li>The genomic composition of patients’ tumors</li>
+        </ul>
+        <p>As might be expected, enabling SEER to collect these data is complicated. Doing so requires capturing information over an extended time period from a massive, fragmented US health care system that relies on a wide variety of records systems that are not designed for easy information sharing.</p>
+        <p>Take, for example, a woman with early-stage breast cancer diagnosed and successfully treated in 2010 but who then had a recurrence in 2015. Ideally, we want to capture data concerning her primary treatment (e.g., surgery, radiation); any prescribed adjuvant treatments (e.g., chemotherapy, hormonal therapy) and whether they were actually administered; important clinical factors (e.g., non-cancer health problems, age, race/ethnicity); where in the body her recurrence occurred and how it was diagnosed; the outcomes of germline and tumor genomic tests done at the time of recurrence; and what treatments she received for that recurrence.</p>
+        <p>Some of these data may be in free-form notes (general notes for which there are no specific data fields) in an electronic record. Some may be in pharmacy records, or a primary care physician’s notes, or insurance records. &nbsp;And if the woman moved to a different state during this period, that presents a whole new layer of challenges.</p>
+        <p>Trying to collect such data, and ensure that they are accurate, is an extremely complex undertaking. It’s because of that great complexity that we are moving forward with these enhancements in a thoughtful and systematic way—one that we believe will lay the foundation for successfully integrating them into the broader SEER program.</p>
+        <h2 id="ui-id-3">More Cases, More Diversity</h2>
+        <p>Among the most important enhancements to the SEER program is the expansion of the size and diversity of the population it covers.</p>
+        <p>SEER now covers 34% of the US population, covering 19 different geographic areas. With this expansion, SEER is&nbsp;collecting data on approximately 550,000 new individual cancer cases (without any personally identifying information) each year.</p>
+        <p>This expansion was implemented with a strategic focus: adding <a href="https://seer.cancer.gov/registries/cancer_registry/cancer_registry.html">US cancer registries</a> that include more underserved and ethnic/racial minorities. That means SEER is capturing data on cancer that more fully represents the US population.</p>
+        <p>Of course, it’s always good to have more data to work from. In practice, the expanded population covered by SEER means that researchers will be able to perform better studies—those that allow us to more completely understand how cancer affects different patient subgroups and inform the development of interventions intended to address the shortcomings and disparities that we know exist in the current system of cancer care.</p>
+        <h2 id="ui-id-4">Pilot Studies and a Virtual Biorepository</h2>
+        <p>Unfortunately, we can’t immediately start collecting every type of data we’d like SEER-wide. That is why we have launched a series of pilot studies that can help us better understand the barriers and challenges to collecting these new types of data.</p>
+        <p>Take, for example, the aforementioned supercomputers. They are part of a pilot effort being conducted in collaboration with the US Department of Energy (DOE).</p>
+        <p>Under this partnership, we are working with DOE scientists to develop tools that will allow SEER to collect the data elements it has traditionally captured (e.g., cancer type and grade) as well as new data elements (e.g., biomarkers, recurrences) from patient medical records. Compared with the manual collection that is often used now, automated data collection would be far more reliable and rapid, even if some cases still require manual coding.</p>
+        <p>This pilot with the DOE will allow us to assess the feasibility of this automated data collection and refine these new data collection tools, ensuring, for example, that they are accurately capturing the data we’re looking for.</p>
+        <p>Another SEER pilot study is focusing on collecting data on the use of oral cancer drugs. Such data have traditionally been difficult to amass because these treatments are not given at hospitals or at doctors’ offices but are obtained through pharmacies and taken by patients at home. Little is known about the use of these drugs and adherence to prescribed regimens in a real-world population<span>—</span>that is, outside of a clinical trial setting.</p>
+        <p>In one such pilot study being conducted with the SEER registry in Georgia, linkages have been established between the registry and all Walgreens and CVS pharmacies in the state. These linkages connect a patient's information in&nbsp;the pharmacy's records to the same patient in the SEER registry, allowing for the real-time collection of data on filled prescriptions for oral cancer therapies.</p>
+        <p>Having these types of real-world data readily available would be invaluable. From them, researchers could glean important insights into usage patterns that, for example, can identify whether certain subgroups of patients are not getting the therapies they need.</p>
+        <p>Similar pilot efforts are creating linkages between SEER registries and health insurance claims data from some of the largest health insurance companies in the country. These linkages are similar to those that enable the <a href="https://healthcaredelivery.cancer.gov/seermedicare/">SEER–Medicare Linked Database</a>, which was established in the early 1990s. This database has been the primary data source for more than 1,600 published studies, including those that have provided information on <a href="/news-events/cancer-currents-blog/2017/young-adult-colorectal-incidence-increasing" title="">important new cancer incidence<span> trends</span></a><span></span> and <a href="/news-events/cancer-currents-blog/2016/cancer-silver-tsunami" title="">long-term survivorship issues</a>.</p>
+        <p>Creating these linkages with commercial health insurance claims will allow SEER to capture much more information on people diagnosed with cancer who are under the age of 65 (i.e., not yet in Medicare), including critical data on treatments that patients receive over time. Such information can offer a window into real-world clinical practice and its potential implications for patients and the health care system at large.</p>
+        <p>Other pilot linkage efforts underway involve collecting data on the results of genomic tests, including multigene panels like the Oncotype DX test <a href="/news-events/press-releases/2018/tailorx-breast-cancer-chemotherapy" title="">used in the TAILORx breast cancer trial</a>. As oncology continues on the road to precision medicine, the ability to systematically collect these data would go a long way toward informing this movement.</p>
+        <p>Although these linkage pilots are noteworthy, another exciting enhancement to SEER under active evaluation is on the other end of the research spectrum: the development of a “virtual <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000561323&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000561323&amp;version=Patient&amp;language=English'); return false;">biorepository</a>.”</p>
+        <p>The aim of this repository is to provide information on tumor samples stored at institutions across the country. This will allow investigators to search for samples from patients with certain demographic or clinical characteristics or certain outcomes, and then request those samples (including all related clinical data on that patient) via an honest broker for use in their research.</p>
+        <p>Currently, six SEER registries are participating in a pilot study of the virtual biorepository, focusing on specific survivor groups for breast and pancreatic cancer. The lessons learned from this pilot will inform our efforts to eventually scale up to a larger virtual biorepository.</p>
+        <h2 id="ui-id-5">New Data, Important Opportunities</h2>
+        <p>The enhancements planned for SEER are exciting and much needed.</p>
+        <p>Of course, patience will be an important ally moving forward. It will take time to implement these ambitious plans, and there is always the possibility that—given the scale of these efforts—they won’t always go according to plan. In fact, performing these activities using small pilots allows us to understand where the barriers and challenges might be and to realistically assess whether they can move past the pilot phase.</p>
+        <p>That said, we are taking the necessary steps to eventually make these new tools and resources integral parts of SEER. In so doing, we will be opening up new doors to cancer researchers and greatly expanding the value of this unique and needed program.</p>
+        <p>Over the coming decade, stay tuned to hear more about a remarkable array of new scientific opportunities. As always, we welcome ideas and feedback from the cancer community about ways to strengthen the utility and usability of SEER data for both cancer research and cancer control planning.</p>
+  field_page_description:
+    value: 'meta nci seer'
+  field_feature_card_description:
+    value: 'NCI’s SEER program is expanding in size and operating a series of innovative pilot studies.'
+  field_list_description:
+    value: 'NCI’s SEER program is expanding in size and operating a series of innovative pilot studies.'
+  field_pretty_url:
+    value: "nci-seer-enhancements-creating-opportunities"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2018-08-23"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ocean Sunset View Mykonos'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Study Provides Closer Look at Postmenopausal Bleeding and Endometrial Cancer"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Study Provides Closer Look at Postmenopausal Bleeding and Endometrial Cancer"
+  body:
+    - format: "full_html"
+      value: |
+        <p>In the largest analysis to date looking at the extent to which vaginal bleeding is associated with endometrial cancer in women who have gone through <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046296&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000046296&amp;version=Patient&amp;language=English'); return false;">menopause</a>, 90% of women diagnosed with endometrial cancer reported bleeding before their cancer diagnosis. Approximately 9% of <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045269&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000045269&amp;version=Patient&amp;language=English'); return false;">postmenopausal</a> women who saw a doctor for bleeding later received a diagnosis of endometrial cancer.</p>
+        <p>Unlike many other cancer types, the rate of endometrial cancer has increased in recent years and is expected to continue rising worldwide over the coming decade. This rise is thought to be largely due to factors that affect <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045713&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000045713&amp;version=Patient&amp;language=English'); return false;">hormones</a>, such as rising obesity rates and changes in how many children women are likely to have.</p>
+        <p>If endometrial cancer is found early, a woman has a 95% chance of surviving the&nbsp;cancer for at least 5 years. By contrast, for women diagnosed after their cancer has spread outside the <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046645&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000046645&amp;version=Patient&amp;language=English'); return false;">uterus</a>,&nbsp;the chance of surviving for at least 5 years is much lower, ranging from 16–45%.</p>
+        <p>In most cancers, by the time a person develops symptoms, their disease is usually advanced and harder to treat, explained Megan Clarke, Ph.D., of NCI’s <a href="https://dceg.cancer.gov/">Division of Cancer Epidemiology and Genetics (DCEG)</a><span>, who led the analysis.</span> "With endometrial cancer it's quite different, and [recognizing symptoms] gives us an opportunity to intervene" and improve the odds of long-term survival, she added.</p>
+        <p>Typically, postmenopausal women who experience bleeding are referred for further testing to either rule out or diagnose endometrial cancer. While vaginal bleeding has&nbsp;been known to be a symptom of&nbsp;endometrial cancer, this large study confirms the practice of referring women for further testing, explained Christina Chu, M.D., of Fox Chase Cancer Center, who was not involved with the research.</p>
+        <p>“If you have bleeding after menopause, you should call your doctor and let them know,” said Dr. Chu. “For the majority of women, it's a benign problem, but there are simple things that can be done to rule out endometrial cancer.”</p>
+        <h2 id="ui-id-2">Examining Endometrial Cancer Worldwide</h2>
+        <p>To get a comprehensive picture of the relationship between endometrial cancer and postmenopausal vaginal bleeding, researchers led by DCEG’s Dr. Clarke and Nicolas Wentzensen, M.D., Ph.D., performed a <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000691484&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000691484&amp;version=Patient&amp;language=English'); return false;">meta-analysis</a> of 129 studies, which included more than 40,000 women. Data for the studies—which were conducted in Europe, North America, and Asia—were collected between 1977 and 2017.</p>
+        <p>The researchers <span>estimated the overall </span><a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000789737&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000789737&amp;version=Patient&amp;language=English'); return false;">prevalence</a><span> of endometrial cancer </span><a href="https://www.ncbi.nlm.nih.gov/pubmed/30083701">among women with postmenopausal bleeding across all the studies combined</a> and within different regions of the world. They also examined whether factors such as use of <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046127&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000046127&amp;version=Patient&amp;language=English'); return false;">hormone replacement therapy</a> affect the prevalence of endometrial cancer.</p>
+        <p>Overall, the analysis showed that, consistent with what had been seen in earlier studies, 90% of women diagnosed with endometrial cancer had experienced postmenopausal bleeding.</p>
+        <p>The number of women with postmenopausal bleeding who were diagnosed with endometrial cancer varied around the globe. While the rate was 9% overall, it ranged from 5% in North America to 13% in Western Europe.</p>
+        <p>Among the studies included in the analysis, the risk of endometrial cancer in women with postmenopausal bleeding was lower in studies that included women using hormone replacement therapy. This may be due, in part, to the fact that hormone replacement therapy itself can cause bleeding, especially during the first 6 months of use, explained Dr. Clarke.</p>
+        <p>“It's only if there's persistent bleeding after the initial 6 months of [hormone replacement] that it may be more concerning” and should trigger testing for endometrial cancer, she said.</p>
+        <h2 id="ui-id-3">Current Testing Practices Supported</h2>
+        <p>Currently, testing for endometrial cancer in women experiencing abnormal vaginal bleeding consists of <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000046633&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000046633&amp;version=Patient&amp;language=English'); return false;">transvaginal ultrasound</a> imaging, <a class="definition" href="/Common/PopUps/popDefinition.aspx?id=CDR0000045164&amp;version=Patient&amp;language=English" onclick="javascript:popWindow('defbyid','CDR0000045164&amp;version=Patient&amp;language=English'); return false;">biopsy</a>, or both.</p>
+  field_page_description:
+    value: 'A new study has found that 90% of postmenopausal women diagnosed with endometrial cancer reported vaginal bleeding before their diagnosis.'
+  field_feature_card_description:
+    value: 'A new study has found that 90% of postmenopausal women diagnosed with endometrial cancer reported vaginal bleeding before their diagnosis.'
+  field_list_description:
+    value: 'A new study has found that 90% of postmenopausal women diagnosed with endometrial cancer reported vaginal bleeding before their diagnosis.'
+  field_pretty_url:
+    value: "endometrial-cancer-bleeding-common-symptom"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2018-08-29"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Snuggles'
+
+- entity: "node"
+  type: "cgov_blog_post"
+  title: "Approval of Osimertinib and Necitumumab Increases Lung Cancer Treatment Options"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Cancer Currents Blog'
+  field_short_title:
+    value: "Approval of Osimertinib and Necitumumab Increases Lung Cancer Treatment Options"
+  body:
+    - format: "full_html"
+      value: |
+        <p>NCI is the federal government's principal agency for cancer research. To advance that mission, NCI leads many highly visible activities related to basic research, clinical trials, training, and coordination of a national cancer plan.</p>
+        <p>Perhaps less well-known are robust NCI programs specifically set up to help small businesses develop and commercialize innovative devices, diagnostics, algorithms, and therapeutics to improve cancer research, prevention, detection, and care. Early in my career as an independent scientist, I remember being surprised not only by the existence of these programs, but also by their scale. I then very quickly came to learn, through personal experience, of their importance.</p>
+        /a></span> and join the many companies that have already experienced the benefits of SBIR/STTR funding to advance their early-in-development innovative ideas.</p>
+        <p>We believe these efforts to commercialize cutting-edge cancer science are economically significant, but most importantly, these programs demonstrably provide a means of getting novel technologies from the bench into broad clinical use in a way that will directly help patients with cancer.</p>
+  field_page_description:
+    value: 'FDA has approved two targeted therapies, osimertinib and necitumumab for the treatment of some patients with advanced lung cancer.'
+  field_feature_card_description:
+    value: 'The FDA has approved two targeted therapies, osimertinib (Tagrisso™) and necitumumab (Portrazza™), for the treatment of some patients with advanced lung cancer.'
+  field_list_description:
+    value: 'The FDA has approved two targeted therapies, osimertinib (Tagrisso™) and necitumumab (Portrazza™), for the treatment of some patients with advanced lung cancer.'
+  field_pretty_url:
+    value: "fda-osimertinib-necitumumab"
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: "2018-12-28"
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Minnie'
