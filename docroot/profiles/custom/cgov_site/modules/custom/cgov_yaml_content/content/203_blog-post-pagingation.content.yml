@@ -1,3 +1,103 @@
+- entity: "media"
+  bundle: "cgov_image"
+  name: "Snuggles"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_media_image:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_snugs_article.jpg'
+      alt: 'Snuggles: King of the Chubs'
+  field_override_img_featured:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_snugs_featured.jpg'
+      alt: 'Snuggles: King of the Chubs'
+  field_override_img_thumbnail:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_snugs_thumb.jpg'
+      alt: 'Snuggles: King of the Chubs'
+  field_credit:
+    value: "Dion D."
+- entity: "media"
+  bundle: "cgov_image"
+  name: "Cat-Cat"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_media_image:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_smoo_article.jpg'
+      alt: "Cat-Cat: Wet Bandit"
+  field_override_img_featured:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_smoo_featured.jpg'
+      alt: "Cat-Cat: Wet Bandit"
+  field_override_img_thumbnail:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_smoo_thumb.jpg'
+      alt: "Cat-Cat: Wet Bandit"
+  field_credit:
+    value: "Dion D."
+- entity: "media"
+  bundle: "cgov_image"
+  name: "Minnie"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_media_image:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_mm_article.jpg'
+      alt: 'Minnie: Lap Aficionado'
+  field_override_img_featured:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_mm_featured.jpg'
+      alt: 'Minnie: Lap Aficionado'
+  field_override_img_thumbnail:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'pet_mm_thumb.jpg'
+      alt: 'Minnie: Lap Aficionado'
+  field_credit:
+    value: "Dion D."
+
 - entity: "node"
   type: "cgov_blog_post"
   title: "Nature’s Bounty: Revitalizing the Discovery of New Cancer Drugs from Natural Products"
@@ -145,7 +245,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Ocean Sunset View Mykonos'
+            name: 'Cat-Cat'
   field_image_promotional:
     - target_type: 'media'
       '#process':
@@ -153,7 +253,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Ocean Sunset View Mykonos'
+            name: 'Cat-Cat'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -239,7 +339,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Ned Sharpless headshot photo'
+            name: 'Minnie'
   field_image_promotional:
     - target_type: 'media'
       '#process':
@@ -247,7 +347,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Ned Sharpless headshot photo'
+            name: 'Minnie'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -331,7 +431,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'vitamin-d-article'
+            name: 'Snuggles'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -416,7 +516,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'vitamin-d-article'
+            name: 'Cat-Cat'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -484,7 +584,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Zedd Octopus'
+            name: 'Minnie'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -542,7 +642,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'Shady Grove Campus'
+            name: 'Snuggles'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -589,7 +689,7 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'vitamin-d-article'
+            name: 'Cat-Cat'
   field_image_promotional:
     - target_type: 'media'
       '#process':
@@ -597,4 +697,4 @@
         args:
           - 'media'
           - bundle: 'cgov_image'
-            name: 'vitamin-d-article'
+            name: 'Cat-Cat'
