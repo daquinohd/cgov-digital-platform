@@ -66,6 +66,7 @@ function cgov_site_section_tokens($type, $tokens, array $data, array $options, B
         }
 
         // Replace 'node/[nid]' with parent Site Section, year, and Pretty URL.
+        // TODO: Compress this mess down.
       case 'blog-post-path':
         if (!empty($data['node'])) {
           $node = $data['node'];
@@ -86,13 +87,19 @@ function cgov_site_section_tokens($type, $tokens, array $data, array $options, B
 
         // Replace 'taxonomy/term/[tid]' with owner Site Section and Pretty URL.
       case 'blog-topic-path':
-        if (1 == 1) {
-          try {
-            $replacements[$original] = 'my/pretty/topic';
-          }
-          catch (Exception $e) {
-            \Drupal::logger('cgov_site_section')
-              ->notice('Could not retrieve computed path for Blog Topic tid.');
+        if (!empty($data['term'])) {
+          $term = $data['term'];
+          if (!empty($term->field_pretty_url->value)) {
+            try {
+              $nid = $term->get('field_owner_blog')->first()->getValue()['target_id'];
+              $name = $term->field_pretty_url->value;
+              $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+              $replacements[$original] = $alias . '/' . $name;
+            }
+            catch (Exception $e) {
+              \Drupal::logger('cgov_site_section')
+                ->notice('Could not retrieve computed path for Blog Topic nid: ' . $nid);
+            }
           }
           break;
         }
