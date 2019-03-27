@@ -15,14 +15,19 @@ function cgov_site_section_token_info() {
   $info = [];
   $info['types']['cgov_tokens'] = ['name' => t('Cancer.gov Tokens'), 'description' => t('Cancer.gov Tokens')];
 
-  $info['tokens']['cgov_tokens']['cgov-computed-path'] = [
-    'name' => t('Computed Path'),
-    'description' => t('The computed path of the term..'),
-  ];
-
-  $info['tokens']['cgov_tokens']['blog-post-path'] = [
-    'name' => t('Blog Post Path'),
-    'description' => t('The computed path of a Blog Post.'),
+  $info['tokens']['cgov_tokens'] = [
+    'cgov-computed-path' => [
+      'name' => t('Computed Path'),
+      'description' => t('The computed path of the term..'),
+    ],
+    'blog-post-path' => [
+      'name' => t('Blog Post Path'),
+      'description' => t('The computed path of a Blog Post.'),
+    ],
+    'blog-topic-path' => [
+      'name' => t('Blog Topic Path'),
+      'description' => t('The path of a Blog Topic taxonomy term.'),
+    ],
   ];
 
   return $info;
@@ -40,8 +45,9 @@ function cgov_site_section_tokens($type, $tokens, array $data, array $options, B
   $replacements = [];
   foreach ($tokens as $name => $original) {
     switch ($name) {
-      case 'cgov-computed-path':
 
+      // Replace 'node/[nid]' with Site Section & Pretty URL.
+      case 'cgov-computed-path':
         if (!empty($data['node'])) {
           /* @var \Drupal\node\NodeInterface $node */
           $node = $data['node'];
@@ -59,8 +65,8 @@ function cgov_site_section_tokens($type, $tokens, array $data, array $options, B
           break;
         }
 
+        // Replace 'node/[nid]' with parent Site Section, year, and Pretty URL.
       case 'blog-post-path':
-
         if (!empty($data['node'])) {
           $node = $data['node'];
           if (!empty($node->get('field_blog_series')->first())) {
@@ -72,13 +78,26 @@ function cgov_site_section_tokens($type, $tokens, array $data, array $options, B
             }
             catch (Exception $e) {
               \Drupal::logger('cgov_site_section')
-                ->notice('Could not retrieve computed path for blog series nid: ' . $nid);
+                ->notice('Could not retrieve computed path for Blog Series nid: ' . $nid);
             }
           }
           break;
         }
-    }
 
+        // Replace 'taxonomy/term/[tid]' with owner Site Section and Pretty URL.
+      case 'blog-topic-path':
+        if (1 == 1) {
+          try {
+            $replacements[$original] = 'my/pretty/topic';
+          }
+          catch (Exception $e) {
+            \Drupal::logger('cgov_site_section')
+              ->notice('Could not retrieve computed path for Blog Topic tid.');
+          }
+          break;
+        }
+
+    }
   }
   return $replacements;
 }
