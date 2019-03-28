@@ -8,13 +8,12 @@
       {{ node.label }}
     </h1>
     <div id="nvcgSubTitle">
-      {% if series.field_feedburner_url|length > 2 %}
+      {% if series.field_feedburner_url.value %}
         <div class="subscribeRSS">
           <a class="blogRSS" href="{{ series.field_feedburner_url.value }}"><span>{% trans %}Subscribe{% endtrans %}</span></a>
         </div>
       {% endif %}
     </div>
-
     <div id="cgvBody">
       <p class="blog-post-publishing-info">
         {% spaceless %}{{ content.field_date_posted }}{% endspaceless %},
