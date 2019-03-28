@@ -8,9 +8,9 @@
       {{ node.label }}
     </h1>
     <div id="nvcgSubTitle">
-      {% if series.field_feedburner_url|length > 0 %}
+      {% if series.field_feedburner_url|length > 2 %}
         <div class="subscribeRSS">
-          <a class="blogRSS" href="{{ series.field_feedburner_url.0.url }}"><span>{% trans %}Subscribe{% endtrans %}</span></a>
+          <a class="blogRSS" href="{{ series.field_feedburner_url.value }}"><span>{% trans %}Subscribe{% endtrans %}</span></a>
         </div>
       {% endif %}
     </div>
