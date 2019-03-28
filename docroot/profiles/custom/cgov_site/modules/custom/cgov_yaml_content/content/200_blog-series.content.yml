@@ -50,6 +50,8 @@
     - value: '15'
   field_recommended_content_header:
     - value: 'Recommended Content'
+  field_feedburner_url:
+    url: 'https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new'
 
 ## RAS Dialogue Blog
 - entity: "node"
