@@ -6,6 +6,7 @@
  */
 
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Allows us to have node based page templates.
@@ -29,4 +30,14 @@ function cgov_common_theme_suggestions_page_alter(array &$suggestions, array $va
     $content_type = $node->bundle();
     $suggestions[] = 'page__' . $content_type;
   }
+
+  // If this is a taxonomy page, add suggestions for the given vocabulary.
+  if (\Drupal::routeMatch()
+    ->getRouteName() == 'entity.taxonomy_term.canonical' && $tid = \Drupal::routeMatch()
+    ->getRawParameter('taxonomy_term')
+  ) {
+    $term = Term::load($tid);
+    $suggestions[] = 'page__taxonomy__' . $term->getVocabularyId();
+  }
+
 }
