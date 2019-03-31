@@ -2,7 +2,15 @@
 {% set url = path('entity.node.canonical', {'node':  content.field_featured_item[0]["#node"].nid[0].value}) %}
 
 {# Set image #}
-{% set img = content.field_override_image_promotional %}
+{% if content.field_override_image_promotional[0] %}
+  {% set img = content.field_override_image_promotional %}
+{% elseif content.field_featured_item[0]["#node"].field_image_promotional[0] %}
+  {#% set img = content.field_featured_item[0]["#node"].field_image_promotional %#}
+  {% set img = 'DEBUG PROMO IMG' %}
+{% elseif content.field_featured_item[0]["#node"].field_image_article[0] %}
+  {#% set img = content.field_featured_item[0]["#node"].field_image_article %#}
+  {% set img = 'DEBUG ARTICLE IMG' %}
+{% endif %}
 
 {# Set title #}
 {% if content.field_override_card_title[0] %}
