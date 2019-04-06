@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  module:
-    - node
-id: node.recommended_content
-label: 'Recommended Content'
-targetEntityType: node
-cache: true
