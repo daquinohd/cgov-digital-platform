@@ -11,12 +11,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides a Featured Posts Block.
  *
  * @Block(
- *   id = "cgov_blog_category_about",
+ *   id = "cgov_blog_topic_intro",
  *   admin_label = @Translation("Cgov Blog Category About"),
  *   category = @Translation("Cgov Digital Platform"),
  * )
  */
-class BlogCategoryAbout extends BlockBase implements ContainerFactoryPluginInterface {
+class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * The BlogManager object.
@@ -61,16 +61,34 @@ class BlogCategoryAbout extends BlockBase implements ContainerFactoryPluginInter
     );
   }
 
+
   /**
    * Create HTML.
    *
    * {@inheritdoc}
    */
   public function build() {
+    $topic_intros = $this->getTopicIntros();
     $build = [
-      '#markup' => 'i hate you',
+      '#topic_intros' => $topic_intros,
     ];
     return $build;
+  }
+
+  /**
+   * Get category descriptions.
+   *
+   * {@inheritdoc}
+   */
+  private function getTopicIntros() {
+    $category_links = [];
+    // Get all of the associated categories and build URL paths for this series.
+    $categories = $this->blogManager->getSeriesCategories();
+    foreach ($categories as $cat) {
+      $pretty_url = 'my-pretty-url';
+      $category_links[$cat->name] = $pretty_url;
+    }
+    return $category_links;
   }
 
 }
