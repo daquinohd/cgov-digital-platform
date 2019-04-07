@@ -204,6 +204,21 @@ class BlogManager implements BlogManagerInterface {
    * @param string $type
    *   Content type or bundle.
    */
+  public function getNodesByPostedDateAsc($type) {
+    $query = $this->entityQuery->get('node');
+    $query->condition('status', 1);
+    $query->condition('type', $type);
+    $query->sort('field_date_posted');
+    $nids = $query->execute();
+    return $nids;
+  }
+
+  /**
+   * Return query results based on date posted.
+   *
+   * @param string $type
+   *   Content type or bundle.
+   */
   public function getNodesByPostedDateDesc($type) {
     $query = $this->entityQuery->get('node');
     $query->condition('status', 1);
