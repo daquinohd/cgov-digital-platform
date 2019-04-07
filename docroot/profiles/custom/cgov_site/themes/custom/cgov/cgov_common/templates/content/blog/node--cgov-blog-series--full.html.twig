@@ -43,7 +43,7 @@
 
         {% if (get.topic) %}
           <div class="blog-intro-text">
-            <p>{{ blogMacros.getTopicIntro(get.topic) }}</p>
+            {{ drupal_block('cgov_blog_category_about', {label: ''}) }}
           </div>
         {% endif %}
 
