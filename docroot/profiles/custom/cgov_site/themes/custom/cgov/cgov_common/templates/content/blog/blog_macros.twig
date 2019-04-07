@@ -33,6 +33,15 @@
   {% endif %}
 {% endmacro %}
 
+{# 
+# Get the topic intro text.
+# @param topic
+#}
+{% macro getTopicIntro(topic) %}
+  {% if topic %}
+    Lorem ipsum dolor sit amet. {{ topic }}    Lorem ipsum dolor sit amet. {{ topic }}    Lorem ipsum dolor sit amet. {{ topic }}
+  {% endif %}
+{% endmacro %}
 
 {# 
  # Draw archive list item for month type.
