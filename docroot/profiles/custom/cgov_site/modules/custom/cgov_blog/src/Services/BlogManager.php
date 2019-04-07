@@ -185,9 +185,16 @@ class BlogManager implements BlogManagerInterface {
    *
    * @param string $nid
    *   Node ID of content item.
+   * @param string $lang
+   *   Optional langcode.
    */
-  public function getBlogPathFromNid($nid) {
-    $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+  public function getBlogPathFromNid($nid, $lang = NULL) {
+    if (isset($lang)) {
+      $path = $this->aliasManager->getAliasByPath('/node/' . $nid, $lang);
+    }
+    else {
+      $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+    }
     return $path;
   }
 
