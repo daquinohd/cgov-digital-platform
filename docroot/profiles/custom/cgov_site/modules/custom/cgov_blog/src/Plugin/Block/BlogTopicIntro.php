@@ -61,7 +61,6 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
     );
   }
 
-
   /**
    * Create HTML.
    *
@@ -81,14 +80,14 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   private function getTopicIntros() {
-    $category_links = [];
-    // Get all of the associated categories and build URL paths for this series.
+    $intros = [];
+    // Get all of the associated categories their description fields.
     $categories = $this->blogManager->getSeriesCategories();
     foreach ($categories as $cat) {
-      $pretty_url = 'my-pretty-url';
-      $category_links[$cat->name] = $pretty_url;
+      $description = $cat->description__value;
+      $intros[$cat->name] = $description;
     }
-    return $category_links;
+    return $intros;
   }
 
 }

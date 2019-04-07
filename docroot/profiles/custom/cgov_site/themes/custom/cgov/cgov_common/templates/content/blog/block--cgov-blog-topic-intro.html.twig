@@ -1,11 +1,7 @@
 {% if content['#topic_intros']|length > 0 %}
-  <div class="slot-item">
-    <div class="managed list without-date">
-      <ul>
-        {% for title, link in content['#topic_intros'] %}
-          <li>{{title}}, {{link}}</li>
-        {% endfor %}
-      <ul>
-    </div>
+  <div class="blog-intro-text">
+    {% for title, link in content['#topic_intros'] %}
+      <p>{{title}}, {{link}} ({{get.topic}})</p>
+    {% endfor %}    
   </div>
 {% endif %}
