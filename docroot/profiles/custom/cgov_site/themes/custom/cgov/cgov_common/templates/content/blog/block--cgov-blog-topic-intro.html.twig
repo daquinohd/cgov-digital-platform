@@ -1,7 +1,9 @@
 {% if content['#topic_intros']|length > 0 %}
   <div class="blog-intro-text">
-    {% for title, link in content['#topic_intros'] %}
-      <p>{{title}}, {{link}} ({{get.topic}})</p>
+    {% for title, desc in content['#topic_intros'] %}
+      {% if title == label %}
+        <p>{{desc}}</p>
+      {% endif %}
     {% endfor %}    
   </div>
 {% endif %}

@@ -40,7 +40,7 @@
           {{ content.field_intro_text }}
         {% endif %}
         {% if (get.topic) %}
-          {{ drupal_block('cgov_blog_topic_intro') }}
+          {{ drupal_block('cgov_blog_topic_intro', {label: get.topic}) }}
         {% endif %}
 	    </div>
       <div class="slot-item last-SI">
