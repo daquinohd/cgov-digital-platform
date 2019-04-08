@@ -80,13 +80,8 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   private function getTopicIntros() {
-    $intros = [];
     // Get all of the associated categories their description fields.
-    $categories = $this->blogManager->getSeriesCategories();
-    foreach ($categories as $cat) {
-      $description = $cat->description__value;
-      $intros[$cat->name] = $description;
-    }
+    $intros = $this->blogManager->getSeriesCategoryDescription();
     return $intros;
   }
 

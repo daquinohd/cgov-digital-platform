@@ -167,7 +167,7 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * Get Blog Series categories (topics). TODO: filter by series.
+   * Get Blog Series categories (topics).
    */
   public function getSeriesCategories() {
     $categories = [];
@@ -184,8 +184,24 @@ class BlogManager implements BlogManagerInterface {
         }
       }
     }
-
     return $categories;
+  }
+
+  /**
+   * Get Blog Series category (topic) descriptions.
+   */
+  public function getSeriesCategoryDescription() {
+    $categories = $this->getSeriesCategories();
+    $descriptions = [];
+
+    // Create an array of categories that match the owner Blog Series.
+    foreach ($categories as $cat) {
+      $tid = $cat->tid;
+      $url = $this->getTaxonomyStorage()->load($tid)->field_pretty_url->value;
+      $desc = $this->getTaxonomyStorage()->load($tid)->description->value;
+      $descriptions[$url] = $desc;
+    }
+    return $descriptions;
   }
 
   /**
