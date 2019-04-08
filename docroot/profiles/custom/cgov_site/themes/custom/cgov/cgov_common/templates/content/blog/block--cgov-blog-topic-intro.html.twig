@@ -1,9 +1,9 @@
 {% if content['#topic_intros']|length > 0 %}
-  <div class="blog-intro-text">
-    {% for title, desc in content['#topic_intros'] %}
-      {% if title == label %}
+  {% for title, desc in content['#topic_intros'] %}
+    {% if title == label and desc|length > 0 %}
+      <div class="blog-intro-text">
         <p>{{desc}}</p>
-      {% endif %}
-    {% endfor %}    
-  </div>
+      </div>
+    {% endif %}
+  {% endfor %}
 {% endif %}
