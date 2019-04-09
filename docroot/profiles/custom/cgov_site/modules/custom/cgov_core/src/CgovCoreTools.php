@@ -378,21 +378,25 @@ class CgovCoreTools {
   }
 
   /**
-   * Check if this is a production Acquia Cloud machine.
+   * Check if this is a production environment.
    *
    * @return bool
    *   TRUE if matches prod environment, FALSE otherwise.
    */
   private function isProd() {
-    $is_prod = FALSE;
-
-    // TODO: get the correct prod environment variable name.
+    // Check the Acquia Cloud environment.
     if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
       if ($_ENV['AH_SITE_ENVIRONMENT'] == 'prod') {
-        $is_prod = TRUE;
+        return TRUE;
       }
     }
-    return $is_prod;
+    // Non-ACSF check for Production environment.
+    if (isset($_ENV['AH_PRODUCTION'])) {
+      if ($_ENV['AH_PRODUCTION'] == 1) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
 }
