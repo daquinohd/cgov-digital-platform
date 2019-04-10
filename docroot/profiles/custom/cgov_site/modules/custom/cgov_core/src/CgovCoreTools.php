@@ -371,32 +371,20 @@ class CgovCoreTools {
    * Installs the DTM configuration based on environment variable.
    */
   public function installDtmEnvironment() {
-    if (!$this->isProd()) {
+    if ($this->cloudEnvironment() != 'prod') {
       $dtmSettings = $this->configFactory->getEditable('adobe_dtm.settings');
-      $dtmSettings->set('environment', 'dev')->save();
+      $dtmSettings->set('environment', 'staging')->save();
     }
   }
 
   /**
    * Check if this is a production environment.
    *
-   * @return bool
-   *   TRUE if matches prod environment, FALSE otherwise.
+   * @return string if cloud environment, FALSE otherwise.
    */
-  private function isProd() {
-    // Check the Acquia Cloud environment.
-    if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
-      if ($_ENV['AH_SITE_ENVIRONMENT'] == 'prod') {
-        return TRUE;
-      }
-    }
-    // Non-ACSF check for Production environment.
-    if (isset($_ENV['AH_PRODUCTION'])) {
-      if ($_ENV['AH_PRODUCTION'] == 1) {
-        return TRUE;
-      }
-    }
-    return FALSE;
+  public function cloudEnvironment(){
+    $environment = isset($_ENV['AH_SITE_ENVIRONMENT']) ? $_ENV['AH_SITE_ENVIRONMENT'] : 'dev';
+    return $environment;
   }
 
 }
