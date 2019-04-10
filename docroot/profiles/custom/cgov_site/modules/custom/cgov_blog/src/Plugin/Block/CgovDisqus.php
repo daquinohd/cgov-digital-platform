@@ -121,21 +121,37 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
   public function build() {
     $build = [];
 
-    // Verify the entity object and parent series.
-    if ($post_node = $this->getCurrEntity()) {
-      $series_nid = $post_node->get('field_blog_series')->target_id;
-      $series_node = $this->getNodeStorage()->load($series_nid);
+    // Get entity object.
+    if ($current = $this->getCurrEntity()) {
+      $content_type = $current->bundle();
     }
 
-    // If 'Allow Comments' is selected, output the Disqus snippet data.
-    if ($series_node && $series_node->get('field_allow_comments')->value) {
-      // Build up the shortname if the field value is set.
-      $shortname = $series_node->get('field_blog_series_shortname')->value;
-      if (strlen($shortname) > 0) {
-        $tier = $this->isProd() ? 'prod' : 'dev';
-        $build = [
-          '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
-        ];
+    // Draw the Disqus block for a given content type.
+    if (isset($content_type)) {
+      switch ($content_type) {
+
+        // Disqus settings for a Blog Post.
+        case 'cgov_blog_post':
+          $series_nid = $current->get('field_blog_series')->target_id;
+          $series_node = $this->getNodeStorage()->load($series_nid);
+          if ($series_node) {
+            // Check that "Allow comments" is true.
+            if (intval($series_node->get('field_allow_comments')->value) == 1) {
+              // Check that the Series Shortname field has a value.
+              $shortname = $series_node->get('field_blog_series_shortname')->value;
+              if (strlen($shortname) > 0) {
+                $tier = $this->isProd() ? 'prod' : 'dev';
+                $build = [
+                  '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
+                ];
+              }
+            }
+          }
+          break;
+
+        // No other Disqus content types atm.
+        default:
+          break;
       }
     }
     return $build;
