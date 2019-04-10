@@ -2,6 +2,7 @@
 
 namespace Drupal\cgov_blog\Plugin\Block;
 
+use Drupal\cgov_core\CgovCoreTools;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -19,6 +20,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
+  /**
+   * Cgov core site helper tools.
+   *
+   * @var Drupal\cgov_core\CgovCoreTools
+   */
+  protected $cgovCoreTools;
 
   /**
    * The route matcher.
@@ -47,17 +54,21 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
    *   The route matcher.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   * @param Drupal\cgov_core\CgovCoreTools $cgov_core_tools
+   *   Cgov core site helper tools.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
     RouteMatchInterface $route_matcher,
-    EntityTypeManagerInterface $entity_type_manager
+    EntityTypeManagerInterface $entity_type_manager,
+    CgovCoreTools $cgov_core_tools
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeMatcher = $route_matcher;
     $this->entityTypeManager = $entity_type_manager;
+    $this->cgovCoreTools = $cgov_core_tools;
   }
 
   /**
@@ -69,7 +80,8 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
       $plugin_id,
       $plugin_definition,
       $container->get('current_route_match'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('cgov_core.tools')
     );
   }
 
@@ -136,13 +148,7 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
    *   TRUE if matches prod environment, FALSE otherwise.
    */
   private function isProd() {
-    // Check the Acquia Cloud environment.
-    if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
-      if ($_ENV['AH_SITE_ENVIRONMENT'] == 'prod') {
-        return TRUE;
-      }
-    }
-    return FALSE;
+    return $this->cgovCoreTools->cloudEnvironment() == 'prod';
   }
 
 }

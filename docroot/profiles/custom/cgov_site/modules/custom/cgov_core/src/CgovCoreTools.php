@@ -380,9 +380,10 @@ class CgovCoreTools {
   /**
    * Check if this is a production environment.
    *
-   * @return string if cloud environment, FALSE otherwise.
+   * @return string
+   *   The name of the environment, 'dev' by default.
    */
-  public function cloudEnvironment(){
+  public function cloudEnvironment() {
     $environment = isset($_ENV['AH_SITE_ENVIRONMENT']) ? $_ENV['AH_SITE_ENVIRONMENT'] : 'dev';
     return $environment;
   }
