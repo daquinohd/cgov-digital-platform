@@ -367,4 +367,16 @@ class CgovCoreTools {
     return $permissions;
   }
 
+  /**
+   * Check if this is a production environment.
+   *
+   * @return string
+   *   The name of the environment, 'dev' by default.
+   */
+  public function cloudEnvironment() {
+    // TODO: get the correct ACE/ACSF values.
+    $environment = isset($_ENV['AH_SITE_ENVIRONMENT']) ? $_ENV['AH_SITE_ENVIRONMENT'] : 'dev';
+    return $environment;
+  }
+
 }
