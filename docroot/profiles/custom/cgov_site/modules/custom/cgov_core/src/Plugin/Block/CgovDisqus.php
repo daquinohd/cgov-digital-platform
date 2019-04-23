@@ -140,7 +140,7 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
               // Check that the Series Shortname field has a value.
               $shortname = $series_node->get('field_blog_series_shortname')->value;
               if (strlen($shortname) > 0) {
-                $tier = $this->isProd() ? 'prod' : 'dev';
+                $tier = $this->cgovCoreTools->isProd() ? 'prod' : 'dev';
                 $build = [
                   '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
                 ];
@@ -155,16 +155,6 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
       }
     }
     return $build;
-  }
-
-  /**
-   * Check if this is a production environment.
-   *
-   * @return bool
-   *   TRUE if matches prod environment, FALSE otherwise.
-   */
-  private function isProd() {
-    return $this->cgovCoreTools->cloudEnvironment() == 'prod';
   }
 
 }
