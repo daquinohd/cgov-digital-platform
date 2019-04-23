@@ -421,7 +421,7 @@ class CgovCoreTools {
    *   TRUE if matches prod environment, FALSE otherwise.
    */
   public function isProd() {
-    return $this->getCloudEnvironment() == 'prod';
+    return $this->getCloudEnvironment() == CgovEnvironments::PROD;
   }
 
 }
