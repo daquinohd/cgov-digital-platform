@@ -32,10 +32,15 @@ targetEntityType: node
 bundle: cgov_event
 mode: event_list_item
 content:
-  content_moderation_control:
-    weight: 0
+  field_all_day_event:
+    type: boolean
+    weight: 6
     region: content
-    settings: {  }
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
   field_city_state:
     weight: 9
@@ -47,7 +52,7 @@ content:
     region: content
   field_event_end_date:
     type: datetime_default
-    weight: 6
+    weight: 5
     region: content
     label: hidden
     settings:
@@ -56,35 +61,35 @@ content:
     third_party_settings: {  }
   field_event_series:
     type: entity_reference_label
-    weight: 4
+    weight: 1
     region: content
     label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_event_start_date:
     type: datetime_default
-    weight: 5
+    weight: 4
     region: content
     label: hidden
     settings:
       format_type: medium
       timezone_override: ''
     third_party_settings: {  }
-  field_list_description:
+  field_feature_card_description:
+    type: string
     weight: 3
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
     region: content
-  field_pretty_url:
-    weight: 10
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+  field_list_description:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   field_room:
     weight: 8
@@ -95,7 +100,7 @@ content:
     type: string
     region: content
   field_short_title:
-    weight: 2
+    weight: 0
     label: hidden
     settings:
       link_to_entity: false
@@ -108,23 +113,19 @@ content:
     region: content
     label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
-  links:
-    weight: 1
-    region: content
-    settings: {  }
+      link: false
     third_party_settings: {  }
 hidden:
   body: true
-  field_all_day_event: true
+  content_moderation_control: true
   field_browser_title: true
   field_card_title: true
-  field_feature_card_description: true
   field_image_article: true
   field_image_promotional: true
   field_page_description: true
+  field_pretty_url: true
   field_related_resources: true
   field_search_engine_restrictions: true
   field_site_section: true
   langcode: true
+  links: true
