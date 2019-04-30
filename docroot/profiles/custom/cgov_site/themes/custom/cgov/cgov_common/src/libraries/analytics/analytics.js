@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { registerCustomEventListener } from 'Core/libraries/customEventHandler';
+import 'Core/libraries/analytics/nci-analytics-functions';
 
 //utility functions
 // treeText
