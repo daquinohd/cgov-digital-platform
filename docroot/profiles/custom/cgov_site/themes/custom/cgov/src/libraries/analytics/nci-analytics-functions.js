@@ -2,7 +2,8 @@
 var oga_pattern = /grants\-training\/grants/gi,
     cct_pattern = /grants\-training\/training/gi,
     pdq_pattern = /pdq/gi,
-    trimmedPathname = document.location.pathname.replace(/\/$/, '');
+    trimmedPathname = document.location.pathname.replace(/\/$/, ''),
+    pageName = 'D=pageName';
 
 var NCIAnalytics = {
 
@@ -23,7 +24,6 @@ var NCIAnalytics = {
         if(oga_pattern.test(path)) { return('oga'); }
         if(cct_pattern.test(path)) { return('cct'); }
         if(pdq_pattern.test(path)) { return('pdq'); }
-
         return('');
 
     })(),
@@ -50,8 +50,10 @@ var NCIAnalytics = {
          set in the Omniture s_code.js file.  The supporting code for the parameter method
          has been retained in case the requirements change.
          */
+        var s_account = 'ncidevelopment';
+        this.ReportSuites = s_account; // Formerly the reportSuites argument
+
         this.sender = sender;
-        this.ReportSuites = (s_account !== 'undefined') ? s_account : 'ncidevelopment'; // Formerly the reportSuites argument
         this.LinkType = linkType;
         this.LinkName = linkName;
         this.Props = {};
@@ -71,7 +73,7 @@ var NCIAnalytics = {
             local_s.linkTrackVars = '';
 
             // add language prop8 - Warning: adding prop8 to individual onclick functions will cause duplication
-            local_s['prop8'] = s.prop8;
+            local_s['prop8'] = 's.prop8';
             local_s.linkTrackVars += 'channel,';
             local_s.linkTrackVars += 'prop8';
 
@@ -87,7 +89,7 @@ var NCIAnalytics = {
             // add link page prop (prop67) to all link tracking calls when not already present; existing values are given preference
             if(!this.Props[67]) {
 
-                local_s['prop67'] = 'D=pageName';
+                local_s['prop67'] = pageName;
 
                 if (local_s.linkTrackVars.length > 0)
                   local_s.linkTrackVars += ',';
@@ -96,7 +98,7 @@ var NCIAnalytics = {
             }
 
             // add engagement score (event92) to all link tracking calls
-            if(s.mainCGovIndex >= 0) {
+            if(local_s.mainCGovIndex >= 0) {
                 try {
                     var engagementScore = '';
                     var engagementObject = 'NCIEngagement';
@@ -128,7 +130,7 @@ var NCIAnalytics = {
             }
 
             // add language eVar2 - Warning: adding eVar2 to individual onclick functions will cause duplication
-            local_s['eVar2'] = s.eVar2;
+            local_s['eVar2'] = 's.eVar2';
             if (local_s.linkTrackVars.length > 0)
                 local_s.linkTrackVars += ',';
             local_s.linkTrackVars += 'eVar2';
@@ -230,11 +232,11 @@ var NCIAnalytics = {
         {
             keyword = document.getElementById('swKeywordQuery').value;
         }
-        if (s.prop8.toLowerCase() == 'spanish')
-            searchType += '_spanish';
+        // if (s.prop8.toLowerCase() == 'spanish')
+            // searchType += '_spanish';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'SiteWideSearch');
+        var clickParams = [];
+        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SiteWideSearch');
         clickParams.Props = {
             11: searchType,
             14: keyword
@@ -290,8 +292,8 @@ var NCIAnalytics = {
             }
         }
 
-        if (s.prop8.toLowerCase() == 'spanish')
-            searchType += '_spanish';
+        // if (s.prop8.toLowerCase() == 'spanish')
+        //     searchType += '_spanish';
 
         // the Omniture s_code file generates 'class does not support Automation' errors on the
         // dataSrc, dataFld, and dataFormatAs properties the 'SEARCH' Image button = therefore reference to
@@ -742,7 +744,7 @@ var NCIAnalytics = {
         clickParams.Props = {
             21: 'CTSPrintPage_' + linkVal,
             62: 'Clinical Trials: Print Results Page',
-            67: s.pageName + '_' + printID
+            67: pageName + '_' + printID
         };            
         
         clickParams.Evars = {
@@ -761,7 +763,7 @@ var NCIAnalytics = {
         clickParams.Props = {
             21: 'CTSPrintPage_CheckUpdates_' + sender.attr('id'),
             62: 'Clinical Trials: Print Results Page',
-            67: s.pageName + '_' + printID
+            67: pageName + '_' + printID
         };
         
         clickParams.Evars = {
@@ -781,7 +783,7 @@ var NCIAnalytics = {
         clickParams.Events = [48];
         clickParams.Props = {
             21: 'CTSPrintSelected_' + location + '_' + hasSelectAll + '_' + totalChecked + '_' + checkedPages,
-            67: 'D=pageName',
+            67: pageName,
             74: formName + '|print selected'
         };
         clickParams.LogToOmniture();
@@ -812,7 +814,7 @@ var NCIAnalytics = {
         clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTStartOverClick'); 
         clickParams.Events = [49]; 
         clickParams.Props = { 
-            67: 'D=pageName',
+            67: pageName,
             74: formName + '|' + linkText
         }; 
         clickParams.LogToOmniture(); 
@@ -947,7 +949,7 @@ var NCIAnalytics = {
       var pageDetail = NCIAnalytics.buildPageDetail() || '';	  
 
       clickParams.Props = {
-          28: s.pageName + pageDetail,      
+          28: pageName + pageDetail,      
           48: payload.previousPageMaxVerticalTrackingString || '',
       };
       if(!clickParams.Props[48]) { clickParams.Props[66] = (((section) ? section + '_' : '') + label.toLowerCase()); }
@@ -1039,7 +1041,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     MegaMenuDesktopReveal: function(sender, menuText) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuDesktopReveal');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuDesktopReveal');
 
         clickParams.Events = [28];
         clickParams.Evars = {
@@ -1280,7 +1282,7 @@ var NCIAnalytics = {
 
         clickParams.Props = {
             66: value,
-            67: 'D=pageName'
+            67: pageName
         };
 
         clickParams.Events = [63];
@@ -1293,7 +1295,7 @@ var NCIAnalytics = {
 
         clickParams.Props = {
             66: value,
-            67: 'D=pageName'
+            67: pageName
         };
 
         clickParams.Events = [64];
@@ -1402,7 +1404,7 @@ var NCIAnalytics = {
         clickParams.Props = {
             4: href,
             66: linkText,
-            67: "D=pageName"
+            67: pageName
         };
         clickParams.Events = [29];
 
@@ -1420,7 +1422,7 @@ var NCIAnalytics = {
         
         clickParams.Props = {
             66: "InThisSection_" + linkText,
-            67: "D=pageName"
+            67: pageName
         };
         clickParams.Events = [69];
 
@@ -1436,7 +1438,7 @@ var NCIAnalytics = {
         
         clickParams.Props = {
             66: state + linkText,
-            67: "D=pageName"
+            67: pageName
         };
         
         clickParams.LogToOmniture();
@@ -1569,7 +1571,6 @@ var NCIAnalytics = {
 	// sender - the element responsible for this event.
 	// type - the delighter type.
 	RecordDelighterRailClick: function(sender, type) {
-		var pageName = s.pageName;
 		if( type === 'livehelp'){
 			clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'DelighterLiveChat');
 			clickParams.Props = {
@@ -1582,7 +1583,6 @@ var NCIAnalytics = {
 	// Record that the proactive chat prompt was displayed.
 	// sender - the element responsible for this event.
 	RecordProactiveChatPromptDisplay: function(sender){
-		var pageName = s.pageName;
 		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - display|' + pageName
@@ -1594,7 +1594,6 @@ var NCIAnalytics = {
 	// Record that the proactive "Chat Now" button was clicked.
 	// sender - the element responsible for this event.
 	RecordProactiveChatPromptClick: function(sender){
-		var pageName = s.pageName;
 		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - launch|' + pageName
@@ -1605,8 +1604,7 @@ var NCIAnalytics = {
 
 	// Record that the proactive chat prompt was dismissed.
 	// sender - the element responsible for this event.
-	RecordProactiveChatPromptDismissal: function(sender){
-		var pageName = s.pageName;
+	RecordProactiveChatPromptDismissal: function(sender){        
 		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - dismiss|' + pageName
@@ -1620,7 +1618,6 @@ var NCIAnalytics = {
 	* sender - the element responsible for this event.
 	*/	
 	FeedbackFormClick: function(sender, value){
-		var pageName = s.pageName;
 		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'FeedbackForm');
 		clickParams.Props = {
 			5 : value + '|' + pageName
@@ -1712,7 +1709,7 @@ var NCIAnalytics = {
         var year = urlParam('[year]');
         var month = urlParam('[month]');
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_Archive",
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_Archive",
             67: pageName,
             50: year + (month ? (":" + month) : "")
         };
@@ -1724,7 +1721,7 @@ var NCIAnalytics = {
         clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogSubscribeClick');
 
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_Subscribe",
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_Subscribe",
             67: pageName
         };
 
@@ -1743,7 +1740,7 @@ var NCIAnalytics = {
         }
         
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + expandCollapse,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + expandCollapse,
             67: pageName
         };
         clickParams.LogToOmniture();
@@ -1755,7 +1752,7 @@ var NCIAnalytics = {
         var linkType = "_BodyLink";
         clickParams.Props = {
             50: linkText,
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + linkType,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + linkType,
             67: pageName
         };
 
@@ -1770,11 +1767,11 @@ var NCIAnalytics = {
         clickParams.Props = {
             45: "Glossified Term",
             50: linkText,
-            67: "D=pageName"
+            67: pageName
         };
         
         if(blogLink) {
-            clickParams.Props[66] = "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + '_BodyGlossifiedTerm';
+            clickParams.Props[66] = "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + '_BodyGlossifiedTerm';
         }
 
         clickParams.Events = [56];
@@ -1787,11 +1784,11 @@ var NCIAnalytics = {
         var prop66_String = "";
         if(NCIAnalytics.blogLocation()){
             clickParams.Events = [57];
-            prop66_String = "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_RelatedResource:" + index;
+            prop66_String = "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_RelatedResource:" + index;
         }
         else{
             clickParams.Events = [59];
-            prop66_String = s.prop44 + "_RelatedResource:" + index;
+            prop66_String = 's.prop44' + "_RelatedResource:" + index;
         }
         clickParams.Props = {
             66: prop66_String,
@@ -1807,7 +1804,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'BlogFeatureCardClick');
 
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_BlogCard:" + containerIndex,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_BlogCard:" + containerIndex,
             67: pageName,
             50: linkText
         };
@@ -1821,7 +1818,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'FeaturedPostsClick');
 
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_FeaturedPosts:" + containerIndex,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_FeaturedPosts:" + containerIndex,
             67: pageName,
             50: linkText
         };
@@ -1835,7 +1832,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'CategoryClick');
 
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_Category:" + containerIndex,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_Category:" + containerIndex,
             67: pageName,
             50: linkText
         };
@@ -1849,7 +1846,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'OlderNewerClick');
 
         clickParams.Props = {
-            66: "Blog_" + s.prop44 + "_" + NCIAnalytics.blogLocation() + "_" + olderNewer,
+            66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_" + olderNewer,
             67: pageName
         };
 
@@ -1876,7 +1873,7 @@ var NCIAnalytics = {
         
         clickParams.Props = {
             66: "InstitutionCard_" + pageName + "_" + linkText,
-            67: 'D=pageName'
+            67: pageName
         }
         clickParams.LogToOmniture();
     }
@@ -2052,7 +2049,7 @@ NCIAnalytics.getScrollDetails = function(payload) {
     var previousPageScroll = NCIAnalytics.previousPageMaxVerticalTrackingString || '',
         pageSection = '';
 		
-    page = s.pageName + ((pageSection) ? '/' + pageSection : '');
+    var page = pageName + ((pageSection) ? '/' + pageSection : '');
 
     if (payload) {
         // only grab the previousPageScroll value from cookie if NOT a scroll update
@@ -2101,8 +2098,8 @@ NCIAnalytics.getScrollDetails = function(payload) {
 
     // calculate percentages and total pixels viewed
     var totalPageViewed = NCIAnalytics.maxVerticalScroll + viewportHeight;
-    percentAboveFoldAtLoad = Math.round(100 * (viewportHeight / fullPageHeight)),
-        percentOfTotalPageViewed = Math.round(100 * (totalPageViewed / NCIAnalytics.maxPageHeight));
+    var percentAboveFoldAtLoad = Math.round(100 * (viewportHeight / fullPageHeight));
+    var percentOfTotalPageViewed = Math.round(100 * (totalPageViewed / NCIAnalytics.maxPageHeight));
 
     // create object for packaging up the data
     function updateScrollDetails(pv_scrollObject) {
@@ -2239,7 +2236,7 @@ attachEvents({
         NCIAnalytics.getScrollDetails({
             source: 'window.load',
             //sendCall: true, 
-            pageOverride: buildPageOverride({page: s.pageName, hash: document.location.hash})
+            pageOverride: buildPageOverride({page: pageName, hash: document.location.hash})
         });
     }
 });
@@ -2255,7 +2252,7 @@ attachEvents({
             NCIAnalytics.getScrollDetails({
                 updateOnly: true,
                 source: 'window.scroll',
-                pageOverride: buildPageOverride({page: s.pageName, hash: document.location.hash})
+                pageOverride: buildPageOverride({page: pageName, hash: document.location.hash})
             })
         }, 150);
     }
@@ -2278,7 +2275,7 @@ attachEvents({
                         reset: true, // clears history, treating the dynamic content as a brand new page load
                         sendCall: true, // sends link tracking call with scroll data
                         pageOverride: buildPageOverride({
-                            page: s.pageName,
+                            page: pageName,
                             hash: document.location.hash
                         })
                     });
@@ -2316,8 +2313,8 @@ NCIAnalytics.getQueryString = function(pv_queryParam, pv_url) {
     
     fullSubString = (pv_url) ? pv_url.slice(pv_url.indexOf("?") + 1) : window.location.search.substring(1);
 
-    subStringArray = fullSubString.split("&");
-    queryParamArray = pv_queryParam.split(",");
+    var subStringArray = fullSubString.split("&");
+    var queryParamArray = pv_queryParam.split(",");
 
     if(subStringArray.length > 0) {        
         for (var i = 0, maxi = subStringArray.length; i < maxi; i++) { // loop through params in query string
