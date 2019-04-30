@@ -43,7 +43,6 @@ var NCIAnalytics = {
         return '';
     },
 
-
     ClickParams: function(sender, reportSuites, linkType, linkName) {
         /*
          The facility for defining report suites by the parameter reportSuites
@@ -1669,9 +1668,8 @@ var NCIAnalytics = {
 			12: formName
 		};
 		clickParams.LogToOmniture();
-    },
-    
-
+	},
+    //******************************************************************************************************
     SPLF_Lang: function() {
         //alert('Lang');
     },
@@ -1765,8 +1763,6 @@ var NCIAnalytics = {
 
         clickParams.LogToOmniture();
     },
-
-
     /* ********************************************************************** */
     glossifiedTerm: function(sender, linkText, blogLink){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'glossifiedTerm');
@@ -1805,7 +1801,6 @@ var NCIAnalytics = {
         
         clickParams.LogToOmniture();
     },
-    
     /* ********************************************************************** */
     BlogCardClick: function(sender, linkText, containerIndex, pageName) {
         clickParams = new NCIAnalytics.ClickParams(sender,
@@ -1820,7 +1815,6 @@ var NCIAnalytics = {
         clickParams.Events = [54];
         clickParams.LogToOmniture();
     },
-
     /* ********************************************************************** */
     FeaturedPostsClick: function(sender, linkText, containerIndex, pageName) {
         clickParams = new NCIAnalytics.ClickParams(sender,
@@ -1835,7 +1829,6 @@ var NCIAnalytics = {
         clickParams.Events = [54];
         clickParams.LogToOmniture();
     },
-    
     /* ********************************************************************** */
     CategoryClick: function(sender, linkText, containerIndex, pageName) {
         clickParams = new NCIAnalytics.ClickParams(sender,
@@ -1850,7 +1843,6 @@ var NCIAnalytics = {
         clickParams.Events = [55];
         clickParams.LogToOmniture();
     },
-
     /* ********************************************************************** */
     OlderNewerClick: function(sender, olderNewer, pageName) {
         clickParams = new NCIAnalytics.ClickParams(sender,
@@ -1867,18 +1859,16 @@ var NCIAnalytics = {
 
         clickParams.LogToOmniture();
     },
-
     /* ********************************************************************** */
-    // TableSortHeaderClick: function(sender, pageName) {
-    //     clickParams = new NCIAnalytics.ClickParams(sender,
-    //         'nciglobal', 'o', 'SortTableHeaderClick');
-
-    //     clickParams.Props = {
-    //         05: "table_sort",
-    //         67: pageName
-    //     }
-    //     clickParams.LogToOmniture(); 
-    // },
+    TableSortHeaderClick: function(sender, pageName) {
+        clickParams = new NCIAnalytics.ClickParams(sender,
+            'nciglobal', 'o', 'SortTableHeaderClick');
+        clickParams.Props = {
+            65: 'table_sort',
+            67: pageName
+        };
+        clickParams.logToOmniture();
+    },
     /* ********************************************************************** */
     ProfilePanelLinkClick: function(sender, linkText, pageName) {
         clickParams = new NCIAnalytics.ClickParams (sender,
@@ -1889,7 +1879,7 @@ var NCIAnalytics = {
             67: 'D=pageName'
         }
         clickParams.LogToOmniture();
-    } 
+    }
 };
 
 /* End the giant NCIAnalytics object functions */
