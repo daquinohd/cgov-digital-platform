@@ -11,6 +11,7 @@ permissions:
   - 'create cgov_blog_series content'
   - 'create content translations'
   - 'delete any cgov_blog_series content'
+  - 'delete content translations'
   - 'delete own cgov_blog_series content'
   - 'edit any cgov_blog_series content'
   - 'edit own cgov_blog_series content'
