@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - workflows.workflow.blog_workflow
     - workflows.workflow.editorial_workflow
   module:
     - content_moderation
@@ -711,12 +710,6 @@ display:
           admin_label: ''
           operator: in
           value:
-            blog_workflow-draft: blog_workflow-draft
-            blog_workflow-review: blog_workflow-review
-            blog_workflow-editing: blog_workflow-editing
-            blog_workflow-post_publication_review: blog_workflow-post_publication_review
-            blog_workflow-archive_requested: blog_workflow-archive_requested
-            blog_workflow-archived: blog_workflow-archived
             editorial_workflow-draft: editorial_workflow-draft
             editorial_workflow-review: editorial_workflow-review
             editorial_workflow-editing: editorial_workflow-editing
@@ -804,7 +797,6 @@ display:
           admin_label: ''
           operator: 'not in'
           value:
-            blog_workflow-published: blog_workflow-published
             editorial_workflow-published: editorial_workflow-published
           group: 1
           exposed: false
