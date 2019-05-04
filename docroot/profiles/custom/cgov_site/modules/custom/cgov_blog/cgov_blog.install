@@ -20,5 +20,5 @@ function cgov_blog_install() {
   $siteHelper->addContentTypePermissions('cgov_blog_post', ['content_author']);
   $siteHelper->addContentTypePermissions('cgov_blog_series', ['blog_manager']);
   $siteHelper->attachContentTypeToWorkflow('cgov_blog_post', 'editorial_workflow');
-  $siteHelper->attachContentTypeToWorkflow('cgov_blog_series', 'editorial_workflow');
+  $siteHelper->attachContentTypeToWorkflow('cgov_blog_series', 'blog_workflow');
 }
