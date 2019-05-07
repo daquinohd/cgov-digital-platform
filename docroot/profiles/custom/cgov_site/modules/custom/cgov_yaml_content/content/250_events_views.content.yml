@@ -27,6 +27,17 @@
   field_credit:
     value: "C.A.D. Schjelderup"
 
+## Event Series taxonomy
+- entity: "taxonomy_term"
+  vid: "cgov_event_series"
+  name: "DCEG Events"
+- entity: "taxonomy_term"
+  vid: "cgov_event_series"
+  name: "NCI Event Series"
+- entity: "taxonomy_term"
+  vid: "cgov_event_series"
+  name: "Other Events"
+
 ## Upcoming event pages
 - entity: "node"
   type: "cgov_event"
@@ -61,6 +72,13 @@
   field_event_end_date:
     value: '2019-07-11T11:30:00'
   field_all_day_event: 0
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'NCI Event Series'  
   field_venue:
     - '#process':
         callback: 'reference'
@@ -69,7 +87,7 @@
           - vid: 'cgov_event_venues'
             name: 'NCI Shady Grove Campus'
   field_room:
-    value: "TE Seminar 110"
+    value: "TE Seminar 116"
   field_city_state:
     value: "Rockville, MD"
   body:
@@ -94,7 +112,73 @@
           - 'media'
           - bundle: 'cgov_image'
             name: 'Reporter'
-- entity: "node"
+- entity: 'node'
+  type: "cgov_event"
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_site_section:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_site_sections'
+            name: 'Events'
+  field_pretty_url:
+    value: "cell-fate"
+  title: "Registration now open for Chromatin and Cell Fate Decisions in Development, Aging & Cancer"
+  field_short_title:
+    value: "Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity"
+  field_browser_title:
+    - value: 'Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity'
+  field_card_title:
+    - value: 'Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity'
+  field_feature_card_description:
+    - value: 'Center of Excellence in Chromosome Biology (CECB), offers an opportunity to learn more about the current status of chromosome structure'
+  field_list_description:
+    - value: 'Center of Excellence in Chromosome Biology (CECB), offers an opportunity to learn more about the current status of chromosome structure'
+  field_page_description:
+    value: 'Center of Excellence in Chromosome Biology (CECB), offers an opportunity to learn more about the current status of chromosome structure'
+  field_event_start_date:
+    value: '2019-11-14T08:00:00'
+  field_event_end_date:
+    value: '2019-11-15T17:00:00'
+  field_all_day_event: 0
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'NCI Event Series'  
+  field_venue:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_venues'
+            name: 'NCI Shady Grove Campus'
+  field_room:
+    value: "TE Seminar 110"
+  field_city_state:
+    value: "Rockville, MD"
+  body:
+    - format: "full_html"
+      value: |
+          <p>
+          The Chromatin and Cell Fate Decisions in Development, Aging & Cancer symposium, hosted by the Center of Excellence in Chromosome Biology (CECB), offers an opportunity to learn more about the current status of chromosome structure and function in development and disease, share research and discuss the use and implications of these advances for clinical applications. The mission of CECB is to achieve a comprehensive understanding of the mechanisms involved in chromosome function, how aberrations in chromosomes and chromatin lead to disease and how these defects can be corrected. Towards achieving our mission, this symposium brings together scientists in the fields of chromatin and chromosome biology, with the focus on stem cells, cell development, aging and cancer. Registration deadline is October 31, 2019.
+          </p>
+          <p>IMPORTANT NOTICE: Please note that this Webex service allows audio and other information sent during the session to be recorded, which may be discoverable in a legal matter. You should inform all meeting attendees prior to recording if you intend to record the meet</p>
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Reporter'
+- entity: 'node'
   type: "cgov_event"
   langcode: en
   status: 1
@@ -123,10 +207,17 @@
   field_page_description:
     value: 'Radiation Epidemiology & Dosimetry Course September 9-12, 2019'
   field_event_start_date:
-    value: '2019-09-09T08:30:00'
+    value: '2019-12-09T08:30:00'
   field_event_end_date:
-    value: '2019-09-12T17:00:00'
+    value: '2019-12-12T17:00:00'
   field_all_day_event: 1
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'DCEG Events'
   field_venue:
     - '#process':
         callback: 'reference'
@@ -187,6 +278,13 @@
   field_event_end_date:
     value: '2020-04-12T14:35:00'
   field_all_day_event: 1
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'Other Events'
   field_city_state:
     value: 'Raleigh, NC'
   body:
@@ -245,6 +343,13 @@
   field_event_end_date:
     value: '2019-04-16T12:00:00'
   field_all_day_event: 1
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'DCEG Events'
   field_venue:
     - '#process':
         callback: 'reference'
@@ -310,6 +415,13 @@
   field_event_end_date:
     value: '2017-05-03T14:00:00'
   field_all_day_event: 0
+  field_event_series:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_event_series'
+            name: 'NCI Event Series'
   field_venue:
     - '#process':
         callback: 'reference'
