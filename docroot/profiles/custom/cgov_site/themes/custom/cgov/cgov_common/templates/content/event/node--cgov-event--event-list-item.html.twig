@@ -37,6 +37,7 @@
             {% else %}
                 {{ eventStart|date('F j, Y') }}
                 {% if content.field_all_day_event[0]['#markup'] == "Off" %}
+                    &vert;
                     {{ eventStart|date('g:i A') }}
                     &ndash;
                     {{ eventEnd|date('g:i A') }}
