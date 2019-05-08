@@ -11,12 +11,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides a Featured Posts Block.
  *
  * @Block(
- *   id = "cgov_blog_categories",
- *   admin_label = @Translation("Cgov Blog Categories"),
+ *   id = "cgov_blog_topic_title",
+ *   admin_label = @Translation("Cgov Blog Topic Name"),
  *   category = @Translation("Cgov Digital Platform"),
  * )
  */
-class BlogCategories extends BlockBase implements ContainerFactoryPluginInterface {
+class BlogTopicTitle extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * The BlogManager object.
@@ -67,43 +67,22 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   public function build() {
-    // Empty build object.
-    $build = [];
-
-    // Return blog category elements. TODO: clean up twig.
-    $blog_categories = $this->drawBlogCategories();
+    $topic_titles = $this->getTopicTitles();
     $build = [
-      '#blog_categories' => $blog_categories,
+      '#topic_titles' => $topic_titles,
     ];
     return $build;
   }
 
   /**
-   * Draw category (topic) links.
+   * Get category descriptions.
    *
    * {@inheritdoc}
    */
-  private function drawBlogCategories() {
-    $category_links = [];
-    // Get all of the associated categories and build URL paths for this series.
-    $categories = $this->blogManager->getSeriesCategories();
-    foreach ($categories as $cat) {
-      $pretty_url = $this->getCategoryUrl($cat->tid);
-      $category_links[$cat->name] = $pretty_url;
-    }
-    return $category_links;
-  }
-
-  /**
-   * Get the pretty URL for a single taxonomy term.
-   *
-   * @param string $tid
-   *   A taxonomy ID.
-   */
-  private function getCategoryUrl($tid) {
-    $path = $this->blogManager->getSeriesPath();
-    $pretty_url = $this->blogManager->getTaxonomyStorage()->load($tid)->get('field_pretty_url')->value;
-    return $path . '?topic=' . $pretty_url;
+  private function getTopicTitles() {
+    // Get all of the associated categories their description fields.
+    $titles = $this->blogManager->getSeriesTopicTitle();
+    return $titles;
   }
 
 }
