@@ -235,8 +235,7 @@ var NCIAnalytics = {
         // if (s.prop8.toLowerCase() == 'spanish')
             // searchType += '_spanish';
 
-        var clickParams = [];
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SiteWideSearch');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SiteWideSearch');
         clickParams.Props = {
             11: searchType,
             14: keyword
@@ -259,7 +258,7 @@ var NCIAnalytics = {
             searchType += '_spanish';
         }
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'PageNotFound');
         clickParams.Props = {
             11: searchType,
@@ -298,7 +297,7 @@ var NCIAnalytics = {
         // the Omniture s_code file generates 'class does not support Automation' errors on the
         // dataSrc, dataFld, and dataFormatAs properties the 'SEARCH' Image button = therefore reference to
         // the control is being set to null instead of sender
-        clickParams = new NCIAnalytics.ClickParams(this,
+        var clickParams = new NCIAnalytics.ClickParams(this,
             'nciglobal', 'o', 'SiteWideSearchResultsSearch');
         clickParams.Props = {
             11: searchType,
@@ -317,7 +316,7 @@ var NCIAnalytics = {
     SiteWideSearchResults: function(sender, isBestBet, resultIndex) {
         var searchModule = (isBestBet) ? 'best_bets' : 'generic';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SiteWideSearchResults');
         clickParams.Props = {
             12: searchModule,
@@ -332,7 +331,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     CTSearchResults: function(sender, resultIndex) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal,nciclinicaltrials', 'o', 'CTSearchResults');
         clickParams.Props = {
             13: resultIndex
@@ -355,7 +354,7 @@ var NCIAnalytics = {
     GeneticsDictionarySearch: function(sender, searchString, isStartsWith) {
         var prop24Contents = (isStartsWith) ? 'starts with' : 'contains';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             '', 'o', 'GeneticsDictionarySearch');
         clickParams.Props = {
             11: 'dictionary_genetics',
@@ -378,7 +377,7 @@ var NCIAnalytics = {
     GeneticsDictionarySearchNew: function(sender) {
         var prop24Contents = (document.getElementById('radioStarts').checked) ? 'starts with' : 'contains';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             '', 'o', 'GeneticsDictionarySearch');
         clickParams.Props = {
             11: 'dictionary_genetics',
@@ -398,7 +397,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     GeneticsDictionarySearchAlphaList: function(sender, value) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             '', 'o', 'GeneticsDictionarySearchAlphaList');
         clickParams.Props = {
             11: 'dictionary_genetics',
@@ -417,7 +416,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     GeneticsDictionaryResults: function(sender, resultIndex) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             '', 'o', 'GeneticsDictionaryResults');
         clickParams.Props = {
             13: resultIndex
@@ -453,7 +452,7 @@ var NCIAnalytics = {
         else
             var searchType = 'dictionary_terms';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', linkName);
         clickParams.Props = {
             11: searchType,
@@ -472,7 +471,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     TermsDictionaryResults: function(sender, resultIndex) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'TermsDictionaryResults');
         clickParams.Props = {
             13: resultIndex
@@ -503,7 +502,7 @@ var NCIAnalytics = {
     DrugDictionarySearchCore: function(sender, value, prop24Contents, linkName) {
         var searchType = 'dictionary_drugs';
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal,ncidrugdictionary', 'o', linkName);
         clickParams.Props = {
             11: searchType,
@@ -522,7 +521,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     DrugDictionaryResults: function(sender, resultIndex) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal,ncidrugdictionary', 'o', 'DrugDictionaryResults');
         clickParams.Props = {
             13: resultIndex
@@ -535,7 +534,7 @@ var NCIAnalytics = {
         var searchType = 'clinicaltrials_featured';
         var keyword = document.getElementById('keyword').value;
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'FeaturedClinicalTrialSearch');
         clickParams.Props = {
             11: searchType,
@@ -595,7 +594,7 @@ var NCIAnalytics = {
                 .join(NCIAnalytics.fieldDelimiter);
         specialty = [typeOfCancer, familyCancerSyndrome].join(NCIAnalytics.fieldDelimiter);
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'GeneticServicesDirectorySearch');
         clickParams.Props = {
             11: searchType,
@@ -614,7 +613,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     KeywordDateRangeSearch: function(sender, searchType, keyword, startDate, endDate) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'KeywordDateRangeSearch');
         clickParams.Props = {
             11: searchType,
@@ -634,7 +633,7 @@ var NCIAnalytics = {
     KeywordSearch: function(sender, searchType) {
         var keyword = document.getElementById('keyword').value;
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'KeywordSearch');
         clickParams.Props = {
             11: searchType,
@@ -651,7 +650,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     SearchResults: function(sender, resultIndex) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SearchResults');
         clickParams.Props = {
             13: resultIndex
@@ -662,7 +661,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     PDFLink: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'd', 'PDFLink');
         clickParams.Evars = {
             30: '+1'
@@ -675,7 +674,7 @@ var NCIAnalytics = {
 
     DownloadKindleClick: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'd', 'DownloadKindleClick');
         clickParams.Evars = {
             30: '+1'
@@ -688,7 +687,7 @@ var NCIAnalytics = {
 
     DownloadOtherEReaderClick: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'd', 'DownloadOtherEReaderClick');
         clickParams.Evars = {
             30: '+1'
@@ -701,7 +700,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     eMailLink: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'eMailLink');
 
         clickParams.Props = {
@@ -716,7 +715,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     HelpLink: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'HelpLink');
         clickParams.Events = [5];
         clickParams.LogToOmniture();
@@ -725,7 +724,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     PrintLink: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'PrintLink');
 
         clickParams.Props = {
@@ -738,7 +737,7 @@ var NCIAnalytics = {
     },
     //******************************************************************************************************
     CTSPrintResults_TopLinkClick: function(sender, linkVal, printID){
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'CTSPrintResults_TopLinkClick');
 
         clickParams.Props = {
@@ -757,7 +756,7 @@ var NCIAnalytics = {
     },
     //******************************************************************************************************
     CTSPrintResults_VewUpdatesLinkClick: function(sender, printID){
-        clickParams = new NCIAnalytics.ClickParams(sender,'nciglobal', 'o', ' CTSPrintResults_VewUpdatesLinkClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender,'nciglobal', 'o', ' CTSPrintResults_VewUpdatesLinkClick');
 
         var link = sender.href;
         clickParams.Props = {
@@ -779,7 +778,7 @@ var NCIAnalytics = {
     },
 	//******************************************************************************************************
     CTSResultsPrintSelectedWithFormClick: function(sender, location, hasSelectAll, totalChecked, checkedPages, formName){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSResultsPrintSelectedClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSResultsPrintSelectedClick');
         clickParams.Events = [48];
         clickParams.Props = {
             21: 'CTSPrintSelected_' + location + '_' + hasSelectAll + '_' + totalChecked + '_' + checkedPages,
@@ -796,7 +795,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     // Replacing CTSResultsMaxSelectedClick 
     CTSResultsSelectedErrorClick: function(sender, formName, errorText) { 
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSResultsSelectedErrorClick'); 
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSResultsSelectedErrorClick'); 
         clickParams.Events = [41]; 
         clickParams.Props = { 
             74: formName + '|error', 
@@ -811,7 +810,7 @@ var NCIAnalytics = {
     },
     //******************************************************************************************************
     CTStartOverWithFormClick: function(sender, formName, linkText) { 
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTStartOverClick'); 
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTStartOverClick'); 
         clickParams.Events = [49]; 
         clickParams.Props = { 
             67: pageName,
@@ -822,7 +821,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     SendToPrinterLink: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SendToPrinterLink');
         clickParams.Events = [14];
         clickParams.LogToOmniture();
@@ -830,7 +829,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     HeaderLink: function(sender, headerName) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'HeaderLink-' + headerName);
         clickParams.Props = {
             36: headerName
@@ -844,7 +843,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     FooterLink: function(sender, footerName) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'FooterLink-' + footerName);
         clickParams.Props = {
             36: footerName
@@ -859,7 +858,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     RightNavLink: function(sender, label) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'RightNavLink-');
 
         clickParams.Props = {
@@ -877,7 +876,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     BulletinSubscription: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'BulletinSubscription');
         clickParams.Events = [9];
         clickParams.LogToOmniture();
@@ -886,7 +885,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     GenericLinkTrack: function(sender, label) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'GenericLinkTrack');
         clickParams.Props = {
             4: sender.href,
@@ -899,7 +898,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     LinkTracking: function(toLink, fromLink, label) {
 
-        clickParams = new NCIAnalytics.ClickParams(this,
+        var clickParams = new NCIAnalytics.ClickParams(this,
             'nciglobal', 'o', 'LinkTracking');
         clickParams.Props = {
             4: toLink,
@@ -911,7 +910,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     CustomLink: function(sender, linkName) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', linkName);
         clickParams.LogToOmniture();
     },
@@ -962,7 +961,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     BookmarkShareClick: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'BookmarkShareClick');
 
         var linkText = (sender.title) ? sender.title : sender[0].title;
@@ -978,13 +977,13 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CustomTweetClick: function(sender, eventCode){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', eventCode);
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', eventCode);
         clickParams.LogToOmniture();
     },
 
     //******************************************************************************************************
     MegaMenuClick: function(sender, tree) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'MegaMenuClick');
 
         var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
@@ -1057,7 +1056,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     MegaMenuMobileReveal: function(sender) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileReveal');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileReveal');
 
         clickParams.Events = [28];
         clickParams.Evars = {
@@ -1071,7 +1070,7 @@ var NCIAnalytics = {
     MegaMenuMobileAccordionClick: function(sender, isExpanded, tree) {
         var state = isExpanded?"Expand":"Collapse";
 
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileAccordionClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileAccordionClick');
 
         clickParams.Events = isExpanded?[34]:[35];
         clickParams.Props = {
@@ -1083,7 +1082,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     MegaMenuMobileLinkClick: function(sender, url, linkText, linkUrl, heading, subHeading) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileLinkClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'MegaMenuMobileLinkClick');
 
         clickParams.Events = [26];
         clickParams.Evars = {
@@ -1100,7 +1099,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     LogoClick: function(sender) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'Logolick');
 
         var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
@@ -1122,7 +1121,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     UtilityBarClick: function(sender, linkText) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'UtilityBarDictionaryClick');
 
         var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
@@ -1146,7 +1145,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'FeatureCardClick');
 
         var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
@@ -1168,7 +1167,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     TimelyContentZoneTab: function(sender, tabTitle) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'TimelyContentZoneTab');
         clickParams.Props = {
             37: tabTitle
@@ -1198,7 +1197,7 @@ var NCIAnalytics = {
             var linkText = "";
             var isTag = false;
 
-            clickParams = new NCIAnalytics.ClickParams(this,
+            var clickParams = new NCIAnalytics.ClickParams(this,
                 'nciglobal', 'o', 'TimelyContentZoneLink');
 
             for (i = 0; i < targ.innerHTML.length; i++) {
@@ -1236,7 +1235,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     QuestionsAboutCancerFooter: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'QuestionsAboutCancerFooter');
         clickParams.Events = [5];
         clickParams.LogToOmniture();
@@ -1245,7 +1244,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     QuestionsAboutCancerHeader: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'QuestionsAboutCancerHeader');
         clickParams.Events = [18];
         clickParams.LogToOmniture();
@@ -1254,7 +1253,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     FindCancerTypeBox: function(sender) {
 
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'FindCancerTypeBox');
         clickParams.Events = [19];
         clickParams.LogToOmniture();
@@ -1262,7 +1261,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     TileCarousel: function(sender, tileTitle, tileURL) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'TileCarousel');
         clickParams.Props = {
             41: tileTitle,
@@ -1278,7 +1277,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     VideoCarouselClickSwipe: function(sender, value) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'VideoCarouselClickSwipe');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'VideoCarouselClickSwipe');
 
         clickParams.Props = {
             66: value,
@@ -1291,7 +1290,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     VideoCarouselComplete: function(sender, value) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'VideoCarouselComplete');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'VideoCarouselComplete');
 
         clickParams.Props = {
             66: value,
@@ -1304,7 +1303,7 @@ var NCIAnalytics = {
 
     /* ********************************************************************** */
     ImageCarouselClickSwipe: function(sender, title, type, direction, imgNum, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'ImageCarouselClick');
 
         clickParams.Props = {
@@ -1388,7 +1387,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     Resize: function(sender, viewPort) {
         var width = 'ResizedTo' + viewPort;
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', width);
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', width);
         clickParams.Evars = {
             5: viewPort
         };
@@ -1398,9 +1397,9 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     OnThisPageClick: function(sender, linkText, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
         linkText = "OnThisPage_" + linkText;
-        href = sender.getAttribute ? sender.getAttribute('href') : sender[0].getAttribute('href');
+        var href = sender.getAttribute ? sender.getAttribute('href') : sender[0].getAttribute('href');
         clickParams.Props = {
             4: href,
             66: linkText,
@@ -1418,7 +1417,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     InThisSectionClick: function(sender, linkText, pageName) {
-        clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'InThisSectionClick'); 
+        var clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'InThisSectionClick'); 
         
         clickParams.Props = {
             66: "InThisSection_" + linkText,
@@ -1432,7 +1431,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     PDQMobileClick: function(sender, linkText, isExpanded, pageName) {
         var state = isExpanded?"AccordionSectionExpand_":"AccordionSectionCollapse_";
-        clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'PDQMobileClick');
+        var clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'PDQMobileClick');
         
         clickParams.Events = isExpanded?[31]:[32];
         
@@ -1446,7 +1445,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     BackToTopReveal: function(sender, reveal) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BackToTopReveal');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BackToTopReveal');
 
         clickParams.Events = [20];
         clickParams.LogToOmniture();
@@ -1454,7 +1453,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     BackToTopClick: function(sender, isUtilityBarVisible) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BackToTopClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BackToTopClick');
 
         clickParams.Events = [21];
         clickParams.Props = {
@@ -1465,7 +1464,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     SectionMenuButtonClick: function(sender, heading) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionMenuButtonClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionMenuButtonClick');
 
         clickParams.Events = [30];
         clickParams.Evars = {
@@ -1478,7 +1477,7 @@ var NCIAnalytics = {
     //******************************************************************************************************
     SectionAccordionClick: function(sender, url, isExpanded, heading, parent) {
         var state = isExpanded?"Expand":"Collapse";
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionAccordionClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionAccordionClick');
 
         clickParams.Events = isExpanded?[31]:[32];
         clickParams.Evars = {
@@ -1494,7 +1493,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     SectionLinkClick: function(sender, url, heading, linkText, depth) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionLinkClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SectionLinkClick');
 
         clickParams.Events = [33];
 
@@ -1519,7 +1518,7 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     fontResizer: function(sender, fontSize, onload) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'fontResizer');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'fontResizer');
 
         if(!onload){
             clickParams.Events = [36];
@@ -1540,7 +1539,7 @@ var NCIAnalytics = {
 	* action - expand or collapse
 	*/
     AccordionClick: function(sender, accordionId, sectionId, name, action) {
-        clickParams = new NCIAnalytics.ClickParams(this, 'nciglobal', 'o', 'LinkTracking');
+        var clickParams = new NCIAnalytics.ClickParams(this, 'nciglobal', 'o', 'LinkTracking');
 
         var accordionInfo = accordionId;
         if(sectionId) accordionInfo += ('|' + sectionId);
@@ -1558,7 +1557,7 @@ var NCIAnalytics = {
     // value - pageName
     HomePageDelighterClick: function(sender, type, value) {
         if( type === 'hp_find'){
-            clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'HomePageFindDelighter');
+            var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'HomePageFindDelighter');
             clickParams.Props = {
                 5 : 'hp_find ct delighter|' + value,
 				66 : 'delighter_findclinicaltrials'
@@ -1572,7 +1571,7 @@ var NCIAnalytics = {
 	// type - the delighter type.
 	RecordDelighterRailClick: function(sender, type) {
 		if( type === 'livehelp'){
-			clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'DelighterLiveChat');
+			var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'DelighterLiveChat');
 			clickParams.Props = {
 				5 : 'rrail_chat with us|' + pageName
 			};
@@ -1583,7 +1582,7 @@ var NCIAnalytics = {
 	// Record that the proactive chat prompt was displayed.
 	// sender - the element responsible for this event.
 	RecordProactiveChatPromptDisplay: function(sender){
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - display|' + pageName
 		};
@@ -1594,7 +1593,7 @@ var NCIAnalytics = {
 	// Record that the proactive "Chat Now" button was clicked.
 	// sender - the element responsible for this event.
 	RecordProactiveChatPromptClick: function(sender){
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - launch|' + pageName
 		};
@@ -1605,7 +1604,7 @@ var NCIAnalytics = {
 	// Record that the proactive chat prompt was dismissed.
 	// sender - the element responsible for this event.
 	RecordProactiveChatPromptDismissal: function(sender){        
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'ProactiveChat');
 		clickParams.Props = {
 			5 : 'livehelp_proactive chat - dismiss|' + pageName
 		};
@@ -1618,7 +1617,7 @@ var NCIAnalytics = {
 	* sender - the element responsible for this event.
 	*/	
 	FeedbackFormClick: function(sender, value){
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'FeedbackForm');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'FeedbackForm');
 		clickParams.Props = {
 			5 : value + '|' + pageName
 		};
@@ -1632,7 +1631,7 @@ var NCIAnalytics = {
 	* value - pagename 
 	*/
 	SimpleCTSLink: function(sender, type, value) {
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSLink');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSLink');
 		clickParams.Props = {
 			5: type + '|' + value
 		};
@@ -1655,7 +1654,7 @@ var NCIAnalytics = {
 	* rank - the position of the selected item on a given page
 	*/
 	CTSResultsWithFormClick: function(sender, rank, formName) {
-		clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSLink');
+		var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CTSLink');
 		clickParams.Events = [42];
 		clickParams.Props = {
 			12: formName,
@@ -1672,7 +1671,7 @@ var NCIAnalytics = {
     },
     //******************************************************************************************************
     VideoSplashImageClick: function(sender, video, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
 
         clickParams.Props = {
             66: "VideoStart_" + video,
@@ -1683,7 +1682,7 @@ var NCIAnalytics = {
     },
     //******************************************************************************************************
     BRPiconClick: function(sender, file, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'OnThisPageClick');
 
         clickParams.Props = {
             66: "FileDownload_" + file,
@@ -1694,7 +1693,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogArchiveLinkClick: function(sender, pageName){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogArchiveDateClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogArchiveDateClick');
 
         urlParam = function(name){
             var results = new RegExp("[\?&].*\[" + name + "\]=([^&#]*)").exec(sender.href);
@@ -1718,7 +1717,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogSubscribeClick: function(sender, pageName){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogSubscribeClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogSubscribeClick');
 
         clickParams.Props = {
             66: "Blog_" + 's.prop44' + "_" + NCIAnalytics.blogLocation() + "_Subscribe",
@@ -1730,7 +1729,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogArchiveAccordionClick: function(sender, pageName, collapse){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogAccordionAction');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogAccordionAction');
         var expandCollapse = "";
         if(collapse){
             expandCollapse = "_Collapse:Archive";
@@ -1747,7 +1746,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogBodyLinkClick: function(sender, linkText, pageName){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogBodyLinkClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogBodyLinkClick');
         
         var linkType = "_BodyLink";
         clickParams.Props = {
@@ -1780,7 +1779,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogRelatedLinksClick: function(sender, linkText, pageName, index){
-        clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogRelatedLinkClick');
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogRelatedLinkClick');
         var prop66_String = "";
         if(NCIAnalytics.blogLocation()){
             clickParams.Events = [57];
@@ -1800,7 +1799,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogCardClick: function(sender, linkText, containerIndex, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'BlogFeatureCardClick');
 
         clickParams.Props = {
@@ -1814,7 +1813,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     FeaturedPostsClick: function(sender, linkText, containerIndex, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'FeaturedPostsClick');
 
         clickParams.Props = {
@@ -1828,7 +1827,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     CategoryClick: function(sender, linkText, containerIndex, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'CategoryClick');
 
         clickParams.Props = {
@@ -1842,7 +1841,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     OlderNewerClick: function(sender, olderNewer, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'OlderNewerClick');
 
         clickParams.Props = {
@@ -1858,7 +1857,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     TableSortHeaderClick: function(sender, pageName) {
-        clickParams = new NCIAnalytics.ClickParams(sender,
+        var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
             65: 'table_sort',
@@ -1868,7 +1867,7 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     ProfilePanelLinkClick: function(sender, linkText, pageName) {
-        clickParams = new NCIAnalytics.ClickParams (sender,
+        var clickParams = new NCIAnalytics.ClickParams (sender,
             'nciglobal', 'o', 'ProfilePanelLinkClick'); 
         
         clickParams.Props = {
