@@ -55,8 +55,6 @@
   field_pretty_url:
     value: "dceg-seminar-buman"
   title: "Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity? Using Novel Methods to Understand How Distinct Behaviors Impact Health - Dr. Matt Buman"
-  field_short_title:
-    value: "Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity?"
   field_browser_title:
     - value: 'Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity?'
   field_card_title:
@@ -128,8 +126,6 @@
   field_pretty_url:
     value: "cell-fate"
   title: "Registration now open for Chromatin and Cell Fate Decisions in Development, Aging & Cancer"
-  field_short_title:
-    value: "Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity"
   field_browser_title:
     - value: 'Additive, Joint, or Synergistic Health Impact of Sleep and Physical Activity'
   field_card_title:
@@ -194,8 +190,6 @@
   field_pretty_url:
     value: "2019-radiation-course"
   title: "Radiation Epidemiology & Dosimetry Course"
-  field_short_title:
-    value: "Radiation Epidemiology & Dosimetry Course"
   field_browser_title:
     - value: 'Radiation Epidemiology & Dosimetry Course'
   field_card_title:
@@ -258,8 +252,6 @@
   field_pretty_url:
     value: 'krispy-kreme'
   title: 'Krispy Kreme Challenge'
-  field_short_title:
-    value: 'Krispy Kreme Challenge'
   field_browser_title:
     - value: 'Krispy Kreme Challenge'
   field_card_title:
@@ -326,8 +318,6 @@
   field_pretty_url:
     value: 'dceg-seminar-treon'
   title: 'Genomic-Based Treatment Advances in Waldenström’s Macroglobulinemia - Dr. Steven Treon, Dr. Zachary Hunter'
-  field_short_title:
-    value: 'Genomic-Based Treatment Advances in Waldenström’s Macroglobulinemia'
   field_browser_title:
     value: 'Genomic-Based Treatment Advances in Waldenström’s Macroglobulinemia'
   field_card_title:
@@ -398,8 +388,6 @@
   field_pretty_url:
     value: 'schiffman-gordon-lecture'
   title: 'The Changing Epidemiology of HPV and Cervical Cancer: From Etiology, to Validation of Prevention Methods, to Dissemination'
-  field_short_title:
-    value: 'The Changing Epidemiology of HPV and Cervical Cancer'
   field_browser_title:
     value: 'The Changing Epidemiology of HPV and Cervical Cancer'
   field_card_title:

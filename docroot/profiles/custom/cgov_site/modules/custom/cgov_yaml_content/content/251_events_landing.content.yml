@@ -6,7 +6,7 @@
   moderation_state:
     value: 'published'
   title: "Upcoming Events"
-  field_short_title:
+  field_browser_title:
     value: "Upcoming Events"
   field_site_section:
     - '#process':
@@ -40,7 +40,7 @@
   moderation_state:
     value: 'published'
   title: "Previous Events"
-  field_short_title:
+  field_browser_title:
     value: "Previous Events"
   field_site_section:
     - '#process':
@@ -76,7 +76,7 @@
   moderation_state:
     value: 'published'
   title: "Events"
-  field_short_title:
+  field_browser_title:
     value: "Events"
   field_site_section:
     - '#process':
