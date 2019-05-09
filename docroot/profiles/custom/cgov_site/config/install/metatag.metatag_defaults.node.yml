@@ -4,10 +4,10 @@ dependencies: {  }
 id: node
 label: Content
 tags:
-  title: '[cgov_tokens:cgov-title] - [site:name]'
-  content_language: '[node:langcode]'
   canonical_url: '[node:url]'
+  content_language: '[node:langcode]'
   description: '[node:field_page_description:value]'
+  title: '[cgov_tokens:cgov-title] - [site:name]'
   dcterms_subject: '[cgov_tokens:cgov-analytics-channel]'
   dcterms_is_referenced_by: event1
   dcterms_issued: '[node:field_date_posted:date:short]'
