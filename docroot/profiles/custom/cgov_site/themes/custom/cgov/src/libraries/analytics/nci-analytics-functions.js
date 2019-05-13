@@ -44,14 +44,14 @@ var NCIAnalytics = {
     },
 
     ClickParams: function(sender, reportSuites, linkType, linkName) {
+        console.log('=== BEGIN nci-analytics-functions.js ===');
         /*
          The facility for defining report suites by the parameter reportSuites
          has been discontinued - now report suites are defined in the s_account variable
          set in the Omniture s_code.js file.  The supporting code for the parameter method
          has been retained in case the requirements change.
          */
-        var s_account = 'ncidevelopment,test-click-suite';
-        this.ReportSuites = s_account; // Formerly the reportSuites argument
+        this.ReportSuites = (s_account) ? s_account : 'ncidevelopment'; // Formerly the reportSuites argument
 
         this.sender = sender;
         this.LinkType = linkType;
@@ -218,6 +218,7 @@ var NCIAnalytics = {
                 alert(alertString);
             }
         }
+        console.log('=== END nci-analytics-functions.js ===');
     },
 
     //*********************** onclick functions ************************************************************
