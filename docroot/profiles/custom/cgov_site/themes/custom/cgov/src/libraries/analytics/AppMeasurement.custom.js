@@ -4,7 +4,7 @@
 /* Config Section Version - Last updated 10/23/2018 */
 
 // s_account (report suites) is defined and set before this file is loaded
-var s_account = 'test-load-suite';
+var s_account = 'ncidevelopment,test-load-suite';
 s.account = (s_account) ? s_account : s.account;
 
 /* Conversion Config */
@@ -247,7 +247,7 @@ function s_doPlugins(s) {
     s.prop29 = tp;
 
     // Set prop64 for percent page viewed - if 0, then set to 'zero'
-    s.prop64=s.getPercentPageViewed();
+    s.prop64= 'TODO: fix s.getPercentPageViewed()';
     s.prop64=(s.prop64=="0") ? "zero" : s.prop64;
 
     // Set prop65 to get the initial load time of the page (for use in the page load speed plugin)
@@ -269,7 +269,7 @@ function s_doPlugins(s) {
     eventsArr.push('event47=' + s_getLoadTime());
 
     // Add engagement tracking (event92)
-    // engagementTracking >> requires EvoEngagementPlugin() 
+    /* engagementTracking >> requires EvoEngagementPlugin() 
     if(s.mainCGovIndex >= 0) {
         try {
             if (typeof (window.NCIEngagementPageLoadComplete) === 'undefined' || !window.NCIEngagementPageLoadComplete) {
@@ -286,9 +286,10 @@ function s_doPlugins(s) {
                 window.NCIEngagementPageLoadComplete = true;
             }
         } catch (err) {
-            /** console.log(err) */
+            // console.log(err);
         }
     }    
+    */
 
     // Remove duplicates and join everything
     eventsArr = eventsArr.filter(onlyUnique);
@@ -524,7 +525,8 @@ s.getTimeParting=new Function("h","z",""
 * Plugin: getPercentPageViewed v1.x
 * This code has been modified from the original version distributed
 * by Omniture and will not be supported by Omniture in any way
-*/
+//
+//
 s.getPercentPageViewed=new Function("",""
 +"var s=this;if(typeof(s.linkType)=='undefined'||s.linkType=='e'){var"
 +" v=s.c_r('s_ppv');s.c_w('s_ppv',0);return v;}");
@@ -548,6 +550,7 @@ s.getPPVSetup=new Function("",""
 +"vent('onload',s.getPPVCalc);s.wd.attachEvent('onscroll',s.getPPVCal"
 +"c);s.wd.attachEvent('onresize',s.getPPVCalc);}");
 s.getPPVSetup();
+*/
 
 /******************************
  * Plugin: socialPlatforms v1.0
@@ -591,7 +594,6 @@ s.getPreviousValue = new Function("v", "c", "el", ""
 
 /*
 * Plugin: custom engagement tracking 
-*/
 s.EvoEngagementPlugin=new Function("",""
 +"var engagementObject='NCIEngagement';window[engagementObject]={loggingEnabled:!1,pollingInterval:1e4,scorePerInterval:10,hasScrolled:!1,hasMoused:!1,hasClicked:!1,defaultEngagementScore:0,engagemen"
 +"tScore:0,minimumEngagementScore:1,cookieName:'engagementTracking',logger:function(e,n){var n=n||'log';this.loggingEnabled&&console[n](engagementObject.toUpperCase()+' LOGGER:',e)},initialize:functi"
@@ -608,6 +610,7 @@ s.EvoEngagementPlugin=new Function("",""
 +"mentObject].pollingInterval);attachEvents({element:window,event:'scroll',action:function(){window[engagementObject].doScroll()}}),attachEvents({element:window,event:'mouseover',action:function(){wi"
 +"ndow[engagementObject].doMouse()}}),attachEvents({element:window,event:'click',action:function(){window[engagementObject].doClick()}});");
 s.EvoEngagementPlugin();
+*/
 
 /*
  AppMeasurement_Module_Media 

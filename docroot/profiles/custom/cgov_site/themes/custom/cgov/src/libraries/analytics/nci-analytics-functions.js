@@ -50,7 +50,7 @@ var NCIAnalytics = {
          set in the Omniture s_code.js file.  The supporting code for the parameter method
          has been retained in case the requirements change.
          */
-        var s_account = 'ncidevelopment';
+        var s_account = 'ncidevelopment,test-click-suite';
         this.ReportSuites = s_account; // Formerly the reportSuites argument
 
         this.sender = sender;
