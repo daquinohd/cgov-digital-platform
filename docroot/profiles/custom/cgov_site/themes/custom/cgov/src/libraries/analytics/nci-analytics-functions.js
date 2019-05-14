@@ -2482,8 +2482,10 @@ NCIAnalytics.urs = {
         var trafficType = '',
             ursValue = '',
             ursPrefix = '',
-            seoKeyword = ppcKeyword = '',
-            refDomain = refSubDomain = '',
+            ppcKeyword = '',
+            seoKeyword = '',
+            refDomain = '',
+            refSubDomain = '',
             isInternalDomain = false,
             campaign = (payload.campaign) ? payload.campaign : '',
             referrer = (payload.referrer) ? payload.referrer : ((document.referrer) ? document.referrer : '');
