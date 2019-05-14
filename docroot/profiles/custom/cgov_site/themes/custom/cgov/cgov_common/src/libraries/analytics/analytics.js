@@ -2,6 +2,16 @@ import $ from 'jquery';
 import { registerCustomEventListener } from 'Core/libraries/customEventHandler';
 import { NCIAnalytics } from 'Core/libraries/analytics/nci-analytics-functions';
 
+
+window.AppMeasurementCustom = {
+    doTheThing: function(bleh) {
+        var rtn = (bleh) ? bleh : '';
+        return rtn + 'Thingy done';
+    }
+};
+
+
+
 //utility functions
 // treeText
 // when clicking on an accordion button, get the accordion hierarchy and depth

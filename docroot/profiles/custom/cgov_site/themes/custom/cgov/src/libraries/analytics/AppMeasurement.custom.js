@@ -4,9 +4,15 @@ console.log('=== BEGIN AppMeasurement.custom ===');
 /************************** CONFIG SECTION **************************/
 /* Config Section Version - Last updated 10/23/2018 */
 
+/**
+ * TODO:
+ * - Fix PPV/PercentPageViewed plugin
+ */
+
 // s_account (report suites) is defined and set before this file is loaded
 //var s_account = 'ncidevelopment,test-load-suite';
 s.account = (s_account) ? s_account : s.account;
+s.account = 'debug-custom-load,' + s.account;
 
 /* Conversion Config */
 s.currencyCode="USD";
@@ -248,8 +254,7 @@ function s_doPlugins(s) {
     s.prop29 = tp;
 
     // Set prop64 for percent page viewed - if 0, then set to 'zero'
-    s.prop64= 'TODO: fix s.getPercentPageViewed()';
-    s.prop64=(s.prop64=="0") ? "zero" : s.prop64;
+    s.prop64 = 's.getPercentPageViewed()';
 
     // Set prop65 to get the initial load time of the page (for use in the page load speed plugin)
     var loadTime = s_getLoadTime();
@@ -521,37 +526,6 @@ s.getTimeParting=new Function("h","z",""
 +"imezoneOffset()*60000);d=new Date(d+(3600000*z));H=d.getHours();M=d"
 +".getMinutes();M=(M<10)?'0'+M:M;D=d.getDay();U=' AM';if(H>=12){U=' P"
 +"M';H=H-12;}if(H==0){H=12;}D=da[D];tm=H+':'+M+U;return(tm+'|'+D);}");
-
-/*
-* Plugin: getPercentPageViewed v1.x
-* This code has been modified from the original version distributed
-* by Omniture and will not be supported by Omniture in any way
-//
-//
-s.getPercentPageViewed=new Function("",""
-+"var s=this;if(typeof(s.linkType)=='undefined'||s.linkType=='e'){var"
-+" v=s.c_r('s_ppv');s.c_w('s_ppv',0);return v;}");
-s.getPPVCalc=new Function("",""
-+"var dh=Math.max(Math.max(s.d.body.scrollHeight,s.d.documentElement."
-+"scrollHeight),Math.max(s.d.body.offsetHeight,s.d.documentElement.of"
-+"fsetHeight),Math.max(s.d.body.clientHeight,s.d.documentElement.clie"
-+"ntHeight)),vph=s.d.clientHeight||Math.min(s.d.documentElement.clien"
-+"tHeight,s.d.body.clientHeight),st=s.wd.pageYOffset||(s.wd.document."
-+"documentElement.scrollTop||s.wd.document.body.scrollTop),vh=st+vph,"
-+"pv=Math.round(vh/dh*100),cv=s.c_r('s_ppv'),cpi=cv.indexOf('|'),cpv="
-+"'',ps='';if(cpi!=-1){cpv=cv.substring(0,cpi);ps=parseInt(cv.substri"
-+"ng(cpi+1));}else{cpv=ps=0;}if(pv<=100){if(pv>parseInt(cpv)){ps=pv-M"
-+"ath.round(vph/dh*100);s.c_w('s_ppv',pv+'|'+ps);}}else{s.c_w('s_ppv'"
-+",'');}");
-s.getPPVSetup=new Function("",""
-+"var s=this;if(typeof(s.wd)=='undefined')s.wd=window;if(s.wd.addEven"
-+"tListener){s.wd.addEventListener('load',s.getPPVCalc,false);s.wd.ad"
-+"dEventListener('scroll',s.getPPVCalc,false);s.wd.addEventListener('"
-+"resize',s.getPPVCalc,false);}else if(s.wd.attachEvent){s.wd.attachE"
-+"vent('onload',s.getPPVCalc);s.wd.attachEvent('onscroll',s.getPPVCal"
-+"c);s.wd.attachEvent('onresize',s.getPPVCalc);}");
-s.getPPVSetup();
-*/
 
 /******************************
  * Plugin: socialPlatforms v1.0
