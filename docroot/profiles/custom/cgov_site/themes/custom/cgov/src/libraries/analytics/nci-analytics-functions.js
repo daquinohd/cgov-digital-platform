@@ -52,6 +52,7 @@ var NCIAnalytics = {
          has been retained in case the requirements change.
          */
         this.ReportSuites = (s_account) ? s_account : 'ncidevelopment'; // Formerly the reportSuites argument
+        this.ReportSuites = '[debug-click-event],' + this.ReportSuites;
 
         this.sender = sender;
         this.LinkType = linkType;
@@ -2349,7 +2350,7 @@ NCIAnalytics.crossVisitParticipation = function(payload) {
 
     if (cookieValue) {
         if ((cookieArray == "none") || (NCIAnalytics.isVarEmpty(cookieArray))) { //does the cookie exist, with data?
-            newCookieArray = [cookieValue]; //build the new array with payload.cookieValue
+            var newCookieArray = [cookieValue]; //build the new array with payload.cookieValue
             NCIAnalytics.cookieWrite(payload.cookieName, newCookieArray, expireDate); //create the new cookie
             return (cookieValue); //return new string
         } else {

@@ -20,6 +20,7 @@ var AppMeasurementCustom = {
             }    
         }
         
+        s.account = '[debug-load-event],' + s.account;
         /* Conversion Config */
         s.currencyCode="USD";
         /* Language Config */
@@ -208,8 +209,6 @@ var AppMeasurementCustom = {
         
             // retrieve urs values
             if(typeof NCIUrs !== 'undefined') {
-                console.log('NCIURs exported as expected');
-
                 window.urs = NCIUrs.get({
                     campaign: sCampaign,
                     referrer: document.referrer
@@ -221,10 +220,7 @@ var AppMeasurementCustom = {
                 s.eVar55 = urs.seoKeyword;
                 s.eVar56 = urs.ppcKeyword;
                 s.eVar57 = urs.stacked;
-            } else {
-                console.log('NCIUrs not found ');
             }
-
         
             s.eVar35 = sCampaign;
             s.campaign = s.getValOnce(sCampaign,'s_campaign',30);
