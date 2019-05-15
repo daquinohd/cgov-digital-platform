@@ -561,7 +561,7 @@ var AppMeasurementCustom = {
         +"resize',s.getPPVCalc,false);}else if(s.wd.attachEvent){s.wd.attachE"
         +"vent('onload',s.getPPVCalc);s.wd.attachEvent('onscroll',s.getPPVCal"
         +"c);s.wd.attachEvent('onresize',s.getPPVCalc);}");
-        s.getPPVSetup();
+        // s.getPPVSetup();
         
         /******************************
          * Plugin: socialPlatforms v1.0
