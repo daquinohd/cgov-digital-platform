@@ -1,4 +1,4 @@
-
+import { NCIUrs } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
@@ -207,21 +207,24 @@ var AppMeasurementCustom = {
             }
         
             // retrieve urs values
-            if(typeof NCIAnalytics !== 'undefined') {
-                if(typeof NCIAnalytics.urs !== 'undefined') {
-                    window.urs = NCIAnalytics.urs.get({
-                        campaign: sCampaign,
-                        referrer: document.referrer
-                    });
-                    // console.info('urs', JSON.stringify(window.urs, null, 2));    
-        
-                    s.eVar54 = urs.value;
-                    s.prop51 = (s.eVar54) ? 'D=v54' : '';
-                    s.eVar55 = urs.seoKeyword;
-                    s.eVar56 = urs.ppcKeyword;
-                    s.eVar57 = urs.stacked;
-                }
+            if(typeof NCIUrs !== 'undefined') {
+                console.log('NCIURs exported as expected');
+
+                window.urs = NCIUrs.get({
+                    campaign: sCampaign,
+                    referrer: document.referrer
+                });
+                // console.info('urs', JSON.stringify(window.urs, null, 2));    
+    
+                s.eVar54 = urs.value;
+                s.prop51 = (s.eVar54) ? 'D=v54' : '';
+                s.eVar55 = urs.seoKeyword;
+                s.eVar56 = urs.ppcKeyword;
+                s.eVar57 = urs.stacked;
+            } else {
+                console.log('NCIUrs not found ');
             }
+
         
             s.eVar35 = sCampaign;
             s.campaign = s.getValOnce(sCampaign,'s_campaign',30);

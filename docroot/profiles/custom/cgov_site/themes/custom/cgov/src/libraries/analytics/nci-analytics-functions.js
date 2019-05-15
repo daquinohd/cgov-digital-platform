@@ -2632,3 +2632,4 @@ NCIAnalytics.urs = {
 
 // Export our NCIAnalytics object.
 export { NCIAnalytics };
+export let NCIUrs = NCIAnalytics.urs;
