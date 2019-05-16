@@ -3,52 +3,73 @@ import { attachEvents } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
+    // Send tagging requests to correct server based on protocol
+    trackingServer: 'nci.122.2o7.net',
+    visitorNamespace: 'nci',
+
+    // Set to 'true' to gather ClickMap data.
+    trackInineStats: true,
+
+    // Paths that are _not_ treated as exit links.
+    linkInternalFilters: 'javascript:,cancer.gov,localhost,www.devbox',
+
+    // Variables sent with custom, event, or download links.
+    linkTrackVars: 'none',
+    linkTrackEvents: 'none',
+
+    // Set to 'true' to allow manual link tracking.
+    useForcedLinkTracking: true,
+
+    // Daylight savings time parting configuration.
+    tpDst: {
+        2019:'3/10,11/3',
+        2020:'3/8,11/1',
+        2021:'3/14,11/7',
+        2022:'3/13,11/6',
+        2023:'3/12,11/5',
+        2024:'3/10,11/3',
+        2025:'3/9,11/2',
+        2026:'3/8,11/1',
+        2027:'3/14,11/7',
+        2028:'3/12,11/5'
+    },
+
+    /**
+     * Build the s object using DTM and DOM elements.
+     * 
+     * @param {*} s 
+     */
     setScodeProperties: function(s) {
 
-        console.log('=== BEGIN AppMeasurement.custom v2 ===');
-        
-        // TODO: 
-        /* Custom NCI Web Analytics values & plugins - for information or support email: NCIOCEWebAnalytics@mail.nih.gov */
-        /************************** CONFIG SECTION **************************/
-        /* Config Section Version - Last updated 10/23/2018 */
-        
-        // s_account (report suites) is defined and set before this file is loaded
+        console.log('=== BEGIN debugging AppMeasurementCustom ===');
+        /*
+         * Set the report suite value(s).
+         * s.account and s_account (report suites) should be defined before this function is called.
+         * If not, set a default value of 'ncidevelopment'.
+         */
         if(!s.account) {
-            if(s_account) {
-                s.account = s_account;
-            } else {
-                s.account = 'ncidevelopment';
-            }    
+            s.account = (s_account) ? s_account : 'ncidevelopment';
         }
+
+        /*
+         * Configure tracking server and namespace.
+         */
+        s.trackingServer = s.trackingServer || AppMeasurementCustom.trackingServer;
+        s.visitorNamespace = AppMeasurementCustom.visitorNamespace;
+
+        /* 
+         * Configure link tracking settings.
+         */
+        s.trackInlineStats = AppMeasurementCustom.trackInlineStats;
+        s.linkInternalFilters = AppMeasurementCustom.linkInternalFilters;
+        s.linkTrackVars = AppMeasurementCustom.linkTrackVars;
+        s.linkTrackEvents = AppMeasurementCustom.linkTrackEvents;
+        s.useForcedLinkTracking = AppMeasurementCustom.useForcedLinkTracking;
         
-        s.account = '[debug-load-event],' + s.account;
-        /* Conversion Config */
-        s.currencyCode="USD";
-        /* Language Config */
-        s.charSet="UTF-8";
-        /* Link Tracking Config */
-        s.trackDownloadLinks=true;
-        s.trackExternalLinks=true;
-        s.trackInlineStats=true;
-        s.linkDownloadFileTypes="avi,doc,docx,epub,exe,gif,jpg,ics,mobi,mov,mp3,mpg,pdf,png,ppt,pptx,rss,wav,wmv,xls,xlsx,xml,zip";
-        s.linkInternalFilters="javascript:,cancer.gov";
-        s.linkLeaveQueryString=false;
-        s.linkTrackVars="None";
-        s.linkTrackEvents="None";
-        s.useForcedLinkTracking=true
-        s.forcedLinkTrackingTimeout=625
-        
-        //time parting configuration 
-        //US
-        s._tpDST = {
-        2012:'3/11,11/4',
-        2013:'3/10,11/3',
-        2014:'3/9,11/2',
-        2015:'3/8,11/1',
-        2016:'3/13,11/6',
-        2017:'3/12,11/5',
-        2018:'3/11,11/4',
-        2019:'3/10,11/3'}
+        /*
+         * Set time parting configuration - US.
+         */
+        s._tpDST = AppMeasurementCustom.tpDst;
         
         //set the font size variable
         s.prop42="Normal";
@@ -578,15 +599,6 @@ var AppMeasurementCustom = {
         s.join=new Function("v","p","var s=this;var f,b,d,w;if(p){f=p.front?p.front:'';b=p.back?p.back:'';d=p.delim?p.delim:'';w=p.wrap?p.wrap:'';}var str='';for(var x=0;x<v.length;x++){if(typeof(v[x])=='object' )str+=s.join( v[x],p);else str+=w+v[x]+w;if(x<v.length-1)str+=d;}return f+str+b;");
 
 
-        /* WARNING: Changing any of the below variables will cause drastic
-        changes to how your visitor data is collected.  Changes should only be
-        made when instructed to do so by your account manager.*/
-        s.visitorNamespace="nci";
-
-        // Send tagging requests to correct server based on protocol
-        s.trackingServer="nci.122.2o7.net";
-        s.dc="122";
-
         /*
         * Plugin: getPreviousValue_v1.0 - return previous value of designated
         *   variable (requires split utility)
@@ -632,7 +644,7 @@ var AppMeasurementCustom = {
         new Image,d.src=c.c(a,b))};a.script=function(b){a.get(b,1)};a.delay=function(){a._d++};a.ready=function(){a._d--;a.disable||l.delayReady()};c.list.push(d)};c._g=function(d){var b,a=(d?"use":"set")+"Vars";for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&b[a])try{b[a](l,b)}catch(e){}};c._t=function(){c._g(1)};c._d=function(){var d,b;for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&0<b._d)return 1;return 0};c.c=function(c,b){var a,e,g,f;"http"!=b.toLowerCase().substring(0,4)&&
         (b="http://"+b);l.ssl&&(b=l.replace(b,"http:","https:"));c.RAND=Math.floor(1E13*Math.random());for(a=0;0<=a;)a=b.indexOf("[",a),0<=a&&(e=b.indexOf("]",a),e>a&&(g=b.substring(a+1,e),2<g.length&&"s."==g.substring(0,2)?(f=l[g.substring(2)])||(f=""):(f=""+c[g],f!=c[g]&&parseFloat(f)!=c[g]&&(g=0)),g&&(b=b.substring(0,a)+encodeURIComponent(f)+b.substring(e+1)),a=e));return b}}
             
-       console.log('=== END AppMeasurement.custom v2 ===');
+       console.log('=== END debugging AppMeasurementCustom ===');
        
    }
 
