@@ -48,7 +48,6 @@ $main-menu-desktop-active-item-border-bottom: $denim;
 $main-menu-desktop-svg-search-magnifying-glass: search-blue-theme;
 $main-menu-desktop-search-background: $white;
 $main-menu-desktop-search-color: $graphite;
-$main-menu-mobile-tablet-items-width: 19%;
 $main-menu-mobile-tablet-nav-search-float-tablet-down: right; // necessary if mobile menu items decrease from the default 4 items
 $main-menu-mobile-tablet-svg-hamburger: menu-blue-theme;
 $main-menu-mobile-tablet-svg-info: info-blue-theme;
@@ -201,6 +200,10 @@ a .feature-card.cgvArticle a:hover h3,
 .list .title a.title:focus,
 .list .title a:hover,
 .list .title a:focus,
+.list.managed li.has-media:hover a,
+.list.managed li.has-media:focus a,
+.list.dynamic li.has-media:hover a,
+.list.dynamic li.has-media:focus a,
 .feature-card.cgvArticle a:hover h3,
 .sub-nav-group a.sub-nav-group-header:hover,
 .sub-nav-group a.sub-nav-group-header:focus,
@@ -222,6 +225,8 @@ a .feature-card.cgvArticle a:hover h3,
 .post-title a:focus,
 .feature-secondary a:hover,
 .feature-secondary a:focus,
+.feature-secondary a:hover h3,
+.feature-secondary a:focus h3,
 .blog-feature a:hover h3,
 .blog-feature a:focus h3,
 .landing-thumb-text h3 a:hover,
@@ -233,7 +238,10 @@ a .feature-card.cgvArticle a:hover h3,
 .page-options li a:hover,
 .page-options li a:focus,
 .contentzone table tbody tr td a:hover,
-.contentzone table tbody tr td a:focus {
+.contentzone table tbody tr td a:focus,
+a.arrow-link:hover,
+a.arrow-link:focus
+{
   color: $default-link-color-hover;
 }
 
@@ -309,14 +317,6 @@ h6 {
   background: $main-menu-background-color;
 }
 
-// mobile menu
-// due to changing number of items in mobile main menu on microsites
-.mobile-menu-bar>a,
-.mobile-menu-bar>button {
-  width: $main-menu-mobile-tablet-items-width;
-  margin-left: 0;
-}
-
 .nav-header.menu-btn::before {
   @include svg-sprite($main-menu-mobile-tablet-svg-hamburger);
 }
@@ -329,7 +329,7 @@ button.nav-search::before {
   @include svg-sprite($main-menu-mobile-tablet-svg-search);
 }
 
-button.nav-dictionary::before {
+a.nav-dictionary::before {
   @include svg-sprite($main-menu-mobile-tablet-svg-dictionary);
 }
 
@@ -599,7 +599,10 @@ form button[type=submit]:hover {
 
 @include break(large) {
 
-
+  // header
+  header {
+    padding-bottom: 1.5em;
+  }
 
   // header
   .nci-logo-pages {
