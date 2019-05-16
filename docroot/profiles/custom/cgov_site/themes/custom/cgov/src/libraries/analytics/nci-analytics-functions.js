@@ -2216,7 +2216,7 @@ function changeMonitor(payload) {
  * cross-browser eventListener logic
  * @author Evolytics <nci@evolytics.com>
  */
-function attachEvents(payload) {
+export function attachEvents(payload) {
     var element = payload.element,
         event = payload.event,
         action = payload.action;

@@ -1,4 +1,5 @@
 import { NCIAnalytics } from 'Core/libraries/analytics/nci-analytics-functions';
+import { attachEvents } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
@@ -145,7 +146,7 @@ var AppMeasurementCustom = {
         if(addToLocalPageName.length > 0)
             localPageName += " - " + addToLocalPageName;
         s.pageName=s.eVar1=localPageName;
-        s.mainCGovIndex = s.pageName.indexOf('www.cancer.gov');
+        s.mainCGovIndex = s.pageName.indexOf('cancer.gov');
         
         var fullURL = document.URL;
         if(fullURL.length > 100)
@@ -598,24 +599,28 @@ var AppMeasurementCustom = {
         + "s.c_w(c,v,t):s.c_w(c,'no value',t);return r}");
 
         /*
-        * Plugin: custom engagement tracking 
+        * Plugin: custom engagement tracking
         */
-        s.EvoEngagementPlugin=new Function("", ""
-        +"var s=this,engagementObject='NCIEngagement';window[engagementObject]={loggingEnabled:!1,pollingInterval:1e4,scorePerInterval:10,hasScrolled:!1,hasMoused:!1,hasClicked:!1,defaultEngagementScore:0,engagemen"
-        +"tScore:0,minimumEngagementScore:1,cookieName:'engagementTracking',logger:function(e,n){var n=n||'log';this.loggingEnabled&&console[n](engagementObject.toUpperCase()+' LOGGER:',e)},initialize:functi"
-        +"on(e){window[engagementObject].logger('initialize');var n=e;window[engagementObject].startTime=(new Date).getTime(),this.isFocused=document.hasFocus()},doScroll:function(){this.isFocused=document.h"
-        +"asFocus(),this.isFocused&&(window[engagementObject].logger('doScroll'),this.hasScrolled=!0)},doMouse:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doMouse'),this.is"
-        +"Focused&&(this.hasMoused=!0)},doClick:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doClick'),this.isFocused&&(this.hasClicked=!0)},getEngagementScore:function(e){v"
-        +"ar n=e.action,t=e.status,o=e.score,g=t?o+10:o;return this[n]=!1,g},getEngagementStatus:function(e){return this.engagementScore=this.getEngagementScore({action:'hasScrolled',status:this.hasScrolled,"
-        +"score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action:'hasMoused',status:this.hasMoused,score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action"
-        +":'hasClicked',status:this.hasClicked,score:this.engagementScore}),this.status={engagementScore:this.engagementScore},this.status},getAndResetEngagementCookie:function(){var e=this.cookieName,n=NCIA"
-        +"nalytics.cookieRead(e)||'';return NCIAnalytics.cookieWrite(e,'0'),n}},window[engagementObject].initialize(window[engagementObject]);var engagement_timer=setInterval(function(){window[engagementObje"
-        +"ct].getEngagementStatus();var e=window[engagementObject].engagementScore>=window[engagementObject].minimumEngagementScore,n=NCIAnalytics.cookieRead(window[engagementObject].cookieName)||0,t=e?'enga"
-        +"ged':'not engaged';if('engaged'===t){var o=parseInt(n)+window[engagementObject].scorePerInterval;NCIAnalytics.cookieWrite(window[engagementObject].cookieName,o),window[engagementObject].logger('eng"
-        +"agement-score_'+o),window[engagementObject].engagementScore=window[engagementObject].defaultEngagementScore}else window[engagementObject].logger('engagement-score: '+t.toUpperCase())},window[engage"
-        +"mentObject].pollingInterval);attachEvents({element:window,event:'scroll',action:function(){window[engagementObject].doScroll()}}),attachEvents({element:window,event:'mouseover',action:function(){wi"
-        +"ndow[engagementObject].doMouse()}}),attachEvents({element:window,event:'click',action:function(){window[engagementObject].doClick()}});");
-        ///// s.EvoEngagementPlugin(); // TODO: replace me 
+        s.EvoEngagementPlugin=function(ae){var s=this,engagementObject='NCIEngagement';window[engagementObject]={loggingEnabled:!1,pollingInterval:1e4,scorePerInterval:10,
+        hasScrolled:!1,hasMoused:!1,hasClicked:!1,defaultEngagementScore:0,engagementScore:0,minimumEngagementScore:1,cookieName:'engagementTracking',
+        logger:function(e,n){var n=n||'log';this.loggingEnabled&&console[n](engagementObject.toUpperCase()+' LOGGER:',e)},
+        initialize:function(e){window[engagementObject].logger('initialize');var n=e;window[engagementObject].startTime=(new Date).getTime(),
+        this.isFocused=document.hasFocus()},doScroll:function(){this.isFocused=document.hasFocus(),this.isFocused&&(window[engagementObject].logger('doScroll'),
+        this.hasScrolled=!0)},doMouse:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doMouse'),
+        this.isFocused&&(this.hasMoused=!0)},doClick:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doClick'),
+        this.isFocused&&(this.hasClicked=!0)},getEngagementScore:function(e){var n=e.action,t=e.status,o=e.score,g=t?o+10:o;
+        return this[n]=!1,g},getEngagementStatus:function(e){return this.engagementScore=this.getEngagementScore({action:'hasScrolled',
+        status:this.hasScrolled,score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action:'hasMoused',status:this.hasMoused,score:this.engagementScore}),
+        this.engagementScore=this.getEngagementScore({action:'hasClicked',status:this.hasClicked,score:this.engagementScore}),this.status={engagementScore:this.engagementScore},
+        this.status},getAndResetEngagementCookie:function(){var e=this.cookieName,n=NCIAnalytics.cookieRead(e)||'';return NCIAnalytics.cookieWrite(e,'0'),n}},
+        window[engagementObject].initialize(window[engagementObject]);var engagement_timer=setInterval(function(){window[engagementObject].getEngagementStatus();
+        var e=window[engagementObject].engagementScore>=window[engagementObject].minimumEngagementScore,n=NCIAnalytics.cookieRead(window[engagementObject].cookieName)||0,
+        t=e?'engaged':'not engaged';if('engaged'===t){var o=parseInt(n)+window[engagementObject].scorePerInterval;NCIAnalytics.cookieWrite(window[engagementObject].cookieName,o),
+        window[engagementObject].logger('engagement-score_'+o),window[engagementObject].engagementScore=window[engagementObject].defaultEngagementScore}else 
+        window[engagementObject].logger('engagement-score: '+t.toUpperCase())},window[engagementObject].pollingInterval);ae({element:window,event:'scroll',
+        action:function(){window[engagementObject].doScroll()}}),ae({element:window,event:'mouseover',action:function(){window[engagementObject].doMouse()}}),
+        ae({element:window,event:'click',action:function(){window[engagementObject].doClick()}})};
+        s.EvoEngagementPlugin(attachEvents);
 
         /*
         * AppMeasurement_Module_Media
