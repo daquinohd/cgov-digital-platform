@@ -96,67 +96,84 @@ var AppMeasurementCustom = {
         /* Get the page name to be used in tracking variables. */
         let canonicalPageName = AppMeasurementCustom.getCanonicalLink();
         let localPageName = (canonicalPageName.length > 0) ? canonicalPageName : AppMeasurementCustom.getLocalPageName();
+        let addToLocalPageName = '';
 
-
-
-
-
-
-
-        
-
-        //set the font size variable
-        s.prop42="Normal";
-        
-        
-        // Determine if patient or healthprofessional version
-        // set prop7 and eVar7 to version and add value to 
-        // addToLocalPageName
-        var version = semphonicGetQueryParm('version');
-        var addToLocalPageName = "";
-        var omversion = "";
-        if(localPageName.indexOf("patient") >= 0 )
-        {
-            omversion = "patient";
+        /**
+         * Set prop8 and eVar2 to "english" unless "espanol" is in the url,
+         * or "lang=spanish" or "language=spanish" query parameters exist,
+         * or the html "lang" attribute is set to "es".
+         */
+        let language = 'english';
+        if (localPageName.indexOf('espanol') >= 0 ||
+            document.querySelector('[lang="es"]') ||
+            s.Util.getQueryParam('lang') == 'spanish' ||
+            s.Util.getQueryParam('language') == 'spanish') {
+                language = 'spanish';
         }
-        else if(localPageName.indexOf("healthprofessional") >= 0 )
+        s.prop8 = language;
+        s.eVar2 = s.prop8;
+
+        /** Get the audience from query param or DOM. */
+        let audience = s.Util.getQueryParam('version');
+        switch (audience.toLowerCase())
         {
-            omversion = "healthprofessional";
+            case 'patient':
+            case 'patients':
+            case '0':
+                audience = 'patient';
+                break;
+            case 'healthprofessional':
+            case 'healthprofessionals':
+            case '1':
+                audience = 'healthprofessional';
+                break;
+            default:
+                if (localPageName.indexOf('patient') > -1)
+                    audience = 'patient';
+                if (localPageName.indexOf('healthprofessional') > -1)
+                    audience = 'healthprofessional';
+                break;
         }
-        else
-        {
-            if (version) 
-            {
-                if( version.toLowerCase() == "patient"  
-                    || version == "patients"
-                    || version == "0" )
-                {
-                    omversion = "patient";
-                    addToLocalPageName = CommaList(addToLocalPageName,"Patient");
-                }
-                else if( version.toLowerCase() == "healthprofessional" 
-                    || version.toLowerCase() == "healthprofessionals"
-                    || version == "1" )
-                {
-                    omversion = "healthprofessional";
-                    addToLocalPageName = CommaList(addToLocalPageName,"HealthProfessional");
-                }
-            }
+
+        // TODO: get audience from meta tag & verify if query params are still used.
+
+        /** Append to local page name & set variables. */
+        if (audience) {
+            addToLocalPageName = CommaList(addToLocalPageName, audience);
+            s.prop7 = audience;
+            s.eVar7 = s.prop7;    
         }
-        s.prop7=s.eVar7=omversion;
+
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Set the font size variable. 
+        s.prop42 = 'normal';
+
+
         // if dictionary, define addToLocalPageName
         if(localPageName.indexOf("dictionaries") > 0 || 
            localPageName.indexOf("diccionario")> 0)
         {
-            if (caseInsensitiveGetQueryParm('expand'))
+            if (s.Util.getQueryParam('expand'))
                 addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
             else if (localPageName.indexOf("/def/") >= 0 )
                 addToLocalPageName = CommaList(addToLocalPageName,'Definition');
         }
         
         // retain page query parameter value
-        var pageNum = caseInsensitiveGetQueryParm('page');
+        var pageNum = s.Util.getQueryParam('page');
         if (pageNum)
             addToLocalPageName = CommaList(addToLocalPageName,"Page " + pageNum.toString());
         
@@ -175,17 +192,6 @@ var AppMeasurementCustom = {
         }
         else
             s.prop1 = fullURL;
-        
-        // Set prop8 and eVar3 to "english" unless "espanol" is in the url 
-        // or "lang=spanish" or "language=spanish" query parameters exist
-        var language = "english";
-        if (localPageName.indexOf("espanol") >= 0 ||
-            caseInsensitiveGetQueryParm('lang') == 'spanish' ||
-            caseInsensitiveGetQueryParm('language') == 'spanish' ||
-            getMetaTagContent('[name="content-language"]') == 'es') {
-                language = "spanish";
-            }
-        s.prop8=s.eVar2=language;
         
         // Set prop26 to Time Stamp format: <year>|<month>|<day>|<hour>
         var now = new Date();
@@ -343,48 +349,6 @@ var AppMeasurementCustom = {
         }
         
         
-        function caseInsensitiveGetQueryParm(qp)
-        {
-            var fullurl = location.search.toLowerCase();
-            var cipos = fullurl.indexOf(qp + "=");
-            if (cipos == -1)
-                return null;
-            cipos += qp.length+1;
-            if (cipos >= fullurl.length)
-                return null;
-            var ciendPos1 = fullurl.indexOf("&", cipos);
-            var ciendPos2 = fullurl.indexOf("#", cipos);
-            if (ciendPos1 < 0 && ciendPos2 < 0)
-            {
-                return unescape(fullurl.substring(cipos));
-            }
-            var ciendPos = ciendPos1;
-            if (ciendPos < 0 || (ciendPos2 >= 0 && ciendPos2 < ciendPos1))
-                ciendPos = ciendPos2;
-        
-            return unescape(fullurl.substring(cipos, ciendPos));
-        }
-        
-        function semphonicGetQueryParm(qp)
-        {
-            var pos = document.URL.indexOf(qp + "=");
-            if (pos == -1)
-                return null;
-            pos += qp.length+1;
-            if (pos >= document.URL.length)
-                return null;
-            var endPos1 = document.URL.indexOf("&", pos);
-            var endPos2 = document.URL.indexOf("#", pos);
-            if (endPos1 < 0 && endPos2 < 0)
-            {
-                return unescape(document.URL.substring(pos));
-            }
-            var endPos = endPos1;
-            if (endPos < 0 || (endPos2 >= 0 && endPos2 < endPos1))
-                endPos = endPos2;
-        
-            return unescape(document.URL.substring(pos, endPos));
-        }
         
         /** Custom Plugin: Dynamically Create s.hier variable*/
         function set_hier1() {
