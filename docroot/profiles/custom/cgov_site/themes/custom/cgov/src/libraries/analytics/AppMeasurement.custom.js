@@ -1,4 +1,4 @@
-import { NCIUrs } from 'Core/libraries/analytics/nci-analytics-functions';
+import { NCIAnalytics } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
@@ -208,8 +208,8 @@ var AppMeasurementCustom = {
             }
         
             // retrieve urs values
-            if(typeof NCIUrs !== 'undefined') {
-                window.urs = NCIUrs.get({
+            if(typeof NCIAnalytics.urs !== 'undefined') {
+                window.urs = NCIAnalytics.urs.get({
                     campaign: sCampaign,
                     referrer: document.referrer
                 });
@@ -518,123 +518,124 @@ var AppMeasurementCustom = {
             return s_loadT
         }
         
-        /*
-         * Plugin: getTimeParting 3.4
-         */
-        s.getTimeParting=new Function("h","z",""
-        +"var s=this,od;od=new Date('1/1/2000');if(od.getDay()!=6||od.getMont"
-        +"h()!=0){return'Data Not Available';}else{var H,M,D,U,ds,de,tm,da=['"
-        +"Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturda"
-        +"y'],d=new Date();z=z?z:0;z=parseFloat(z);if(s._tpDST){var dso=s._tp"
-        +"DST[d.getFullYear()].split(/,/);ds=new Date(dso[0]+'/'+d.getFullYea"
-        +"r());de=new Date(dso[1]+'/'+d.getFullYear());if(h=='n'&&d>ds&&d<de)"
-        +"{z=z+1;}else if(h=='s'&&(d>de||d<ds)){z=z+1;}}d=d.getTime()+(d.getT"
-        +"imezoneOffset()*60000);d=new Date(d+(3600000*z));H=d.getHours();M=d"
-        +".getMinutes();M=(M<10)?'0'+M:M;D=d.getDay();U=' AM';if(H>=12){U=' P"
-        +"M';H=H-12;}if(H==0){H=12;}D=da[D];tm=H+':'+M+U;return(tm+'|'+D);}");
-        
-        /*
-        * Plugin: getPercentPageViewed v1.x
-        * This code has been modified from the original version distributed
-        * by Omniture and will not be supported by Omniture in any way
-        */
-        s.getPercentPageViewed=new Function("",""
-        +"var s=this;if(typeof(s.linkType)=='undefined'||s.linkType=='e'){var"
-        +" v=s.c_r('s_ppv');s.c_w('s_ppv',0);return v;}");
-        s.getPPVCalc=new Function("",""
-        +"var dh=Math.max(Math.max(s.d.body.scrollHeight,s.d.documentElement."
-        +"scrollHeight),Math.max(s.d.body.offsetHeight,s.d.documentElement.of"
-        +"fsetHeight),Math.max(s.d.body.clientHeight,s.d.documentElement.clie"
-        +"ntHeight)),vph=s.d.clientHeight||Math.min(s.d.documentElement.clien"
-        +"tHeight,s.d.body.clientHeight),st=s.wd.pageYOffset||(s.wd.document."
-        +"documentElement.scrollTop||s.wd.document.body.scrollTop),vh=st+vph,"
-        +"pv=Math.round(vh/dh*100),cv=s.c_r('s_ppv'),cpi=cv.indexOf('|'),cpv="
-        +"'',ps='';if(cpi!=-1){cpv=cv.substring(0,cpi);ps=parseInt(cv.substri"
-        +"ng(cpi+1));}else{cpv=ps=0;}if(pv<=100){if(pv>parseInt(cpv)){ps=pv-M"
-        +"ath.round(vph/dh*100);s.c_w('s_ppv',pv+'|'+ps);}}else{s.c_w('s_ppv'"
-        +",'');}");
-        s.getPPVSetup=new Function("",""
-        +"var s=this;if(typeof(s.wd)=='undefined')s.wd=window;if(s.wd.addEven"
-        +"tListener){s.wd.addEventListener('load',s.getPPVCalc,false);s.wd.ad"
-        +"dEventListener('scroll',s.getPPVCalc,false);s.wd.addEventListener('"
-        +"resize',s.getPPVCalc,false);}else if(s.wd.attachEvent){s.wd.attachE"
-        +"vent('onload',s.getPPVCalc);s.wd.attachEvent('onscroll',s.getPPVCal"
-        +"c);s.wd.attachEvent('onresize',s.getPPVCalc);}");
-        // s.getPPVSetup();
-        
-        /******************************
-         * Plugin: socialPlatforms v1.0
-         ******************************/
-        s.socialPlatforms=new Function("a",""
-        +"var s=this,g,K,D,E,F;g=s.referrer?s.referrer:document.referrer;g=g."
-        +"toLowerCase();K=s.split(s.socPlatList,'|');for(i=0;i<K.length;i++){"
-        +"D=s.split(K[i],'>');if(g.indexOf(D[0])!=-1){if(a){s[a]=D[1];}}}");
-        
-        s.socPlatList="facebook.com>Facebook|twitter.com>Twitter|t.co/>Twitter|youtube.com>Youtube|clipmarks.com>Clipmarks|dailymotion.com>Dailymotion|delicious.com>Delicious|digg.com>Digg|diigo.com>Diigo|flickr.com>Flickr|flixster.com>Flixster|fotolog.com>Fotolog|friendfeed.com>FriendFeed|google.com/buzz>Google Buzz|buzz.googleapis.com>Google Buzz|plus.google.com>Google+|hulu.com>Hulu|identi.ca>identi.ca|ilike.com>iLike|intensedebate.com>IntenseDebate|myspace.com>MySpace|newsgator.com>Newsgator|photobucket.com>Photobucket|plurk.com>Plurk|slideshare.net>SlideShare|smugmug.com>SmugMug|stumbleupon.com>StumbleUpon|tumblr.com>Tumblr|vimeo.com>Vimeo|wordpress.com>WordPress|xanga.com>Xanga|metacafe.com>Metacafe|";
-        
-        //append list
-        s.apl=new Function("L","v","d","u","var s=this,m=0;if(!L)L='';if(u){var i,n,a=s.split(L,d);for(i=0;i<a.length;i++){n=a[i];m=m||(u==1?(n==v):(n.toLowerCase()==v.toLowerCase()));}}if(!m)L=L?L+d+v:v;return L");
-        
-        // split v1.5
-        s.split=new Function("l","d","var i,x=0,a=new Array;while(l){i=l.indexOf(d);i=i>-1?i:l.length;a[x++]=l.substring(0,i);l=l.substring(i+d.length);}return a");
-        
-        // ver. 1.0 - s.join(v,p)| v - Array | p - formatting parameters (front,back,delim,wrap)
-        s.join=new Function("v","p","var s=this;var f,b,d,w;if(p){f=p.front?p.front:'';b=p.back?p.back:'';d=p.delim?p.delim:'';w=p.wrap?p.wrap:'';}var str='';for(var x=0;x<v.length;x++){if(typeof(v[x])=='object' )str+=s.join( v[x],p);else str+=w+v[x]+w;if(x<v.length-1)str+=d;}return f+str+b;");
-        
-        
-        /* WARNING: Changing any of the below variables will cause drastic
-        changes to how your visitor data is collected.  Changes should only be
-        made when instructed to do so by your account manager.*/
-        s.visitorNamespace="nci";
-        
-        // Send tagging requests to correct server based on protocol
-        s.trackingServer="nci.122.2o7.net";
-        s.dc="122";
-        
-        /*
-        * Plugin: getPreviousValue_v1.0 - return previous value of designated
-        *   variable (requires split utility)
-        */
-        s.getPreviousValue = new Function("v", "c", "el", ""
-        + "var s=this,t=new Date,i,j,r='';t.setTime(t.getTime()+1800000);if(el"
-        + "){if(s.events){i=s.split(el,',');j=s.split(s.events,',');for(x in i"
-        + "){for(y in j){if(i[x]==j[y]){if(s.c_r(c)) r=s.c_r(c);v?s.c_w(c,v,t)"
-        + ":s.c_w(c,'no value',t);return r}}}}}else{if(s.c_r(c)) r=s.c_r(c);v?"
-        + "s.c_w(c,v,t):s.c_w(c,'no value',t);return r}");
-        
-        /*
-        * Plugin: custom engagement tracking 
-        */
-        s.EvoEngagementPlugin=new Function("", ""
-        +"var engagementObject='NCIEngagement';window[engagementObject]={loggingEnabled:!1,pollingInterval:1e4,scorePerInterval:10,hasScrolled:!1,hasMoused:!1,hasClicked:!1,defaultEngagementScore:0,engagemen"
-        +"tScore:0,minimumEngagementScore:1,cookieName:'engagementTracking',logger:function(e,n){var n=n||'log';this.loggingEnabled&&console[n](engagementObject.toUpperCase()+' LOGGER:',e)},initialize:functi"
-        +"on(e){window[engagementObject].logger('initialize');var n=e;window[engagementObject].startTime=(new Date).getTime(),this.isFocused=document.hasFocus()},doScroll:function(){this.isFocused=document.h"
-        +"asFocus(),this.isFocused&&(window[engagementObject].logger('doScroll'),this.hasScrolled=!0)},doMouse:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doMouse'),this.is"
-        +"Focused&&(this.hasMoused=!0)},doClick:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doClick'),this.isFocused&&(this.hasClicked=!0)},getEngagementScore:function(e){v"
-        +"ar n=e.action,t=e.status,o=e.score,g=t?o+10:o;return this[n]=!1,g},getEngagementStatus:function(e){return this.engagementScore=this.getEngagementScore({action:'hasScrolled',status:this.hasScrolled,"
-        +"score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action:'hasMoused',status:this.hasMoused,score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action"
-        +":'hasClicked',status:this.hasClicked,score:this.engagementScore}),this.status={engagementScore:this.engagementScore},this.status},getAndResetEngagementCookie:function(){var e=this.cookieName,n=NCIA"
-        +"nalytics.cookieRead(e)||'';return NCIAnalytics.cookieWrite(e,'0'),n}},window[engagementObject].initialize(window[engagementObject]);var engagement_timer=setInterval(function(){window[engagementObje"
-        +"ct].getEngagementStatus();var e=window[engagementObject].engagementScore>=window[engagementObject].minimumEngagementScore,n=NCIAnalytics.cookieRead(window[engagementObject].cookieName)||0,t=e?'enga"
-        +"ged':'not engaged';if('engaged'===t){var o=parseInt(n)+window[engagementObject].scorePerInterval;NCIAnalytics.cookieWrite(window[engagementObject].cookieName,o),window[engagementObject].logger('eng"
-        +"agement-score_'+o),window[engagementObject].engagementScore=window[engagementObject].defaultEngagementScore}else window[engagementObject].logger('engagement-score: '+t.toUpperCase())},window[engage"
-        +"mentObject].pollingInterval);attachEvents({element:window,event:'scroll',action:function(){window[engagementObject].doScroll()}}),attachEvents({element:window,event:'mouseover',action:function(){wi"
-        +"ndow[engagementObject].doMouse()}}),attachEvents({element:window,event:'click',action:function(){window[engagementObject].doClick()}});");
-        // s.EvoEngagementPlugin(s, NCIAnalytics);
-        
+/*
+ * Plugin: getTimeParting 3.4
+ */
+s.getTimeParting=new Function("h","z",""
++"var s=this,od;od=new Date('1/1/2000');if(od.getDay()!=6||od.getMont"
++"h()!=0){return'Data Not Available';}else{var H,M,D,U,ds,de,tm,da=['"
++"Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturda"
++"y'],d=new Date();z=z?z:0;z=parseFloat(z);if(s._tpDST){var dso=s._tp"
++"DST[d.getFullYear()].split(/,/);ds=new Date(dso[0]+'/'+d.getFullYea"
++"r());de=new Date(dso[1]+'/'+d.getFullYear());if(h=='n'&&d>ds&&d<de)"
++"{z=z+1;}else if(h=='s'&&(d>de||d<ds)){z=z+1;}}d=d.getTime()+(d.getT"
++"imezoneOffset()*60000);d=new Date(d+(3600000*z));H=d.getHours();M=d"
++".getMinutes();M=(M<10)?'0'+M:M;D=d.getDay();U=' AM';if(H>=12){U=' P"
++"M';H=H-12;}if(H==0){H=12;}D=da[D];tm=H+':'+M+U;return(tm+'|'+D);}");
+
+/*
+* Plugin: getPercentPageViewed v1.x
+* This code has been modified from the original version distributed
+* by Omniture and will not be supported by Omniture in any way
+*/
+s.getPercentPageViewed=new Function("",""
++"var s=this;if(typeof(s.linkType)=='undefined'||s.linkType=='e'){var"
++" v=s.c_r('s_ppv');s.c_w('s_ppv',0);return v;}");
+s.getPPVCalc=new Function("",""
++"var dh=Math.max(Math.max(s.d.body.scrollHeight,s.d.documentElement."
++"scrollHeight),Math.max(s.d.body.offsetHeight,s.d.documentElement.of"
++"fsetHeight),Math.max(s.d.body.clientHeight,s.d.documentElement.clie"
++"ntHeight)),vph=s.d.clientHeight||Math.min(s.d.documentElement.clien"
++"tHeight,s.d.body.clientHeight),st=s.wd.pageYOffset||(s.wd.document."
++"documentElement.scrollTop||s.wd.document.body.scrollTop),vh=st+vph,"
++"pv=Math.round(vh/dh*100),cv=s.c_r('s_ppv'),cpi=cv.indexOf('|'),cpv="
++"'',ps='';if(cpi!=-1){cpv=cv.substring(0,cpi);ps=parseInt(cv.substri"
++"ng(cpi+1));}else{cpv=ps=0;}if(pv<=100){if(pv>parseInt(cpv)){ps=pv-M"
++"ath.round(vph/dh*100);s.c_w('s_ppv',pv+'|'+ps);}}else{s.c_w('s_ppv'"
++",'');}");
+s.getPPVSetup=new Function("",""
++"var s=this;if(typeof(s.wd)=='undefined')s.wd=window;if(s.wd.addEven"
++"tListener){s.wd.addEventListener('load',s.getPPVCalc,false);s.wd.ad"
++"dEventListener('scroll',s.getPPVCalc,false);s.wd.addEventListener('"
++"resize',s.getPPVCalc,false);}else if(s.wd.attachEvent){s.wd.attachE"
++"vent('onload',s.getPPVCalc);s.wd.attachEvent('onscroll',s.getPPVCal"
++"c);s.wd.attachEvent('onresize',s.getPPVCalc);}");
+///// s.getPPVSetup(); // TODO: replace me 
+
+/******************************
+ * Plugin: socialPlatforms v1.0
+ ******************************/
+s.socialPlatforms=new Function("a",""
++"var s=this,g,K,D,E,F;g=s.referrer?s.referrer:document.referrer;g=g."
++"toLowerCase();K=s.split(s.socPlatList,'|');for(i=0;i<K.length;i++){"
++"D=s.split(K[i],'>');if(g.indexOf(D[0])!=-1){if(a){s[a]=D[1];}}}");
+
+s.socPlatList="facebook.com>Facebook|twitter.com>Twitter|t.co/>Twitter|youtube.com>Youtube|clipmarks.com>Clipmarks|dailymotion.com>Dailymotion|delicious.com>Delicious|digg.com>Digg|diigo.com>Diigo|flickr.com>Flickr|flixster.com>Flixster|fotolog.com>Fotolog|friendfeed.com>FriendFeed|google.com/buzz>Google Buzz|buzz.googleapis.com>Google Buzz|plus.google.com>Google+|hulu.com>Hulu|identi.ca>identi.ca|ilike.com>iLike|intensedebate.com>IntenseDebate|myspace.com>MySpace|newsgator.com>Newsgator|photobucket.com>Photobucket|plurk.com>Plurk|slideshare.net>SlideShare|smugmug.com>SmugMug|stumbleupon.com>StumbleUpon|tumblr.com>Tumblr|vimeo.com>Vimeo|wordpress.com>WordPress|xanga.com>Xanga|metacafe.com>Metacafe|";
+
+//append list
+s.apl=new Function("L","v","d","u","var s=this,m=0;if(!L)L='';if(u){var i,n,a=s.split(L,d);for(i=0;i<a.length;i++){n=a[i];m=m||(u==1?(n==v):(n.toLowerCase()==v.toLowerCase()));}}if(!m)L=L?L+d+v:v;return L");
+
+// split v1.5
+s.split=new Function("l","d","var i,x=0,a=new Array;while(l){i=l.indexOf(d);i=i>-1?i:l.length;a[x++]=l.substring(0,i);l=l.substring(i+d.length);}return a");
+
+// ver. 1.0 - s.join(v,p)| v - Array | p - formatting parameters (front,back,delim,wrap)
+s.join=new Function("v","p","var s=this;var f,b,d,w;if(p){f=p.front?p.front:'';b=p.back?p.back:'';d=p.delim?p.delim:'';w=p.wrap?p.wrap:'';}var str='';for(var x=0;x<v.length;x++){if(typeof(v[x])=='object' )str+=s.join( v[x],p);else str+=w+v[x]+w;if(x<v.length-1)str+=d;}return f+str+b;");
+
+
+/* WARNING: Changing any of the below variables will cause drastic
+changes to how your visitor data is collected.  Changes should only be
+made when instructed to do so by your account manager.*/
+s.visitorNamespace="nci";
+
+// Send tagging requests to correct server based on protocol
+s.trackingServer="nci.122.2o7.net";
+s.dc="122";
+
+/*
+* Plugin: getPreviousValue_v1.0 - return previous value of designated
+*   variable (requires split utility)
+*/
+s.getPreviousValue = new Function("v", "c", "el", ""
++ "var s=this,t=new Date,i,j,r='';t.setTime(t.getTime()+1800000);if(el"
++ "){if(s.events){i=s.split(el,',');j=s.split(s.events,',');for(x in i"
++ "){for(y in j){if(i[x]==j[y]){if(s.c_r(c)) r=s.c_r(c);v?s.c_w(c,v,t)"
++ ":s.c_w(c,'no value',t);return r}}}}}else{if(s.c_r(c)) r=s.c_r(c);v?"
++ "s.c_w(c,v,t):s.c_w(c,'no value',t);return r}");
+
+/*
+* Plugin: custom engagement tracking 
+*/
+s.EvoEngagementPlugin=new Function("", ""
++"var s=this,engagementObject='NCIEngagement';window[engagementObject]={loggingEnabled:!1,pollingInterval:1e4,scorePerInterval:10,hasScrolled:!1,hasMoused:!1,hasClicked:!1,defaultEngagementScore:0,engagemen"
++"tScore:0,minimumEngagementScore:1,cookieName:'engagementTracking',logger:function(e,n){var n=n||'log';this.loggingEnabled&&console[n](engagementObject.toUpperCase()+' LOGGER:',e)},initialize:functi"
++"on(e){window[engagementObject].logger('initialize');var n=e;window[engagementObject].startTime=(new Date).getTime(),this.isFocused=document.hasFocus()},doScroll:function(){this.isFocused=document.h"
++"asFocus(),this.isFocused&&(window[engagementObject].logger('doScroll'),this.hasScrolled=!0)},doMouse:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doMouse'),this.is"
++"Focused&&(this.hasMoused=!0)},doClick:function(){this.isFocused=document.hasFocus(),window[engagementObject].logger('doClick'),this.isFocused&&(this.hasClicked=!0)},getEngagementScore:function(e){v"
++"ar n=e.action,t=e.status,o=e.score,g=t?o+10:o;return this[n]=!1,g},getEngagementStatus:function(e){return this.engagementScore=this.getEngagementScore({action:'hasScrolled',status:this.hasScrolled,"
++"score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action:'hasMoused',status:this.hasMoused,score:this.engagementScore}),this.engagementScore=this.getEngagementScore({action"
++":'hasClicked',status:this.hasClicked,score:this.engagementScore}),this.status={engagementScore:this.engagementScore},this.status},getAndResetEngagementCookie:function(){var e=this.cookieName,n=NCIA"
++"nalytics.cookieRead(e)||'';return NCIAnalytics.cookieWrite(e,'0'),n}},window[engagementObject].initialize(window[engagementObject]);var engagement_timer=setInterval(function(){window[engagementObje"
++"ct].getEngagementStatus();var e=window[engagementObject].engagementScore>=window[engagementObject].minimumEngagementScore,n=NCIAnalytics.cookieRead(window[engagementObject].cookieName)||0,t=e?'enga"
++"ged':'not engaged';if('engaged'===t){var o=parseInt(n)+window[engagementObject].scorePerInterval;NCIAnalytics.cookieWrite(window[engagementObject].cookieName,o),window[engagementObject].logger('eng"
++"agement-score_'+o),window[engagementObject].engagementScore=window[engagementObject].defaultEngagementScore}else window[engagementObject].logger('engagement-score: '+t.toUpperCase())},window[engage"
++"mentObject].pollingInterval);attachEvents({element:window,event:'scroll',action:function(){window[engagementObject].doScroll()}}),attachEvents({element:window,event:'mouseover',action:function(){wi"
++"ndow[engagementObject].doMouse()}}),attachEvents({element:window,event:'click',action:function(){window[engagementObject].doClick()}});");
+
+///// s.EvoEngagementPlugin(); // TODO: replace me 
+
         /*
          AppMeasurement_Module_Media 
          This replaces the Integrate module from s_code
          https://marketing.adobe.com/resources/help/en_US/sc/implement/appmeasure_mjs_migrate.html
         */
-        function AppMeasurement_Module_Integrate(l){var c=this;c.s=l;var e=window;e.s_c_in||(e.s_c_il=[],e.s_c_in=0);c._il=e.s_c_il;c._in=e.s_c_in;c._il[c._in]=c;e.s_c_in++;c._c="s_m";c.list=[];c.add=function(d,b){var a;b||(b="s_Integrate_"+d);e[b]||(e[b]={});a=c[d]=e[b];a.a=d;a.e=c;a._c=0;a._d=0;void 0==a.disable&&(a.disable=0);a.get=function(b,d){var f=document,h=f.getElementsByTagName("HEAD"),k;if(!a.disable&&(d||(v="s_"+c._in+"_Integrate_"+a.a+"_get_"+a._c),a._c++,a.VAR=v,a.CALLBACK="s_c_il["+c._in+"]."+
-        a.a+".callback",a.delay(),h=h&&0<h.length?h[0]:f.body))try{k=f.createElement("SCRIPT"),k.type="text/javascript",k.setAttribute("async","async"),k.src=c.c(a,b),0>b.indexOf("[CALLBACK]")&&(k.onload=k.onreadystatechange=function(){a.callback(e[v])}),h.firstChild?h.insertBefore(k,h.firstChild):h.appendChild(k)}catch(l){}};a.callback=function(b){var c;if(b)for(c in b)Object.prototype[c]||(a[c]=b[c]);a.ready()};a.beacon=function(b){var d="s_i_"+c._in+"_Integrate_"+a.a+"_"+a._c;a.disable||(a._c++,d=e[d]=
-        new Image,d.src=c.c(a,b))};a.script=function(b){a.get(b,1)};a.delay=function(){a._d++};a.ready=function(){a._d--;a.disable||l.delayReady()};c.list.push(d)};c._g=function(d){var b,a=(d?"use":"set")+"Vars";for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&b[a])try{b[a](l,b)}catch(e){}};c._t=function(){c._g(1)};c._d=function(){var d,b;for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&0<b._d)return 1;return 0};c.c=function(c,b){var a,e,g,f;"http"!=b.toLowerCase().substring(0,4)&&
-        (b="http://"+b);l.ssl&&(b=l.replace(b,"http:","https:"));c.RAND=Math.floor(1E13*Math.random());for(a=0;0<=a;)a=b.indexOf("[",a),0<=a&&(e=b.indexOf("]",a),e>a&&(g=b.substring(a+1,e),2<g.length&&"s."==g.substring(0,2)?(f=l[g.substring(2)])||(f=""):(f=""+c[g],f!=c[g]&&parseFloat(f)!=c[g]&&(g=0)),g&&(b=b.substring(0,a)+encodeURIComponent(f)+b.substring(e+1)),a=e));return b}}
-        
-        console.log('=== END AppMeasurement.custom v2 ===');
-        
-    }
+       function AppMeasurement_Module_Integrate(l){var c=this;c.s=l;var e=window;e.s_c_in||(e.s_c_il=[],e.s_c_in=0);c._il=e.s_c_il;c._in=e.s_c_in;c._il[c._in]=c;e.s_c_in++;c._c="s_m";c.list=[];c.add=function(d,b){var a;b||(b="s_Integrate_"+d);e[b]||(e[b]={});a=c[d]=e[b];a.a=d;a.e=c;a._c=0;a._d=0;void 0==a.disable&&(a.disable=0);a.get=function(b,d){var f=document,h=f.getElementsByTagName("HEAD"),k;if(!a.disable&&(d||(v="s_"+c._in+"_Integrate_"+a.a+"_get_"+a._c),a._c++,a.VAR=v,a.CALLBACK="s_c_il["+c._in+"]."+
+       a.a+".callback",a.delay(),h=h&&0<h.length?h[0]:f.body))try{k=f.createElement("SCRIPT"),k.type="text/javascript",k.setAttribute("async","async"),k.src=c.c(a,b),0>b.indexOf("[CALLBACK]")&&(k.onload=k.onreadystatechange=function(){a.callback(e[v])}),h.firstChild?h.insertBefore(k,h.firstChild):h.appendChild(k)}catch(l){}};a.callback=function(b){var c;if(b)for(c in b)Object.prototype[c]||(a[c]=b[c]);a.ready()};a.beacon=function(b){var d="s_i_"+c._in+"_Integrate_"+a.a+"_"+a._c;a.disable||(a._c++,d=e[d]=
+       new Image,d.src=c.c(a,b))};a.script=function(b){a.get(b,1)};a.delay=function(){a._d++};a.ready=function(){a._d--;a.disable||l.delayReady()};c.list.push(d)};c._g=function(d){var b,a=(d?"use":"set")+"Vars";for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&b[a])try{b[a](l,b)}catch(e){}};c._t=function(){c._g(1)};c._d=function(){var d,b;for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&0<b._d)return 1;return 0};c.c=function(c,b){var a,e,g,f;"http"!=b.toLowerCase().substring(0,4)&&
+       (b="http://"+b);l.ssl&&(b=l.replace(b,"http:","https:"));c.RAND=Math.floor(1E13*Math.random());for(a=0;0<=a;)a=b.indexOf("[",a),0<=a&&(e=b.indexOf("]",a),e>a&&(g=b.substring(a+1,e),2<g.length&&"s."==g.substring(0,2)?(f=l[g.substring(2)])||(f=""):(f=""+c[g],f!=c[g]&&parseFloat(f)!=c[g]&&(g=0)),g&&(b=b.substring(0,a)+encodeURIComponent(f)+b.substring(e+1)),a=e));return b}}
+       
+       console.log('=== END AppMeasurement.custom v2 ===');
+       
+   }
 
 
 
