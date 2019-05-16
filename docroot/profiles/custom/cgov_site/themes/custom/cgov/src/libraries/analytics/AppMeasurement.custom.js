@@ -3,24 +3,21 @@ import { attachEvents } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
-    // Send tagging requests to correct server based on protocol
+    /** Send tagging requests to correct server and set namespace. */ 
     trackingServer: 'nci.122.2o7.net',
     visitorNamespace: 'nci',
 
-    // Set to 'true' to gather ClickMap data.
-    trackInineStats: true,
-
-    // Paths that are _not_ treated as exit links.
+    /** 
+     * Set configuration variable values for AppMeasurement. 
+     * See https://marketing.adobe.com/resources/help/en_US/sc/implement/configuration-variables.html
+     */
     linkInternalFilters: 'javascript:,cancer.gov,localhost,www.devbox',
-
-    // Variables sent with custom, event, or download links.
-    linkTrackVars: 'none',
     linkTrackEvents: 'none',
-
-    // Set to 'true' to allow manual link tracking.
+    linkTrackVars: 'none',
+    trackInineStats: true,
     useForcedLinkTracking: true,
 
-    // Daylight savings time parting configuration.
+    /** Daylight savings time parting configuration. */
     tpDst: {
         2019:'3/10,11/3',
         2020:'3/8,11/1',
@@ -32,6 +29,37 @@ var AppMeasurementCustom = {
         2026:'3/8,11/1',
         2027:'3/14,11/7',
         2028:'3/12,11/5'
+    },
+
+    /**
+     * Get the page name (hostname + path).
+     */
+    getCanonicalLink: function() {
+        let canonicalLink = document.querySelector("link[rel='canonical']").href;
+
+        // Strip out protocol and query params if any. 
+        // TODO: replace this.
+        if(canonicalLink)
+        {
+            // Remove http
+            if(canonicalLink.indexOf("http://") >= 0)
+                canonicalLink = canonicalLink.substring(canonicalLink.indexOf("http://")+7);    
+            // Remove https
+            if(canonicalLink.indexOf("https://") >= 0)
+                canonicalLink = canonicalLink.substring(canonicalLink.indexOf("https://")+8);
+            // Remove query parameters
+            if(canonicalLink.indexOf("?") > 0)
+               canonicalLink = canonicalLink.substring(0, canonicalLink.indexOf("?"));
+        }
+        return canonicalLink.toLowerCase();
+    },
+
+    /**
+     * Get the page name (hostname + path).
+     */
+    getLocalPageName: function() {
+        let localPageName = window.location.hostname + window.location.pathname;
+        return localPageName.toLowerCase();
     },
 
     /**
@@ -47,69 +75,39 @@ var AppMeasurementCustom = {
          * s.account and s_account (report suites) should be defined before this function is called.
          * If not, set a default value of 'ncidevelopment'.
          */
-        if(!s.account) {
-            s.account = (s_account) ? s_account : 'ncidevelopment';
+        if (!s.account) {
+            s.account = s_account || 'ncidevelopment';
         }
+        
+        // For debugging only 
+        s.account = '[debug-load-events],' + s.account;
 
-        /*
-         * Configure tracking server and namespace.
-         */
+        /* Configure tracking server and namespace. */
         s.trackingServer = s.trackingServer || AppMeasurementCustom.trackingServer;
         s.visitorNamespace = AppMeasurementCustom.visitorNamespace;
 
-        /* 
-         * Configure link tracking settings.
-         */
+        /* Configure link tracking settings. */
         s.trackInlineStats = AppMeasurementCustom.trackInlineStats;
         s.linkInternalFilters = AppMeasurementCustom.linkInternalFilters;
         s.linkTrackVars = AppMeasurementCustom.linkTrackVars;
         s.linkTrackEvents = AppMeasurementCustom.linkTrackEvents;
         s.useForcedLinkTracking = AppMeasurementCustom.useForcedLinkTracking;
+                
+        /* Get the page name to be used in tracking variables. */
+        let canonicalPageName = AppMeasurementCustom.getCanonicalLink();
+        let localPageName = (canonicalPageName.length > 0) ? canonicalPageName : AppMeasurementCustom.getLocalPageName();
+
+
+
+
+
+
+
         
-        /*
-         * Set time parting configuration - US.
-         */
-        s._tpDST = AppMeasurementCustom.tpDst;
-        
+
         //set the font size variable
         s.prop42="Normal";
         
-        // Domain override
-        var localPageName = location.hostname.toLowerCase() + location.pathname.toLowerCase();
-        
-        if (typeof pageNameOverride!="undefined")
-            localPageName = pageNameOverride;
-        
-        if (typeof linkInternalFiltersOverride!="undefined")
-            s.linkInternalFilters=linkInternalFiltersOverride;  
-            
-        var canonicalLink = null;
-        var links = document.getElementsByTagName("link");
-        for (var i = 0; i < links.length; i++) {
-            if( links[i].getAttribute("rel") == "canonical")
-            {
-                canonicalLink = links[i].href;
-                break;
-            }
-        }
-        if(canonicalLink)
-        {
-            canonicalLink = canonicalLink.toLowerCase();
-        
-            // Remove http
-            if(canonicalLink.indexOf("http://") >= 0)
-              canonicalLink = canonicalLink.substring(canonicalLink.indexOf("http://")+7);
-        
-            // Remove https
-            if(canonicalLink.indexOf("https://") >= 0)
-              canonicalLink = canonicalLink.substring(canonicalLink.indexOf("https://")+8);
-        
-            // Remove query parameters
-            if(canonicalLink.indexOf("?") > 0)
-              canonicalLink = canonicalLink.substring(0, canonicalLink.indexOf("?"));
-        
-            localPageName = canonicalLink;
-        }
         
         // Determine if patient or healthprofessional version
         // set prop7 and eVar7 to version and add value to 
@@ -193,11 +191,30 @@ var AppMeasurementCustom = {
         var now = new Date();
         s.prop26 = now.getFullYear() + "|" + (now.getMonth() + 1) + "|" + now.getDate() + "|" + now.getHours();
         
-        /* Plugin Config */
-        s.usePlugins=true
-        
-        /* Add calls to plugins here */
+        /** Plugin config. */
+        s.usePlugins = true;
+
+        /**
+         * Fire off plugins. Add calls to plugins here.
+         * 
+         * @param {*} s
+         *   The 's' object.
+         */
         function s_doPlugins(s) {
+
+            // Set prop29 via getTimeParting() plugin.
+            s.prop29 = s.getTimeParting('n','-5');
+
+
+
+
+
+
+
+
+
+
+
         
             /* Set prop15 to either 'protoclsearchid' or 'PrintID' (depends on the page being loaded) */
             if(s.prop15 == null && s.eVar15 == null) 
@@ -247,25 +264,7 @@ var AppMeasurementCustom = {
             s.eVar35 = sCampaign;
             s.campaign = s.getValOnce(sCampaign,'s_campaign',30);
         
-            /* Force Custom Variables to Lower Case */
-            //s.prop6 = makeLowerCase(s.prop6);
-            s.prop7 = makeLowerCase(s.prop7);
-            s.eVar7= makeLowerCase(s.eVar7);
-            s.prop14 = makeLowerCase(s.prop14);
-            s.eVar14= makeLowerCase(s.eVar14);
-            s.prop17 = makeLowerCase(s.prop17);
-            s.eVar17= makeLowerCase(s.eVar17);
-            s.prop18 = makeLowerCase(s.prop18);
-            s.eVar18= makeLowerCase(s.eVar18);
-            s.prop19 = makeLowerCase(s.prop19);
-            s.eVar19 = makeLowerCase(s.eVar19);
-            s.prop20 = makeLowerCase(s.prop20);
-            s.eVar20 = makeLowerCase(s.eVar20);
-            s.prop21 = makeLowerCase(s.prop21);
-            s.eVar21 = makeLowerCase(s.eVar21);
-            s.prop22 = makeLowerCase(s.prop22);
-            s.eVar23 = makeLowerCase(s.eVar23);
-            s.eVar24 = makeLowerCase(s.eVar24);
+            
         //////////
         // SOCIAL
         //////////
@@ -276,9 +275,6 @@ var AppMeasurementCustom = {
             /* Previous Page */
             s.prop61 = s.getPreviousValue(s.pageName, 'gpv_pn', "");
         
-            // Set the variables for the time parting ('n' for northern hemisphere, '-5" for EST) and set to prop29 for time parting
-            var tp = s.getTimeParting('n','-5');
-            s.prop29 = tp;
         
             // Set prop64 for percent page viewed - if 0, then set to 'zero'
             s.getPercentPageViewed();
@@ -288,7 +284,7 @@ var AppMeasurementCustom = {
             }
             
             // Set prop65 to get the initial load time of the page (for use in the page load speed plugin)
-            var loadTime = s_getLoadTime();
+            var loadTime = s.getLoadTime();
             s.prop65 = loadTime;
         
             // Start building event data from existing values on the "s" object
@@ -303,7 +299,7 @@ var AppMeasurementCustom = {
         
             // Add the standard load events
             eventsArr.push('event1');
-            eventsArr.push('event47=' + s_getLoadTime());
+            eventsArr.push('event47=' + s.getLoadTime());
         
             // Add engagement tracking (event92)
             if(s.mainCGovIndex >= 0) {
@@ -346,13 +342,6 @@ var AppMeasurementCustom = {
                 return addValue;
         }
         
-        function makeLowerCase(value)
-        {
-            if(value == null || typeof(value) == 'undefined' )
-                return value;
-            else     
-                return value.toLowerCase();
-        }
         
         function caseInsensitiveGetQueryParm(qp)
         {
@@ -531,21 +520,15 @@ var AppMeasurementCustom = {
         
         /*
          * Copyright 2011-2013 Adobe Systems, Inc.
-         * s_getLoadTime v1.36 - Get page load time in units of 1/10 seconds
+         * s.getLoadTime v1.36 - Get page load time in units of 1/10 seconds
          */
-        function s_getLoadTime()
-        {
-            if(!window.s_loadT)
-            {
-                var s_loadT = '';
-                var b=new Date().getTime(),o=window.performance?performance.timing:0,a=o?o.requestStart:window.inHeadTS||0;s_loadT=a?Math.round((b-a)/100):''
-            }
-            return s_loadT
-        }
+        s.getLoadTime=function(){if(!window.s_loadT){var e="",n=(new Date).getTime(),i=window.performance?performance.timing:0,
+        r=i?i.requestStart:window.inHeadTS||0;e=r?Math.round((n-r)/100):""}return e};
         
         /*
         * Plugin: getTimeParting 3.4
         */
+        s._tpDST = AppMeasurementCustom.tpDst;
         s.getTimeParting=new Function("h","z",""
         +"var s=this,od;od=new Date('1/1/2000');if(od.getDay()!=6||od.getMont"
         +"h()!=0){return'Data Not Available';}else{var H,M,D,U,ds,de,tm,da=['"
@@ -644,10 +627,8 @@ var AppMeasurementCustom = {
         new Image,d.src=c.c(a,b))};a.script=function(b){a.get(b,1)};a.delay=function(){a._d++};a.ready=function(){a._d--;a.disable||l.delayReady()};c.list.push(d)};c._g=function(d){var b,a=(d?"use":"set")+"Vars";for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&b[a])try{b[a](l,b)}catch(e){}};c._t=function(){c._g(1)};c._d=function(){var d,b;for(d=0;d<c.list.length;d++)if((b=c[c.list[d]])&&!b.disable&&0<b._d)return 1;return 0};c.c=function(c,b){var a,e,g,f;"http"!=b.toLowerCase().substring(0,4)&&
         (b="http://"+b);l.ssl&&(b=l.replace(b,"http:","https:"));c.RAND=Math.floor(1E13*Math.random());for(a=0;0<=a;)a=b.indexOf("[",a),0<=a&&(e=b.indexOf("]",a),e>a&&(g=b.substring(a+1,e),2<g.length&&"s."==g.substring(0,2)?(f=l[g.substring(2)])||(f=""):(f=""+c[g],f!=c[g]&&parseFloat(f)!=c[g]&&(g=0)),g&&(b=b.substring(0,a)+encodeURIComponent(f)+b.substring(e+1)),a=e));return b}}
             
-       console.log('=== END debugging AppMeasurementCustom ===');
-       
+        console.log('=== END debugging AppMeasurementCustom ===');       
    }
-
 
 };
 
