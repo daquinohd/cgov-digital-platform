@@ -73,23 +73,10 @@ var AppMeasurementCustom = {
         s.useForcedLinkTracking = AppMeasurementCustom.useForcedLinkTracking;
                 
         /* Get the page name to be used in tracking variables. */
-        let localPageName = AppMeasurementCustom.getLocalPageName();
+        s.localPageName = AppMeasurementCustom.getLocalPageName();
         let addToLocalPageName = '';
 
-        /**
-         * Set prop8 and eVar2 to "english" unless "espanol" is in the url,
-         * or "lang=spanish" or "language=spanish" query parameters exist,
-         * or the html "lang" attribute is set to "es".
-         */
-        let language = 'english';
-        if (localPageName.indexOf('espanol') >= 0 ||
-            document.querySelector('[lang="es"]') ||
-            s.Util.getQueryParam('lang') == 'spanish' ||
-            s.Util.getQueryParam('language') == 'spanish') {
-                language = 'spanish';
-        }
-        s.prop8 = language;
-        s.eVar2 = s.prop8;
+
 
 
         /** Get the audience from query param or DOM. */
@@ -107,9 +94,9 @@ var AppMeasurementCustom = {
                 audience = 'healthprofessional';
                 break;
             default:
-                if (localPageName.indexOf('patient') > -1)
+                if (s.localPageName.indexOf('patient') > -1)
                     audience = 'patient';
-                if (localPageName.indexOf('healthprofessional') > -1)
+                if (s.localPageName.indexOf('healthprofessional') > -1)
                     audience = 'healthprofessional';
                 break;
         }
@@ -124,10 +111,10 @@ var AppMeasurementCustom = {
         
         /** If dictionary, define addToLocalPageName. */
         // TODO: clean up 'CommaList()' calls.
-        if (localPageName.indexOf("dictionaries") > -1 || localPageName.indexOf("diccionario") > -1) {
+        if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
             if (s.Util.getQueryParam('expand'))
                 addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
-            else if (localPageName.indexOf("/def/") >= 0 )
+            else if (s.localPageName.indexOf("/def/") >= 0 )
                 addToLocalPageName = CommaList(addToLocalPageName,'Definition');
         }
 
@@ -137,17 +124,17 @@ var AppMeasurementCustom = {
             addToLocalPageName = CommaList(addToLocalPageName, 'Page ' + pageNum.toString());
         
         /**
-         * Concatenate localPageName with any additional information.
+         * Concatenate s.localPageName with any additional information.
          */
         if(addToLocalPageName.length > 0)
-            localPageName += " - " + addToLocalPageName;
+            s.localPageName += " - " + addToLocalPageName;
 
         /**
          * Set pageName and eVar1 to localPageName.
          */
-        s.eVar1 = localPageName;
-        s.pageName = localPageName;
-        s.mainCGovIndex = localPageName.indexOf('cancer.gov');
+        s.eVar1 = s.localPageName;
+        s.pageName = s.localPageName;
+        s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
 
         /**
          * Set prop1 and prop2 if necessary.
@@ -186,6 +173,11 @@ var AppMeasurementCustom = {
          *   The 's' object.
          */
         function s_doPlugins(s) {
+
+            // Set language value.
+            s.prop8 = s.getNciPageLang();
+            s.eVar2 = s.prop8;
+
 
             // Set prop29 via getTimeParting() plugin.
             s.prop29 = s.getTimeParting('n','-5');
@@ -448,7 +440,26 @@ var AppMeasurementCustom = {
         
         }
         s.prop10 = setProp10();
-            
+        
+        /************************* FUNCTIONS SECTION ************************/
+        /* Custom Cgov functions go here.                                   */
+        /********************************************************************/        
+
+        /**
+         * Get the language code from pagename, DOM, or URL param.
+         */
+         s.getNciPageLang = function() {
+            let s = this;
+            let language = 'english';
+            if (s.localPageName.indexOf('espanol') >= 0 ||
+                document.querySelector('[lang="es"]') ||
+                s.Util.getQueryParam('lang') == 'spanish' ||
+                s.Util.getQueryParam('language') == 'spanish') {
+                    language = 'spanish';
+            }
+            return language;
+        }
+
         
         /************************** PLUGINS SECTION *************************/
         /* You may insert any plugins you wish to use here.                 */
