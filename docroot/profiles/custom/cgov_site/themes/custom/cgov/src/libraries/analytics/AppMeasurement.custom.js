@@ -49,6 +49,18 @@ var AppMeasurementCustom = {
     setScodeProperties: function(s) {
 
         console.log('=== BEGIN debugging AppMeasurementCustom ===');
+        /** 
+         * TODO: Add these values to 'localpagename' array:
+            audience
+            page number
+            dictionary values:
+                if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
+                    if (s.Util.getQueryParam('expand'))
+                        addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
+                    else if (s.localPageName.indexOf("/def/") >= 0 )
+                        addToLocalPageName = CommaList(addToLocalPageName,'Definition');
+         */
+
         /*
          * Set the report suite value(s).
          * s.account and s_account (report suites) should be defined before this function is called.
@@ -74,41 +86,11 @@ var AppMeasurementCustom = {
                 
         /* Get the page name to be used in tracking variables. */
         s.localPageName = AppMeasurementCustom.getLocalPageName();
+        let pageNameMore = [];
         let addToLocalPageName = '';
 
 
 
-
-        /** Get the audience from query param or DOM. */
-        let audience = s.Util.getQueryParam('version');
-        switch (audience.toLowerCase())
-        {
-            case 'patient':
-            case 'patients':
-            case '0':
-                audience = 'patient';
-                break;
-            case 'healthprofessional':
-            case 'healthprofessionals':
-            case '1':
-                audience = 'healthprofessional';
-                break;
-            default:
-                if (s.localPageName.indexOf('patient') > -1)
-                    audience = 'patient';
-                if (s.localPageName.indexOf('healthprofessional') > -1)
-                    audience = 'healthprofessional';
-                break;
-        }
-        // TODO: get audience from meta tag & verify if query params are still used.
-        /** Append to local page name & set variables. */
-        if (audience) {
-            addToLocalPageName = CommaList(addToLocalPageName, audience);
-            s.prop7 = audience;
-            s.eVar7 = s.prop7;    
-        }
-
-        
         /** If dictionary, define addToLocalPageName. */
         // TODO: clean up 'CommaList()' calls.
         if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
@@ -174,10 +156,13 @@ var AppMeasurementCustom = {
          */
         function s_doPlugins(s) {
 
-            // Set language value.
+            // Set language tracking values.
             s.prop8 = s.getNciPageLang();
             s.eVar2 = s.prop8;
 
+            // Set audience tracking values.
+            s.prop7 = s.getNciAudience() || null;
+            s.eVar7 = s.prop7;
 
             // Set prop29 via getTimeParting() plugin.
             s.prop29 = s.getTimeParting('n','-5');
@@ -460,7 +445,35 @@ var AppMeasurementCustom = {
             return language;
         }
 
-        
+        /**
+         * Get the audience from query param or DOM.
+         */
+        s.getNciAudience = function() {
+            let s = this;
+            let audience = s.Util.getQueryParam('version');
+            switch (audience.toLowerCase())
+            {
+                case 'patient':
+                case 'patients':
+                case '0':
+                    audience = 'patient';
+                    break;
+                case 'healthprofessional':
+                case 'healthprofessionals':
+                case '1':
+                    audience = 'healthprofessional';
+                    break;
+                default:
+                    if (s.localPageName.indexOf('patient') > -1)
+                        audience = 'patient';
+                    if (s.localPageName.indexOf('healthprofessional') > -1)
+                        audience = 'healthprofessional';
+                    break;
+            }
+            // TODO: get audience from meta tag & verify if query params are still used.
+            return audience;
+        }
+
         /************************** PLUGINS SECTION *************************/
         /* You may insert any plugins you wish to use here.                 */
         /********************************************************************/
