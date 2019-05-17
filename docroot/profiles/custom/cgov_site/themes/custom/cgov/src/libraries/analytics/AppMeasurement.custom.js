@@ -113,6 +113,7 @@ var AppMeasurementCustom = {
         s.prop8 = language;
         s.eVar2 = s.prop8;
 
+
         /** Get the audience from query param or DOM. */
         let audience = s.Util.getQueryParam('version');
         switch (audience.toLowerCase())
@@ -134,9 +135,7 @@ var AppMeasurementCustom = {
                     audience = 'healthprofessional';
                 break;
         }
-
         // TODO: get audience from meta tag & verify if query params are still used.
-
         /** Append to local page name & set variables. */
         if (audience) {
             addToLocalPageName = CommaList(addToLocalPageName, audience);
@@ -145,9 +144,43 @@ var AppMeasurementCustom = {
         }
 
         
+        /** If dictionary, define addToLocalPageName. */
+        // TODO: clean up 'CommaList()' calls.
+        if (localPageName.indexOf("dictionaries") > -1 || localPageName.indexOf("diccionario") > -1) {
+            if (s.Util.getQueryParam('expand'))
+                addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
+            else if (localPageName.indexOf("/def/") >= 0 )
+                addToLocalPageName = CommaList(addToLocalPageName,'Definition');
+        }
 
+        /** Retain page query parameter value. */
+        var pageNum = s.Util.getQueryParam('page');
+        if (pageNum)
+            addToLocalPageName = CommaList(addToLocalPageName, 'Page ' + pageNum.toString());
+        
+        /**
+         * Concatenate localPageName with any additional information.
+         */
+        if(addToLocalPageName.length > 0)
+            localPageName += " - " + addToLocalPageName;
 
+        /**
+         * Set pageName and eVar1 to localPageName.
+         */
+        s.eVar1 = localPageName;
+        s.pageName = localPageName;
+        s.mainCGovIndex = localPageName.indexOf('cancer.gov');
 
+        /**
+         * Set prop1 and prop2 if necessary.
+         */
+        let fullURL = document.URL;
+        if (fullURL.length > 100) {
+            s.prop1 = fullURL.substring(0,100);
+            s.prop2 = fullURL.substring(100);
+        } else {
+            s.prop1 = fullURL;
+        }
 
 
 
@@ -160,38 +193,6 @@ var AppMeasurementCustom = {
 
         // Set the font size variable. 
         s.prop42 = 'normal';
-
-
-        // if dictionary, define addToLocalPageName
-        if(localPageName.indexOf("dictionaries") > 0 || 
-           localPageName.indexOf("diccionario")> 0)
-        {
-            if (s.Util.getQueryParam('expand'))
-                addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
-            else if (localPageName.indexOf("/def/") >= 0 )
-                addToLocalPageName = CommaList(addToLocalPageName,'Definition');
-        }
-        
-        // retain page query parameter value
-        var pageNum = s.Util.getQueryParam('page');
-        if (pageNum)
-            addToLocalPageName = CommaList(addToLocalPageName,"Page " + pageNum.toString());
-        
-        // add any additional information to localPageName and
-        // set pageName and eVar1 to localPageName
-        if(addToLocalPageName.length > 0)
-            localPageName += " - " + addToLocalPageName;
-        s.pageName=s.eVar1=localPageName;
-        s.mainCGovIndex = s.pageName.indexOf('cancer.gov');
-        
-        var fullURL = document.URL;
-        if(fullURL.length > 100)
-        {
-            s.prop1 = fullURL.substring(0,100);
-            s.prop2 = fullURL.substring(100);
-        }
-        else
-            s.prop1 = fullURL;
         
         // Set prop26 to Time Stamp format: <year>|<month>|<day>|<hour>
         var now = new Date();
