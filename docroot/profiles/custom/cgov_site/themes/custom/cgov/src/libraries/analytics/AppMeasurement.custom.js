@@ -34,31 +34,10 @@ var AppMeasurementCustom = {
     /**
      * Get the page name (hostname + path).
      */
-    getCanonicalLink: function() {
-        let canonicalLink = document.querySelector("link[rel='canonical']").href;
-
-        // Strip out protocol and query params if any. 
-        // TODO: replace this.
-        if(canonicalLink)
-        {
-            // Remove http
-            if(canonicalLink.indexOf("http://") >= 0)
-                canonicalLink = canonicalLink.substring(canonicalLink.indexOf("http://")+7);    
-            // Remove https
-            if(canonicalLink.indexOf("https://") >= 0)
-                canonicalLink = canonicalLink.substring(canonicalLink.indexOf("https://")+8);
-            // Remove query parameters
-            if(canonicalLink.indexOf("?") > 0)
-               canonicalLink = canonicalLink.substring(0, canonicalLink.indexOf("?"));
-        }
-        return canonicalLink.toLowerCase();
-    },
-
-    /**
-     * Get the page name (hostname + path).
-     */
     getLocalPageName: function() {
-        let localPageName = window.location.hostname + window.location.pathname;
+        let canonicalLink = document.querySelector("link[rel='canonical']").href;
+        let localPageName = canonicalLink || (window.location.hostname + window.location.pathname);
+        localPageName = localPageName.replace(/(^\w+:|^)\/\//, '');
         return localPageName.toLowerCase();
     },
 
@@ -94,8 +73,7 @@ var AppMeasurementCustom = {
         s.useForcedLinkTracking = AppMeasurementCustom.useForcedLinkTracking;
                 
         /* Get the page name to be used in tracking variables. */
-        let canonicalPageName = AppMeasurementCustom.getCanonicalLink();
-        let localPageName = (canonicalPageName.length > 0) ? canonicalPageName : AppMeasurementCustom.getLocalPageName();
+        let localPageName = AppMeasurementCustom.getLocalPageName();
         let addToLocalPageName = '';
 
         /**
