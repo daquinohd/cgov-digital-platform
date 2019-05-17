@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: file
   data_parser_plugin: xml
-  urls: migration://migrations/private-files-mig/article_en.xml
+  urls: migration://article_en.xml
   item_selector: /rows/row
   fields:
         -
@@ -93,11 +93,6 @@ source:
          name: term_id
          label: term_id
          selector: '@term_id'
-
-        -
-         name: para_id
-         label: para_id
-         selector: para_id
 
         -
          name: field_pretty_url
@@ -192,20 +187,20 @@ process:
     no_stub: true
 
 
-## Holding off on images until the image migration is complete
 
 
-#  field_image_article:
-#    plugin: migration_lookup
-#    migration: cgovimage_migration
-#    source: field_image_article
-#    no_stub: true
-#
-#  field_image_promotional:
-#    plugin: migration_lookup
-#    migration: cgovimage_migration
-#    source: field_image_promotional
-#    no_stub: true
+
+  field_image_article:
+    plugin: migration_lookup
+    migration: cgovimage_migration
+    source: field_image_article
+    no_stub: true
+
+  field_image_promotional:
+    plugin: migration_lookup
+    migration: cgovimage_migration
+    source: field_image_promotional
+    no_stub: true
 
 
 

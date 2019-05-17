@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: file
   data_parser_plugin: xml
-  urls: migration://migrations/private-files-mig/article_es.xml
+  urls: migration://article_es.xml
   item_selector: /rows/row
   fields:
         -
@@ -201,19 +201,19 @@ process:
     source: term_id
     no_stub: true
 
-# Holding off until the image migration
 
-#  field_image_article:
-#    plugin: migration_lookup
-#    migration: cgovimage_migration
-#    source: field_image_article
-#    no_stub: true
-#
-#  field_image_promotional:
-#    plugin: migration_lookup
-#    migration: cgovimage_migration
-#    source: field_image_promotional
-#    no_stub: true
+
+  field_image_article:
+    plugin: migration_lookup
+    migration: cgovimage_migration
+    source: field_image_article
+    no_stub: true
+
+  field_image_promotional:
+    plugin: migration_lookup
+    migration: cgovimage_migration
+    source: field_image_promotional
+    no_stub: true
 
 
   field_pretty_url: field_pretty_url
