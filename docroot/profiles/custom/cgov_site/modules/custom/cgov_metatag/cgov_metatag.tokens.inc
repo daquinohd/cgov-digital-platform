@@ -5,8 +5,7 @@
  * Cgov metatag tokens.
  */
 
-use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Term;
+use Drupal\crop\Entity\Crop;
 
 /**
  * Implements hook_token_info().
@@ -15,21 +14,17 @@ function cgov_metatag_token_info() {
   $info = [];
   $info['types']['cgov_tokens'] = ['name' => t('Cancer.gov Tokens'), 'description' => t('Cancer.gov Tokens')];
 
-  $info['tokens']['cgov_tokens'] = [
-    'cgov-title' => [
-      'name' => t('Cgov Title Meta Tag'),
-      'description' => t('The value to user for the title meta tag.'),
-    ],
-    'cgov-analytics-channel' => [
-      'name' => t('Cgov WA Channel'),
-      'description' => t('The channel field value.'),
-    ],
-    'cgov-analytics-group' => [
-      'name' => t('Cgov WA Group'),
-      'description' => t('The content group field value.'),
-    ],
-  ];
+  $info['tokens']['cgov_tokens']['cgov-title'] =
+        [
+          'name' => t('Cgov Title Meta Tag'),
+          'description' => t('The value to user for the title meta tag.'),
+        ];
 
+  $info['tokens']['cgov_tokens']['cgov-og-image'] =
+        [
+          'name' => t('Cgov og:image Metatag'),
+          'description' => t('The value to user for the title meta tag.'),
+        ];
   return $info;
 }
 
@@ -45,12 +40,8 @@ function cgov_metatag_tokens($type, $tokens, array $data, array $options, $bubbl
           $replacements[$original] = get_meta_title_token($data);
           break;
 
-        case 'cgov-analytics-channel':
-          $replacements[$original] = get_taxonomy_field_token($data, 'field_channel');
-          break;
-
-        case 'cgov-analytics-group':
-          $replacements[$original] = get_taxonomy_field_token($data, 'field_content_group');
+        case 'cgov-og-image':
+          $replacements[$original] = get_meta_og_image_token($data);
           break;
       }
     }
@@ -63,6 +54,7 @@ function cgov_metatag_tokens($type, $tokens, array $data, array $options, $bubbl
  */
 function get_meta_title_token(array $data) {
 
+  // Get the entity from the appropriate data key.
   if (!empty($data['node'])) {
     $entity = $data['node'];
   }
@@ -71,10 +63,11 @@ function get_meta_title_token(array $data) {
   }
 
   $titleToken = "";
+
   if (!empty($entity)) {
-    /* @var \Drupal\node\NodeInterface $node */
 
     if ($entity->hasField('field_browser_title') && !$entity->get('field_browser_title')->isEmpty()) {
+
       $titleToken = $entity->get('field_browser_title')->getValue()[0]['value'];
     }
   }
@@ -82,87 +75,132 @@ function get_meta_title_token(array $data) {
 }
 
 /**
- * Get a given field value from taxonomy term.
- *
- * @param array $data
- *   An associative array of data objects.
- * @param string $fieldname
- *   The name of the field.
- *
- * @return string
- *   String value of the selected field.
+ * Retrieves the desired og:image url.
  */
-function get_taxonomy_field_token(array $data, $fieldname) {
-  $rtn = t('NCI');
-  $node = $data['node'] ?? NULL;
+function get_meta_og_image_token(array $data) {
 
-  if (isset($node) && !empty($node)) {
-
-    /*
-     * Get the site section and its ancestors, then loop through
-     * until a valid string value is found or we run out of site
-     * section taxons.
-     */
-    if ($node->hasField('field_site_section') && !empty($node->get('field_site_section')->first())) {
-      $tid = $node->get('field_site_section')->first()->getValue()['target_id'];
-      $sections = \Drupal::service('entity_type.manager')->getStorage("taxonomy_term")->loadAllParents($tid);
-      foreach ($sections as $section) {
-        $sid = $section->id();
-        $fieldToken = Term::load($sid)->get($fieldname)->value;
-        if (isset($fieldToken) && trim($fieldToken) !== '') {
-          return $fieldToken;
-        }
-      }
-    }
-
-    /*
-     * If there is no site section, traverse through ancestor
-     * paths until one is found.
-     */
-    else {
-      $nid = $node->id();
-      $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-      $parent['node'] = get_valid_parent($alias);
-
-      // Recurse through this method until a field value is found.
-      $fieldToken = get_taxonomy_field_token($parent, $fieldname);
-      return $fieldToken;
-    }
+  // Get the entity from the appropriate data key.
+  if (!empty($data['node'])) {
+    $entity = $data['node'];
+  }
+  elseif (!empty($data['media'])) {
+    $entity = $data['media'];
   }
 
-  /*
-   * If we hit this, it means the taxonomy field is not set
-   * anywhere between here and the tree root.
-   */
-  return $rtn;
+  if (empty($entity)) {
+    return;
+  }
+
+  $image_url_token = NULL;
+
+  // Return the URL for the promo image, otherwise use the lead image, if set.
+  if ($entity->hasField('field_image_promotional') && !$entity->get('field_image_promotional')->isEmpty()) {
+    $media_entity = $entity->get('field_image_promotional')->entity;
+
+    // Get the token.
+    $image_url_token = get_social_image_path_from_media($media_entity);
+  }
+  elseif ($entity->hasField('field_image_article') && !$entity->get('field_image_article')->isEmpty()) {
+    $media_entity = $entity->get('field_image_article')->entity;
+
+    // Get the token.
+    $image_url_token = get_social_image_path_from_media($media_entity);
+  }
+
+  return $image_url_token;
 }
 
 /**
- * Search for ancestor nodes by alias.
+ * Return the social media image url based on cgov logic.
  *
- * @param string $alias
- *   An associative array of data objects.
+ * @param object $media_entity
+ *   The media entity containing the image.
  *
- * @return \Drupal\node\Entity\Node
- *   Node object.
+ * @return string
+ *   THe URL of the image
  */
-function get_valid_parent($alias) {
-  if (!isset($alias) || trim($alias) === '') {
-    return NULL;
+function get_social_image_path_from_media($media_entity) {
+
+  try {
+    $social_img_style_name = 'cgov_social_media';
+    // Use the Social Image Override if set.
+    if (!$media_entity->get('field_override_img_social_media')->isEmpty()) {
+
+      // Get the Social Media Image.
+      $image_fid = $media_entity->field_override_img_social_media->target_id;
+      $file_storage = \Drupal::entityTypeManager()->getStorage('file');
+      $file = $file_storage->load($image_fid);
+
+      // Get the Image URL.
+      $file_uri = $file->getFileUri();
+      $image_url_token = file_url_transform_relative(file_create_url($file_uri));
+
+    }
+    // Use the normal image if cropped with social media crop.
+    else {
+      $image_fid = $media_entity->field_media_image->target_id;
+      $image_url_token = find_styled_image_url($image_fid, $social_img_style_name);
+    }
+
+  }
+  catch (Exception $e) {
+    // Generic exception handling if something gets thrown.
+    \Drupal::logger('cgov_metatag')->error($e->getMessage());
+    $image_url_token = NULL;
   }
 
-  // Trim the last section of the current alias and get the 'node/<nid>' path.
-  $parentAlias = preg_replace('#\/[^/]*$#', '', $alias);
-  $parentPath = \Drupal::service('path.alias_manager')->getPathByAlias($parentAlias);
+  return $image_url_token;
+}
 
-  // Return node if matches, otherwise run through this method again.
-  if (preg_match('/node\/(\d+)/', $parentPath, $matches)) {
-    $node = Node::load($matches[1]);
-    return $node;
-  }
-  else {
-    $node = get_valid_parent($parentAlias);
-    return $node;
-  }
+/**
+ * Return the relative url for a given image file and image style.
+ *
+ * @param int $image_fid
+ *   The image fid.
+ * @param string $social_img_style_name
+ *   The name of the imagestyle.
+ *
+ * @return string
+ *   THe URL of the image
+ */
+function find_styled_image_url($image_fid, $social_img_style_name) {
 
+  try {
+    // Get the image style.
+    $style = \Drupal::entityTypeManager()->getStorage('image_style')->load($social_img_style_name);
+
+    $file_storage = \Drupal::entityTypeManager()->getStorage('file');
+    $file = $file_storage->load($image_fid);
+    $file_uri = $file->getFileUri();
+
+    // Find the Crop associated with this ImageStyle.
+    $image_helper = \Drupal::service('cgov_image.image_tools');
+    $crop = $image_helper->findCropByStyle($social_img_style_name);
+
+    // Return NULL token if there is no social media crop for this item.
+    if (!Crop::cropExists($file_uri, $crop)) {
+      $image_url = NULL;
+    }
+    else {
+      // Get the relative URL for this image style binary.
+      $derivative_uri = $style->buildUri($file_uri);
+
+      // If the derivative doesn't exist yet create it.
+      if (!file_exists($derivative_uri)) {
+        $style->createDerivative($file_uri, $derivative_uri);
+      }
+
+      $image_url = file_url_transform_relative($style->buildUrl($file_uri));
+
+      // Strip the tokens as they're not desired.
+      $image_url = strtok($image_url, "?");
+
+    }
+  }
+  catch (\Exception  $e) {
+    // Generic exception handling if something gets thrown.
+    \Drupal::logger('cgov_image')->error($e->getMessage());
+    $image_url = NULL;
+  }
+  return $image_url;
 }
