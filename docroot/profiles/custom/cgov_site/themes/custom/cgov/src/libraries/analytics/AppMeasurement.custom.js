@@ -138,8 +138,6 @@ var AppMeasurementCustom = {
 
 
 
-        // Set the font size variable. 
-        s.prop42 = 'normal';
         
         // Set prop26 to Time Stamp format: <year>|<month>|<day>|<hour>
         var now = new Date();
@@ -164,6 +162,15 @@ var AppMeasurementCustom = {
             s.prop7 = s.getNciAudience() || null;
             s.eVar7 = s.prop7;
 
+            // Set page title tracking values.
+            s.prop10 = getNciPageTitle();
+
+            // Set the font size variable. 
+            s.prop42 = 'Normal';
+
+            // Set timestamp variable.
+            s.prop26 = getNciDate();
+
             // Set prop29 via getTimeParting() plugin.
             s.prop29 = s.getTimeParting('n','-5');
 
@@ -177,7 +184,9 @@ var AppMeasurementCustom = {
 
 
 
-        
+
+
+            
             /* Set prop15 to either 'protoclsearchid' or 'PrintID' (depends on the page being loaded) */
             if(s.prop15 == null && s.eVar15 == null) 
             {
@@ -291,6 +300,21 @@ var AppMeasurementCustom = {
         }
         s.doPlugins=s_doPlugins 
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* Functions */
         function onlyUnique(value, index, self) { 
             return self.indexOf(value) === index;
@@ -414,21 +438,29 @@ var AppMeasurementCustom = {
         // Set eVars
         setNumberedVars("evar");
         
-        // Return prop10 value
-        function setProp10() {
+        /************************* FUNCTIONS SECTION ************************/
+        /* Custom Cgov functions go here.                                   */
+        /********************************************************************/        
+
+        /**
+         * Get the document title.
+         */
+        function getNciPageTitle() {
             // If this  is an R4R page, set the generic title 
             if(document.querySelector('#r4r-root .r4r-resource')) {
                 return 'Resources for Researchers - National Cancer Institute';
             } else {
                 return document.title;
             }
-        
         }
-        s.prop10 = setProp10();
-        
-        /************************* FUNCTIONS SECTION ************************/
-        /* Custom Cgov functions go here.                                   */
-        /********************************************************************/        
+
+        /**
+         * Set date to Time Stamp format: <year>|<month>|<day>|<hour>.
+         */
+        function getNciDate() {
+            let now = new Date();
+            return now.getFullYear() + "|" + (now.getMonth() + 1) + "|" + now.getDate() + "|" + now.getHours();
+        }
 
         /**
          * Get the language code from pagename, DOM, or URL param.
