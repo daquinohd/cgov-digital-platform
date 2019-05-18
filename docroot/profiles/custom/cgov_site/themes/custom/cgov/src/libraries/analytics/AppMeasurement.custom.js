@@ -106,7 +106,7 @@ var AppMeasurementCustom = {
             // Set page title tracking values.
             s.prop10 = getNciPageTitle();
 
-            // Set the font size variable. 
+            // Set the font size variable.
             s.prop42 = 'Normal';
 
             // Set timestamp variable.
@@ -120,6 +120,18 @@ var AppMeasurementCustom = {
             s.prop15 = s.prop15 || s.getNciSearchId();
             s.eVar15 = s.prop15;
 
+            // Set Previous Page values.
+            s.prop61 = s.getPreviousValue(s.pageName, 'gpv_pn', '');
+
+            // Set load time of the page.
+            s.prop65 = s.getLoadTime();
+
+            // Set browser width value.
+            s.eVar5 = getNciViewPort(); 
+
+            // Dynamically Capture Hierarchy Variable via Custom Plugin.
+            s.hier1 = getNciHierarchy();
+                        
             // Set campaign & urs tracking values.
             let s_campaign = s.getNciCampaign();
             if (s_campaign && NCIAnalytics.urs) {
@@ -137,6 +149,16 @@ var AppMeasurementCustom = {
             s.eVar35 = s_campaign;
             s.campaign = s.getValOnce(s_campaign,'s_campaign',30);
         
+
+
+
+
+            
+
+
+
+
+
 
             /** 
              * Build out local pagename w/extra values.
@@ -163,6 +185,7 @@ var AppMeasurementCustom = {
             if(pageNameAdditions.length > 0)
                 s.localPageName += " - " + pageNameAdditions.join(', ');
     
+
             /**
              * Set pageName and eVar1 to localPageName.
              */
@@ -188,22 +211,14 @@ var AppMeasurementCustom = {
             // SOCIAL
             //////////
             s.socialPlatforms('eVar74');
-                
-            /* Previous Page */
-            s.prop61 = s.getPreviousValue(s.pageName, 'gpv_pn', "");
-        
-        
+                        
             // Set prop64 for percent page viewed - if 0, then set to 'zero'
             s.getPercentPageViewed();
             if(s._ppvPreviousPage) {
                 s.prop64 = s._ppvInitialPercentViewed + '|' + s._ppvHighestPercentViewed;
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
-            
-            // Set prop65 to get the initial load time of the page (for use in the page load speed plugin)
-            var loadTime = s.getLoadTime();
-            s.prop65 = loadTime;
-        
+                    
             // Start building event data from existing values on the "s" object
             var eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
             var waData = document.querySelector('[class*="wa-data"][data-events]');
@@ -249,63 +264,17 @@ var AppMeasurementCustom = {
 
 
 
-
-
-
-
-
-
         /* Functions */
         function onlyUnique(value, index, self) { 
             return self.indexOf(value) === index;
         }
         
-        /** Custom Plugin: Dynamically Create s.hier variable*/
-        function set_hier1() {
-            var h1 = new String(document.location.host + document.location.pathname);
-            if (h1.charAt(h1.length - 1) == "/") {
-                var temp = new String();
-                for (var i = 0; i < h1.length - 1; i++) {
-                    temp += h1.charAt(i);
-                }
-                h1 = temp;
-            }
-            var intMatch = h1.indexOf("/");
-            while (intMatch != -1) {
-                h1 = h1.replace("/", "|");
-                intMatch = h1.indexOf("/");
-            }
-            return h1;
-        }
-        
-        /* Dynamically Capture Hierarchy Variable via Custom Plugin */
-        s.hier1 = set_hier1();
         
         /* Track scroll percentage of previous page / percent visible on current page */
         if(typeof NCIAnalytics !== 'undefined') {
             if(typeof NCIAnalytics.cookieRead === 'function') {
                 s.prop48=NCIAnalytics.cookieRead("nci_scroll");
             }
-        }
-        
-
-        
-
-        
-        /* Set eVar for browser width on page load */
-        s.eVar5 = getViewPort(); 
-         
-        /* Set a name for the view port based on the current screen size */
-        function getViewPort() {
-            var screen = '';
-            if(window.innerWidth)
-            {
-                if (window.innerWidth > 1440) { screen = "Extra wide"; }
-                else if (window.innerWidth > 1024) { screen = "Desktop"; }
-                else if (window.innerWidth > 640) { screen = "Tablet"; }
-                else { screen = "Mobile"; }
-            }
-            return screen;
         }
         
         // Set channel 
@@ -391,6 +360,39 @@ var AppMeasurementCustom = {
             if (!results) return null;
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        /* Set a name for the view port based on the current screen size */
+        function getNciViewPort() {
+            var screen = '';
+            if(window.innerWidth)
+            {
+                if (window.innerWidth > 1440) { screen = "Extra wide"; }
+                else if (window.innerWidth > 1024) { screen = "Desktop"; }
+                else if (window.innerWidth > 640) { screen = "Tablet"; }
+                else { screen = "Mobile"; }
+            }
+            return screen;
+        }
+
+        /**
+         * Dynamically create s.hier (hierarchy) variables.
+         */
+        function getNciHierarchy() {
+            var h1 = new String(document.location.host + document.location.pathname);
+            if (h1.charAt(h1.length - 1) == "/") {
+                var temp = new String();
+                for (var i = 0; i < h1.length - 1; i++) {
+                    temp += h1.charAt(i);
+                }
+                h1 = temp;
+            }
+            var intMatch = h1.indexOf("/");
+            while (intMatch != -1) {
+                h1 = h1.replace("/", "|");
+                intMatch = h1.indexOf("/");
+            }
+            return h1;
         }
 
         /**
@@ -481,14 +483,14 @@ var AppMeasurementCustom = {
         +"var s=this,a=new Date,v=v?v:v='',c=c?c:c='s_gvo',e=e?e:0,k=s.c_r(c"
         +");if(v){a.setTime(a.getTime()+e*86400000);s.c_w(c,v,e?a:0);}return"
         +" v==k?'':v");
-        
+
         /*
          * Copyright 2011-2013 Adobe Systems, Inc.
          * s.getLoadTime v1.36 - Get page load time in units of 1/10 seconds
          */
         s.getLoadTime=function(){if(!window.s_loadT){var e="",n=(new Date).getTime(),i=window.performance?performance.timing:0,
         r=i?i.requestStart:window.inHeadTS||0;e=r?Math.round((n-r)/100):""}return e};
-        
+
         /*
         * Plugin: getTimeParting 3.4
         */
@@ -544,7 +546,6 @@ var AppMeasurementCustom = {
 
         // ver. 1.0 - s.join(v,p)| v - Array | p - formatting parameters (front,back,delim,wrap)
         s.join=new Function("v","p","var s=this;var f,b,d,w;if(p){f=p.front?p.front:'';b=p.back?p.back:'';d=p.delim?p.delim:'';w=p.wrap?p.wrap:'';}var str='';for(var x=0;x<v.length;x++){if(typeof(v[x])=='object' )str+=s.join( v[x],p);else str+=w+v[x]+w;if(x<v.length-1)str+=d;}return f+str+b;");
-
 
         /*
         * Plugin: getPreviousValue_v1.0 - return previous value of designated
