@@ -507,6 +507,30 @@ var AppMeasurementCustom = {
             return id;
         }
             
+        /**
+         * Set the campagin value if there are any matching queries in the URL.
+         */
+        s.getNciCampaign = function() {
+            // Set 'cid' if available, then 'gclid' if available.
+            let s = this;
+            let sCampaign = s.Util.getQueryParam('cid') || s.Util.getQueryParam('gclid');
+
+            // If still no value, try the utm_* parameters. 
+            // Return a value if one or more params are set.
+            if (!sCampaign) {
+                let hasUtm = false;
+                let utmJoin  = [];
+                let utmArr = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+                utmArr.forEach(function(parm) {
+                    let val = s.Util.getQueryParam(parm) || '_';
+                    utmJoin.push(val);
+                    hasUtm = (val !== '_') ? true : hasUtm;
+                });
+                sCampaign = (hasUtm) ? utmJoin.join('|') : '';
+            }
+            return sCampaign;
+        }
+
         /************************** PLUGINS SECTION *************************/
         /* You may insert any plugins you wish to use here.                 */
         /********************************************************************/
