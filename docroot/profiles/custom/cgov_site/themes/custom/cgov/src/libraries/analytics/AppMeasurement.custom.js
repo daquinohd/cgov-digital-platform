@@ -176,55 +176,22 @@ var AppMeasurementCustom = {
             s.prop15 = (s.prop15) ? s.prop15 : s.getNciSearchId();
             s.eVar15 = s.prop15;
 
-
-
-
-
-
-
-
-        
-            /* Set the campagin value if there are any matching queries in the URL*/
-            var hasUtm = false;
-            var utmArr = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
-            var utmJoin  = [];
-            var sCampaign = s.Util.getQueryParam('cid');
-            if (!sCampaign) {
-                sCampaign = s.Util.getQueryParam('gclid');
-                if (!sCampaign) {
-                    for (i = 0; i < utmArr.length; i++) {
-                        var val = s.Util.getQueryParam(utmArr[i]); 
-                        if(val) {
-                            hasUtm = true;
-                        }
-                        else {
-                            val = '_';
-                        }
-                        utmJoin.push(val);
-                    }
-                    if(hasUtm) {
-                        sCampaign = utmJoin.join('|');
-                    }
-                }
-            }
-        
-            // retrieve urs values
-            if(typeof NCIAnalytics.urs !== 'undefined') {
+            // Set campaign & urs tracking values.
+            let s_campaign = s.getNciCampaign();
+            if (s_campaign && NCIAnalytics.urs) {
                 window.urs = NCIAnalytics.urs.get({
-                    campaign: sCampaign,
+                    campaign: s_campaign,
                     referrer: document.referrer
                 });
-                // console.info('urs', JSON.stringify(window.urs, null, 2));    
-    
+                // console.info('urs', JSON.stringify(window.urs, null, 2));
                 s.eVar54 = urs.value;
                 s.prop51 = (s.eVar54) ? 'D=v54' : '';
                 s.eVar55 = urs.seoKeyword;
                 s.eVar56 = urs.ppcKeyword;
                 s.eVar57 = urs.stacked;
             }
-        
-            s.eVar35 = sCampaign;
-            s.campaign = s.getValOnce(sCampaign,'s_campaign',30);
+            s.eVar35 = s_campaign;
+            s.campaign = s.getValOnce(s_campaign,'s_campaign',30);
         
             
         //////////
@@ -513,11 +480,11 @@ var AppMeasurementCustom = {
         s.getNciCampaign = function() {
             // Set 'cid' if available, then 'gclid' if available.
             let s = this;
-            let sCampaign = s.Util.getQueryParam('cid') || s.Util.getQueryParam('gclid');
+            let campaign = s.Util.getQueryParam('cid') || s.Util.getQueryParam('gclid');
 
             // If still no value, try the utm_* parameters. 
             // Return a value if one or more params are set.
-            if (!sCampaign) {
+            if (!campaign) {
                 let hasUtm = false;
                 let utmJoin  = [];
                 let utmArr = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
@@ -526,9 +493,9 @@ var AppMeasurementCustom = {
                     utmJoin.push(val);
                     hasUtm = (val !== '_') ? true : hasUtm;
                 });
-                sCampaign = (hasUtm) ? utmJoin.join('|') : '';
+                campaign = (hasUtm) ? utmJoin.join('|') : null;
             }
-            return sCampaign;
+            return campaign;
         }
 
         /************************** PLUGINS SECTION *************************/
