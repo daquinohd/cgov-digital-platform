@@ -16,6 +16,8 @@ var AppMeasurementCustom = {
     linkTrackVars: 'none',
     trackInineStats: true,
     useForcedLinkTracking: true,
+    forcedLinkTrackingTimeout: 500,
+    debug: true,
 
     /** Daylight savings time parting configuration. */
     tpDst: {
@@ -49,25 +51,13 @@ var AppMeasurementCustom = {
     setScodeProperties: function(s) {
 
         console.log('=== BEGIN debugging AppMeasurementCustom ===');
-        /** 
-         * TODO: Add these values to 'localpagename' array:
-            audience
-            page number
-            dictionary values:
-                if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
-                    if (s.Util.getQueryParam('expand'))
-                        addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
-                    else if (s.localPageName.indexOf("/def/") >= 0 )
-                        addToLocalPageName = CommaList(addToLocalPageName,'Definition');
-         */
-
         /*
          * Set the report suite value(s).
          * s.account and s_account (report suites) should be defined before this function is called.
          * If not, set a default value of 'ncidevelopment'.
          */
         if (!s.account) {
-            s.account = s_account || 'ncidevelopment';
+            s.account = s_account || 'ncidevelopment';            
         }
         
         // For debugging only 
@@ -83,64 +73,14 @@ var AppMeasurementCustom = {
         s.linkTrackVars = AppMeasurementCustom.linkTrackVars;
         s.linkTrackEvents = AppMeasurementCustom.linkTrackEvents;
         s.useForcedLinkTracking = AppMeasurementCustom.useForcedLinkTracking;
-                
+        s.forcedLinkTrackingTimeout = AppMeasurementCustom.forcedLinkTrackingTimeout;
+        
         /* Get the page name to be used in tracking variables. */
         s.localPageName = AppMeasurementCustom.getLocalPageName();
-        let pageNameMore = [];
-        let addToLocalPageName = '';
 
-
-
-        /** If dictionary, define addToLocalPageName. */
-        // TODO: clean up 'CommaList()' calls.
-        if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
-            if (s.Util.getQueryParam('expand'))
-                addToLocalPageName = CommaList(addToLocalPageName,'AlphaNumericBrowse');
-            else if (s.localPageName.indexOf("/def/") >= 0 )
-                addToLocalPageName = CommaList(addToLocalPageName,'Definition');
-        }
-
-        /** Retain page query parameter value. */
-        var pageNum = s.Util.getQueryParam('page');
-        if (pageNum)
-            addToLocalPageName = CommaList(addToLocalPageName, 'Page ' + pageNum.toString());
-        
-        /**
-         * Concatenate s.localPageName with any additional information.
-         */
-        if(addToLocalPageName.length > 0)
-            s.localPageName += " - " + addToLocalPageName;
-
-        /**
-         * Set pageName and eVar1 to localPageName.
-         */
-        s.eVar1 = s.localPageName;
-        s.pageName = s.localPageName;
-        s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
-
-        /**
-         * Set prop1 and prop2 if necessary.
-         */
-        let fullURL = document.URL;
-        if (fullURL.length > 100) {
-            s.prop1 = fullURL.substring(0,100);
-            s.prop2 = fullURL.substring(100);
-        } else {
-            s.prop1 = fullURL;
-        }
-
-
-
-
-
-
-
-
-
-
-        
-        /** Plugin config. */
+        /** Plugin configs. */
         s.usePlugins = true;
+        s.maxDelay='1000'; // Wait for 3rd party api response - different from s.forcedLinkTracking.
 
         /**
          * Fire off plugins. Add calls to plugins here.
@@ -149,6 +89,11 @@ var AppMeasurementCustom = {
          *   The 's' object.
          */
         function s_doPlugins(s) {
+
+            // Set prop1 - and prop2 if necessary.
+            let fullURL = document.URL.toLowerCase();
+            s.prop1 = fullURL.substring(0,100);
+            s.prop2 = (fullURL.length > 100) ? fullURL.substring(100) : null;
 
             // Set language tracking values.
             s.prop8 = s.getNciPageLang();
@@ -171,9 +116,8 @@ var AppMeasurementCustom = {
             s.prop29 = s.getTimeParting('n','-5');
 
             // Set ID param variable value.
-            s.prop15 = (fullURL.toLowerCase().indexOf('cts.print/display') > -1) ? 
-                getNciPrintID() : '';
-            s.prop15 = (s.prop15) ? s.prop15 : s.getNciSearchId();
+            s.prop15 = (fullURL.indexOf('cts.print/display') > -1) ? getNciPrintID() : '';
+            s.prop15 = s.prop15 || s.getNciSearchId();
             s.eVar15 = s.prop15;
 
             // Set campaign & urs tracking values.
@@ -193,14 +137,58 @@ var AppMeasurementCustom = {
             s.eVar35 = s_campaign;
             s.campaign = s.getValOnce(s_campaign,'s_campaign',30);
         
+
+            /** 
+             * Build out local pagename w/extra values.
+             * TODO: Refactor into separate function.
+             */
+            let pageNameAdditions = [];
+
+            /** Add audience to page name. */
+            if (s.prop7) {
+                pageNameAdditions.push(s.prop7);
+            }
+            /** Add dictionary types to page name. */   
+            if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
+                if (s.Util.getQueryParam('expand'))
+                    pageNameAdditions.push('AlphaNumericBrowse');
+                else if (s.localPageName.indexOf("/def/") >= 0 )
+                    pageNameAdditions.push('Definition');
+            }
+            /** Add page number query parameter value. */
+            let pageNum = s.Util.getQueryParam('page');
+            if (pageNum)
+                pageNameAdditions.push('Page ' + pageNum.toString());            
+            /** Concatenate s.localPageName with any additional information. */
+            if(pageNameAdditions.length > 0)
+                s.localPageName += " - " + pageNameAdditions.join(', ');
+    
+            /**
+             * Set pageName and eVar1 to localPageName.
+             */
+            s.eVar1 = s.localPageName;
+            s.pageName = s.localPageName;
+            s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
+    
+
+    
+    
+    
+
+
+
+
+
+    
+    
+    
             
-        //////////
-        // SOCIAL
-        //////////
+
+            //////////
+            // SOCIAL
+            //////////
             s.socialPlatforms('eVar74');
-        
-            s.maxDelay='1000';  //max time to wait for 3rd party api response in milliseconds
-        
+                
             /* Previous Page */
             s.prop61 = s.getPreviousValue(s.pageName, 'gpv_pn', "");
         
@@ -267,26 +255,10 @@ var AppMeasurementCustom = {
 
 
 
-
-
-
-
-
-
         /* Functions */
         function onlyUnique(value, index, self) { 
             return self.indexOf(value) === index;
         }
-        
-        function CommaList(commaList, addValue)
-        {
-            if (commaList.length > 0)
-                return commaList + ", " + addValue;
-            else 
-                return addValue;
-        }
-        
-        
         
         /** Custom Plugin: Dynamically Create s.hier variable*/
         function set_hier1() {
@@ -447,18 +419,19 @@ var AppMeasurementCustom = {
                 case 'patient':
                 case 'patients':
                 case '0':
-                    audience = 'patient';
+                    audience = 'Patient';
                     break;
                 case 'healthprofessional':
                 case 'healthprofessionals':
                 case '1':
-                    audience = 'healthprofessional';
+                    audience = 'Health professional';
                     break;
                 default:
                     if (s.localPageName.indexOf('patient') > -1)
-                        audience = 'patient';
-                    if (s.localPageName.indexOf('healthprofessional') > -1)
-                        audience = 'healthprofessional';
+                        audience = 'Patient';
+                    if (s.localPageName.indexOf('healthprofessional') > -1 ||
+                        s.localPageName.indexOf('/hp/') > -1)
+                        audience = 'Health professional';
                     break;
             }
             // TODO: get audience from meta tag & verify if query params are still used.
