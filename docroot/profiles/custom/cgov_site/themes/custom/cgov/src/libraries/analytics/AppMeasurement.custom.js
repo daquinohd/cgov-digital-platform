@@ -139,10 +139,6 @@ var AppMeasurementCustom = {
 
 
         
-        // Set prop26 to Time Stamp format: <year>|<month>|<day>|<hour>
-        var now = new Date();
-        s.prop26 = now.getFullYear() + "|" + (now.getMonth() + 1) + "|" + now.getDate() + "|" + now.getHours();
-        
         /** Plugin config. */
         s.usePlugins = true;
 
@@ -174,6 +170,11 @@ var AppMeasurementCustom = {
             // Set prop29 via getTimeParting() plugin.
             s.prop29 = s.getTimeParting('n','-5');
 
+            // Set ID param variable value.
+            s.prop15 = (fullURL.toLowerCase().indexOf('cts.print/display') > -1) ? 
+                getNciPrintID() : '';
+            s.prop15 = (s.prop15) ? s.prop15 : s.getNciSearchId();
+            s.eVar15 = s.prop15;
 
 
 
@@ -182,16 +183,6 @@ var AppMeasurementCustom = {
 
 
 
-
-
-
-
-            
-            /* Set prop15 to either 'protoclsearchid' or 'PrintID' (depends on the page being loaded) */
-            if(s.prop15 == null && s.eVar15 == null) 
-            {
-                s.prop15=s.eVar15= s.Util.getQueryParam('protocolsearchid') ? s.Util.getQueryParam('protocolsearchid') : s.Util.getQueryParam('PrintID');
-            }
         
             /* Set the campagin value if there are any matching queries in the URL*/
             var hasUtm = false;
@@ -358,20 +349,9 @@ var AppMeasurementCustom = {
             }
         }
         
-        /* Get the Trial Print ID from a URL */
-        function getPrintID(){
-            var url = window.location.href;
-            var regex = new RegExp("[?&]" + "PrintID" + "(=([^&#]*)|&|#|$)", "i");
-            var results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
+
         
-        /** Set prop15 to the Prind ID if this is a CTS print page */
-        if(fullURL.toLowerCase().indexOf('cts.print/display') > -1) {
-            s.prop15 = s.eVar15 = getPrintID();
-        }
+
         
         /* Set eVar for browser width on page load */
         s.eVar5 = getViewPort(); 
@@ -463,9 +443,21 @@ var AppMeasurementCustom = {
         }
 
         /**
+         * Get the Trial Print ID from a URL.
+         */
+        function getNciPrintID(){
+            var url = window.location.href;
+            var regex = new RegExp("[?&]" + "PrintID" + "(=([^&#]*)|&|#|$)", "i");
+            var results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        /**
          * Get the language code from pagename, DOM, or URL param.
          */
-         s.getNciPageLang = function() {
+        s.getNciPageLang = function() {
             let s = this;
             let language = 'english';
             if (s.localPageName.indexOf('espanol') >= 0 ||
@@ -506,6 +498,15 @@ var AppMeasurementCustom = {
             return audience;
         }
 
+        /**
+         * Get value of  'protoclsearchid' or 'PrintID' (depends on the page being loaded).
+         */
+        s.getNciSearchId = function() {
+            let s = this;
+            let id = s.Util.getQueryParam('protocolsearchid') || s.Util.getQueryParam('PrintID');
+            return id;
+        }
+            
         /************************** PLUGINS SECTION *************************/
         /* You may insert any plugins you wish to use here.                 */
         /********************************************************************/
