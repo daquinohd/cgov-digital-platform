@@ -124,7 +124,7 @@ var AppMeasurementCustom = {
             s.prop61 = s.getPreviousValue(s.pageName, 'gpv_pn', '');
 
             // Set load time of the page.
-            s.prop65 = s.getLoadTime();
+            s.prop65 = s.getLoadTime(); 
 
             // Set browser width value.
             s.eVar5 = getNciViewPort(); 
@@ -149,11 +149,11 @@ var AppMeasurementCustom = {
             s.eVar35 = s_campaign;
             s.campaign = s.getValOnce(s_campaign,'s_campaign',30);
         
-
-
-
+            
 
             
+
+
 
 
 
@@ -194,10 +194,12 @@ var AppMeasurementCustom = {
             s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
     
 
-    
-    
-    
-
+            // Set props in data attributes.
+            s.setNumberedVars('prop');
+            
+            // Set eVars in data attributes.
+            s.setNumberedVars('evar');
+            
 
 
 
@@ -269,13 +271,14 @@ var AppMeasurementCustom = {
             return self.indexOf(value) === index;
         }
         
-        
+
         /* Track scroll percentage of previous page / percent visible on current page */
         if(typeof NCIAnalytics !== 'undefined') {
             if(typeof NCIAnalytics.cookieRead === 'function') {
                 s.prop48=NCIAnalytics.cookieRead("nci_scroll");
             }
         }
+        
         
         // Set channel 
         s.channel = getMetaTagContent('[name="dcterms.subject"]');
@@ -301,31 +304,7 @@ var AppMeasurementCustom = {
             }
         }
         
-        /** Dynamically add numbered variables (e.g. prop1, eVar8) and values to the 's' object */
-        function setNumberedVars(varName, selector) {
-        
-            // Get the data element; '.wa-data-element' is the default
-            selector = selector || '.wa-data-element';
-            var waData = document.querySelector(selector);
-        
-            if(varName && waData) {
-                for(dataAttr in waData.dataset) {
-                    if(dataAttr.indexOf(varName) > -1)
-                    {
-                        var nvKey = dataAttr.replace('evar', 'eVar'); // 'eVar' must be specified on s object
-                        var nvValue = waData.dataset[dataAttr].replace(/(^'+|'+$)/mg, ''); // strip out single quotes
-                        s[nvKey] = nvValue;
-                    }
-                }
-            }
-        }
-        
-        // Set props
-        setNumberedVars("prop");
-        
-        // Set eVars
-        setNumberedVars("evar");
-        
+
         /************************* FUNCTIONS SECTION ************************/
         /* Custom Cgov functions go here.                                   */
         /********************************************************************/        
@@ -473,6 +452,31 @@ var AppMeasurementCustom = {
             return campaign;
         }
 
+        /** 
+         * Dynamically add numbered variables (e.g. prop1, eVar8) and values to the 's' object
+         * 
+         * @param {*} varName 
+         * @param {*} selector 
+         */
+        s.setNumberedVars = function (varName, selector) {
+            let s = this;
+
+            // Get the data element; '.wa-data-element' is the default
+            selector = selector || '.wa-data-element';
+            let waData = document.querySelector(selector);
+        
+            if(varName && waData) {
+                for(dataAttr in waData.dataset) {
+                    if(dataAttr.indexOf(varName) > -1)
+                    {
+                        let nvKey = dataAttr.replace('evar', 'eVar'); // 'eVar' must be specified on s object
+                        let nvValue = waData.dataset[dataAttr].replace(/(^'+|'+$)/mg, ''); // strip out single quotes
+                        s[nvKey] = nvValue;
+                    }
+                }
+            }
+        }
+                
         /************************** PLUGINS SECTION *************************/
         /* You may insert any plugins you wish to use here.                 */
         /********************************************************************/
