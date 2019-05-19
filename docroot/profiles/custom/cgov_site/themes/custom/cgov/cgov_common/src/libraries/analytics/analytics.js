@@ -45,8 +45,6 @@ function getWidthForAnalytics() {
 }
 
 $(document).ready(function() {
-    // console.log('=== Debug NCIAnalytics object: ===');
-    // console.log(NCIAnalytics);
 
     // reusable pageName value for most analytic events
     var pageName = window.location.hostname + window.location.pathname;

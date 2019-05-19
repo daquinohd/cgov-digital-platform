@@ -8,6 +8,7 @@ var oga_pattern = /grants\-training\/grants/gi,
 var NCIAnalytics = {
 
     displayAlerts: false,
+    debug: false,
     stringDelimiter: '|',
     fieldDelimiter: '~',
 
@@ -44,7 +45,6 @@ var NCIAnalytics = {
     },
 
     ClickParams: function(sender, reportSuites, linkType, linkName) {
-        console.log('=== BEGIN nci-analytics-functions.js ===');
         /*
          The facility for defining report suites by the parameter reportSuites
          has been discontinued - now report suites are defined in the s_account variable
@@ -52,8 +52,12 @@ var NCIAnalytics = {
          has been retained in case the requirements change.
          */
         this.ReportSuites = (s_account) ? s_account : 'ncidevelopment'; // Formerly the reportSuites argument
-        this.ReportSuites = '[debug-click-event],' + this.ReportSuites;
 
+        // For debugging only 
+        if (NCIAnalytics.debug) {
+            console.log('Debug NCIAnalytics.ClickParams():');
+            console.log(s.account);
+        };
         this.sender = sender;
         this.LinkType = linkType;
         this.LinkName = linkName;
@@ -219,7 +223,6 @@ var NCIAnalytics = {
                 alert(alertString);
             }
         }
-        console.log('=== END nci-analytics-functions.js ===');
     },
 
     //*********************** onclick functions ************************************************************

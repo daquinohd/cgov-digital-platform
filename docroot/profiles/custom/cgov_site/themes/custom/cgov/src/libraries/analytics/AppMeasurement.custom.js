@@ -19,6 +19,14 @@ var AppMeasurementCustom = {
     forcedLinkTrackingTimeout: 500,
     debug: false,
 
+    /** Valid Cgov host identifiers. */
+    cgovHosts: [
+        // 'www.devbox',
+        'cancer.gov',
+        'ncigovcdode',
+        'acsitefactory'
+    ],
+
     /** Daylight savings time parting configuration. */
     tpDst: {
         2019:'3/10,11/3',
@@ -44,6 +52,20 @@ var AppMeasurementCustom = {
     },
 
     /**
+     * Get an index value for a cgov host identifier within the local pagename.
+     */
+    getMainCGovIndex: function() {
+        let index = -1;
+        let pageName = AppMeasurementCustom.getLocalPageName();
+        let hosts = AppMeasurementCustom.cgovHosts;
+        for (let i = 0; i < hosts.length; i++) {
+            index = pageName.indexOf(hosts[i]);
+            if (index > -1) { break; }
+        }
+        return index;
+    },
+
+    /**
      * Build the s object using DTM and DOM elements.
      * 
      * @param {*} s 
@@ -61,8 +83,8 @@ var AppMeasurementCustom = {
         
         // For debugging only 
         if (AppMeasurementCustom.debug) {
-            console.log('=== BEGIN debugging AppMeasurementCustom ===');
-            s.account = '[debug-load-events],' + s.account;
+            console.log('Debug AppMeasurementCustom.setScodeProperties():');
+            console.log(s.account);
         };
 
         /* Configure tracking server and namespace. */
@@ -153,14 +175,6 @@ var AppMeasurementCustom = {
             }
             s.eVar35 = s_campaign;
             s.campaign = s.getValOnce(s_campaign,'s_campaign',30);
-        
-            
-
-            
-
-
-
-    
 
             /**
              * Set pageName and eVar1 to localPageName.
@@ -168,11 +182,18 @@ var AppMeasurementCustom = {
             s.setPageNameAdditions();
             s.pageName = s.localPageName;
             s.eVar1 = s.pageName;
-            s.mainCGovIndex = s.pageName.indexOf('cancer.gov'); //TODO: make a global var
+            s.mainCGovIndex = AppMeasurementCustom.getMainCGovIndex();
 
             // Social platform.
             // TODO: update the Adobe plugin.
             s.socialPlatforms('eVar74');
+
+
+
+
+
+
+
 
             // Set prop64 for percent page viewed - if 0, then set to 'zero'
             s.getPercentPageViewed();
@@ -181,6 +202,12 @@ var AppMeasurementCustom = {
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
                     
+
+
+
+
+
+
             // Start building event data from existing values on the "s" object
             var eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
             var waData = document.querySelector('[class*="wa-data"][data-events]');
@@ -235,6 +262,9 @@ var AppMeasurementCustom = {
             
             // Set prop44 & eVar44 to 'group'
             s.prop44 = s.eVar44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
+
+            // Set concatenated events list.
+            // s.setNciEvents();
 
             // Set props and eVars from data attributes.
             s.setNumberedVars('prop');
