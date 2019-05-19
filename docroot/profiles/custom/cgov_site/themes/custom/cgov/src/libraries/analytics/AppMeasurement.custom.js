@@ -17,7 +17,7 @@ var AppMeasurementCustom = {
     trackInineStats: true,
     useForcedLinkTracking: true,
     forcedLinkTrackingTimeout: 500,
-    debug: true,
+    debug: false,
 
     /** Daylight savings time parting configuration. */
     tpDst: {
@@ -61,7 +61,9 @@ var AppMeasurementCustom = {
         }
         
         // For debugging only 
-        s.account = '[debug-load-events],' + s.account;
+        if (AppMeasurementCustom.debug) {
+            s.account = '[debug-load-events],' + s.account;
+        };
 
         /* Configure tracking server and namespace. */
         s.trackingServer = s.trackingServer || AppMeasurementCustom.trackingServer;
@@ -158,6 +160,16 @@ var AppMeasurementCustom = {
 
 
 
+            /* Track scroll percentage of previous page / percent visible on current page */
+            if (typeof NCIAnalytics.cookieRead === 'function') {
+                s.prop48 = NCIAnalytics.cookieRead("nci_scroll");
+            }
+            
+
+
+
+
+
 
 
             /** 
@@ -192,28 +204,11 @@ var AppMeasurementCustom = {
             s.eVar1 = s.localPageName;
             s.pageName = s.localPageName;
             s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
-    
 
-            // Set props in data attributes.
-            s.setNumberedVars('prop');
-            
-            // Set eVars in data attributes.
-            s.setNumberedVars('evar');
-            
-
-
-
-
-    
-    
-    
-            
-
-            //////////
-            // SOCIAL
-            //////////
+            // Social platform.
+            // TODO: update the Adobe plugin.
             s.socialPlatforms('eVar74');
-                        
+
             // Set prop64 for percent page viewed - if 0, then set to 'zero'
             s.getPercentPageViewed();
             if(s._ppvPreviousPage) {
@@ -255,58 +250,35 @@ var AppMeasurementCustom = {
                     // console.log(err);
                 }
             }    
-
         
-            // Remove duplicates and join everything
+            // Remove event duplicates and join everything
             eventsArr = eventsArr.filter(onlyUnique);
             s.events = eventsArr.join(',');
+
+            // Set channel 
+            s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
+            
+            // Set pageType 
+            s.pageType = getNciMetaTagContent('[name="dcterms.type"]');
+            
+            // Set prop6 to short title
+            s.prop6 = getNciMetaTagContent('[property="og:title"]');
+            
+            // Set prop25 to date published
+            s.prop25 = getNciMetaTagContent('[name="dcterms.issued"]');
+            
+            // Set prop44 & eVar44 to 'group'
+            s.prop44 = s.eVar44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
+
+            // Set props and eVars from data attributes.
+            s.setNumberedVars('prop');
+            s.setNumberedVars('evar');            
         }
         s.doPlugins=s_doPlugins 
         
 
-
-
-        /* Functions */
-        function onlyUnique(value, index, self) { 
-            return self.indexOf(value) === index;
-        }
-        
-
-        /* Track scroll percentage of previous page / percent visible on current page */
-        if(typeof NCIAnalytics !== 'undefined') {
-            if(typeof NCIAnalytics.cookieRead === 'function') {
-                s.prop48=NCIAnalytics.cookieRead("nci_scroll");
-            }
-        }
-        
-        
-        // Set channel 
-        s.channel = getMetaTagContent('[name="dcterms.subject"]');
-        
-        // Set pageType 
-        s.pageType = getMetaTagContent('[name="dcterms.type"]');
-        
-        // Set prop6 to short title
-        s.prop6 = getMetaTagContent('[property="og:title"]');
-        
-        // Set prop25 to date published
-        s.prop25 = getMetaTagContent('[name="dcterms.issued"]');
-        
-        // Set prop44 & eVar44 to 'group'
-        s.prop44 = s.eVar44 = getMetaTagContent('[name="dcterms.isPartOf"]');
-        
-        // Check for meta attribute and get content if exists
-        function getMetaTagContent (selector) {
-            if(document.head.querySelector(selector) != null) {
-                return document.head.querySelector(selector).content;
-            } else {
-                return '';
-            }
-        }
-        
-
         /************************* FUNCTIONS SECTION ************************/
-        /* Custom Cgov functions go here.                                   */
+        /*             Custom NCI functions can be added here.              */
         /********************************************************************/        
 
         /**
@@ -318,6 +290,19 @@ var AppMeasurementCustom = {
                 return 'Resources for Researchers - National Cancer Institute';
             } else {
                 return document.title;
+            }
+        }
+
+        /**
+         * Check for meta attribute and get content if exists.
+         * 
+         * @param {*} selector 
+         */
+        function getNciMetaTagContent (selector) {
+            if(document.head.querySelector(selector) != null) {
+                return document.head.querySelector(selector).content;
+            } else {
+                return '';
             }
         }
 
@@ -476,9 +461,16 @@ var AppMeasurementCustom = {
                 }
             }
         }
+
+        /**
+         * Utility function to remove duplicaes.
+         */ 
+        function onlyUnique(value, index, self) { 
+            return self.indexOf(value) === index;
+        }
                 
         /************************** PLUGINS SECTION *************************/
-        /* You may insert any plugins you wish to use here.                 */
+        /*            Adobe / 3rd party plugins can be added here.          */
         /********************************************************************/
         /*
          * Plugin: getValOnce_v1.0
