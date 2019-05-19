@@ -1,5 +1,10 @@
 import $ from 'jquery';
 import { registerCustomEventListener } from 'Core/libraries/customEventHandler';
+import { NCIAnalytics } from 'Core/libraries/analytics/nci-analytics-functions';
+import { AppMeasurementCustom } from 'Core/libraries/analytics/AppMeasurement.custom';
+
+// Make our 's' object accessible on the window.
+window.AppMeasurementCustom = AppMeasurementCustom;
 
 //utility functions
 // treeText
@@ -40,6 +45,8 @@ function getWidthForAnalytics() {
 }
 
 $(document).ready(function() {
+    // console.log('=== Debug NCIAnalytics object: ===');
+    // console.log(NCIAnalytics);
 
     // reusable pageName value for most analytic events
     var pageName = window.location.hostname + window.location.pathname;
