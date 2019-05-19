@@ -131,6 +131,9 @@ var AppMeasurementCustom = {
             // Set browser width value.
             s.eVar5 = getNciViewPort(); 
 
+            // Track scroll percentage of previous page / percent visible on current page.
+            s.prop48 = NCIAnalytics.cookieRead("nci_scroll");
+
             // Dynamically Capture Hierarchy Variable via Custom Plugin.
             s.hier1 = getNciHierarchy();
                         
@@ -157,53 +160,15 @@ var AppMeasurementCustom = {
 
 
 
-
-
-
-            /* Track scroll percentage of previous page / percent visible on current page */
-            if (typeof NCIAnalytics.cookieRead === 'function') {
-                s.prop48 = NCIAnalytics.cookieRead("nci_scroll");
-            }
-            
-
-
-
-
-
-
-
-            /** 
-             * Build out local pagename w/extra values.
-             * TODO: Refactor into separate function.
-             */
-            let pageNameAdditions = [];
-
-            /** Add audience to page name. */
-            if (s.prop7) {
-                pageNameAdditions.push(s.prop7);
-            }
-            /** Add dictionary types to page name. */   
-            if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
-                if (s.Util.getQueryParam('expand'))
-                    pageNameAdditions.push('AlphaNumericBrowse');
-                else if (s.localPageName.indexOf("/def/") >= 0 )
-                    pageNameAdditions.push('Definition');
-            }
-            /** Add page number query parameter value. */
-            let pageNum = s.Util.getQueryParam('page');
-            if (pageNum)
-                pageNameAdditions.push('Page ' + pageNum.toString());            
-            /** Concatenate s.localPageName with any additional information. */
-            if(pageNameAdditions.length > 0)
-                s.localPageName += " - " + pageNameAdditions.join(', ');
     
 
             /**
              * Set pageName and eVar1 to localPageName.
              */
-            s.eVar1 = s.localPageName;
+            s.setPageNameAdditions();
             s.pageName = s.localPageName;
-            s.mainCGovIndex = s.localPageName.indexOf('cancer.gov');
+            s.eVar1 = s.pageName;
+            s.mainCGovIndex = s.pageName.indexOf('cancer.gov'); //TODO: make a global var
 
             // Social platform.
             // TODO: update the Adobe plugin.
@@ -231,6 +196,7 @@ var AppMeasurementCustom = {
             eventsArr.push('event47=' + s.getLoadTime());
         
             // Add engagement tracking (event92)
+            // TODO: move into custom fxn.
             if(s.mainCGovIndex >= 0) {
                 try {
                     if (typeof (window.NCIEngagementPageLoadComplete) === 'undefined' || !window.NCIEngagementPageLoadComplete) {
@@ -437,13 +403,47 @@ var AppMeasurementCustom = {
             return campaign;
         }
 
+        /**
+         * Build out additional tracking values for page name.
+         */
+        s.setPageNameAdditions = function() {
+            let s = this;
+            let pageNameAdditions = [];
+            let pageNum = s.Util.getQueryParam('page');
+
+            // Add audience.
+            if (s.prop7) {
+                pageNameAdditions.push(s.prop7);
+            }
+
+            // Add dictionary types.
+            if (s.localPageName.indexOf("dictionaries") > -1 || s.localPageName.indexOf("diccionario") > -1) {
+                if (s.Util.getQueryParam('expand')) {
+                    pageNameAdditions.push('AlphaNumericBrowse');
+                } else if (s.localPageName.indexOf("/def/") >= 0 ) {
+                    pageNameAdditions.push('Definition');
+                }
+            }
+
+            // Add page number query parameter value.
+            if (pageNum) {
+                pageNameAdditions.push('Page ' + pageNum.toString());
+            }
+
+            // Concatenate pageName with any additional strings.
+            if(pageNameAdditions.length > 0) {
+                s.localPageName += " - " + pageNameAdditions.join(', ');
+            }
+        }
+
+
         /** 
          * Dynamically add numbered variables (e.g. prop1, eVar8) and values to the 's' object
          * 
          * @param {*} varName 
          * @param {*} selector 
          */
-        s.setNumberedVars = function (varName, selector) {
+        s.setNumberedVars = function(varName, selector) {
             let s = this;
 
             // Get the data element; '.wa-data-element' is the default
