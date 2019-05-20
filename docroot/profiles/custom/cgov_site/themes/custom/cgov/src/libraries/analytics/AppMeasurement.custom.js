@@ -179,21 +179,14 @@ var AppMeasurementCustom = {
             /**
              * Set pageName and eVar1 to localPageName.
              */
-            s.setPageNameAdditions();
+            s.setNciPageNameAdditions();
             s.pageName = s.localPageName;
             s.eVar1 = s.pageName;
             s.mainCGovIndex = AppMeasurementCustom.getMainCGovIndex();
 
             // Social platform.
-            // TODO: update the Adobe plugin.
+            // TODO: update the list provided by Adobe.
             s.socialPlatforms('eVar74');
-
-
-
-
-
-
-
 
             // Set prop64 for percent page viewed - if 0, then set to 'zero'
             s.getPercentPageViewed();
@@ -201,52 +194,6 @@ var AppMeasurementCustom = {
                 s.prop64 = s._ppvInitialPercentViewed + '|' + s._ppvHighestPercentViewed;
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
-                    
-
-
-
-
-
-
-            // Start building event data from existing values on the "s" object
-            var eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
-            var waData = document.querySelector('[class*="wa-data"][data-events]');
-        
-            // Add any events from the metadata
-            if(waData) {
-                var eventData = waData.getAttribute('data-events');
-                if(eventData) eventsArr = eventsArr.concat(eventData.split(','));
-            }
-        
-            // Add the standard load events
-            eventsArr.push('event1');
-            eventsArr.push('event47=' + s.getLoadTime());
-        
-            // Add engagement tracking (event92)
-            // TODO: move into custom fxn.
-            if(s.mainCGovIndex >= 0) {
-                try {
-                    if (typeof (window.NCIEngagementPageLoadComplete) === 'undefined' || !window.NCIEngagementPageLoadComplete) {
-        
-                        // check the cookie
-                        var engagementScore = window.NCIEngagement.getAndResetEngagementCookie();
-        
-                        // add engagement metrics to the page load call, if needed
-                        if (engagementScore && parseInt(engagementScore) > 0) {
-                            eventsArr.push('event92=' + engagementScore);
-                        }
-        
-                        // flag to prevent firing this logic more than once per page load
-                        window.NCIEngagementPageLoadComplete = true;
-                    }
-                } catch (err) {
-                    // console.log(err);
-                }
-            }    
-        
-            // Remove event duplicates and join everything
-            eventsArr = eventsArr.filter(onlyUnique);
-            s.events = eventsArr.join(',');
 
             // Set channel 
             s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
@@ -261,14 +208,15 @@ var AppMeasurementCustom = {
             s.prop25 = getNciMetaTagContent('[name="dcterms.issued"]');
             
             // Set prop44 & eVar44 to 'group'
-            s.prop44 = s.eVar44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
+            s.prop44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
+            s.eVar44 = s.prop44;
 
             // Set concatenated events list.
-            // s.setNciEvents();
+            s.setNciEvents();
 
             // Set props and eVars from data attributes.
-            s.setNumberedVars('prop');
-            s.setNumberedVars('evar');            
+            s.setNciNumberedVars('prop');
+            s.setNciNumberedVars('evar');            
         }
         s.doPlugins=s_doPlugins 
         
@@ -436,7 +384,7 @@ var AppMeasurementCustom = {
         /**
          * Build out additional tracking values for page name.
          */
-        s.setPageNameAdditions = function() {
+        s.setNciPageNameAdditions = function() {
             let s = this;
             let pageNameAdditions = [];
             let pageNum = s.Util.getQueryParam('page');
@@ -466,18 +414,62 @@ var AppMeasurementCustom = {
             }
         }
 
+        /** 
+         * Build comma-separated string of s.event values.
+         */
+        s.setNciEvents = function() {
+            // Start building event data from existing values on the "s" object
+            let s = this;
+            let eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
+            let waData = document.querySelector('[class*="wa-data"][data-events]');
+        
+            // Add any events from the metadata
+            if(waData) {
+                let eventData = waData.getAttribute('data-events');
+                if (eventData) eventsArr = eventsArr.concat(eventData.split(','));
+            }
+        
+            // Add the standard load events
+            eventsArr.push('event1');
+            eventsArr.push('event47=' + s.getLoadTime());
+        
+            // Add engagement tracking (event92)
+            if(s.mainCGovIndex >= 0) {
+                try {
+                    if (typeof (window.NCIEngagementPageLoadComplete) === 'undefined' || !window.NCIEngagementPageLoadComplete) {
+        
+                        // check the cookie
+                        let engagementScore = window.NCIEngagement.getAndResetEngagementCookie();
+        
+                        // add engagement metrics to the page load call, if needed
+                        if (engagementScore && parseInt(engagementScore) > 0) {
+                            eventsArr.push('event92=' + engagementScore);
+                        }
+        
+                        // flag to prevent firing this logic more than once per page load
+                        window.NCIEngagementPageLoadComplete = true;
+                    }
+                } catch (err) {
+                    // console.log(err);
+                }
+            }    
+        
+            // Remove event duplicates and join everything
+            eventsArr = eventsArr.filter((item, index) => eventsArr.indexOf(item) === index);
+            s.events = eventsArr.join(',');
+        }
 
         /** 
-         * Dynamically add numbered variables (e.g. prop1, eVar8) and values to the 's' object
+         * Dynamically add numbered variables (e.g. prop1, eVar8) and values to the 's' object.
          * 
          * @param {*} varName 
          * @param {*} selector 
          */
-        s.setNumberedVars = function(varName, selector) {
-            let s = this;
+        s.setNciNumberedVars = function(varName, selector) {
 
             // Get the data element; '.wa-data-element' is the default
             selector = selector || '.wa-data-element';
+            let s = this;
             let waData = document.querySelector(selector);
         
             if(varName && waData) {
@@ -490,13 +482,6 @@ var AppMeasurementCustom = {
                     }
                 }
             }
-        }
-
-        /**
-         * Utility function to remove duplicaes.
-         */ 
-        function onlyUnique(value, index, self) { 
-            return self.indexOf(value) === index;
         }
                 
         /************************** PLUGINS SECTION *************************/
