@@ -203,20 +203,13 @@ var AppMeasurementCustom = {
 
             /**
              * TODO: track these tags:
-             * og:url
-             * dcterms.coverage
-             * dcterms.isReferencedBy
-             * dcterms.audience
-             * dcterms.accrualMethod
-             * totalResults
-             * <dfn data-cdr-id=*>
+             * dcterms.coverage (suites)
+             * dcterms.isReferencedBy (events)
+             * dcterms.audience (prop7)
+             * dcterms.accrualMethod (search/listing type)
+             * totalResults (eVar10)
+             * <dfn data-cdr-id=*> (prop/eVar16)
              */ 
-
-            // Set channel 
-            s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
-            
-            // Set pageType 
-            s.pageType = getNciMetaTagContent('[name="dcterms.type"]');
             
             // Set prop6 to short title
             s.prop6 = getNciMetaTagContent('[property="og:title"]');
@@ -227,6 +220,12 @@ var AppMeasurementCustom = {
             // Set prop44 & eVar44 to 'group'
             s.prop44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
             s.eVar44 = s.prop44;
+
+            // Set channel 
+            s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
+            
+            // Set pageType 
+            s.pageType = getNciMetaTagContent('[name="dcterms.type"]');
 
             // Set concatenated events list.
             s.setNciEvents();
