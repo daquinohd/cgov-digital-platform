@@ -200,7 +200,28 @@ var AppMeasurementCustom = {
                 s.prop64 = s._ppvInitialPercentViewed + '|' + s._ppvHighestPercentViewed;
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
-            
+
+
+
+
+
+            /**
+             * TODO: the tags below will be implemented in separate tickets when the components
+             * are built on dev. 
+             */
+            // // Will be used to set additional suite values, if needed
+            // s_resultsCount = getNciMetaTagContent('[property="dcterms.coverage"]');
+            // // Will be used to populate eVar10, listing, CTS, and search values.
+            // s_resultsCount = getNciMetaTagContent('totalResults,[property="dcterms.extent"]');
+            // // Will be used to populate multiple values on CTS, trial listing, trial detail, & redirect CT pages.
+            // s_ctSearchType = getNciMetaTagContent('[property="dcterms.accrualMethod"]');
+            // // Will be used to populate prop/eVar16, dictionary pages, definition pages.
+            // s_cdrId = getNciDataAttr('dfn[data-cdr-id]', 'cdrId');
+
+
+
+
+
             // Set short title, pub date, and content group from meta tags.
             s.prop6 = getNciMetaTagContent('[property="og:title"]');
             s.prop25 = getNciMetaTagContent('[name="dcterms.issued"]');
@@ -250,6 +271,20 @@ var AppMeasurementCustom = {
                 if (metaTag.content) { return metaTag.content; }
             }
             return metaTag;
+        }
+
+        /**
+         * Check for meta attribute and get content if exists.
+         * 
+         * @param {*} selector 
+         */
+        function getNciDataAttr (selector, attribute) {
+            let elem = document.querySelector(selector);
+            let value = null;
+            if (elem) {
+                value = elem.dataset[attribute] || null;
+            }
+            return value;
         }
 
         /**
