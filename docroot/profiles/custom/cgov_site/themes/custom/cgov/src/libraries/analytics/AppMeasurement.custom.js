@@ -204,7 +204,6 @@ var AppMeasurementCustom = {
             /**
              * TODO: track these tags:
              * dcterms.coverage (suites)
-             * dcterms.isReferencedBy (events)
              * dcterms.audience (prop7)
              * dcterms.accrualMethod (search/listing type)
              * totalResults (eVar10)
@@ -437,11 +436,17 @@ var AppMeasurementCustom = {
             // Start building event data from existing values on the "s" object
             let s = this;
             let eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
-            let waData = document.querySelector('[class*="wa-data"][data-events]');
+            let headData = getNciMetaTagContent('[name="dcterms.isReferencedBy"]');
+            let elemData = document.querySelector('[class*="wa-data"][data-events]');
         
-            // Add any events from the metadata
-            if(waData) {
-                let eventData = waData.getAttribute('data-events');
+            // Add any events from dcterms.isReferencedBy meta tag.
+            if(headData) {
+                eventsArr = eventsArr.concat(headData.split(','));
+            }
+
+            // Add any events from the on the on the wa-data class.
+            if(elemData) {
+                let eventData = elemData.getAttribute('data-events');
                 if (eventData) eventsArr = eventsArr.concat(eventData.split(','));
             }
         
