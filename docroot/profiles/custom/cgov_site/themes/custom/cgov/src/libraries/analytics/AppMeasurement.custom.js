@@ -3,7 +3,11 @@ import { attachEvents } from 'Core/libraries/analytics/nci-analytics-functions';
 
 var AppMeasurementCustom = {
 
-    /** Send tagging requests to correct server and set namespace. */ 
+    /** 
+     * Send tagging requests to correct server and set namespace.
+     * WARNING: Changing any of the below variables will cause drastic
+     * changes to how your visitor data is collected. Changes should only be
+     * made when instructed to do so by your account manager.*/
     trackingServer: 'nci.122.2o7.net',
     visitorNamespace: 'nci',
 
@@ -72,6 +76,8 @@ var AppMeasurementCustom = {
      */
     setScodeProperties: function(s) {
 
+        /************************** CONFIG SECTION **************************/
+        
         /*
          * Set the report suite value(s).
          * s.account and s_account (report suites) should be defined before this function is called.
@@ -222,7 +228,7 @@ var AppMeasurementCustom = {
         
 
         /************************* FUNCTIONS SECTION ************************/
-        /*             Custom NCI functions can be added here.              */
+        /* Custom NCI functions can be added here.                          */
         /********************************************************************/        
 
         /**
@@ -485,7 +491,7 @@ var AppMeasurementCustom = {
         }
                 
         /************************** PLUGINS SECTION *************************/
-        /*            Adobe / 3rd party plugins can be added here.          */
+        /* Adobe / 3rd party plugins can be added here.                     */
         /********************************************************************/
         /*
          * Plugin: getValOnce_v1.0
@@ -549,7 +555,7 @@ var AppMeasurementCustom = {
 
         s.socPlatList="facebook.com>Facebook|twitter.com>Twitter|t.co/>Twitter|youtube.com>Youtube|clipmarks.com>Clipmarks|dailymotion.com>Dailymotion|delicious.com>Delicious|digg.com>Digg|diigo.com>Diigo|flickr.com>Flickr|flixster.com>Flixster|fotolog.com>Fotolog|friendfeed.com>FriendFeed|google.com/buzz>Google Buzz|buzz.googleapis.com>Google Buzz|plus.google.com>Google+|hulu.com>Hulu|identi.ca>identi.ca|ilike.com>iLike|intensedebate.com>IntenseDebate|myspace.com>MySpace|newsgator.com>Newsgator|photobucket.com>Photobucket|plurk.com>Plurk|slideshare.net>SlideShare|smugmug.com>SmugMug|stumbleupon.com>StumbleUpon|tumblr.com>Tumblr|vimeo.com>Vimeo|wordpress.com>WordPress|xanga.com>Xanga|metacafe.com>Metacafe|";
 
-        //append list
+        // append list
         s.apl=new Function("L","v","d","u","var s=this,m=0;if(!L)L='';if(u){var i,n,a=s.split(L,d);for(i=0;i<a.length;i++){n=a[i];m=m||(u==1?(n==v):(n.toLowerCase()==v.toLowerCase()));}}if(!m)L=L?L+d+v:v;return L");
 
         // split v1.5
@@ -568,6 +574,8 @@ var AppMeasurementCustom = {
         + "){for(y in j){if(i[x]==j[y]){if(s.c_r(c)) r=s.c_r(c);v?s.c_w(c,v,t)"
         + ":s.c_w(c,'no value',t);return r}}}}}else{if(s.c_r(c)) r=s.c_r(c);v?"
         + "s.c_w(c,v,t):s.c_w(c,'no value',t);return r}");
+
+        /****************************** MODULES *****************************/
 
         /*
         * Plugin: custom engagement tracking
