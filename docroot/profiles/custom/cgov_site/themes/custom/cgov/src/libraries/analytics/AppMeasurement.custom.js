@@ -579,8 +579,6 @@ var AppMeasurementCustom = {
         + ":s.c_w(c,'no value',t);return r}}}}}else{if(s.c_r(c)) r=s.c_r(c);v?"
         + "s.c_w(c,v,t):s.c_w(c,'no value',t);return r}");
 
-        /****************************** MODULES *****************************/
-
         /*
         * Plugin: custom engagement tracking
         */
@@ -604,6 +602,24 @@ var AppMeasurementCustom = {
         action:function(){window[engagementObject].doScroll()}}),ae({element:window,event:'mouseover',action:function(){window[engagementObject].doMouse()}}),
         ae({element:window,event:'click',action:function(){window[engagementObject].doClick()}})};
         s.EvoEngagementPlugin(attachEvents);
+
+        /*
+        * Get mapped NCI suite names.
+        */
+        function getNciSuites(){var live_or_other=document.URL.indexOf("www.cancer.gov")>-1?"live":"other",wa_hier1="",wa_hier2="",wa_lang="",
+        AllSuites={nciglobal:{live:"nciglobal",other:"ncidevelopment"},ncienterprise:{live:"ncienterprise",other:"ncienterprise-dev"},
+        "ncienglish-all":{live:"ncienglish-all",other:"ncienglish-all-dev"},"ncispanish-all":{live:"ncispanish-all",other:"ncispanish-all-dev"},
+        ncincidictionary:{live:"ncincidictionary",other:"ncincidictionary-dev"},ncidrugdictionary:{live:"ncidrugdictionary",other:"ncidrugdictionary-dev"},
+        ncinews:{live:"ncinews",other:"ncinews-dev"},nciresearch:{live:"nciresearch",other:"nciresearch-dev"},nciabout:{live:"nciabout",other:"nciabout-dev"},
+        nciclinicaltrials:{live:"nciclinicaltrials",other:"nciclinicaltrials-dev"},ncicancertopics:{live:"ncicancertopics",other:"ncicancertopics-dev"},
+        ncitiposdecancer:{live:"ncitiposdecancer",other:"ncitiposdecancer-dev"},ncinoticias:{live:"ncinoticias",other:"ncinoticias-dev"},
+        ncinuestroinstituto:{live:"ncinuestroinstituto",other:"ncinuestroinstituto-dev"},ncielcancer:{live:"ncielcancer",other:"ncielcancer-dev"},
+        "nciogcr-governmentcongressionalrelations":{live:"nciogcr-governmentcongressionalrelations",other:"nciogcr-govcongressionalrelations-dev"}},
+        AnalyticsMapping={GetSuites:function(e){var n=e.split(","),c="";for(i=0;i<n.length;i++)try{var t=n[i].replace(" ","");
+        c+=AllSuites[t][live_or_other],i<n.length-1&&(c+=",")}catch(i){c+=""}return c}},suiteMeta=document.head.querySelector('[name="dcterms.coverage"]'),
+        suites=suiteMeta?suiteMeta.content:"nciglobal,ncienterprise",s_account=AnalyticsMapping.GetSuites(suites);return s_account;}
+
+        /****************************** MODULES *****************************/
 
         /*
         * AppMeasurement_Module_Media

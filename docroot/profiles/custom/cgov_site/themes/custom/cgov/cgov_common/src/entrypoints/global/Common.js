@@ -13,7 +13,9 @@ import 'core-js/fn/string/starts-with';
 import initializeCustomEventHandler from 'Core/libraries/customEventHandler';
 initializeCustomEventHandler();
 
+import 'Libraries/analytics/analytics';
 import './Common.scss';
+
 import $ from 'jquery';
 import 'Core/libraries/jQueryUIExtensions/jQueryUIExtensions';
 import popupFunctions from 'Libraries/popups/popup_functions';
