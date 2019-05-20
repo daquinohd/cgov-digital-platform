@@ -201,6 +201,17 @@ var AppMeasurementCustom = {
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
 
+            /**
+             * TODO: track these tags:
+             * og:url
+             * dcterms.coverage
+             * dcterms.isReferencedBy
+             * dcterms.audience
+             * dcterms.accrualMethod
+             * totalResults
+             * <dfn data-cdr-id=*>
+             */ 
+
             // Set channel 
             s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
             
