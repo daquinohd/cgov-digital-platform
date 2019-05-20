@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = {
     "Common": path.resolve(__dirname, "src/entrypoints/global/Common.js"),
     "Ckeditor": path.resolve(__dirname, "src/entrypoints/ckeditor/Ckeditor.js"),
-    "Analytics": path.resolve(__dirname, "src/entrypoints/analytics/Analytics.js"),
     "Article": path.resolve(__dirname, "src/entrypoints/article/Article.js"),
     "Homelanding": path.resolve(__dirname, "src/entrypoints/homelanding/Homelanding.js"),
     "PDQ": path.resolve(__dirname, "src/entrypoints/pdq/PDQ.js"),

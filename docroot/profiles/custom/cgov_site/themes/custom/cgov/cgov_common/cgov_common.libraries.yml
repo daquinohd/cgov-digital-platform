@@ -7,7 +7,6 @@ global-styling:
 global-scripts:
   version: 1.x
   js:
-    dist/js/Analytics.js: { preprocess: false }
     dist/js/Common.js: { preprocess: false }
   dependencies:
     - core/jquery
