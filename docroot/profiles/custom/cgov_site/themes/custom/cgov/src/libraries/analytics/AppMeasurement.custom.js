@@ -130,7 +130,7 @@ var AppMeasurementCustom = {
             s.eVar2 = s.prop8;
 
             // Set audience tracking values.
-            s.prop7 = s.getNciAudience() || null;
+            s.prop7 = s.getNciAudience();
             s.eVar7 = s.prop7;
 
             // Set page title tracking values.
@@ -200,31 +200,34 @@ var AppMeasurementCustom = {
                 s.prop64 = s._ppvInitialPercentViewed + '|' + s._ppvHighestPercentViewed;
                 s.prop64 = (s.prop64=='0') ? 'zero' : s.prop64;
             }
-
-            /**
-             * TODO: track these tags:
-             * dcterms.coverage (suites)
-             * dcterms.isReferencedBy (events)
-             * dcterms.audience (prop7)
-             * dcterms.accrualMethod (search/listing type)
-             * totalResults (eVar10)
-             * <dfn data-cdr-id=*> (prop/eVar16)
-             */ 
             
-            // Set prop6 to short title
+            // Set short title, pub date, and content group from meta tags.
             s.prop6 = getNciMetaTagContent('[property="og:title"]');
-            
-            // Set prop25 to date published
             s.prop25 = getNciMetaTagContent('[name="dcterms.issued"]');
-            
-            // Set prop44 & eVar44 to 'group'
             s.prop44 = getNciMetaTagContent('[name="dcterms.isPartOf"]');
             s.eVar44 = s.prop44;
 
-            // Set channel 
+
+
+            /**
+             * TODO: the tags below will be implemented in separate tickets when the components
+             * are built on dev.
+                // Will be used to set additional suite values, if needed
+                s_resultsCount = getNciMetaTagContent('[property="dcterms.coverage"]');
+                // Will be used to populate eVar10, listing, CTS, and search values.
+                s_resultsCount = getNciMetaTagContent('totalResults,[property="dcterms.extent"]');
+                // Will be used to populate multiple values on CTS, trial listing, trial detail, & redirect CT pages.
+                s_ctSearchType = getNciMetaTagContent('[property="dcterms.accrualMethod"]');
+                // Will be used to populate prop/eVar16, dictionary pages, definition pages.
+                s_cdrId = getNciDataAttr('dfn[data-cdr-id]', 'cdrId');
+             */
+
+
+
+            // Set channel based on dcterms.subject meta tag.
             s.channel = getNciMetaTagContent('[name="dcterms.subject"]');
             
-            // Set pageType 
+            // Set pageType based on dcterms.type meta tag.
             s.pageType = getNciMetaTagContent('[name="dcterms.type"]');
 
             // Set concatenated events list.
@@ -259,11 +262,25 @@ var AppMeasurementCustom = {
          * @param {*} selector 
          */
         function getNciMetaTagContent (selector) {
-            if(document.head.querySelector(selector) != null) {
-                return document.head.querySelector(selector).content;
-            } else {
-                return '';
+            let metaTag = document.head.querySelector(selector) || null;
+            if (metaTag) {
+                if (metaTag.content) { return metaTag.content; }
             }
+            return metaTag;
+        }
+
+        /**
+         * Check for meta attribute and get content if exists.
+         * 
+         * @param {*} selector 
+         */
+        function getNciDataAttr (selector, attribute) {
+            let elem = document.querySelector(selector);
+            let value = null;
+            if (elem) {
+                value = elem.dataset[attribute] || null;
+            }
+            return value;
         }
 
         /**
@@ -339,29 +356,31 @@ var AppMeasurementCustom = {
          */
         s.getNciAudience = function() {
             let s = this;
-            let audience = s.Util.getQueryParam('version');
-            switch (audience.toLowerCase())
-            {
-                case 'patient':
-                case 'patients':
-                case '0':
-                    audience = 'Patient';
-                    break;
-                case 'healthprofessional':
-                case 'healthprofessionals':
-                case '1':
-                    audience = 'Health professional';
-                    break;
-                default:
-                    if (s.localPageName.indexOf('patient') > -1)
+            let audience = getNciMetaTagContent('[name="dcterms.audience"]') || s.Util.getQueryParam('version');
+            if (audience) {
+                switch (audience.toLowerCase())
+                {
+                    case 'patient':
+                    case 'patients':
+                    case '0':
                         audience = 'Patient';
-                    if (s.localPageName.indexOf('healthprofessional') > -1 ||
-                        s.localPageName.indexOf('/hp/') > -1)
+                        break;
+                    case 'healthprofessional':
+                    case 'healthprofessionals':
+                    case '1':
                         audience = 'Health professional';
-                    break;
+                        break;
+                    default:
+                        if (s.localPageName.indexOf('patient') > -1)
+                            audience = 'Patient';
+                        if (s.localPageName.indexOf('healthprofessional') > -1 ||
+                            s.localPageName.indexOf('/hp/') > -1)
+                            audience = 'Health professional';
+                        break;
+                }
+                return audience;
             }
-            // TODO: get audience from meta tag & verify if query params are still used.
-            return audience;
+            else { return null; }
         }
 
         /**
@@ -437,11 +456,17 @@ var AppMeasurementCustom = {
             // Start building event data from existing values on the "s" object
             let s = this;
             let eventsArr = (s.events && s.events.length > 0) ? s.events.split(',') : [];
-            let waData = document.querySelector('[class*="wa-data"][data-events]');
+            let headData = getNciMetaTagContent('[name="dcterms.isReferencedBy"]');
+            let elemData = document.querySelector('[class*="wa-data"][data-events]');
         
-            // Add any events from the metadata
-            if(waData) {
-                let eventData = waData.getAttribute('data-events');
+            // Add any events from dcterms.isReferencedBy meta tag.
+            if(headData) {
+                eventsArr = eventsArr.concat(headData.split(','));
+            }
+
+            // Add any events from the on the on the wa-data class.
+            if(elemData) {
+                let eventData = elemData.getAttribute('data-events');
                 if (eventData) eventsArr = eventsArr.concat(eventData.split(','));
             }
         
