@@ -76,50 +76,6 @@ function cgov_core_block_build_alter(array &$build, BlockPluginInterface $block)
 }
 
 /**
- * Implements hook_ENTITY_insert().
- *
- * Perform any actions that are required when adding a new language.
- * During the install process, only EN is enabled, so use this hook
- * to add any other translations or other things needed by a new
- * language when it gets enabled.
- *
- * Adds new Public Use translation when a new language is installed.
- */
-function cgov_core_configurable_language_insert($entity) {
-  $public_use['es'] = <<<EOMarkup
-<p><em>Si desea copiar algo de este texto, vea <a href="/espanol/politicas/derechos-de-autor-y-uso">Derechos de autor y uso de imágenes y contenido</a> sobre instrucciones de derechos de autor y permisos. En caso de reproducción digital permitida, por favor, dé crédito al Instituto Nacional del Cáncer como su creador, y enlace al producto original del NCI usando el título original del producto; por ejemplo,  “[current-page:title] publicada originalmente por el Instituto Nacional del Cáncer.”</em></p>
-EOMarkup;
-
-  $langcode = $entity->id();
-
-  // If no translation defined, exit hook.
-  if (!isset($public_use[$langcode])) {
-    return;
-  }
-
-  // Get the existing English PublicUse block to add the translation.
-  $query = \Drupal::entityQuery('block_content');
-  $query->condition('info', 'Public Use')
-    ->condition('langcode', 'en');
-  $result = $query->execute();
-  if (count($result)) {
-    $eid = array_shift($result);
-    $block = entity_load('block_content', $eid);
-    $title = $block->info->value . " - " . $langcode;
-    // Create translation if it doesn't already exist.
-    if (!$block->hasTranslation($langcode)) {
-      $block_translated = $block->addTranslation($langcode, [
-        'id' => "public_use__$langcode",
-        'info' => $title,
-        'body' => ['value' => $public_use[$langcode], 'format' => 'streamlined'],
-      ]);
-      $block_translated->save();
-      drupal_set_message("Added Public Use block_content: $title");
-    }
-  }
-}
-
-/**
  * Implements hook_node_access().
  */
 function cgov_core_node_access(NodeInterface $node, $op, AccountInterface $account) {
