@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - cgov_core
+  theme:
+    - cgov_common
+id: cgov_common_public_use
+theme: cgov_common
+region: public_use
+weight: 0
+provider: null
+plugin: cgov_public_use
+settings:
+  id: cgov_public_use
+  label: 'Public Use'
+  provider: cgov_core
+  label_display: '0'
+visibility: {  }
