@@ -188,3 +188,6 @@ msgstr ""
 "y enlace al producto original del NCI usando el título original del "
 "producto; por ejemplo, \“[current-page:title] publicada "
 "originalmente por el Instituto Nacional del Cáncer.\”"
+
+msgid "National Cancer Institute"
+msgstr "Instituto Nacional Del Cáncer"
