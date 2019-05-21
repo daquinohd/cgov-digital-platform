@@ -1,7 +1,8 @@
 <p>
   <em>
-    {% trans %}
-      If you would like to reproduce some or all of this content, see <a href="/policies/copyright-reuse">Reuse of NCI Information</a> for guidance about copyright and permissions. In the case of permitted digital reproduction, please credit the National Cancer Institute as the source and link to the original NCI product using the original product's title; e.g., "[current-page:title] was originally published by the National Cancer Institute.”
-    {% endtrans %}
+      {% trans %}
+        If you would like to reproduce some or all of this content, see <a href="/policies/copyright-reuse">Reuse of NCI Information</a> for guidance about copyright and permissions. In the case of permitted digital reproduction, please credit the National Cancer Institute as the source and link to the original NCI product using the original product's title; e.g.,
+      {% endtrans %} 
+      "{{ content.page_title }} {% trans %}was originally published by the National Cancer Institute.{% endtrans %}”
   </em>
 </p>
