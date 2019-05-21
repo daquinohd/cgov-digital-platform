@@ -205,7 +205,6 @@ var AppMeasurementCustom = {
 
 
 
-
             /**
              * TODO: the tags below will be implemented in separate tickets when the components
              * are built on dev. 
@@ -218,7 +217,6 @@ var AppMeasurementCustom = {
             // s_ctSearchType = getNciMetaTagContent('[property="dcterms.accrualMethod"]');
             // // Will be used to populate prop/eVar16, dictionary pages, definition pages.
             // s_cdrId = getNciDataAttr('dfn[data-cdr-id]', 'cdrId');
-
 
 
 
