@@ -181,7 +181,7 @@ class BlogManager implements BlogManagerInterface {
       foreach ($taxonomy as $taxon) {
         $tid = $taxon->tid;
         $owner_nid = $this->getTaxonomyStorage()->load($tid)->get('field_owner_blog')->target_id;
-        if ($curr_nid === $owner_nid) {
+        if ($curr_nid == $owner_nid) {
           $categories[] = $taxon;
         }
       }
