@@ -30,6 +30,8 @@
   type: "cgov_blog_post"
   title:
     value: "Immunotherapy Effective in Alveolar Soft Part Sarcoma"
+  title__ES:
+    value: 'Inmunoterapia eficaz en el sarcoma alveolar de partes blandas'
   langcode: en
   status: 1
   moderation_state:
@@ -65,6 +67,13 @@
             <h2 id="ui-id-4">Future Research Directions</h2>
             <p>In the future, “these results may encourage investigators to consider [patients with] ASPS for other immunotherapy trials. And I think it will also lead to more trials [just] in this rare tumor subtype,” said Dr. O’Sullivan Coyne, who received the CTOS Young Investigator Award for her work on the study.</p>
             <p>At the CTOS meeting, researchers from several different countries expressed interest in testing atezolizumab to treat ASPS, including in combination with other therapies as well as in different sequences of administration, Dr. Chen noted.</p>
+  body__ES:
+    - format: "full_html"
+      value: |
+            <p>Las personas con sarcoma de parte blanda alveolar avanzada (ASPS, por sus siglas en inglés), un cáncer raro, parecen beneficiarse de un tipo de inmunoterapia llamada inhibidor del punto de control inmunitario, según los resultados de un pequeño ensayo clínico.</p>
+            <p>Pocos tratamientos probados en el pasado en personas con ASPS han mostrado algún efecto. La excepción ha sido una clase de medicamentos llamados inhibidores de la tirosina quinasa (TKI, por sus siglas en inglés), que incluyen sorafenib (Nexavar) y cediranib (Recentin). Aunque los tumores de algunos pacientes se reducen después del tratamiento con estos medicamentos, la mayoría de los cánceres finalmente dejan de responder al tratamiento.</p>
+            <p>En el nuevo ensayo dirigido por el NCI, los tumores se contrajeron o dejaron de crecer después del tratamiento con el inhibidor del punto de control atezolizumab (Tecentriq).</p>
+            <p>"Para los pacientes cuya enfermedad ha hecho metástasis, es emocionante que ahora haya una nueva clase de medicamentos que tengan actividad [contra el cáncer]", dijo Scott Schuetze, MD, Ph.D., que se especializa en el tratamiento de sarcomas en la Universidad de Michigan. pero no participó en el estudio.</p>
   field_browser_title:
     value: 'Immunotherapy Effective in Alveolar Soft Part Sarcoma'
   field_card_title:
@@ -274,13 +283,6 @@
   field_feedburner_url:
     - value: 'https://feedburner-test.cancer.gov/cancercurrents'
   field_featured_posts:
-    - target_type: 'node'
-      '#process':
-        callback: 'reference'
-        args:
-          - 'node'
-          - type: 'cgov_blog_post'
-            title: 'Immunotherapy Effective in Alveolar Soft Part Sarcoma'
     - target_type: 'node'
       '#process':
         callback: 'reference'

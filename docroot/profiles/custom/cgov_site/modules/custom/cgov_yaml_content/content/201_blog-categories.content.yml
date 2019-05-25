@@ -211,8 +211,6 @@
   name: "Treatment"
   description: 
     value: 'Cancer treatment related news, with context from leading experts. Includes articles on new therapies, treatment side effects, and important trends in treatment-related research.'
-  field_pretty_url:
-    value: "treatment"
   field_owner_blog:
     - target_type: 'node'
       '#process':
