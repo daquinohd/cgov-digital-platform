@@ -73,7 +73,12 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
     // Return blog category elements. TODO: clean up twig.
     $blog_categories = $this->drawBlogCategories();
     $build = [
-      '#blog_categories' => $blog_categories,
+      'blog_categories' => $blog_categories,
+      '#cache' => [
+        'tags' => [
+          'node_list',
+        ],
+      ],
     ];
     return $build;
   }
@@ -102,8 +107,8 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    */
   private function getCategoryUrl($tid) {
     $path = $this->blogManager->getSeriesPath();
-    $pretty_url = $this->blogManager->getTaxonomyStorage()->load($tid)->get('field_pretty_url')->value;
-    return $path . '?topic=' . $pretty_url;
+    $param = $this->blogManager->getTaxonomyStorage()->load($tid)->get('field_pretty_url')->value ?? $tid;
+    return $path . '?topic=' . $param;
   }
 
 }
