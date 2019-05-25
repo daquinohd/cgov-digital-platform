@@ -215,10 +215,17 @@ class BlogManager implements BlogManagerInterface {
 
     // Create an array of categories that match the owner Blog Series.
     foreach ($topics as $topic) {
+      // Build tid-based titles.
       $tid = $topic->tid;
-      $url = $this->getTaxonomyStorage()->load($tid)->field_pretty_url->value ?? $tid;
       $name = $this->getTaxonomyStorage()->load($tid)->getName();
-      $names[$url] = $name;
+      $names[$tid] = $name;
+
+      // Build url-based titles.
+      $url = $this->getTaxonomyStorage()->load($tid)->field_pretty_url->value ?? FALSE;
+      if (isset($url)) {
+        $names[$url] = $name;
+      }
+
     }
     return $names;
   }
