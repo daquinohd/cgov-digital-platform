@@ -222,7 +222,7 @@ class BlogManager implements BlogManagerInterface {
 
       // Build url-based titles.
       $url = $this->getTaxonomyStorage()->load($tid)->field_pretty_url->value ?? FALSE;
-      if (isset($url)) {
+      if ($url) {
         $names[$url] = $name;
       }
 

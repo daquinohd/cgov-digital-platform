@@ -260,6 +260,12 @@
           - 'taxonomy_term'
           - vid: 'cgov_blog_topics'
             name: 'Clinical Trial Results'
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Treatment'
 
 - entity: "node"
   type: "cgov_blog_post"
@@ -1184,7 +1190,7 @@
         args:
           - 'taxonomy_term'
           - vid: 'cgov_blog_topics'
-            name: 'prevention'
+            name: 'Prevention'
 
 - entity: "node"
   type: "cgov_blog_post"
