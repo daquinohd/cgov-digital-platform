@@ -74,6 +74,11 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
     $blog_categories = $this->drawBlogCategories();
     $build = [
       'blog_categories' => $blog_categories,
+      '#cache' => [
+        'tags' => [
+          'node_list',
+        ],
+      ],
     ];
     return $build;
   }

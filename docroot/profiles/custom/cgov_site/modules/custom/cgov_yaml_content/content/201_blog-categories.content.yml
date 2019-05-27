@@ -211,8 +211,6 @@
   name: "Treatment"
   description: 
     value: 'Cancer treatment related news, with context from leading experts. Includes articles on new therapies, treatment side effects, and important trends in treatment-related research.'
-  field_topic_pretty_url:
-    value: "treatment"
   field_owner_blog:
     - target_type: 'node'
       '#process':
@@ -225,8 +223,6 @@
 - entity: "taxonomy_term"
   vid: "cgov_blog_topics"
   name: "RAS Conversations: Immuno-Oncology"
-  field_topic_pretty_url:
-    value: "immuno-oncology"
   field_owner_blog:
     - target_type: 'node'
       '#process':
@@ -253,8 +249,6 @@
 - entity: "taxonomy_term"
   vid: "cgov_blog_topics"
   name: "KRAS"
-  field_topic_pretty_url:
-    value: "kras"
   field_owner_blog:
     - target_type: 'node'
       '#process':
@@ -267,8 +261,6 @@
 - entity: "taxonomy_term"
   vid: "cgov_blog_topics"
   name: "Cancer Susceptibilities"
-  field_topic_pretty_url:
-    value: "cancer-susceptibilities"
   field_owner_blog:
     - target_type: 'node'
       '#process':
