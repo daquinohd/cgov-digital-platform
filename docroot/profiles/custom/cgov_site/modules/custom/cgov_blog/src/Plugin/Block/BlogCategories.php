@@ -102,7 +102,7 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    */
   private function getCategoryUrl($tid) {
     $path = $this->blogManager->getSeriesPath();
-    $param = $this->blogManager->getTaxonomyStorage()->load($tid)->get('field_pretty_url')->value ?? $tid;
+    $param = $this->blogManager->getTaxonomyStorage()->load($tid)->get('field_topic_pretty_url')->value ?? $tid;
     return $path . '?topic=' . $param;
   }
 
