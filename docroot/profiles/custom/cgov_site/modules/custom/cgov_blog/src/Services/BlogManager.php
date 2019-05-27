@@ -3,6 +3,7 @@
 namespace Drupal\cgov_blog\Services;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Path\AliasManagerInterface;
@@ -19,6 +20,13 @@ class BlogManager implements BlogManagerInterface {
    * @var Drupal\Core\Entity\Query\QueryFactory
    */
   protected $entityQuery;
+
+  /**
+   * The entity repository.
+   *
+   * @var \Drupal\Core\Entity\EntityRepositoryInterface
+   */
+  protected $entityRepository;
 
   /**
    * The entity type manager.
@@ -46,6 +54,8 @@ class BlogManager implements BlogManagerInterface {
    *
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
    *   An entity query.
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+   *   The entity repository.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_matcher
@@ -55,11 +65,13 @@ class BlogManager implements BlogManagerInterface {
    */
   public function __construct(
     QueryFactory $entity_query,
+    EntityRepositoryInterface $entity_repository,
     EntityTypeManagerInterface $entity_type_manager,
     RouteMatchInterface $route_matcher,
     AliasManagerInterface $alias_manager
   ) {
     $this->entityQuery = $entity_query;
+    $this->entityRepository = $entity_repository;
     $this->entityTypeManager = $entity_type_manager;
     $this->routeMatcher = $route_matcher;
     $this->aliasManager = $alias_manager;
@@ -134,6 +146,18 @@ class BlogManager implements BlogManagerInterface {
   public function loadBlogTopic($tid) {
     $taxonomy_storage = $this->entityTypeManager->getStorage('taxonomy_term');
     $topic = $taxonomy_storage->load($tid) ?? NULL;
+
+    /*
+     * Retrieve the translated taxonomy term in specified
+     * language ($curr_langcode) with fallback to default
+     * language if translation not exists.
+     */
+    if ($topic != NULL) {
+      $lang = $this->getCurrentLang();
+      $topic = $this->entityRepository->getTranslationFromContext($topic, $lang);
+    }
+
+    // TODO: fix link names, link labels, translated path.
     return $topic;
   }
 
