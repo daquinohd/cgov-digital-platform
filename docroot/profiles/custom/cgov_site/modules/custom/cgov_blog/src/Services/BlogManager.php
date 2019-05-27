@@ -126,14 +126,27 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * Create a new taxonomy storage instance.
+   * Get a single topic taxonomy object.
    *
-   * @return Drupal\Core\Entity\EntityStorageInterface
-   *   The taxonomy storage or NULL.
+   * @param string $tid
+   *   A taxonomy term ID.
    */
-  public function getTaxonomyStorage() {
+  public function loadBlogTopic($tid) {
     $taxonomy_storage = $this->entityTypeManager->getStorage('taxonomy_term');
-    return isset($taxonomy_storage) ? $taxonomy_storage : NULL;
+    $topic = $taxonomy_storage->load($tid) ?? NULL;
+    return $topic;
+  }
+
+  /**
+   * Get all single topic taxonomy objects.
+   *
+   * @param string $vid
+   *   A vocabulary ID.
+   */
+  public function loadAllBlogTopics($vid) {
+    $taxonomy_storage = $this->entityTypeManager->getStorage('taxonomy_term');
+    $topics = $taxonomy_storage->loadTree($vid) ?? NULL;
+    return $topics;
   }
 
   /**
@@ -174,13 +187,13 @@ class BlogManager implements BlogManagerInterface {
   public function getSeriesCategories() {
     $categories = [];
     $curr_nid = $this->getSeriesId();
-    $taxonomy = $this->getTaxonomyStorage()->loadTree('cgov_blog_topics');
+    $taxonomy = $this->loadAllBlogTopics('cgov_blog_topics');
 
     // Create an array of categories that match the owner Blog Series.
     if (count($taxonomy) > 0) {
       foreach ($taxonomy as $taxon) {
         $tid = $taxon->tid;
-        $owner_nid = $this->getTaxonomyStorage()->load($tid)->get('field_owner_blog')->target_id;
+        $owner_nid = $this->loadBlogTopic($tid)->get('field_owner_blog')->target_id;
         if ($curr_nid == $owner_nid) {
           $categories[] = $taxon;
         }
@@ -199,8 +212,8 @@ class BlogManager implements BlogManagerInterface {
     // Create an array of categories that match the owner Blog Series.
     foreach ($topics as $topic) {
       $tid = $topic->tid;
-      $url = $this->getTaxonomyStorage()->load($tid)->field_topic_pretty_url->value ?? $tid;
-      $desc = $this->getTaxonomyStorage()->load($tid)->description->value;
+      $url = $this->loadBlogTopic($tid)->field_topic_pretty_url->value ?? $tid;
+      $desc = $this->loadBlogTopic($tid)->description->value;
       $descriptions[$url] = $desc;
     }
     return $descriptions;
@@ -217,11 +230,11 @@ class BlogManager implements BlogManagerInterface {
     foreach ($topics as $topic) {
       // Build tid-based titles.
       $tid = $topic->tid;
-      $name = $this->getTaxonomyStorage()->load($tid)->getName();
+      $name = $this->loadBlogTopic($tid)->getName();
       $names[$tid] = $name;
 
       // Build url-based titles.
-      $url = $this->getTaxonomyStorage()->load($tid)->field_topic_pretty_url->value ?? FALSE;
+      $url = $this->loadBlogTopic($tid)->field_topic_pretty_url->value ?? FALSE;
       if ($url) {
         $names[$url] = $name;
       }
