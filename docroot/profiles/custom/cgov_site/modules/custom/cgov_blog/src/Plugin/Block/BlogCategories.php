@@ -70,7 +70,7 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
     // Empty build object.
     $build = [];
 
-    // Return blog category elements. TODO: clean up twig.
+    // Return blog category elements.
     $blog_categories = $this->drawBlogCategories();
     $build = [
       'blog_categories' => $blog_categories,
@@ -91,7 +91,7 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
   private function drawBlogCategories() {
     $category_links = [];
     // Get all of the associated categories and build URL paths for this series.
-    $categories = $this->blogManager->getSeriesCategories();
+    $categories = $this->blogManager->getSeriesTopics();
     foreach ($categories as $cat) {
       $pretty_url = $this->getCategoryUrl($cat->tid);
       $category_links[$cat->name] = $pretty_url;
@@ -106,10 +106,10 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    *   A taxonomy term ID.
    */
   private function getCategoryUrl($tid) {
-    $path = $this->blogManager->getSeriesPath();
-    $taxon = $this->blogManager->getTaxonomyStorage()->load($tid);
-    $param = $taxon->get('field_topic_pretty_url')->value ?? $tid;
-    return $path . '?topic=' . $param;
+    $taxon = $this->blogManager->loadBlogTopic($tid);
+    $param['topic'] = $taxon->get('field_topic_pretty_url')->value ?? $tid;
+    $path = $this->blogManager->getSeriesPath($param);
+    return $path;
   }
 
 }
