@@ -70,7 +70,7 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
     // Empty build object.
     $build = [];
 
-    // Return blog category elements. TODO: clean up twig.
+    // Return blog category elements.
     $blog_categories = $this->drawBlogCategories();
     $build = [
       'blog_categories' => $blog_categories,
