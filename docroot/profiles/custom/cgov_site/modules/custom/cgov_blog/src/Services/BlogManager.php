@@ -186,12 +186,8 @@ class BlogManager implements BlogManagerInterface {
    * The the URL path for the blog series.
    */
   public function getSeriesPath() {
-    $nid = $this->getSeriesId();
-    $lang = $this->getCurrentLang();
-    $path = $this->aliasManager->getAliasByPath('/node/' . $nid, $lang);
-    if ($this->getCurrentLang() == 'es') {
-      $path = '/espanol' . $path;
-    }
+    $series = $this->getSeriesEntity();
+    $path = $series->toUrl('canonical')->toString();
     return $path;
   }
 
