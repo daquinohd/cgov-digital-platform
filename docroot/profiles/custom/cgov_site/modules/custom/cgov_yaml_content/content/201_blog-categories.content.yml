@@ -13,6 +13,20 @@
           - 'node'
           - type: 'cgov_blog_series'
             title: 'Cancer Currents Blog'
+  name__ES:
+    value: 'Biología'
+  description__ES:
+    value: 'Noticias de investigación sobre la biología del cáncer, con el contexto de expertos del NCI y de otros lugares. Los temas incluyen metástasis del cáncer, el microambiente del tumor y nuevos objetivos de terapias para el cáncer.'
+  field_topic_pretty_url__ES:
+    value: "biologia"
+  field_owner_blog__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Temas y relatos blog'
 
 - entity: "taxonomy_term"
   vid: "cgov_blog_topics"

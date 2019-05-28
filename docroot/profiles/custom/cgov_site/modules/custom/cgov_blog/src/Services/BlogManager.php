@@ -157,7 +157,7 @@ class BlogManager implements BlogManagerInterface {
       $topic = $this->entityRepository->getTranslationFromContext($topic, $lang);
     }
 
-    // TODO: fix link names, link labels, translated path.
+    // TODO: fix link names, link labels.
     return $topic;
   }
 
@@ -187,7 +187,11 @@ class BlogManager implements BlogManagerInterface {
    */
   public function getSeriesPath() {
     $nid = $this->getSeriesId();
-    $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+    $lang = $this->getCurrentLang();
+    $path = $this->aliasManager->getAliasByPath('/node/' . $nid, $lang);
+    if ($this->getCurrentLang() == 'es') {
+      $path = '/espanol' . $path;
+    }
     return $path;
   }
 
