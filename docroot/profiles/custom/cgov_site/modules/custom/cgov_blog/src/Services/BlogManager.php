@@ -183,11 +183,18 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * The the URL path for the blog series.
+   * The URL path for the blog series.
    */
-  public function getSeriesPath() {
+  public function getSeriesPath($queryParams = []) {
     $series = $this->getSeriesEntity();
-    $path = $series->toUrl('canonical')->toString();
+
+    // Append URL query parameters if there are any.
+    if (count($queryParams) > 0) {
+      $path = $series->toUrl('canonical')->toString();
+    }
+    else {
+      $path = $series->toUrl('canonical')->toString();
+    }
     return $path;
   }
 
@@ -204,36 +211,34 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * Get Blog Series categories (topics).
-   *
-   * TODO: Rename *categories files & methods to *topics for consistency.
+   * Get Blog Series topics (cagtegories).
    */
-  public function getSeriesCategories() {
-    $categories = [];
+  public function getSeriesTopics() {
+    $topics = [];
     $curr_nid = $this->getSeriesId();
     $taxonomy = $this->loadAllBlogTopics('cgov_blog_topics');
 
-    // Create an array of categories that match the owner Blog Series.
+    // Create an array of topics that match the owner Blog Series.
     if (count($taxonomy) > 0) {
       foreach ($taxonomy as $taxon) {
         $tid = $taxon->tid;
         $owner_nid = $this->loadBlogTopic($tid)->get('field_owner_blog')->target_id;
         if ($curr_nid == $owner_nid) {
-          $categories[] = $taxon;
+          $topics[] = $taxon;
         }
       }
     }
-    return $categories;
+    return $topics;
   }
 
   /**
    * Get Blog Series topic (category) descriptions.
    */
   public function getSeriesTopicDescription() {
-    $topics = $this->getSeriesCategories();
+    $topics = $this->getSeriesTopics();
     $descriptions = [];
 
-    // Create an array of categories that match the owner Blog Series.
+    // Create an array of topics that match the owner Blog Series.
     foreach ($topics as $topic) {
       $tid = $topic->tid;
       $url = $this->loadBlogTopic($tid)->field_topic_pretty_url->value ?? $tid;
@@ -247,10 +252,10 @@ class BlogManager implements BlogManagerInterface {
    * Get Blog Series topic (category) names.
    */
   public function getSeriesTopicTitle() {
-    $topics = $this->getSeriesCategories();
+    $topics = $this->getSeriesTopics();
     $names = [];
 
-    // Create an array of categories that match the owner Blog Series.
+    // Create an array of topics that match the owner Blog Series.
     foreach ($topics as $topic) {
       // Build tid-based titles.
       $tid = $topic->tid;
