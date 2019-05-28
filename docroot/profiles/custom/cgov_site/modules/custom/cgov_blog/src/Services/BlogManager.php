@@ -184,18 +184,14 @@ class BlogManager implements BlogManagerInterface {
 
   /**
    * The URL path for the blog series.
+   *
+   * @param mixed $queryParams
+   *   An associative array of the URL query parameter.
    */
   public function getSeriesPath($queryParams = []) {
     $series = $this->getSeriesEntity();
-
-    // Append URL query parameters if there are any.
-    if (count($queryParams) > 0) {
-      $path = $series->toUrl('canonical')->toString();
-    }
-    else {
-      $path = $series->toUrl('canonical')->toString();
-    }
-    return $path;
+    $path = $series->toUrl('canonical', ['query' => $queryParams]);
+    return $path->toString();
   }
 
   /**
