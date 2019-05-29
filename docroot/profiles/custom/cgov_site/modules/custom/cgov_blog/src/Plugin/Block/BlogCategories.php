@@ -90,11 +90,11 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    */
   private function drawBlogCategories() {
     $category_links = [];
-    // Get all of the associated categories and build URL paths for this series.
+    // Get all associated categories and build URL paths for this series.
     $categories = $this->blogManager->getSeriesTopics();
     foreach ($categories as $cat) {
-      $pretty_url = $this->getCategoryUrl($cat->tid);
-      $category_links[$cat->name] = $pretty_url;
+      $link = $this->getCategoryLink($cat->tid);
+      $category_links[$link['link_name']] = $link['link_path'];
     }
     return $category_links;
   }
@@ -105,11 +105,15 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
    * @param string $tid
    *   A taxonomy term ID.
    */
-  private function getCategoryUrl($tid) {
+  private function getCategoryLink($tid) {
     $taxon = $this->blogManager->loadBlogTopic($tid);
     $param['topic'] = $taxon->get('field_topic_pretty_url')->value ?? $tid;
     $path = $this->blogManager->getSeriesPath($param);
-    return $path;
+    $link = [
+      'link_name' => $taxon->name->value,
+      'link_path' => $path,
+    ];
+    return $link;
   }
 
 }
