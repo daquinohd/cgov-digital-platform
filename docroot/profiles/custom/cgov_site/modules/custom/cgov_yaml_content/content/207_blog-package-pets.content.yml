@@ -1,0 +1,400 @@
+## Pets Blog Series
+- entity: 'node'
+  type: 'cgov_blog_series'
+  title: 'Pets Blog Series'
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_pretty_url:
+    value: 'blog'
+  field_page_description:
+    value: 'pets blog series'
+  field_browser_title:
+    value: 'Pets Blog Series'
+  field_card_title:
+    value: 'Pets Blog Series'
+  field_feature_card_description:
+    value: 'Pets Blog Series'
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_about_blog:
+    value: 'A blog featuring news about pets.'
+  field_site_section:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_site_sections'
+            computed_path: '/pets'
+  field_allow_comments: 0
+  field_archive_group_by:
+    - value: 'month'
+  field_archive_back_years:
+    - value: '7'
+  field_num_display_posts:
+    - value: '15'
+  title__ES:
+    value: 'Blog de mascotas serie'
+  field_browser_title__ES:
+    value: 'Blog de mascotas serie'
+  field_card_title__ES:
+    value: 'Blog de mascotas serie'
+  field_feature_card_description__ES:
+    value: 'Un blog con noticias sobre mascotas.'
+  field_pretty_url__ES:
+    value: 'blog-mascotas'
+  field_site_section__ES:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_site_sections'
+            computed_path: '/espanol/instituto'
+  field_about_blog__ES:
+    value: 'Un blog con noticias sobre mascotas.'
+  field_archive_group_by__ES:
+    value: 'year'
+
+## Pets blog categories
+- entity: 'taxonomy_term'
+  vid: 'cgov_blog_topics'
+  name: 'Mammals'
+  description: 
+    value: |
+      Mammals (from Latin mamma "breast") are vertebrate animals constituting the class Mammalia (/məˈmeɪliə/), and characterized by the presence of mammary glands which in females produce milk.
+  field_topic_pretty_url:
+    value: 'mammals'
+  field_owner_blog:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  name__ES:
+    value: 'Mammalia'
+  description__ES:
+    value: |
+      Los mamíferos (Mammalia) son una clase de vertebrados amniotas homeotermos (de «sangre caliente») que poseen glándulas mamarias productoras de leche.
+  field_topic_pretty_url__ES:
+    value: 'mammalia'
+  field_owner_blog__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+
+- entity: 'taxonomy_term'
+  vid: 'cgov_blog_topics'
+  name: 'Reptiles'
+  description: 
+    value: |
+      Reptiles are tetrapod animals in the class Reptilia, comprising today's turtles, crocodilians, snakes, amphisbaenians, lizards, tuatara, and their extinct relatives.
+  field_topic_pretty_url:
+    value: 'reptiles'
+  field_owner_blog:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  name__ES:
+    value: 'Reptilia'
+  description__ES:
+    value: |
+      Los reptiles (Reptilia) son una clase parafilética de animales vertebrados amniotas provistos de escamas epidérmicas de queratina.
+  field_topic_pretty_url__ES:
+    value: 'reptilia'
+  field_owner_blog__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+
+- entity: 'taxonomy_term'
+  vid: 'cgov_blog_topics'
+  name: 'Birds'
+  description: 
+    value: |
+      Birds, also known as aves, are a group of endothermic vertebrates, characterised by feathers, toothless beaked jaws, the laying of hard-shelled eggs.
+  field_topic_pretty_url:
+    value: 'birds'
+  field_owner_blog:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  name__ES:
+    value: 'Aves'
+  description__ES:
+    value: |
+      Las aves son animales vertebrados, de sangre caliente, que caminan, saltan o se mantienen solo sobre las extremidades posteriores,3​ mientras que las extremidades anteriores han evolucionado hasta convertirse en alas que.
+  field_topic_pretty_url__ES:
+    value: 'aves'
+  field_owner_blog__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+
+## Pets blog posts
+- entity: 'node'
+  type: 'cgov_blog_post'
+  title: 'The Kitty'
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  field_browser_title:
+    value: 'The Kitty'
+  body:
+    - format: 'full_html'
+      value: |
+        <p>What is the anatomy of a cat's paw?</p>
+        <p>Liddle piddles. Smoosh bean piddly doos. Fluffstuff pink plddle chubber bubbies. As a biologist l can attest for the accuracy of this.</p>
+  field_page_description:
+    value: 'Meow meow meow meow. Meow meow meow meow. Meow meow meow meow. Meow meow meow meow.'
+  field_feature_card_description:
+    value: 'Meow meow meow meow. Meow meow meow meow. Meow meow meow meow. Meow meow meow meow.'
+  field_list_description:
+    value: 'Meow meow meow meow. Meow meow meow meow. Meow meow meow meow. Meow meow meow meow.'
+  field_pretty_url:
+    value: 'kitty'
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: '2020-01-01'
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Cat-Cat'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Mammals'
+  title__ES:
+    value: 'El gatito'
+  field_blog_series__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+  field_browser_title__ES:
+    value: 'El gatito'
+  body__ES:
+    - format: 'full_html'
+      value: |
+        <p>Liddle piddles. Smoosh frijol piddly doos. Fluffstuff rosa plddle chubber bubbies. Como biólogo puedo dar fe de la exactitud de esto.</p>
+  field_page_description:
+    value: 'mau mau mau mau. mau mau mau mau. mau mau mau mau. mau mau mau mau.'
+  field_feature_card_description:
+    value: 'mau mau mau mau. mau mau mau mau. mau mau mau mau. mau mau mau mau.'
+  field_list_description:
+    value: 'mau mau mau mau. mau mau mau mau. mau mau mau mau. mau mau mau mau.'
+  field_pretty_url:
+    value: 'gatito'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Mammalia'
+
+- entity: 'node'
+  type: 'cgov_blog_post'
+  title: 'Puppers'
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  field_browser_title:
+    value: 'Puppers'
+  body:
+    - format: 'full_html'
+      value: |
+        <p>Chubby Puppies are loveable, tumbling, stumbling toys that your children are bound to fall in love with. Featuring a range of adorable breeds.</p>
+  field_page_description:
+    value: 'Woof woof woof. Woof woof woof. Woof woof woof. Woof woof woof.'
+  field_feature_card_description:
+    value: 'Woof woof woof. Woof woof woof. Woof woof woof. Woof woof woof.'
+  field_list_description:
+    value: 'Woof woof woof. Woof woof woof. Woof woof woof. Woof woof woof.'
+  field_pretty_url:
+    value: 'puppy'
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: '2021-01-01'
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Zedd Octopus'    
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Mammals'
+  title__ES:
+    value: 'El perrito gordo'
+  field_blog_series__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+  field_browser_title__ES:
+    value: 'El perrito gordo'
+  body__ES:
+    - format: 'full_html'
+      value: |
+        <p>Los Chubby Puppies son juguetes adorables, que se caen y tropiezan de los que sus hijos están obligados a enamorarse. </p>
+  field_page_description:
+    value: 'Arf arf arf arf.'
+  field_feature_card_description:
+    value: 'Arf arf arf arf.'
+  field_list_description:
+    value: 'Arf arf arf arf.'
+  field_pretty_url:
+    value: 'perrito'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Mammalia'
+
+- entity: 'node'
+  type: 'cgov_blog_post'
+  title: 'The Birb'
+  langcode: en
+  status: 1
+  moderation_state:
+    value: 'published'
+  field_blog_series:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Pets Blog Series'
+  field_browser_title:
+    value: 'The Birb'
+  body:
+    - format: 'full_html'
+      value: |
+        <p>Bird bird bird bird.</p>
+        <p>Bird bird bird bird.</p>
+  field_page_description:
+    value: 'Chirp chirp chirp.'
+  field_feature_card_description:
+    value: 'Chirp chirp chirp.'
+  field_list_description:
+    value: 'Chirp chirp chirp.'
+  field_pretty_url:
+    value: 'birb'
+  field_public_use: 1
+  field_search_engine_restrictions: 0
+  field_date_posted:
+    value: '2020-02-01'
+  field_image_article:
+    - target_type: 'media'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'media'
+          - bundle: 'cgov_image'
+            name: 'Ocean Sunset View Mykonos'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Birds'
+  title__ES:
+    value: 'El birb'
+  field_blog_series__ES:
+    - target_type: 'node'
+      '#process':
+        callback: 'reference'
+        args:
+          - 'node'
+          - type: 'cgov_blog_series'
+            title: 'Blog de mascotas serie'
+  field_browser_title__ES:
+    value: 'El gatito'
+  body__ES:
+    - format: 'full_html'
+      value: |
+        <p>Ave ave ave ave.</p>
+        <p>Ave ave ave ave.</p>
+        <p>Ave ave ave ave.</p>
+        <p>Ave ave ave ave.</p>
+  field_page_description:
+    value: 'chirrup chirrup chirrup.'
+  field_feature_card_description:
+    value: 'chirrup chirrup chirrup.'
+  field_list_description:
+    value: 'chirrup chirrup chirrup.'
+  field_pretty_url:
+    value: 'birb-es'
+  field_blog_topics:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_blog_topics'
+            name: 'Aves'
