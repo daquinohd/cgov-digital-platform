@@ -97,6 +97,7 @@ class BlogManager implements BlogManagerInterface {
    */
   public function getSeriesEntity() {
     $currEntity = $this->getCurrentEntity();
+    $currLang = $this->getCurrentLang();
     $currId = $currEntity->id();
     $currBundle = $currEntity->bundle();
 
@@ -109,12 +110,20 @@ class BlogManager implements BlogManagerInterface {
       case 'cgov_blog_post':
         $seriesNodeId = $this->getNodeStorage()->load($currId)->field_blog_series->target_id;
         $seriesNode = $this->getNodeStorage()->load($seriesNodeId);
+        /*
+         * Set node to current language. Translations are lost when the NID is
+         * passed into load() above.
+         */
+        if ($seriesNode->hasTranslation($currLang)) {
+          $seriesNode = $seriesNode->getTranslation($currLang);
+        }
         break;
 
       default:
         $seriesNode = NULL;
         break;
     }
+
     return $seriesNode;
   }
 
@@ -160,7 +169,6 @@ class BlogManager implements BlogManagerInterface {
     /*
      * TODO:
      * - Fix prev/next Blog Post links on translations.
-     * - Fix categories links on Blog Post translations.
      */
     return $topic;
   }
