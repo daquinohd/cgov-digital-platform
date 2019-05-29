@@ -193,6 +193,8 @@ process:
     -
       plugin: remove_rx_wrapper
       source: field_intro_text
+    -
+      plugin: generate_placeholders
   field_intro_text/format:
    plugin: default_value
    default_value: streamlined
@@ -230,7 +232,8 @@ process:
         internallinksql_migration
       -
         externallinksql_migration
-
+      -
+        medialink_migration
     no_stub: true
     source: related_resource_ids
 
@@ -251,7 +254,8 @@ process:
           internallinksql_migration
         -
           externallinksql_migration
-
+        -
+          medialink_migration
       no_stub: true
       source: related_resource_id
     -
@@ -267,7 +271,8 @@ process:
           internallinksql_migration
         -
           externallinksql_migration
-
+        -
+          medialink_migration
       no_stub: true
       source: related_resource_id
     -

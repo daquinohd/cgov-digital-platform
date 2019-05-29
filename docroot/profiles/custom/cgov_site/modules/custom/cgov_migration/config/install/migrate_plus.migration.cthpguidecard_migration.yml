@@ -57,6 +57,8 @@ process:
    -
      plugin: remove_rx_wrapper
      source: field_cthp_guide_card_desc
+   -
+     plugin: generate_placeholders
 
  field_cthp_guide_card_desc/format:
      plugin: default_value
@@ -78,6 +80,7 @@ process:
     migration:
       - internallinksql_migration
       - externallinksql_migration
+      - medialink_migration
 
     no_stub: true
     source: field_cthp_view_more_infos
@@ -98,6 +101,7 @@ process:
       migration:
         - internallinksql_migration
         - externallinksql_migration
+        - medialink_migration
 
       no_stub: true
       source: field_cthp_view_more_info
@@ -112,6 +116,7 @@ process:
       migration:
         - internallinksql_migration
         - externallinksql_migration
+        - medialink_migration
 
       no_stub: true
       source: field_cthp_view_more_info
