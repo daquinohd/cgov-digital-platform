@@ -96,6 +96,7 @@ class BlogCategories extends BlockBase implements ContainerFactoryPluginInterfac
       $link = $this->getCategoryLink($cat->tid);
       $category_links[$link['link_name']] = $link['link_path'];
     }
+    ksort($category_links);
     return $category_links;
   }
 
