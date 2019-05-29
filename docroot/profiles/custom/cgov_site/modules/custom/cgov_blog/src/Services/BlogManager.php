@@ -277,11 +277,13 @@ class BlogManager implements BlogManagerInterface {
    *   Optional langcode.
    */
   public function getBlogPathFromNid($nid, $lang = NULL) {
-    if (isset($lang)) {
-      $path = $this->aliasManager->getAliasByPath('/node/' . $nid, $lang);
-    }
-    else {
-      $path = $this->aliasManager->getAliasByPath('/node/' . $nid);
+    $node = $this->getNodeStorage()->load($nid);
+    $path = (isset($node)) ? $node->toUrl('canonical') : NULL;
+
+    // Use alias manager otherwise.
+    if (!isset($path)) {
+      $path = (isset($lang)) ? $this->aliasManager->getAliasByPath('/node/' . $nid, $lang) :
+        $this->aliasManager->getAliasByPath('/node/' . $nid);
     }
     return $path;
   }
