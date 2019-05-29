@@ -78,9 +78,14 @@ class BlogArchive extends BlockBase implements ContainerFactoryPluginInterface {
       $archive = $this->drawArchiveData($content_id, $years_back, $group_by);
       $path = $this->blogManager->getSeriesPath();
       $build = [
-        '#archive_data' => $archive,
-        '#archive_granularity' => $group_by,
-        '#archive_path' => $path,
+        'archive_data' => $archive,
+        'archive_granularity' => $group_by,
+        'archive_path' => $path,
+        '#cache' => [
+          'tags' => [
+            'node_list',
+          ],
+        ],
       ];
     }
 
