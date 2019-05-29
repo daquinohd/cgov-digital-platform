@@ -157,7 +157,11 @@ class BlogManager implements BlogManagerInterface {
       $topic = $this->entityRepository->getTranslationFromContext($topic, $lang);
     }
 
-    // TODO: fix link names, link labels.
+    /*
+     * TODO:
+     * - Fix prev/next Blog Post links on translations.
+     * - Fix categories links on Blog Post translations.
+     */
     return $topic;
   }
 
