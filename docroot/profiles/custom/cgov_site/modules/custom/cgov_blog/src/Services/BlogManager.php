@@ -96,35 +96,27 @@ class BlogManager implements BlogManagerInterface {
    * {@inheritdoc}
    */
   public function getSeriesEntity() {
+    $seriesEntity = [];
     $currEntity = $this->getCurrentEntity();
     $currLang = $this->getCurrentLang();
-    $currId = $currEntity->id();
     $currBundle = $currEntity->bundle();
 
     // If this is a series.
     switch ($currBundle) {
       case 'cgov_blog_series':
-        $seriesNode = $currEntity;
+        $seriesEntity = $currEntity;
         break;
 
       case 'cgov_blog_post':
-        $seriesNodeId = $this->getNodeStorage()->load($currId)->field_blog_series->target_id;
-        $seriesNode = $this->getNodeStorage()->load($seriesNodeId);
-        /*
-         * Set node to current language. Translations are lost when the NID is
-         * passed into load() above.
-         */
-        if ($seriesNode->hasTranslation($currLang)) {
-          $seriesNode = $seriesNode->getTranslation($currLang);
-        }
+        $seriesEntity = $currEntity->field_blog_series->entity;
+        $seriesEntity = $this->entityRepository->getTranslationFromContext($seriesEntity, $currLang);
         break;
 
       default:
-        $seriesNode = NULL;
         break;
     }
 
-    return $seriesNode;
+    return $seriesEntity;
   }
 
   /**
@@ -190,8 +182,11 @@ class BlogManager implements BlogManagerInterface {
    */
   public function getSeriesId() {
     $series = $this->getSeriesEntity();
-    $series_id = (!empty($series->id())) ? $series->id() : '';
-    return $series_id;
+    $sid = '';
+    if (isset($series)) {
+      $sid = $series->id();
+    }
+    return $sid;
   }
 
   /**
