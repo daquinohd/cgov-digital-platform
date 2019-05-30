@@ -60,8 +60,8 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: 'Newer Posts >'
-            next: '< Older Posts'
+            previous: 'Newer Posts'
+            next: 'Older Posts'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
