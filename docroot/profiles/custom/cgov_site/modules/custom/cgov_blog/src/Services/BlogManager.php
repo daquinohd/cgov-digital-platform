@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\TypedData\TranslatableInterface;
 
 /**
  * Blog Manager Service.
@@ -98,7 +99,6 @@ class BlogManager implements BlogManagerInterface {
   public function getSeriesEntity() {
     $seriesEntity = [];
     $currEntity = $this->getCurrentEntity();
-    $currLang = $this->getCurrentLang();
     $currBundle = $currEntity->bundle();
 
     // If this is a series.
@@ -109,7 +109,7 @@ class BlogManager implements BlogManagerInterface {
 
       case 'cgov_blog_post':
         $seriesEntity = $currEntity->field_blog_series->entity;
-        $seriesEntity = $this->entityRepository->getTranslationFromContext($seriesEntity, $currLang);
+        $seriesEntity = $this->getCurrentTranslation($seriesEntity);
         break;
 
       default:
@@ -128,14 +128,39 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * Create a new node storage instance.
+   * Gets the entity translation to be used in the given context.
+   *
+   * This will check whether a translation for the desired language
+   * is available and if not, it will fall back to the most
+   * appropriate translation based on the provided context.
+   * Based on the implementation found in
+   * EntityReferenceFormatterBase->getEntitiesToView().
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   A referenced entity.
+   */
+  public function getCurrentTranslation($node) {
+    if ($node instanceof TranslatableInterface) {
+      $lang = $this->getCurrentLang();
+      $node = $this->entityRepository->getTranslationFromContext($node, $lang);
+    }
+    return $node;
+  }
+
+  /**
+   * Create a node object given an nid.
+   *
+   * @param string $nid
+   *   A node ID.
    *
    * @return Drupal\Core\Entity\EntityStorageInterface
    *   The node storage or NULL.
    */
-  public function getNodeStorage() {
-    $node_storage = $this->entityTypeManager->getStorage('node');
-    return isset($node_storage) ? $node_storage : NULL;
+  public function getNodeFromNid($nid) {
+    $storage = $this->entityTypeManager->getStorage('node');
+    $nodeLoad = (isset($storage)) ? $storage->load($nid) : NULL;
+    $nodeLoad = $this->getCurrentTranslation($nodeLoad);
+    return $nodeLoad;
   }
 
   /**
@@ -158,10 +183,6 @@ class BlogManager implements BlogManagerInterface {
       $topic = $this->entityRepository->getTranslationFromContext($topic, $lang);
     }
 
-    /*
-     * TODO:
-     * - Fix prev/next Blog Post links on translations.
-     */
     return $topic;
   }
 
@@ -284,7 +305,7 @@ class BlogManager implements BlogManagerInterface {
    *   Optional langcode.
    */
   public function getBlogPathFromNid($nid, $lang = NULL) {
-    $node = $this->getNodeStorage()->load($nid);
+    $node = $this->getNodeFromNid($nid);
     $path = (isset($node)) ? $node->toUrl('canonical') : NULL;
 
     // Use alias manager otherwise.

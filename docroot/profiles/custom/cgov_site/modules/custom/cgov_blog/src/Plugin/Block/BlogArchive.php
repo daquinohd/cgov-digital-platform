@@ -136,7 +136,7 @@ class BlogArchive extends BlockBase implements ContainerFactoryPluginInterface {
      * those where field_blog_series matches the filter series.
      */
     foreach ($post_nids as $post_nid) {
-      $post_node = $this->blogManager->getNodeStorage()->load($post_nid);
+      $post_node = $this->blogManager->getNodeFromNid($post_nid);
       $field_blog_series = $post_node->field_blog_series->target_id;
 
       // Get the date posted field, then split for the link values.
