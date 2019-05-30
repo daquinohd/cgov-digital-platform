@@ -63,7 +63,7 @@
         args:
           - 'taxonomy_term'
           - vid: 'cgov_site_sections'
-            computed_path: '/espanol/noticias/temas-y-relatos-blog'
+            computed_path: '/noticias/temas-y-relatos-blog'
   field_banner_image__ES:
     - '#process':
         callback: 'file'

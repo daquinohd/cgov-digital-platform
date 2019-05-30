@@ -105,11 +105,6 @@ function cgov_common_preprocess_node(&$variables) {
     $variables['get'][$param] = $_GET[$param] ?? '';
   }
 
-  // TODO: set our URL translation.
-  if (1 == 2) {
-    $variables['url'] = '/todo/fix/me';
-  }
-
   // is_front is normally only available in page templates.
   // This is to subvert that expectation.
   // (NOTE: An exception might be thrown.)
