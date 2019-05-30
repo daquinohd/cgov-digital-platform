@@ -55,8 +55,6 @@
     value: 'Temas y relatos blog'
   field_feature_card_description__ES:
     value: 'Temas y relatos blog'
-  field_pretty_url__ES:
-    value: "temas-y-relatos-blog"
   field_site_section__ES:
     - '#process':
         callback: 'reference'

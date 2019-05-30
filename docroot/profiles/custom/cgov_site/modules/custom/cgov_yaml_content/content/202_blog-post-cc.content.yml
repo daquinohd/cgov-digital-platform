@@ -297,3 +297,37 @@
           - 'node'
           - type: 'cgov_blog_post'
             title: 'Immunotherapy Effective in Alveolar Soft Part Sarcoma'
+  ## Cancer Currents Blog Español
+  title__ES:
+    value: 'Temas y relatos blog'
+  field_browser_title__ES:
+    value: 'Temas y relatos: Un blog sobre la investigación del cáncer'
+  field_card_title__ES:
+    value: 'Temas y relatos blog'
+  field_feature_card_description__ES:
+    value: 'Temas y relatos blog'
+  field_site_section__ES:
+    - '#process':
+        callback: 'reference'
+        args:
+          - 'taxonomy_term'
+          - vid: 'cgov_site_sections'
+            computed_path: '/noticias/temas-y-relatos-blog'
+  field_banner_image__ES:
+    - '#process':
+        callback: 'file'
+        args:
+          - 'image'
+          - type: 'module'
+            filename: 'ras-blog-banner.__v400106190.jpg'
+      alt: 'Join the Discussion text with image of gears'
+  field_about_blog__ES:
+    value: 'Blog que presenta las noticias y las últimas investigaciones del Instituto Nacional del Cáncer.'
+  field_allow_comments__ES:
+    value: 0
+  field_archive_group_by__ES:
+    value: 'year'
+  field_feedburner_url__ES:
+    value: 'https://feedburner-test.cancer.gov/cancercurrents?lang=es'
+  field_blog_series_shortname__ES:
+    value: 'temas-y-relatos'
