@@ -78,6 +78,8 @@ function _get_blog_post_path($node) {
       // Assemble the path with date.
       $path = $seriesEntity->toUrl('canonical')->toString();
       $year = substr($node->field_date_posted->value, 0, 4);
+
+      // TODO: fix the double espanol.
       $path = $path . '/' . $year;
     }
     catch (Exception $e) {
