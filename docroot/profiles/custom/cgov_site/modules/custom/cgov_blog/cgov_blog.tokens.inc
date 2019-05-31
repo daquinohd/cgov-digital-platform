@@ -66,20 +66,21 @@ function cgov_blog_tokens($type, $tokens, array $data, array $options, Bubbleabl
  *   Error for missing data.
  */
 function _get_blog_post_path($node) {
-  $path = FALSE;
-  $lang = $node->language()->getId();
   $entityRepository = \Drupal::service('entity.repository');
+  $lang = $node->language()->getId();
+  $year = '/' . substr($node->field_date_posted->value, 0, 4);
+  $path = FALSE;
 
   if (!empty($node->get('field_blog_series')->first())) {
     try {
       // Get the owner series and translation if exists.
       $seriesEntity = $node->field_blog_series->entity;
       $seriesEntity = $entityRepository->getTranslationFromContext($seriesEntity, $lang);
-      $tid = $seriesEntity->get('field_site_section')->first()->getValue()['target_id'];
-      $term = Term::load($tid);
-      $year = substr($node->field_date_posted->value, 0, 4);
-      $path = $term->get('computed_path')->value;
-      $path = $path . '/' . $year;
+
+      // Get the computed path of the series.
+      $tid = $seriesEntity->field_site_section->target_id;
+      $path = Term::load($tid)->get('computed_path')->value;
+      $path = $path . $year;
     }
     catch (Exception $e) {
       \Drupal::logger('cgov_blog')
