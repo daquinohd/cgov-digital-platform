@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_token_info().
@@ -74,12 +75,10 @@ function _get_blog_post_path($node) {
       // Get the owner series and translation if exists.
       $seriesEntity = $node->field_blog_series->entity;
       $seriesEntity = $entityRepository->getTranslationFromContext($seriesEntity, $lang);
-
-      // Assemble the path with date.
-      $path = $seriesEntity->toUrl('canonical')->toString();
+      $tid = $seriesEntity->get('field_site_section')->first()->getValue()['target_id'];
+      $term = Term::load($tid);
       $year = substr($node->field_date_posted->value, 0, 4);
-
-      // TODO: fix the double espanol.
+      $path = $term->get('computed_path')->value;
       $path = $path . '/' . $year;
     }
     catch (Exception $e) {
