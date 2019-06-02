@@ -1905,9 +1905,14 @@ NCIAnalytics.blogLocation = function() {
  * 'isPartOf' metatag.
  */
 NCIAnalytics.contentGroup = function() {
-    var metaSelctor = ('[name="dcterms.isPartOf"]');
-    var metaTag = document.head.querySelector(metaSelctor) || '';
-    return metaTag;
+    var metaSel = ('[name="dcterms.isPartOf"]');
+    var metaTag = document.head.querySelector(metaSel) || null;
+    if (metaTag) {
+        var metaVal = metaTag.content || '';
+        return metaVal;
+    } else {
+        return '';
+    }
 }
 
 /**
