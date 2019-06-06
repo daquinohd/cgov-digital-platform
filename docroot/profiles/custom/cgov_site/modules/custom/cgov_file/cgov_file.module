@@ -5,7 +5,27 @@
  * Contains the cgov_file functions.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function cgov_file_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() != 'cgov_image' && $entity->bundle() != 'cgov_contextual_image') {
+    return;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function cgov_file_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() != 'cgov_image' && $entity->bundle() != 'cgov_contextual_image') {
+    return;
+  }
+}
 
 /**
  * Implements hook_form_alter().
