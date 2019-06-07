@@ -208,6 +208,21 @@ $(document).ready(function() {
         });
     });
 
+    $('.general-list-item.has-media').each(function (i, el) {
+        var $this = $(this);
+        var $title = $this.find('h3').text().trim();
+        var $container = 'Thumbnail';
+        var $containerIndex = i + 1;
+
+        $(el).on('click.analytics', 'a.image', function (e) {
+            NCIAnalytics.CardClick(this, $title, 'Image', $container, $containerIndex);
+        });
+
+        $(el).on('click.analytics', 'a.title', function (e) {
+            NCIAnalytics.CardClick(this, $title, $title, $container, $containerIndex);
+        });
+    });
+
     $('.card-thumbnail .card-thumbnail-image').each(function (i, el) {
         $(el).on('click.analytics', 'a', function (event) {
             var $this = $(this);

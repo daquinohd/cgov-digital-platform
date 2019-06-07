@@ -78,7 +78,7 @@ var NCIAnalytics = {
             local_s.linkTrackVars = '';
 
             // add language prop8 - Warning: adding prop8 to individual onclick functions will cause duplication
-            local_s['prop8'] = 's.prop8';
+            local_s['prop8'] = document.querySelector('[lang="es"]') ? 'spanish' : 'english';
             local_s.linkTrackVars += 'channel,';
             local_s.linkTrackVars += 'prop8';
 
