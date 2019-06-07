@@ -1535,6 +1535,15 @@ var NCIAnalytics = {
         clickParams.LogToOmniture();
     },
 
+    //******************************************************************************************************
+    CalloutBoxClick: function(sender, linkText, type) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', type + 'CallOut');
+        clickParams.Props = {
+            66: linkText,
+        };
+        clickParams.LogToOmniture();
+    },
+
     /******************************************************************************************************
     * General accordion click tracking
     * sender - the element responsible for this event.

@@ -426,6 +426,13 @@ $(document).ready(function() {
         });
     });
 
+    // Track callout box links.
+    $('.callout-box-right').on('click', 'a', function(e) {
+        var $this = $(this);
+        var $text = $this.text().trim();
+        NCIAnalytics.CalloutBoxClick($this, $text, 'CancerTypesIndex');
+    });
+
     // BEGIN Spanish Analytics tracking
     $('html[lang="es"]').find('a.news-govdelivery, a.blogRSS').on('click', function() {
         s.linkTrackVars = 'prop4,prop5';
