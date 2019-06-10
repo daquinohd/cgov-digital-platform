@@ -1150,13 +1150,8 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'FeatureCardClick');
-
-        var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
-        if (typeof pageNameOverride !== 'undefined')
-            localPageName = pageNameOverride;
-
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CardClick');
+        var pageName = 'D=pageName';
         var position = container + ":" + containerIndex;
 
         clickParams.Props = {
@@ -1168,6 +1163,11 @@ var NCIAnalytics = {
 
         clickParams.Events = [27];
         clickParams.LogToOmniture();
+    },
+
+    //******************************************************************************************************
+    DynamicListItemClick: function(sender, listTitle, linkText, container, index) {
+        NCIAnalytics.CardClick(sender, listTitle, linkText, container, index);
     },
 
     //******************************************************************************************************

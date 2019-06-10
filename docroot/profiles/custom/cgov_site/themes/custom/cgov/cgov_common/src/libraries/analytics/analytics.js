@@ -208,7 +208,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.general-list-item.has-media').each(function (i, el) {
+    $('.managed.list .general-list-item.has-media').each(function (i, el) {
         var $this = $(this);
         var $title = $this.find('h3').text().trim();
         var $container = 'Thumbnail';
@@ -244,6 +244,24 @@ $(document).ready(function() {
             var containerIndex = i + 1;
 
             NCIAnalytics.CardClick(this, cardTitle, linkText, container, containerIndex);
+        });
+    });
+
+
+    $('.dynamic.list .general-list-item.has-media').each(function (i, el) {
+        let $this = $(this);
+        let $title = $this.closest('.dynamic.list').find('h2').text().trim();
+        let $containerIndex = i + 1;
+
+        $(el).on('click.analytics', 'a.image', function () {
+            $this = $(this);
+            NCIAnalytics.DynamicListItemClick($this, $title, 'Image', $title, $containerIndex);
+        });
+
+        $(el).on('click.analytics', 'a.title', function () {
+            $this = $(this);
+            const $link = $this.text().trim();
+            NCIAnalytics.DynamicListItemClick($this, $title, $link, $title, $containerIndex);
         });
     });
 
