@@ -135,7 +135,7 @@ var NCIAnalytics = {
             }
 
             // add language eVar2 - Warning: adding eVar2 to individual onclick functions will cause duplication
-            local_s['eVar2'] = 's.eVar2';
+            local_s['eVar2'] = local_s['prop8'];
             if (local_s.linkTrackVars.length > 0)
                 local_s.linkTrackVars += ',';
             local_s.linkTrackVars += 'eVar2';
