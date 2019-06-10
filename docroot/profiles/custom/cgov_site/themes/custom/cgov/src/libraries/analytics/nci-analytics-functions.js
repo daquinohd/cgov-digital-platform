@@ -78,7 +78,7 @@ var NCIAnalytics = {
             local_s.linkTrackVars = '';
 
             // add language prop8 - Warning: adding prop8 to individual onclick functions will cause duplication
-            local_s['prop8'] = 's.prop8';
+            local_s['prop8'] = document.querySelector('[lang="es"]') ? 'spanish' : 'english';
             local_s.linkTrackVars += 'channel,';
             local_s.linkTrackVars += 'prop8';
 
@@ -1150,13 +1150,8 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'FeatureCardClick');
-
-        var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
-        if (typeof pageNameOverride !== 'undefined')
-            localPageName = pageNameOverride;
-
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CardClick');
+        var pageName = 'D=pageName';
         var position = container + ":" + containerIndex;
 
         clickParams.Props = {
@@ -1168,6 +1163,11 @@ var NCIAnalytics = {
 
         clickParams.Events = [27];
         clickParams.LogToOmniture();
+    },
+
+    //******************************************************************************************************
+    DynamicListItemClick: function(sender, listTitle, linkText, container, index) {
+        NCIAnalytics.CardClick(sender, listTitle, linkText, container, index);
     },
 
     //******************************************************************************************************
@@ -1535,6 +1535,15 @@ var NCIAnalytics = {
         clickParams.LogToOmniture();
     },
 
+    //******************************************************************************************************
+    CalloutBoxClick: function(sender, linkText, type) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', type + 'CallOut');
+        clickParams.Props = {
+            66: linkText,
+        };
+        clickParams.LogToOmniture();
+    },
+
     /******************************************************************************************************
     * General accordion click tracking
     * sender - the element responsible for this event.
@@ -1699,19 +1708,9 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogArchiveLinkClick: function(sender, pageName){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogArchiveDateClick');
-
-        urlParam = function(name){
-            var results = new RegExp("[\?&].*\[" + name + "\]=([^&#]*)").exec(sender.href);
-            if (results==null){
-                return "";
-            }
-            else{
-                return results[1] || 0;
-            }
-        }
-        
-        var year = urlParam('[year]');
-        var month = urlParam('[month]');
+        var year = NCIAnalytics.getQueryString('year');
+        var month = NCIAnalytics.getQueryString('month');
+;
         clickParams.Props = {
             66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_Archive",
             67: pageName,
@@ -1785,17 +1784,18 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogRelatedLinksClick: function(sender, linkText, pageName, index){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogRelatedLinkClick');
-        var prop66_String = "";
-        if(NCIAnalytics.blogLocation()){
+        var linkGrouping = ['Blog', NCIAnalytics.contentGroup(), 'RelatedResource:' + index];
+
+        // Add location if exists.
+        if (NCIAnalytics.blogLocation()) {
             clickParams.Events = [57];
-            prop66_String = "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_RelatedResource:" + index;
-        }
-        else{
+            linkGrouping.splice(2, 0, NCIAnalytics.blogLocation());
+        } else {
             clickParams.Events = [59];
-            prop66_String = NCIAnalytics.contentGroup() + "_RelatedResource:" + index;
         }
+
         clickParams.Props = {
-            66: prop66_String,
+            66: linkGrouping.join('_'),
             67: pageName,
             50: linkText
         };
@@ -2337,7 +2337,7 @@ NCIAnalytics.getQueryString = function(pv_queryParam, pv_url) {
 
     if(subStringArray.length > 0) {        
         for (var i = 0, maxi = subStringArray.length; i < maxi; i++) { // loop through params in query string
-            paramValue = subStringArray[i].split("=");
+            var paramValue = subStringArray[i].split("=");
             for (var ii = 0, maxii = queryParamArray.length; ii < maxii; ii++) { //loop through params in pv_queryParam
                 if (paramValue[0].toLowerCase() == queryParamArray[ii].toLowerCase()) {
                     returnVal = (paramValue[1]) ? unescape(paramValue[1]) : "";
