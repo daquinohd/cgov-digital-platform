@@ -78,7 +78,7 @@ var NCIAnalytics = {
             local_s.linkTrackVars = '';
 
             // add language prop8 - Warning: adding prop8 to individual onclick functions will cause duplication
-            local_s['prop8'] = 's.prop8';
+            local_s['prop8'] = document.querySelector('[lang="es"]') ? 'spanish' : 'english';
             local_s.linkTrackVars += 'channel,';
             local_s.linkTrackVars += 'prop8';
 
@@ -135,7 +135,7 @@ var NCIAnalytics = {
             }
 
             // add language eVar2 - Warning: adding eVar2 to individual onclick functions will cause duplication
-            local_s['eVar2'] = 's.eVar2';
+            local_s['eVar2'] = local_s['prop8'];
             if (local_s.linkTrackVars.length > 0)
                 local_s.linkTrackVars += ',';
             local_s.linkTrackVars += 'eVar2';
@@ -877,49 +877,28 @@ var NCIAnalytics = {
         clickParams.Events = [8];
         clickParams.LogToOmniture();
     },
-	
-    //******************************************************************************************************
-    BulletinSubscription: function(sender) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'BulletinSubscription');
-        clickParams.Events = [9];
-        clickParams.LogToOmniture();
-    },
 
     //******************************************************************************************************
-    GenericLinkTrack: function(sender, label) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'GenericLinkTrack');
+    GenericLinkTrack: function(sender, label, linkName='GenericLinkTrack') {
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
         clickParams.Props = {
             4: sender.href,
-            5: sender.innerHTML,
+            5: pageName,
             28: label
         };
         clickParams.LogToOmniture();
     },
 
     //******************************************************************************************************
-    LinkTracking: function(toLink, fromLink, label) {
-
-        var clickParams = new NCIAnalytics.ClickParams(this,
-            'nciglobal', 'o', 'LinkTracking');
-        clickParams.Props = {
-            4: toLink,
-            5: fromLink + NCIAnalytics.stringDelimiter + toLink
-        };
-        clickParams.LogToOmniture();
-    },
-
-    //******************************************************************************************************
     CustomLink: function(sender, linkName) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', linkName);
-        clickParams.LogToOmniture();
+        NCIAnalytics.GenericLinkTrack(sender, '', linkName);
     },
 
+    /* ********************************************************************** */
+    GovDelivery: function(sender, label) {
+        NCIAnalytics.GenericLinkTrack(sender, label, 'GovDelivery');
+    },
+    
     //******************************************************************************************************
     /**
      * Generic / global link tracking method
@@ -1149,25 +1128,38 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'FeatureCardClick');
-
-        var pageName = sender.ownerDocument.location.hostname + sender.ownerDocument.location.pathname; // this is the URL
-        if (typeof pageNameOverride !== 'undefined')
-            localPageName = pageNameOverride;
-
-        var position = container + ":" + containerIndex;
-
+    IndexedItemClick: function(sender, title, text, container, index, linkName) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
         clickParams.Props = {
-            57: cardTitle,
-            58: linkText,
-            59: position,
-            60: pageName
+            57: title,
+            58: text,
+            59: container + ':' + index,
+            60: 'D=pageName'
         };
 
-        clickParams.Events = [27];
+        if (linkName === 'CardClick') {
+            clickParams.Events = [27];
+        }
+
         clickParams.LogToOmniture();
+    },
+
+    //******************************************************************************************************
+    CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
+        NCIAnalytics.IndexedItemClick(sender, cardTitle, linkText, container, containerIndex, 'CardClick');
+    },
+
+    //******************************************************************************************************
+    DynamicListItemClick: function(sender, listTitle, linkText, container, index) {
+        NCIAnalytics.IndexedItemClick(sender, listTitle, linkText, container, index, 'SearchResults');
+    },
+
+    //******************************************************************************************************
+    ContainerItemClick: function(sender, title, text, identifier, linkName) {
+        let id = identifier.split(':');
+        let desc = id[0];
+        let index = id[1] || '';
+        NCIAnalytics.IndexedItemClick(sender, title, text, desc, index, linkName);
     },
 
     //******************************************************************************************************
@@ -1321,75 +1313,6 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    LinkTrackTagBuilder: function(e) {
-
-        if (e.button == 0) {  // Left mouse button pressed
-            var linkElement = NCIAnalytics.GetElement(NCIAnalytics.GetEventTarget(e), 'A');
-
-            if (linkElement != null &&
-                linkElement.href != null &&
-                linkElement.href != '' &&
-                (linkElement.onclick == null ||
-                linkElement.onclick.toString().indexOf('NCIAnalytics') == -1)) {
-
-                NCIAnalytics.LinkTracking(NCIAnalytics.DissectLink(linkElement.href), location.pathname);
-            }
-        }
-    },
-
-    //******************************************************************************************************
-    DissectLink: function(theLink) {
-
-        if (theLink.indexOf('clickpassthrough') != -1) {
-            var theLinkBreakout = theLink.split('&');
-            for (var i = 0; i < theLinkBreakout.length; i++) {
-                if (theLinkBreakout[i].indexOf('redirectUrl') != -1) {
-                    return unescape(theLinkBreakout[i].substring(12));
-                    break;
-                }
-            }
-        }
-        else {
-            var theLinkBreakout = theLink.split('//');
-            if (theLinkBreakout.length > 1)
-                return theLinkBreakout[1];
-            else
-                return theLink;
-        }
-    },
-
-    //******************************************************************************************************
-    GetElement: function(startingNode, elementType) {
-
-        try {
-
-            var currentNode = startingNode;
-
-            while (currentNode != null && currentNode.tagName != 'BODY') {
-                if (currentNode.tagName == elementType) {
-                    return currentNode;
-                    break;
-                }
-                else {
-                    currentNode = currentNode.parentNode;
-                }
-            }
-        } catch (err) { }
-
-    },
-
-    //******************************************************************************************************
-    GetEventTarget: function(e) {
-        var target = (e.target) ? e.target : e.srcElement;
-
-        if (target != null) {
-            if (target.nodeType == 3)
-                target = target.parentNode;
-        }
-        return target;
-    },
-
-    //******************************************************************************************************
     Resize: function(sender, viewPort) {
         var width = 'ResizedTo' + viewPort;
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', width);
@@ -1531,6 +1454,15 @@ var NCIAnalytics = {
         clickParams.Props = {
             42: fontSize,
             66: ((NCIAnalytics.siteSection) ? NCIAnalytics.siteSection + '_' : '') + 'font-resize_' + ((fontSize) ? fontSize.toLowerCase() : '')
+        };
+        clickParams.LogToOmniture();
+    },
+
+    //******************************************************************************************************
+    CalloutBoxClick: function(sender, value, linkName) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
+        clickParams.Props = {
+            66: value
         };
         clickParams.LogToOmniture();
     },
@@ -1699,19 +1631,9 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogArchiveLinkClick: function(sender, pageName){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogArchiveDateClick');
-
-        urlParam = function(name){
-            var results = new RegExp("[\?&].*\[" + name + "\]=([^&#]*)").exec(sender.href);
-            if (results==null){
-                return "";
-            }
-            else{
-                return results[1] || 0;
-            }
-        }
-        
-        var year = urlParam('[year]');
-        var month = urlParam('[month]');
+        var year = NCIAnalytics.getQueryString('year');
+        var month = NCIAnalytics.getQueryString('month');
+;
         clickParams.Props = {
             66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_Archive",
             67: pageName,
@@ -1785,17 +1707,18 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogRelatedLinksClick: function(sender, linkText, pageName, index){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogRelatedLinkClick');
-        var prop66_String = "";
-        if(NCIAnalytics.blogLocation()){
+        var linkGrouping = ['Blog', NCIAnalytics.contentGroup(), 'RelatedResource:' + index];
+
+        // Add location if exists.
+        if (NCIAnalytics.blogLocation()) {
             clickParams.Events = [57];
-            prop66_String = "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_RelatedResource:" + index;
-        }
-        else{
+            linkGrouping.splice(2, 0, NCIAnalytics.blogLocation());
+        } else {
             clickParams.Events = [59];
-            prop66_String = NCIAnalytics.contentGroup() + "_RelatedResource:" + index;
         }
+
         clickParams.Props = {
-            66: prop66_String,
+            66: linkGrouping.join('_'),
             67: pageName,
             50: linkText
         };
@@ -1881,6 +1804,7 @@ var NCIAnalytics = {
         }
         clickParams.LogToOmniture();
     }
+
 };
 
 /* End the giant NCIAnalytics object functions */
@@ -2337,7 +2261,7 @@ NCIAnalytics.getQueryString = function(pv_queryParam, pv_url) {
 
     if(subStringArray.length > 0) {        
         for (var i = 0, maxi = subStringArray.length; i < maxi; i++) { // loop through params in query string
-            paramValue = subStringArray[i].split("=");
+            var paramValue = subStringArray[i].split("=");
             for (var ii = 0, maxii = queryParamArray.length; ii < maxii; ii++) { //loop through params in pv_queryParam
                 if (paramValue[0].toLowerCase() == queryParamArray[ii].toLowerCase()) {
                     returnVal = (paramValue[1]) ? unescape(paramValue[1]) : "";
