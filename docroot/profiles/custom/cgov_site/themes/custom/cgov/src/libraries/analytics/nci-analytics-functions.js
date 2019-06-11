@@ -1459,10 +1459,10 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    CalloutBoxClick: function(sender, linkText, type) {
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', type + 'CallOut');
+    CalloutBoxClick: function(sender, value, linkName) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
         clickParams.Props = {
-            66: linkText,
+            66: value
         };
         clickParams.LogToOmniture();
     },

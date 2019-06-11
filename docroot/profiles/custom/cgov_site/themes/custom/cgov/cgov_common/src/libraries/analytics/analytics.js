@@ -460,15 +460,8 @@ $(document).ready(function() {
         NCIAnalytics.FooterLink($this, $text);
     });
 
-    // Data attribute tracking to replace hardcoded values.
-    // Track callout box links.
-    $('a[data-callout-box]').on('click', function() {
-        let $this = $(this);
-        let $text = $this.text().trim();
-        NCIAnalytics.CalloutBoxClick($this, $text, 'CancerTypesIndex');
-    });
-
-    // Track GovDelivery links.
+    /** Data attribute tracking to replace hardcoded values.  */
+    // Track GovDelivery links. Look for data attribute only, no value needed.
     $('a[data-gov-delivery]').on('click', function() {
         let $this = $(this);
         let $name = ($this.has('img')) ? 'GovDeliveryImage' : 'GovDelivery';
@@ -476,18 +469,27 @@ $(document).ready(function() {
         NCIAnalytics.GovDelivery($this, $name);
     });
 
-    // Track misc container or raw HTML links.
+    // Track callout box links. Attribute values: [text]|[linkName].
+    $('a[data-callout-box]').on('click', function() {
+        let $this = $(this);
+        let $data = $this.data('callout-box').split('|');
+        let $text = $data[0] || '';
+        let $linkName = $data[1] || '';
+        NCIAnalytics.CalloutBoxClick($this, $text, $linkName);
+    });
+
+    // Track misc container or raw HTML links. Attribute values: [title]|[identifier]|[linkName].
     $('a[data-indexed-link]').on('click', function() {
         let $this = $(this);
         let $text = $this.text().trim();
-        let $data = $this.data('indexed-link').split(',');
+        let $data = $this.data('indexed-link').split('|');
         let $title = $data[0] || '';
         let $identifier = $data[1] || '';
         let $linkName = $data[2] || '';
         NCIAnalytics.ContainerItemClick($this, $title, $text, $identifier, $linkName);
     });
 
-    // Track generic custom links.
+    // Track generic custom links. Attribute value: [text].
     $('a[data-custom-link]').on('click', function() {
         let $this = $(this);
         let $data = $this.data('custom-link').trim();
