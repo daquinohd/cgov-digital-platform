@@ -1665,14 +1665,14 @@
 <div sys_dependentvariantid="1998" sys_dependentid="1014291" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7347240"><a name="GovDelivery+Call+out+Right"></a>
 <div class="callout-box-right" style="padding: 15px;"><!--
 <figure class="image-center-full centered-set">
-<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
+<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
 </figure>
 -->
 <div class="show-for-medium-up">
-<p style="margin-top: 0;"><a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></p>
+<p style="margin-top: 0;"><a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></p>
 </div>
 <div class="show-for-small">
-<p style="margin-top: 0;"><a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI</a></p>
+<p style="margin-top: 0;"><a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI</a></p>
 </div>
 </div>
 </div>
@@ -2566,15 +2566,15 @@
 <a name="GovDelivery+Call+out+Right"></a>
 <div class="callout-box-right" style=" padding: 15px;"><!--
 <figure class="image-center-full centered-set">
-<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
+<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
 </figure>
 -->
 <div class="show-for-medium-up">
-<p style=" margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery>Get email updates from NCI on cancer health information, news, and other topics</a></p>
+<p style=" margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')">Get email updates from NCI on cancer health information, news, and other topics</a></p>
 </div>
 
 <div class="show-for-small">
-<p style=" margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery>Get email updates from NCI</a></p>
+<p style=" margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')">Get email updates from NCI</a></p>
 </div>
 </div>
   </div>
@@ -6802,14 +6802,14 @@ A blog to foster a dialogue between NCI's Epidemiology and Genomics Research Pro
 <div sys_dependentvariantid="1998" sys_dependentid="1014291" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7238073"><a name="GovDelivery+Call+out+Right"></a>
 <div class="callout-box-right" style="padding: 15px;"><!--
 <figure class="image-center-full centered-set">
-<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
+<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
 </figure>
 -->
 <div class="show-for-medium-up">
-<p style="margin-top: 0;"><a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></p>
+<p style="margin-top: 0;"><a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></p>
 </div>
 <div class="show-for-small">
-<p style="margin-top: 0;"><a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI</a></p>
+<p style="margin-top: 0;"><a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI</a></p>
 </div>
 </div>
 </div>
@@ -6911,14 +6911,14 @@ A blog to foster a dialogue between NCI's Epidemiology and Genomics Research Pro
 <div sys_dependentvariantid="1998" sys_dependentid="1014291" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7315411"><a name="GovDelivery+Call+out+Right"></a>
 <div class="callout-box-right" style="padding: 15px;"><!--
 <figure class="image-center-full centered-set">
-<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
+<div class="centered-element"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=1482&#38;sys_revision=3&#38;sys_contentid=1014457&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="1482" sys_dependentid="1014457" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005160" /></a></div>
 </figure>
 -->
 <div class="show-for-medium-up">
-<p style="margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery>Get email updates from NCI on cancer health information, news, and other topics</a></p>
+<p style="margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')">Get email updates from NCI on cancer health information, news, and other topics</a></p>
 </div>
 <div class="show-for-small">
-<p style="margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery>Get email updates from NCI</a></p>
+<p style="margin-top: 0;"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')">Get email updates from NCI</a></p>
 </div>
 </div>
 </div>
@@ -8147,10 +8147,10 @@ Cartera de subvenciones internacionales de la División de Control del Cáncer y
 <div sys_dependentvariantid="1998" sys_dependentid="1014292" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7203197"><a name="GovDelivery+Call+out+full+width"></a>
 <div class="callout-box-full">
 <h3>Get Email Updates From NCI</h3>
-<a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
+<a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
 <!--
 <div class="row collapse-edges apha2015">
-<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
+<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
 <div class="large-9 columns"></div>
 </div>
 --></div>
@@ -8535,10 +8535,10 @@ Cartera de subvenciones internacionales de la División de Control del Cáncer y
 <div sys_dependentvariantid="1998" sys_dependentid="1014292" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7203187"><a name="GovDelivery+Call+out+full+width"></a>
 <div class="callout-box-full">
 <h3>Get Email Updates From NCI</h3>
-<a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
+<a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
 <!--
 <div class="row collapse-edges apha2015">
-<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
+<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
 <div class="large-9 columns"></div>
 </div>
 --></div>
@@ -9050,10 +9050,10 @@ CFID=25868051&amp;CFTOKEN=31576776&amp;jsessionid=f6303923562fbd68a150424f1b6246
 <div sys_dependentvariantid="1998" sys_dependentid="1014292" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7203177"><a name="GovDelivery+Call+out+full+width"></a>
 <div class="callout-box-full">
 <h3>Get Email Updates From NCI</h3>
-<a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
+<a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
 <!--
 <div class="row collapse-edges apha2015">
-<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
+<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
 <div class="large-9 columns"></div>
 </div>
 --></div>
@@ -9214,10 +9214,10 @@ CFID=25868051&amp;CFTOKEN=31576776&amp;jsessionid=f6303923562fbd68a150424f1b6246
 <div sys_dependentvariantid="1998" sys_dependentid="1014292" inlinetype="rxvariant" rxinlineslot="105" sys_siteid="305" class="rx_ephox_inlinevariant mceNonEditable" contenteditable="false" rxselectedtext="" sys_relationshipid="7203167"><a name="GovDelivery+Call+out+full+width"></a>
 <div class="callout-box-full">
 <h3>Get Email Updates From NCI</h3>
-<a data-gov-delivery href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
+<a onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDelivery'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')" href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new">Get email updates from NCI on cancer health information, news, and other topics</a></div>
 <!--
 <div class="row collapse-edges apha2015">
-<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" data-gov-delivery><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
+<div class="large-3 columns"><a href="https://public.govdelivery.com/accounts/USNIHNCI/subscriber/new" onclick="s.linkTrackVars='prop4,prop5'; s.prop4='GovDeliveryImage'; s.prop5='www.cancer.gov' + location.pathname.toLowerCase(); s.tl(this,'o','GovDelivery')"><img alt="" src="http://percussion.cancer.gov/Rhythmyx/assembler/render?sys_authtype=0&#38;sys_variantid=2254&#38;sys_revision=2&#38;sys_contentid=1014458&#38;sys_context=0&#38;sys_siteid=305" sys_dependentvariantid="2254" sys_dependentid="1014458" inlinetype="rximage" rxinlineslot="104" sys_siteid="305" sys_relationshipid="6005161" /></a></div>
 <div class="large-9 columns"></div>
 </div>
 --></div>
