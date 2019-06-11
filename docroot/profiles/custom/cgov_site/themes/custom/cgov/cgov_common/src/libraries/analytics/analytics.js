@@ -473,7 +473,7 @@ $(document).ready(function() {
         let $this = $(this);
         let $name = ($this.has('img')) ? 'GovDeliveryImage' : 'GovDelivery';
         if ($('html[lang="es"]').length > 0) $name += 'Esp';
-        NCIAnalytics.GovDelivery($this, $name, pageName);
+        NCIAnalytics.GovDelivery($this, $name);
     });
 
     // Track misc container or raw HTML links.

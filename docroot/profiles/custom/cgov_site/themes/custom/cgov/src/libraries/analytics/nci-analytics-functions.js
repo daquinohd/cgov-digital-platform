@@ -877,49 +877,28 @@ var NCIAnalytics = {
         clickParams.Events = [8];
         clickParams.LogToOmniture();
     },
-	
-    //******************************************************************************************************
-    BulletinSubscription: function(sender) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'BulletinSubscription');
-        clickParams.Events = [9];
-        clickParams.LogToOmniture();
-    },
 
     //******************************************************************************************************
-    GenericLinkTrack: function(sender, label) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'GenericLinkTrack');
+    GenericLinkTrack: function(sender, label, linkName='GenericLinkTrack') {
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
         clickParams.Props = {
             4: sender.href,
-            5: sender.innerHTML,
+            5: pageName,
             28: label
         };
         clickParams.LogToOmniture();
     },
 
     //******************************************************************************************************
-    LinkTracking: function(toLink, fromLink, label) {
-
-        var clickParams = new NCIAnalytics.ClickParams(this,
-            'nciglobal', 'o', 'LinkTracking');
-        clickParams.Props = {
-            4: toLink,
-            5: fromLink + NCIAnalytics.stringDelimiter + toLink
-        };
-        clickParams.LogToOmniture();
-    },
-
-    //******************************************************************************************************
     CustomLink: function(sender, linkName) {
-
-        var clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', linkName);
-        clickParams.LogToOmniture();
+        NCIAnalytics.GenericLinkTrack(sender, '', linkName);
     },
 
+    /* ********************************************************************** */
+    GovDelivery: function(sender, label) {
+        NCIAnalytics.GenericLinkTrack(sender, label, 'GovDelivery');
+    },
+    
     //******************************************************************************************************
     /**
      * Generic / global link tracking method
@@ -1331,75 +1310,6 @@ var NCIAnalytics = {
 
         clickParams.Events = [62];
         clickParams.LogToOmniture();
-    },
-
-    //******************************************************************************************************
-    LinkTrackTagBuilder: function(e) {
-
-        if (e.button == 0) {  // Left mouse button pressed
-            var linkElement = NCIAnalytics.GetElement(NCIAnalytics.GetEventTarget(e), 'A');
-
-            if (linkElement != null &&
-                linkElement.href != null &&
-                linkElement.href != '' &&
-                (linkElement.onclick == null ||
-                linkElement.onclick.toString().indexOf('NCIAnalytics') == -1)) {
-
-                NCIAnalytics.LinkTracking(NCIAnalytics.DissectLink(linkElement.href), location.pathname);
-            }
-        }
-    },
-
-    //******************************************************************************************************
-    DissectLink: function(theLink) {
-
-        if (theLink.indexOf('clickpassthrough') != -1) {
-            var theLinkBreakout = theLink.split('&');
-            for (var i = 0; i < theLinkBreakout.length; i++) {
-                if (theLinkBreakout[i].indexOf('redirectUrl') != -1) {
-                    return unescape(theLinkBreakout[i].substring(12));
-                    break;
-                }
-            }
-        }
-        else {
-            var theLinkBreakout = theLink.split('//');
-            if (theLinkBreakout.length > 1)
-                return theLinkBreakout[1];
-            else
-                return theLink;
-        }
-    },
-
-    //******************************************************************************************************
-    GetElement: function(startingNode, elementType) {
-
-        try {
-
-            var currentNode = startingNode;
-
-            while (currentNode != null && currentNode.tagName != 'BODY') {
-                if (currentNode.tagName == elementType) {
-                    return currentNode;
-                    break;
-                }
-                else {
-                    currentNode = currentNode.parentNode;
-                }
-            }
-        } catch (err) { }
-
-    },
-
-    //******************************************************************************************************
-    GetEventTarget: function(e) {
-        var target = (e.target) ? e.target : e.srcElement;
-
-        if (target != null) {
-            if (target.nodeType == 3)
-                target = target.parentNode;
-        }
-        return target;
     },
 
     //******************************************************************************************************
@@ -1893,16 +1803,8 @@ var NCIAnalytics = {
             67: pageName
         }
         clickParams.LogToOmniture();
-    },
-    /* ********************************************************************** */
-    GovDelivery: function(sender, linkName, pageName) {
-        var clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'GovDelivery');         
-        clickParams.Props = {
-            4: linkName,
-            5: pageName
-        }
-        clickParams.LogToOmniture();
     }
+
 };
 
 /* End the giant NCIAnalytics object functions */
