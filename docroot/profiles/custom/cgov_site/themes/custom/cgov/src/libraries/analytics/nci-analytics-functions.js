@@ -1149,25 +1149,38 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'CardClick');
-        var pageName = 'D=pageName';
-        var position = container + ":" + containerIndex;
-
+    IndexedItemClick: function(sender, title, text, container, index, linkName) {
+        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
         clickParams.Props = {
-            57: cardTitle,
-            58: linkText,
-            59: position,
-            60: pageName
+            57: title,
+            58: text,
+            59: container + ':' + index,
+            60: 'D=pageName'
         };
 
-        clickParams.Events = [27];
+        if (linkName === 'CardClick') {
+            clickParams.Events = [27];
+        }
+
         clickParams.LogToOmniture();
     },
 
     //******************************************************************************************************
+    CardClick: function(sender, cardTitle, linkText, container, containerIndex) {
+        NCIAnalytics.IndexedItemClick(sender, cardTitle, linkText, container, containerIndex, 'CardClick');
+    },
+
+    //******************************************************************************************************
     DynamicListItemClick: function(sender, listTitle, linkText, container, index) {
-        NCIAnalytics.CardClick(sender, listTitle, linkText, container, index);
+        NCIAnalytics.IndexedItemClick(sender, listTitle, linkText, container, index, 'SearchResults');
+    },
+
+    //******************************************************************************************************
+    ContainerItemClick: function(sender, title, text, identifier, linkName) {
+        let id = identifier.split(':');
+        let desc = id[0];
+        let index = id[1] || '';
+        NCIAnalytics.IndexedItemClick(sender, title, text, desc, index, linkName);
     },
 
     //******************************************************************************************************
@@ -1878,6 +1891,15 @@ var NCIAnalytics = {
         clickParams.Props = {
             66: "InstitutionCard_" + pageName + "_" + linkText,
             67: pageName
+        }
+        clickParams.LogToOmniture();
+    },
+    /* ********************************************************************** */
+    GovDelivery: function(sender, linkName, pageName) {
+        var clickParams = new NCIAnalytics.ClickParams (sender, 'nciglobal', 'o', 'GovDelivery');         
+        clickParams.Props = {
+            4: linkName,
+            5: pageName
         }
         clickParams.LogToOmniture();
     }

@@ -444,13 +444,6 @@ $(document).ready(function() {
         });
     });
 
-    // Track callout box links.
-    $('.callout-box-right').on('click', 'a', function(e) {
-        var $this = $(this);
-        var $text = $this.text().trim();
-        NCIAnalytics.CalloutBoxClick($this, $text, 'CancerTypesIndex');
-    });
-
     // BEGIN Spanish Analytics tracking
     $('html[lang="es"]').find('a.news-govdelivery, a.blogRSS').on('click', function() {
         s.linkTrackVars = 'prop4,prop5';
@@ -465,6 +458,33 @@ $(document).ready(function() {
         var $this = $(this);
         var $text = $this.text().trim();
         NCIAnalytics.FooterLink($this, $text);
+    });
+
+    // Data attribute tracking to replace hardcoded values.
+    // Track callout box links.
+    $('a[data-callout-box]').on('click', function() {
+        let $this = $(this);
+        let $text = $this.text().trim();
+        NCIAnalytics.CalloutBoxClick($this, $text, 'CancerTypesIndex');
+    });
+
+    // Track GovDelivery links.
+    $('a[data-gov-delivery]').on('click', function() {
+        let $this = $(this);
+        let $name = ($this.has('img')) ? 'GovDeliveryImage' : 'GovDelivery';
+        if ($('html[lang="es"]').length > 0) $name += 'Esp';
+        NCIAnalytics.GovDelivery($this, $name, pageName);
+    });
+
+    // Track misc container or raw HTML links.
+    $('a[data-indexed-link]').on('click', function() {
+        let $this = $(this);
+        let $text = $this.text().trim();
+        let $data = $this.data('indexed-link').split(',');
+        let $title = $data[0] || '';
+        let $identifier = $data[1] || '';
+        let $linkName = $data[2] || '';
+        NCIAnalytics.ContainerItemClick($this, $title, $text, $identifier, $linkName);
     });
 
 }); //end document ready
