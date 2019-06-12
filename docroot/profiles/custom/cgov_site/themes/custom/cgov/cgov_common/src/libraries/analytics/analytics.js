@@ -478,15 +478,15 @@ $(document).ready(function() {
         NCIAnalytics.CalloutBoxClick($this, $text, $linkName);
     });
 
-    // Track misc container or raw HTML links. Attribute values: [title]|[identifier]|[linkName].
+    // Track misc container or raw HTML links. Attribute values: [title]|[linkName|[index].
     $('a[data-indexed-link]').on('click', function() {
         let $this = $(this);
         let $text = $this.text().trim();
         let $data = $this.data('indexed-link').split('|');
         let $title = $data[0] || '';
-        let $identifier = $data[1] || '';
-        let $linkName = $data[2] || '';
-        NCIAnalytics.ContainerItemClick($this, $title, $text, $identifier, $linkName);
+        let $linkName = $data[1] || '';
+        let $index = $data[2] || '';
+        NCIAnalytics.ContainerItemClick($this, $title, $text, $linkName, $index);
     });
 
     // Track generic custom links. Attribute value: [text].

@@ -1155,11 +1155,8 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    ContainerItemClick: function(sender, title, text, identifier, linkName) {
-        let id = identifier.split(':');
-        let desc = id[0];
-        let index = id[1] || '';
-        NCIAnalytics.IndexedItemClick(sender, title, text, desc, index, linkName);
+    ContainerItemClick: function(sender, title, text, linkName, index) {
+        NCIAnalytics.IndexedItemClick(sender, title, text, linkName, index, linkName);
     },
 
     //******************************************************************************************************
