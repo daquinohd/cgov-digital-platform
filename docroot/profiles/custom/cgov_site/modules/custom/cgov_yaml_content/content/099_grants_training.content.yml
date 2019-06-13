@@ -101,7 +101,7 @@
             - format: "full_html"
               value: |
                 <ul>
-                  <li><a class="arrow-link" href="/news-events/cancer-currents-blog" title="" data-custom-link="CustomLinkReplacement">Cancer Currents</a></li>
+                  <li><a class="arrow-link" href="/news-events/cancer-currents-blog" title="" data-custom-link="CancerCurrents|Cancer Currents Blog">Cancer Currents</a></li>
                   <li><a class="arrow-link" href="/grants-training/apply-grant" title="">Apply for a Grant</a></li>
                   <li><a class="arrow-link" href="/grants-training/manage-award" title="">Manage Your Award</a></li>
                   <li><a class="arrow-link" href="/grants-training/policies-process" title="">Grants Policies</a></li>

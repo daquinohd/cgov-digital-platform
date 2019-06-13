@@ -890,8 +890,15 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    CustomLink: function(sender, linkName) {
-        NCIAnalytics.GenericLinkTrack(sender, '', linkName);
+    CustomLink: function(sender, linkData) {
+        let name = linkData.split('|');
+        let label = '';
+        let linkName = linkData;
+        if(name[1] !== 'undefined') {
+            linkName = name[0];
+            label = name[1];
+        }
+        NCIAnalytics.GenericLinkTrack(sender, label, linkName);
     },
 
     /* ********************************************************************** */

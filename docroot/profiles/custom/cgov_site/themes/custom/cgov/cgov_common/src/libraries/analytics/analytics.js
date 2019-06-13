@@ -470,7 +470,7 @@ $(document).ready(function() {
     });
 
     // Track callout box links. Attribute values: [text]|[linkName].
-    $('a[data-callout-box]').on('click', function() {
+    $('a[data-callout-link]').on('click', function() {
         let $this = $(this);
         let $data = $this.data('callout-box').split('|');
         let $text = $data[0] || '';
