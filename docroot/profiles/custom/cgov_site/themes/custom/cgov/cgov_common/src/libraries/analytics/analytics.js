@@ -208,11 +208,12 @@ $(document).ready(function() {
         });
     });
 
+    // Track thumbnail clicks.
     $('.managed.list .general-list-item.has-media').each(function (i, el) {
-        var $this = $(this);
-        var $title = $this.find('h3').text().trim();
-        var $container = 'Thumbnail';
-        var $containerIndex = i + 1;
+        let $this = $(this);
+        let $title = $this.find('h3').text().trim();
+        let $container = 'Thumbnail';
+        let $containerIndex = i + 1;
 
         $(el).on('click.analytics', 'a.image', function (e) {
             NCIAnalytics.CardClick(this, $title, 'Image', $container, $containerIndex);
@@ -220,6 +221,19 @@ $(document).ready(function() {
 
         $(el).on('click.analytics', 'a.title', function (e) {
             NCIAnalytics.CardClick(this, $title, $title, $container, $containerIndex);
+        });
+    });
+
+    // Track dynamic list link clicks.
+    $('.dynamic.list .general-list-item').each(function (i, el) {
+        let $this = $(this);
+        let $title = $('article h1').text().trim();
+        let $listTitle = $this.closest('.dynamic.list').find('h2').text().trim();
+        let $index = i + 1;
+
+        $(el).on('click.analytics', 'a', function () {
+            $title = $listTitle || $title;
+            NCIAnalytics.DynamicListItemClick($this, $title, $index);
         });
     });
 
@@ -244,24 +258,6 @@ $(document).ready(function() {
             var containerIndex = i + 1;
 
             NCIAnalytics.CardClick(this, cardTitle, linkText, container, containerIndex);
-        });
-    });
-
-
-    $('.dynamic.list .general-list-item.has-media').each(function (i, el) {
-        let $this = $(this);
-        let $title = $this.closest('.dynamic.list').find('h2').text().trim();
-        let $containerIndex = i + 1;
-
-        $(el).on('click.analytics', 'a.image', function () {
-            $this = $(this);
-            NCIAnalytics.DynamicListItemClick($this, $title, 'Image', $title, $containerIndex);
-        });
-
-        $(el).on('click.analytics', 'a.title', function () {
-            $this = $(this);
-            const $link = $this.text().trim();
-            NCIAnalytics.DynamicListItemClick($this, $title, $link, $title, $containerIndex);
         });
     });
 
@@ -472,7 +468,7 @@ $(document).ready(function() {
     // Track callout box links. Attribute values: [text]|[linkName].
     $('a[data-callout-link]').on('click', function() {
         let $this = $(this);
-        let $data = $this.data('callout-box').split('|');
+        let $data = $this.data('callout-link').split('|');
         let $text = $data[0] || '';
         let $linkName = $data[1] || '';
         NCIAnalytics.CalloutBoxClick($this, $text, $linkName);

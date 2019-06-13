@@ -1144,8 +1144,15 @@ var NCIAnalytics = {
             60: 'D=pageName'
         };
 
-        if (linkName === 'CardClick') {
-            clickParams.Events = [27];
+        switch(linkName) {
+            case 'CardClick':
+                clickParams.Events = [27];
+                break;
+            case 'SearchResults':
+                clickParams.Props[13] = index;
+                break;
+            default: 
+                break;
         }
 
         clickParams.LogToOmniture();
@@ -1157,13 +1164,14 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    DynamicListItemClick: function(sender, listTitle, linkText, container, index) {
-        NCIAnalytics.IndexedItemClick(sender, listTitle, linkText, container, index, 'SearchResults');
+    ContainerItemClick: function(sender, title, text, linkName, index) {
+        NCIAnalytics.IndexedItemClick(sender, title, text, linkName, index, linkName);
     },
 
     //******************************************************************************************************
-    ContainerItemClick: function(sender, title, text, linkName, index) {
-        NCIAnalytics.IndexedItemClick(sender, title, text, linkName, index, linkName);
+    DynamicListItemClick: function(sender, title, index) {
+        let linkName = 'SearchResults';
+        NCIAnalytics.IndexedItemClick(sender, title, linkName, title, index, linkName);
     },
 
     //******************************************************************************************************
