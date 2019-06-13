@@ -440,6 +440,13 @@ $(document).ready(function() {
         });
     });
 
+    // Track footer links.
+    $('footer.site-footer').on('click', 'a', function(e) {
+        var $this = $(this);
+        var $text = $this.text().trim();
+        NCIAnalytics.FooterLink($this, $text);
+    });
+
     // BEGIN Spanish Analytics tracking
     $('html[lang="es"]').find('a.news-govdelivery, a.blogRSS').on('click', function() {
         s.linkTrackVars = 'prop4,prop5';
@@ -449,24 +456,22 @@ $(document).ready(function() {
     });
     // END Spanish Analytics Tracking
 
-    // Track footer links.
-    $('footer.site-footer').on('click', 'a', function(e) {
-        var $this = $(this);
-        var $text = $this.text().trim();
-        NCIAnalytics.FooterLink($this, $text);
-    });
-
     /** Data attribute tracking to replace hardcoded values.  */
     // Track GovDelivery links. Look for data attribute only, no value needed.
-    $('a[data-gov-delivery]').on('click', function() {
+    $('a[data-gov-delivery]').on('click.analytics', function() {
         let $this = $(this);
-        let $name = ($this.has('img')) ? 'GovDeliveryImage' : 'GovDelivery';
-        if ($('html[lang="es"]').length > 0) $name += 'Esp';
+        let $name = 'GovDelivery';
+        if ($this.find('img, figure').length) {
+            $name += 'Image';
+        }
+        if ($('html[lang="es"]').length) {
+            $name += 'Esp';
+        }            
         NCIAnalytics.GovDelivery($this, $name);
     });
 
     // Track callout box links. Attribute values: [text]|[linkName].
-    $('a[data-callout-link]').on('click', function() {
+    $('a[data-callout-link]').on('click.analyica', function() {
         let $this = $(this);
         let $data = $this.data('callout-link').split('|');
         let $text = $data[0] || '';
@@ -475,7 +480,7 @@ $(document).ready(function() {
     });
 
     // Track misc container or raw HTML links. Attribute values: [title]|[linkName|[index].
-    $('a[data-indexed-link]').on('click', function() {
+    $('a[data-indexed-link]').on('click.analytics', function() {
         let $this = $(this);
         let $text = $this.text().trim();
         let $data = $this.data('indexed-link').split('|');
@@ -486,7 +491,7 @@ $(document).ready(function() {
     });
 
     // Track generic custom links. Attribute value: [text].
-    $('a[data-custom-link]').on('click', function() {
+    $('a[data-custom-link]').on('click.analytics', function() {
         let $this = $(this);
         let $data = $this.data('custom-link').trim();
         NCIAnalytics.CustomLink($this, $data);
