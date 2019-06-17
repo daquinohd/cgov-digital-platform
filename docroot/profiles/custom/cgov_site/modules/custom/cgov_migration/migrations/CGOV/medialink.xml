@@ -1,4 +1,4 @@
-<rows>
+﻿<rows>
   <row>
     <medialink_id>7277592</medialink_id>
     <field_media_link>1002199</field_media_link>
@@ -97,11 +97,6 @@
   <row>
     <medialink_id>6816696</medialink_id>
     <field_media_link>971522</field_media_link>
-    <langcode>en</langcode>
-  </row>
-  <row>
-    <medialink_id>6890483</medialink_id>
-    <field_media_link>649354</field_media_link>
     <langcode>en</langcode>
   </row>
   <row>

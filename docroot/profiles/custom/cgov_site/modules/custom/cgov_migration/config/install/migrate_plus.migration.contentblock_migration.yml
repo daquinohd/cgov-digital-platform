@@ -41,14 +41,13 @@ process:
     -
       plugin: remove_rx_wrapper
       source: field_html_content
-    -
-      plugin: generate_placeholders
+
   field_html_content/format:
    plugin: default_value
    default_value: full_html
 
   field_content_heading: long_title
-
+  langcode: langcode
 
   uid:
    plugin: default_value

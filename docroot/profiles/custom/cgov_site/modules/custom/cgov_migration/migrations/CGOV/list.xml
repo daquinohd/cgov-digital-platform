@@ -1,4 +1,4 @@
-<rows>
+﻿<rows>
   <row>
     <row_rid>13054</row_rid>
     <langcode>en</langcode>
@@ -132,21 +132,21 @@
     <row_rid>828020</row_rid>
     <langcode>en</langcode>
     <field_list_item_style>list_item_title_desc_image</field_list_item_style>
-    <field_list_items>7340923</field_list_items>
-    <field_list_items>7340928</field_list_items>
-    <field_list_items>7340929</field_list_items>
-    <field_list_items>7340925</field_list_items>
-    <field_list_items>7340927</field_list_items>
-    <field_list_items>7340930</field_list_items>
+    <field_list_items>7357961</field_list_items>
+    <field_list_items>7357966</field_list_items>
+    <field_list_items>7357967</field_list_items>
+    <field_list_items>7357963</field_list_items>
+    <field_list_items>7357965</field_list_items>
+    <field_list_items>7357968</field_list_items>
   </row>
   <row>
     <row_rid>866188</row_rid>
     <langcode>en</langcode>
     <field_list_item_style>list_item_title_desc_image</field_list_item_style>
-    <field_list_items>7356338</field_list_items>
-    <field_list_items>7356339</field_list_items>
-    <field_list_items>7356340</field_list_items>
-    <field_list_items>7356341</field_list_items>
+    <field_list_items>7360463</field_list_items>
+    <field_list_items>7360464</field_list_items>
+    <field_list_items>7360465</field_list_items>
+    <field_list_items>7360469</field_list_items>
   </row>
   <row>
     <row_rid>866280</row_rid>
@@ -565,6 +565,7 @@
     <field_list_items>7163752</field_list_items>
     <field_list_items>7163753</field_list_items>
     <field_list_items>7163754</field_list_items>
+    <field_list_title>List of Advisory Boards and Groups</field_list_title>
   </row>
   <row>
     <row_rid>6728267</row_rid>
@@ -581,12 +582,13 @@
     <field_list_items>6819273</field_list_items>
     <field_list_items>6819274</field_list_items>
     <field_list_items>6819275</field_list_items>
+    <field_list_title>Grupos de preguntas por tema</field_list_title>
   </row>
   <row>
     <row_rid>7003819</row_rid>
     <langcode>en</langcode>
     <field_list_item_style>list_item_title_desc_image</field_list_item_style>
-    <field_list_item>7294132</field_list_item>
+    <field_list_item>7360563</field_list_item>
   </row>
   <row>
     <row_rid>7119770</row_rid>
@@ -595,6 +597,7 @@
     <field_list_items>7100109</field_list_items>
     <field_list_items>7100110</field_list_items>
     <field_list_items>7100100</field_list_items>
+    <field_list_title>Apoyo y Recursos</field_list_title>
   </row>
   <row>
     <row_rid>7119771</row_rid>
@@ -610,6 +613,7 @@
     <field_list_items>7104195</field_list_items>
     <field_list_items>7104200</field_list_items>
     <field_list_items>7104201</field_list_items>
+    <field_list_title>Detección y diagnóstico</field_list_title>
   </row>
   <row>
     <row_rid>7119772</row_rid>
@@ -626,6 +630,7 @@
     <field_list_items>7119750</field_list_items>
     <field_list_items>7119748</field_list_items>
     <field_list_items>7119749</field_list_items>
+    <field_list_title>Dieta y nutrición</field_list_title>
   </row>
   <row>
     <row_rid>7119773</row_rid>
@@ -663,6 +668,7 @@
     <field_list_items>7119702</field_list_items>
     <field_list_items>7119713</field_list_items>
     <field_list_items>7119708</field_list_items>
+    <field_list_title>Factores de riesgo y causas posibles</field_list_title>
   </row>
   <row>
     <row_rid>7119774</row_rid>
@@ -677,6 +683,7 @@
     <field_list_items>7126580</field_list_items>
     <field_list_items>7126576</field_list_items>
     <field_list_items>7126582</field_list_items>
+    <field_list_title>Prevención</field_list_title>
   </row>
   <row>
     <row_rid>7119775</row_rid>
@@ -689,6 +696,7 @@
     <field_list_items>7103671</field_list_items>
     <field_list_items>7103672</field_list_items>
     <field_list_items>7103673</field_list_items>
+    <field_list_title>Tabaco y dejar de fumar</field_list_title>
   </row>
   <row>
     <row_rid>7119776</row_rid>
@@ -699,6 +707,7 @@
     <field_list_items>6343196</field_list_items>
     <field_list_items>6343198</field_list_items>
     <field_list_items>6343197</field_list_items>
+    <field_list_title>Tipo de cáncer</field_list_title>
   </row>
   <row>
     <row_rid>7119777</row_rid>
@@ -716,6 +725,7 @@
     <field_list_items>7100121</field_list_items>
     <field_list_items>7100122</field_list_items>
     <field_list_items>7100123</field_list_items>
+    <field_list_title>Tratamiento del cáncer</field_list_title>
   </row>
   <row>
     <row_rid>7120063</row_rid>
@@ -734,6 +744,7 @@
     <field_list_items>7020374</field_list_items>
     <field_list_items>7020366</field_list_items>
     <field_list_items>7020375</field_list_items>
+    <field_list_title>Cancer Therapy</field_list_title>
   </row>
   <row>
     <row_rid>7120064</row_rid>
@@ -744,6 +755,7 @@
     <field_list_items>6343052</field_list_items>
     <field_list_items>6343053</field_list_items>
     <field_list_items>6343054</field_list_items>
+    <field_list_title>Cancer Types</field_list_title>
   </row>
   <row>
     <row_rid>7120065</row_rid>
@@ -759,6 +771,7 @@
     <field_list_items>6264899</field_list_items>
     <field_list_items>6264901</field_list_items>
     <field_list_items>6264902</field_list_items>
+    <field_list_title>Detection and Diagnosis</field_list_title>
   </row>
   <row>
     <row_rid>7120066</row_rid>
@@ -775,6 +788,7 @@
     <field_list_items>6797360</field_list_items>
     <field_list_items>6797357</field_list_items>
     <field_list_items>6797358</field_list_items>
+    <field_list_title>Diet and Nutrition</field_list_title>
   </row>
   <row>
     <row_rid>7120067</row_rid>
@@ -790,6 +804,7 @@
     <field_list_items>7344808</field_list_items>
     <field_list_items>7344802</field_list_items>
     <field_list_items>7344803</field_list_items>
+    <field_list_title>Prevention</field_list_title>
   </row>
   <row>
     <row_rid>7120068</row_rid>
@@ -827,6 +842,7 @@
     <field_list_items>7268063</field_list_items>
     <field_list_items>7268065</field_list_items>
     <field_list_items>7268066</field_list_items>
+    <field_list_title>Risk Factors and Possible Causes</field_list_title>
   </row>
   <row>
     <row_rid>7120069</row_rid>
@@ -835,6 +851,7 @@
     <field_list_items>7126133</field_list_items>
     <field_list_items>7126135</field_list_items>
     <field_list_items>7126136</field_list_items>
+    <field_list_title>Support, Coping, and Resources</field_list_title>
   </row>
   <row>
     <row_rid>7120070</row_rid>
@@ -847,6 +864,7 @@
     <field_list_items>6247513</field_list_items>
     <field_list_items>6247514</field_list_items>
     <field_list_items>6247515</field_list_items>
+    <field_list_title>Tobacco and Smoking Cessation</field_list_title>
   </row>
   <row>
     <row_rid>7121168</row_rid>
@@ -865,15 +883,16 @@
     <field_list_items>6177831</field_list_items>
     <field_list_items>6177827</field_list_items>
     <field_list_items>6177832</field_list_items>
+    <field_list_title>Políticas</field_list_title>
   </row>
   <row>
     <row_rid>7136911</row_rid>
     <langcode>es</langcode>
     <field_list_item_style>list_item_title_desc_image</field_list_item_style>
-    <field_list_items>7338957</field_list_items>
-    <field_list_items>7338958</field_list_items>
-    <field_list_items>7338960</field_list_items>
-    <field_list_items>7338959</field_list_items>
+    <field_list_items>7360789</field_list_items>
+    <field_list_items>7360790</field_list_items>
+    <field_list_items>7360792</field_list_items>
+    <field_list_items>7360791</field_list_items>
   </row>
   <row>
     <row_rid>7163239</row_rid>
@@ -887,26 +906,7 @@
     <field_list_items>7163231</field_list_items>
     <field_list_items>7163234</field_list_items>
     <field_list_items>7163236</field_list_items>
-  </row>
-  <row>
-    <row_rid>7293398</row_rid>
-    <langcode>en</langcode>
-    <field_list_item_style>list_item_title_desc</field_list_item_style>
-    <field_list_items>7293406</field_list_items>
-    <field_list_items>7293405</field_list_items>
-    <field_list_items>7293404</field_list_items>
-    <field_list_items>7293407</field_list_items>
-  </row>
-  <row>
-    <row_rid>7293411</row_rid>
-    <langcode>en</langcode>
-    <field_list_item_style>list_item_title_desc</field_list_item_style>
-    <field_list_items>7293417</field_list_items>
-    <field_list_items>7293416</field_list_items>
-    <field_list_items>7293415</field_list_items>
-    <field_list_items>7293414</field_list_items>
-    <field_list_items>7293412</field_list_items>
-    <field_list_items>7293413</field_list_items>
+    <field_list_title>Web and Digital Policies</field_list_title>
   </row>
   <row>
     <row_rid>7298920</row_rid>
@@ -920,5 +920,27 @@
     <field_list_item_style>list_item_title_desc</field_list_item_style>
     <field_list_items>7309082</field_list_items>
     <field_list_items>7309083</field_list_items>
+  </row>
+  <row>
+    <row_rid>7365190</row_rid>
+    <langcode>en</langcode>
+    <field_list_item_style>list_item_title_desc</field_list_item_style>
+    <field_list_items>7293406</field_list_items>
+    <field_list_items>7293405</field_list_items>
+    <field_list_items>7293404</field_list_items>
+    <field_list_items>7293407</field_list_items>
+    <field_list_title>Testing and Screening Trials</field_list_title>
+  </row>
+  <row>
+    <row_rid>7365196</row_rid>
+    <langcode>en</langcode>
+    <field_list_item_style>list_item_title_desc</field_list_item_style>
+    <field_list_items>7293417</field_list_items>
+    <field_list_items>7293416</field_list_items>
+    <field_list_items>7293415</field_list_items>
+    <field_list_items>7293414</field_list_items>
+    <field_list_items>7293412</field_list_items>
+    <field_list_items>7293413</field_list_items>
+    <field_list_title>Treatment Trials</field_list_title>
   </row>
 </rows>

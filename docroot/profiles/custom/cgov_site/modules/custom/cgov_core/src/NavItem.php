@@ -5,7 +5,6 @@ namespace Drupal\cgov_core;
 use Drupal\taxonomy\TermInterface;
 use Drupal\cgov_core\Services\CgovNavigationManager;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Url;
 
 /**
  * Nav Item.
@@ -149,10 +148,7 @@ class NavItem {
     $this->term = $term;
     $this->termId = $this->term->id();
 
-    $hasLandingPage = count($this->term->field_landing_page->getValue()) && isset($this->term->field_landing_page->getValue()[0]['target_id']);
-    if ($hasLandingPage) {
-      $this->landingPageId = $this->term->field_landing_page->getValue()[0]['target_id'];
-    }
+    $this->href = $this->navMgr->getUrlForLanding($this->term);
 
     $this->isBreadcrumbRoot = $this->term->field_breadcrumb_root->value;
     $this->isSectionNavRoot = $this->term->field_section_nav_root->value;
@@ -162,14 +158,6 @@ class NavItem {
     $this->label = $this->term->field_navigation_label->value
       ? $this->term->field_navigation_label->value
       : $this->term->name->value;
-
-    // Only site sections with landing pages can have a link.
-    // Nav plugins should never be calling getHref on NavItems without landing
-    // pages (since those are filtered )
-    if ($this->landingPageId) {
-      $href = Url::fromRoute('entity.node.canonical', ['node' => $this->landingPageId])->toString();
-      $this->href = $href;
-    }
 
     // @var [['value' => string], ['value' => string]]
     $navigationDisplayRules = $this->term->field_navigation_display_options->getValue();
@@ -198,7 +186,12 @@ class NavItem {
    *   Href value.
    */
   public function getHref() {
-    return $this->href;
+    if ($this->href) {
+      return $this->href->toString();
+    }
+    else {
+      return '';
+    }
   }
 
   /**

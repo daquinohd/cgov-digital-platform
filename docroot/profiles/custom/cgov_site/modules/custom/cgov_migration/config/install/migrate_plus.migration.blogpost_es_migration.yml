@@ -206,8 +206,7 @@ process:
     -
       plugin: remove_rx_wrapper
       source: body
-    -
-      plugin: generate_placeholders
+
   body/format:
    plugin: default_value
    default_value: full_html
@@ -308,11 +307,8 @@ process:
     source: field_blog_series
     no_stub: true
 
-  field_blog_topics:
-    plugin: migration_lookup
-    migration: blogtopics_es_migration
-    source: field_blog_topics
-    no_stub: true
+  field_blog_topics: field_blog_topics
+
 
   temp_text:
     plugin: migration_lookup
