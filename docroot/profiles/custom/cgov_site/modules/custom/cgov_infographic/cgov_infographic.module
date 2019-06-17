@@ -11,6 +11,15 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 /**
  * Implements hook_ENTITY_TYPE_view().
  */
+function cgov_infographic_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity == NULL || $entity->bundle() != 'cgov_infographic') {
+    return;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
 function cgov_infographic_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if ($entity == NULL || $entity->bundle() != 'cgov_infographic') {
     return;
