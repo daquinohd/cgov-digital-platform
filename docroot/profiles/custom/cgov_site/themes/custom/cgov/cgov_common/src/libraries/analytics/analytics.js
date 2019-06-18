@@ -638,7 +638,7 @@ $(window).on('load',function(){
         var $this = $(this);
         var linkText = $this.text();
         var index = $this.closest('li').index() + 1;
-        NCIAnalytics.BlogRelatedLinksClick(this, linkText, pageName, index);
+        NCIAnalytics.RelatedResourceClick(this, linkText, index);
     });
 
     // Track clicks on feature cards on blog posts.
@@ -722,7 +722,8 @@ $(window).on('load',function(){
         var href =  e.target.href;
         var isPhoneNumber = href.match(/^tel\:./i);
         var linkText = isPhoneNumber ? 'phone' : 'website';
+        var token = pathname.match(/([^\/]*)\/*$/)[1];
 
-        NCIAnalytics.ProfilePanelLinkClick($this, linkText, pageName);
-    });
+        NCIAnalytics.ProfilePanelLinkClick($this, linkText, token);
+    });    
 });
