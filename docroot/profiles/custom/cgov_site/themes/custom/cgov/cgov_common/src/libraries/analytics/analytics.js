@@ -722,7 +722,8 @@ $(window).on('load',function(){
         var href =  e.target.href;
         var isPhoneNumber = href.match(/^tel\:./i);
         var linkText = isPhoneNumber ? 'phone' : 'website';
+        var token = pathname.match(/([^\/]*)\/*$/)[1];
 
-        NCIAnalytics.ProfilePanelLinkClick($this, linkText, pageName);
-    });
+        NCIAnalytics.ProfilePanelLinkClick($this, linkText, token);
+    });    
 });

@@ -1811,12 +1811,12 @@ var NCIAnalytics = {
         clickParams.logToOmniture();
     },
     /* ********************************************************************** */
-    ProfilePanelLinkClick: function(sender, linkText, pageName) {
+    ProfilePanelLinkClick: function(sender, linkText, token) {
         var clickParams = new NCIAnalytics.ClickParams (sender,
             'nciglobal', 'o', 'ProfilePanelLinkClick'); 
         
         clickParams.Props = {
-            66: "InstitutionCard_" + pageName + "_" + linkText,
+            66: "InstitutionCard_" + token + "_" + linkText,
             67: pageName
         }
         clickParams.LogToOmniture();
