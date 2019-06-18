@@ -638,7 +638,7 @@ $(window).on('load',function(){
         var $this = $(this);
         var linkText = $this.text();
         var index = $this.closest('li').index() + 1;
-        NCIAnalytics.BlogRelatedLinksClick(this, linkText, pageName, index);
+        NCIAnalytics.RelatedResourceClick(this, linkText, index);
     });
 
     // Track clicks on feature cards on blog posts.

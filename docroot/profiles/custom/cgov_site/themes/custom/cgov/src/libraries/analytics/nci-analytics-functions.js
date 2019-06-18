@@ -1654,11 +1654,11 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogArchiveLinkClick: function(sender, pageName){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogArchiveDateClick');
-        var year = NCIAnalytics.getQueryString('year');
-        var month = NCIAnalytics.getQueryString('month');
-;
+        var year = NCIAnalytics.getQueryString('year', sender.href);
+        var month = NCIAnalytics.getQueryString('month', sender.href);
+
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_Archive",
+            66: NCIAnalytics.concatCustomLink('Archive'),
             67: pageName,
             50: year + (month ? (":" + month) : "")
         };
@@ -1670,7 +1670,7 @@ var NCIAnalytics = {
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogSubscribeClick');
 
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_Subscribe",
+            66: NCIAnalytics.concatCustomLink('Subscribe'),
             67: pageName
         };
 
@@ -1679,17 +1679,16 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     BlogArchiveAccordionClick: function(sender, pageName, collapse){
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogAccordionAction');
-        var expandCollapse = "";
-        if(collapse){
-            expandCollapse = "_Collapse:Archive";
-        }
-        else{
-            expandCollapse = "_Expand:Archive";
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogAccordionAction');
+        let action = 'Archive';
+        if (collapse) {
+            action = 'Collapse:' + action;
+        } else {
+            action = 'Expand:' + action;
         }
         
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + expandCollapse,
+            66: NCIAnalytics.concatCustomLink(action),
             67: pageName
         };
         clickParams.LogToOmniture();
@@ -1697,16 +1696,13 @@ var NCIAnalytics = {
     /* ********************************************************************** */
     BlogBodyLinkClick: function(sender, linkText, pageName){
         var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogBodyLinkClick');
-        
-        var linkType = "_BodyLink";
         clickParams.Props = {
             50: linkText,
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + linkType,
+            66: NCIAnalytics.concatCustomLink('BodyLink'),
             67: pageName
         };
 
         clickParams.Events = [56];
-
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
@@ -1720,31 +1716,29 @@ var NCIAnalytics = {
         };
         
         if(blogLink) {
-            clickParams.Props[66] = "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + '_BodyGlossifiedTerm';
+            clickParams.Props[66] = NCIAnalytics.concatCustomLink('BodyGlossifiedTerm');
         }
 
         clickParams.Events = [56];
-    
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
-    BlogRelatedLinksClick: function(sender, linkText, pageName, index){
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'BlogRelatedLinkClick');
-        var linkGrouping = ['Blog', NCIAnalytics.contentGroup(), 'RelatedResource:' + index];
+    RelatedResourceClick: function(sender, linkText, index){
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'RelatedLinkClick');
+
+        clickParams.Props = {
+            67: pageName,
+            50: linkText
+        };
 
         // Add location if exists.
         if (NCIAnalytics.blogLocation()) {
             clickParams.Events = [57];
-            linkGrouping.splice(2, 0, NCIAnalytics.blogLocation());
+            clickParams.Props[66] = NCIAnalytics.concatCustomLink('BlogRelatedResource:' + index);
         } else {
             clickParams.Events = [59];
+            clickParams.Props[66] = NCIAnalytics.concatCustomLink('RelatedResource:' + index);
         }
-
-        clickParams.Props = {
-            66: linkGrouping.join('_'),
-            67: pageName,
-            50: linkText
-        };
         
         clickParams.LogToOmniture();
     },
@@ -1754,7 +1748,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'BlogFeatureCardClick');
 
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_BlogCard:" + containerIndex,
+            66: NCIAnalytics.concatCustomLink('BlogCard:' + containerIndex),
             67: pageName,
             50: linkText
         };
@@ -1768,7 +1762,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'FeaturedPostsClick');
 
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_FeaturedPosts:" + containerIndex,
+            66: NCIAnalytics.concatCustomLink('FeaturedPosts:' + containerIndex),
             67: pageName,
             50: linkText
         };
@@ -1782,7 +1776,7 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'CategoryClick');
 
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_Category:" + containerIndex,
+            66: NCIAnalytics.concatCustomLink('Category:' + containerIndex),
             67: pageName,
             50: linkText
         };
@@ -1796,11 +1790,11 @@ var NCIAnalytics = {
             'nciglobal', 'o', 'OlderNewerClick');
 
         clickParams.Props = {
-            66: "Blog_" + NCIAnalytics.contentGroup() + "_" + NCIAnalytics.blogLocation() + "_" + olderNewer,
+            66: NCIAnalytics.concatCustomLink(olderNewer),
             67: pageName
         };
 
-        if (NCIAnalytics.blogLocation() == "Post") {
+        if (NCIAnalytics.blogLocation() == 'Post') {
             clickParams.Events = [55];
         }
 
@@ -1837,13 +1831,38 @@ var NCIAnalytics = {
 /* ********************************************************************** */
 /* ********************************************************************** */
 
+/**
+ * Build the concatenated value for blog custom links (usually prop66).
+ *
+ * @param {string} value - custom value or indexed item.
+ */
+NCIAnalytics.concatCustomLink = function(value) {
+    let linkArr = [NCIAnalytics.contentGroup()];
+
+    // Add blog values if set.
+    if (NCIAnalytics.blogLocation()) {
+        linkArr.unshift('Blog');
+        linkArr.push(NCIAnalytics.blogLocation());
+    }
+
+    // Add custom value if set.
+    if (value) {
+        linkArr.push(value);
+    }
+    
+    return linkArr.join('_').trim();
+}
+
+/**
+ * Get the Blog page location (post, series, or topic)
+ */
 NCIAnalytics.blogLocation = function() {
-    if (document.querySelector('body.cgvblogpost')) {
-        return 'Post';
-    } else if (document.querySelector('body.cgvblogseries')) {
-        return 'Series';
-    } else if (document.querySelector('body.cgvtopicpage')) {
+    if (NCIAnalytics.getQueryString('topic')) {
         return 'Category';
+    } else if (document.querySelector('[content="cgvBlogSeries"], #cgvBody.cgvblogseries')) {
+        return 'Series';
+    } else if (document.querySelector('[content="cgvBlogPost"], #cgvBody.cgvblogpost')) {
+        return 'Post';
     } else return '';
 }
 
@@ -1852,14 +1871,12 @@ NCIAnalytics.blogLocation = function() {
  * 'isPartOf' metatag.
  */
 NCIAnalytics.contentGroup = function() {
-    var metaSel = ('[name="dcterms.isPartOf"]');
-    var metaTag = document.head.querySelector(metaSel) || null;
-    if (metaTag) {
-        var metaVal = metaTag.content || '';
-        return metaVal;
-    } else {
-        return '';
+    let metaTag = document.head.querySelector('[name="dcterms.isPartOf"]');
+    let metaVal = '';
+    if (metaTag) { 
+        metaVal = metaTag.content || ''; 
     }
+    return metaVal;
 }
 
 /**
