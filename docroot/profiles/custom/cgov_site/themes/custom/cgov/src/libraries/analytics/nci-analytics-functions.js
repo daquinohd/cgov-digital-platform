@@ -1801,14 +1801,15 @@ var NCIAnalytics = {
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
-    TableSortHeaderClick: function(sender, pageName) {
+    TableSortHeaderClick: function(sender) {
         var clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
             65: 'table_sort',
             67: pageName
         };
-        clickParams.logToOmniture();
+
+        clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
     ProfilePanelLinkClick: function(sender, linkText, token) {

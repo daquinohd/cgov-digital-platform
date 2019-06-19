@@ -691,7 +691,7 @@ $(window).on('load',function(){
         if(userHasSorted){
             return
         }
-        NCIAnalytics.TableSortHeaderClick(this, pageName);
+        NCIAnalytics.TableSortHeaderClick(this);
         userHasSorted = true;
     });
 
@@ -719,11 +719,11 @@ $(window).on('load',function(){
     // Track clicks on website url of profile panel pages.
     $('div.profile-panel-content a').on("click", function(e) {
         var $this = $(this);
-        var href =  e.target.href;
+        var href = e.target.href;
         var isPhoneNumber = href.match(/^tel\:./i);
         var linkText = isPhoneNumber ? 'phone' : 'website';
-        var token = pathname.match(/([^\/]*)\/*$/)[1];
+        var name = pathname.match(/([^\/]*)\/*$/)[1];
 
-        NCIAnalytics.ProfilePanelLinkClick($this, linkText, token);
-    });    
+        NCIAnalytics.ProfilePanelLinkClick($this, linkText, name);
+    });
 });
