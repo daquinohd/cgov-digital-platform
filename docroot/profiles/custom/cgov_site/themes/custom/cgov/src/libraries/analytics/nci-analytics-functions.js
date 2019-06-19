@@ -1,9 +1,8 @@
 // global
-var oga_pattern = /grants\-training\/grants/gi,
-    cct_pattern = /grants\-training\/training/gi,
-    pdq_pattern = /pdq/gi,
-    trimmedPathname = document.location.pathname.replace(/\/$/, ''),
-    pageName = 'D=pageName';
+const oga_pattern = /grants\-training\/grants/gi;
+const cct_pattern = /grants\-training\/training/gi;
+const pdq_pattern = /pdq/gi;
+const pageName = 'D=pageName';
 
 var NCIAnalytics = {
 
@@ -1930,9 +1929,9 @@ if (document.readyState === "complete" ||
  * @author Evolytics <nci@evolytics.com>
  * @since 2016-08-12
  */
-if (trimmedPathname === '/grants-training') {
-    var grantsTrainingLinks = document.querySelectorAll("#content a[href*='grants-training']");
-    var linksArray = [].slice.call(grantsTrainingLinks);
+NCIAnalytics.dynamicGrantsTraining = function () {
+    let grantsTrainingLinks = document.querySelectorAll("#content a[href*='grants-training']");
+    let linksArray = [].slice.call(grantsTrainingLinks);
 
     // Add the 'click' event listener to each link containting 'grants-training'
     linksArray.forEach(function(element) {
@@ -1941,8 +1940,8 @@ if (trimmedPathname === '/grants-training') {
 
     // Set the "timetoclick" event (106) for specified grants-training links
     function setTimeToClick(e) {	
-        var href = e.target.href;
-        destinationSiteSection = '';
+        let href = e.target.href;
+        let destinationSiteSection = '';
 
         // identify destination site section; used to determine whether or not to send a call
         if (oga_pattern.test(href)) {
@@ -1952,8 +1951,8 @@ if (trimmedPathname === '/grants-training') {
         }
 		
         if (destinationSiteSection && window.pageLoadedAtTime) {
-            var linkText = e.target.textContent.toLowerCase().substring(0, 89).trim();
-            var linkClickedAtTime = new Date().getTime();    
+            let linkText = e.target.textContent.toLowerCase().substring(0, 89).trim();
+            let linkClickedAtTime = new Date().getTime();    
 
             NCIAnalytics.GlobalLinkTrack({
                 sender: this,

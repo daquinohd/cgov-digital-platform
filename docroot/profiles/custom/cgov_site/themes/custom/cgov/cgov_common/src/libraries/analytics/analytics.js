@@ -48,6 +48,7 @@ $(document).ready(function() {
 
     // Use the Adobe dynamic pageName value.
     var pageName = 'D=pageName';
+    var trimmedPathname = document.location.pathname.replace(/\/$/, '');
 
     // PAGE OPTIONS MODULE
     registerCustomEventListener('NCI.page_option.clicked', (target, data) => {
@@ -415,6 +416,11 @@ $(document).ready(function() {
                 });
             }
         });
+    }
+
+    // Dynamic link tracking for http://www.cancer.gov/grants-training
+    if (trimmedPathname === '/grants-training') {
+        NCIAnalytics.dynamicGrantsTraining();
     }
 
     $("#apply").on("click", "a", function () {
