@@ -447,18 +447,9 @@ $(document).ready(function() {
         NCIAnalytics.FooterLink($this, $text);
     });
 
-    // BEGIN Spanish Analytics tracking
-    $('html[lang="es"]').find('a.news-govdelivery, a.blogRSS').on('click', function() {
-        s.linkTrackVars = 'prop4,prop5';
-        s.prop4 = 'GovDeliveryEsp';
-        s.prop5 = pageName;
-        s.tl(this, 'o', 'GovDeliveryEsp');
-    });
-    // END Spanish Analytics Tracking
-
     /** Data attribute tracking to replace hardcoded values.  */
     // Track GovDelivery links. Look for data attribute only, no value needed.
-    $('a[data-gov-delivery]').on('click.analytics', function() {
+    $('#content a[href*="govdelivery.com"], a[data-gov-delivery]').on('click.analytics', function() {
         let $this = $(this);
         let $name = 'GovDelivery';
         if ($this.find('img, figure').length) {
