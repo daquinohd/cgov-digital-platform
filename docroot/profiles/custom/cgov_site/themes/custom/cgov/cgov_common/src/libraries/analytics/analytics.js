@@ -466,6 +466,13 @@ $(document).ready(function() {
         NCIAnalytics.GovDelivery($this, $name);
     });
 
+    // Track callout box links. Attribute values: [text]|[linkName].
+    $('[class*="callout-box"]').on('click.analyica', 'a', function() {
+        let $this = $(this);
+        let $text = 'my placeholder callout';
+        NCIAnalytics.CalloutLinkTrack($this, $text);
+    });
+
     /** Data attribute tracking to replace hardcoded values.  */
     // Track callout box links. Attribute values: [text]|[linkName].
     $('a[data-callout-link]').on('click.analyica', function() {

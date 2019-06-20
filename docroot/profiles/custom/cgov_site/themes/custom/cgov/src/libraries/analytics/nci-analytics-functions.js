@@ -912,6 +912,11 @@ var NCIAnalytics = {
     },
     
     //******************************************************************************************************
+    CalloutLinkTrack: function(sender, value) {
+        NCIAnalytics.GlobalLinkTrack({sender: sender, label: value});
+    },
+
+    //******************************************************************************************************
     /**
      * Generic / global link tracking method
      * @param {object} payload
