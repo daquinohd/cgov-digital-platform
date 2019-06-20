@@ -453,9 +453,8 @@ $(document).ready(function() {
         NCIAnalytics.FooterLink($this, $text);
     });
 
-    /** Data attribute tracking to replace hardcoded values.  */
     // Track GovDelivery links. Look for data attribute only, no value needed.
-    $('#content a[href*="govdelivery.com"], a[data-gov-delivery]').on('click.analytics', function() {
+    $('#content a[href*="govdelivery.com"], a.news-govdelivery, a.blogRSS').on('click.analytics', function() {
         let $this = $(this);
         let $name = 'GovDelivery';
         if ($this.find('img, figure').length) {
@@ -467,6 +466,7 @@ $(document).ready(function() {
         NCIAnalytics.GovDelivery($this, $name);
     });
 
+    /** Data attribute tracking to replace hardcoded values.  */
     // Track callout box links. Attribute values: [text]|[linkName].
     $('a[data-callout-link]').on('click.analyica', function() {
         let $this = $(this);
