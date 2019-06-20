@@ -894,6 +894,11 @@ var NCIAnalytics = {
         NCIAnalytics.GenericLinkTrack(fromLink, label, 'LinkTracking');
     },
 
+    /* ********************************************************************** */
+    GovDelivery: function(sender, label) {
+        NCIAnalytics.GenericLinkTrack(sender, '', label);
+    },
+
     //******************************************************************************************************
     CustomLink: function(sender, linkData) {
         let name = linkData.split('|');
@@ -904,16 +909,6 @@ var NCIAnalytics = {
             label = name[1];
         }
         NCIAnalytics.GenericLinkTrack(sender, label, linkName);
-    },
-
-    /* ********************************************************************** */
-    GovDelivery: function(sender, label) {
-        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'GovDelivery');
-        clickParams.Props = {
-            4: label,
-            5: pageName,
-        };
-        clickParams.LogToOmniture();
     },
     
     //******************************************************************************************************
