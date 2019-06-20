@@ -911,11 +911,24 @@ var NCIAnalytics = {
         let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'GovDelivery');
         clickParams.Props = {
             4: label,
-            5: pageName,
+            5: pageName
         };
         clickParams.LogToOmniture();
     },
     
+    //******************************************************************************************************
+    CalloutBoxLinkTrack: function(sender, label, linkName) {
+        let callOut = 'CallOut';
+        let link = linkName + callOut;
+        let text = [linkName, callOut, label].join('_');
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', link);
+        
+        clickParams.Props = {
+            66: text
+        };
+        clickParams.LogToOmniture();
+    },
+
     //******************************************************************************************************
     /**
      * Generic / global link tracking method
@@ -1480,15 +1493,6 @@ var NCIAnalytics = {
         clickParams.LogToOmniture();
     },
 
-    //******************************************************************************************************
-    CalloutBoxClick: function(sender, value, linkName) {
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
-        clickParams.Props = {
-            66: value
-        };
-        clickParams.LogToOmniture();
-    },
-
     /******************************************************************************************************
     * General accordion click tracking
     * sender - the element responsible for this event.
@@ -1801,10 +1805,12 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     TableSortHeaderClick: function(sender) {
-        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SortTableHeaderClick');
+        let clickParams = new NCIAnalytics.ClickParams(sender,
+            'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
             5: 'table_sort',
         };
+
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
