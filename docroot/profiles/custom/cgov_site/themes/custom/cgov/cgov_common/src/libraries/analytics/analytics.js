@@ -470,8 +470,9 @@ $(document).ready(function() {
     $('[class*="callout-box"]').on('click.analyics', 'a', function() {
         let $this = $(this);
         if (!$this[0].href.includes('govdelivery.com')) {
-            let $text = 'why u no track';
-            NCIAnalytics.CalloutLinkTrack($this, $text);
+            let $title = $('h1').first().text().replace(/\s/g, '');
+            let $text = $this.text().replace(/\s/g, '');
+            NCIAnalytics.CalloutBoxLinkTrack($this, $text, $title);
         }
     });
 
