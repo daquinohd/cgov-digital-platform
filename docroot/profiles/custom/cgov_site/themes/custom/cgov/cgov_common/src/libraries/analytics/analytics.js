@@ -469,11 +469,9 @@ $(document).ready(function() {
     // Track callout box links if not GovDelivery.
     $('[class*="callout-box"]').on('click.analyics', 'a', function() {
         let $this = $(this);
-        if (!$this.find('[href*="govdelivery.com"]')) {
-            let $text = 'callout 2: the new batch';
+        if (!$this[0].href.includes('govdelivery.com')) {
+            let $text = 'why u no track';
             NCIAnalytics.CalloutLinkTrack($this, $text);
-        } else {
-            NCIAnalytics.GovDelivery($this, 'GovDelivery');
         }
     });
 
