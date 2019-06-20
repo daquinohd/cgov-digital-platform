@@ -466,11 +466,15 @@ $(document).ready(function() {
         NCIAnalytics.GovDelivery($this, $name);
     });
 
-    // Track callout box links. Attribute values: [text]|[linkName].
-    $('[class*="callout-box"]').on('click.analyica', 'a', function() {
+    // Track callout box links if not GovDelivery.
+    $('[class*="callout-box"]').on('click.analyics', 'a', function() {
         let $this = $(this);
-        let $text = 'my placeholder callout';
-        NCIAnalytics.CalloutLinkTrack($this, $text);
+        if (!$this.find('[href*="govdelivery.com"]')) {
+            let $text = 'callout 2: the new batch';
+            NCIAnalytics.CalloutLinkTrack($this, $text);
+        } else {
+            NCIAnalytics.GovDelivery($this, 'GovDelivery');
+        }
     });
 
     /** Data attribute tracking to replace hardcoded values.  */
