@@ -474,15 +474,6 @@ $(document).ready(function() {
     });
 
     /** Data attribute tracking to replace hardcoded values.  */
-    // Track callout box links. Attribute values: [text]|[linkName].
-    $('a[data-callout-link]').on('click.analyica', function() {
-        let $this = $(this);
-        let $data = $this.data('callout-link').split('|');
-        let $text = $data[0] || '';
-        let $linkName = $data[1] || '';
-        NCIAnalytics.CalloutBoxClick($this, $text, $linkName);
-    });
-
     // Track misc container or raw HTML links. Attribute values: [title]|[linkName|[index].
     $('a[data-indexed-link]').on('click.analytics', function() {
         let $this = $(this);

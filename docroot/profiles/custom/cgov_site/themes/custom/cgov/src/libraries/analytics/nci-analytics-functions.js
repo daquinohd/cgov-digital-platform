@@ -915,7 +915,7 @@ var NCIAnalytics = {
     CalloutLinkTrack: function(sender, value) {
         NCIAnalytics.GlobalLinkTrack({sender: sender, label: value});
     },
-
+    
     //******************************************************************************************************
     /**
      * Generic / global link tracking method
@@ -1480,15 +1480,6 @@ var NCIAnalytics = {
         clickParams.LogToOmniture();
     },
 
-    //******************************************************************************************************
-    CalloutBoxClick: function(sender, value, linkName) {
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
-        clickParams.Props = {
-            66: value
-        };
-        clickParams.LogToOmniture();
-    },
-
     /******************************************************************************************************
     * General accordion click tracking
     * sender - the element responsible for this event.
@@ -1801,11 +1792,10 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     TableSortHeaderClick: function(sender) {
-        var clickParams = new NCIAnalytics.ClickParams(sender,
+        let clickParams = new NCIAnalytics.ClickParams(sender,
             'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
-            65: 'table_sort',
-            67: pageName
+            5: 'table_sort',
         };
 
         clickParams.LogToOmniture();
