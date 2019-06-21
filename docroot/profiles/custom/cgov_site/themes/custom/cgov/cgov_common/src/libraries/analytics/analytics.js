@@ -483,8 +483,8 @@ $(document).ready(function() {
         let $text = $this.text().trim();
         let $data = $this.data('indexed-link').split('|');
         let $title = $data[0] || '';
-        let $linkName = $data[1] || '';
-        let $index = $data[2] || '';
+        let $linkName = $data[1] || 'CustomIndexedItemClick';
+        let $index = $data[2] || 'none';
         NCIAnalytics.CustomIndexedItemClick($this, $title, $text, $linkName, $index);
     });
 
