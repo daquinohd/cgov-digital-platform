@@ -485,7 +485,7 @@ $(document).ready(function() {
         let $title = $data[0] || '';
         let $linkName = $data[1] || '';
         let $index = $data[2] || '';
-        NCIAnalytics.ContainerItemClick($this, $title, $text, $linkName, $index);
+        NCIAnalytics.CustomIndexedItemClick($this, $title, $text, $linkName, $index);
     });
 
     // Track generic custom links. Attribute value: [text].

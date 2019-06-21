@@ -896,13 +896,10 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CustomLink: function(sender, linkData) {
-        let name = linkData.split('|');
-        let label = '';
-        let linkName = linkData;
-        if(name[1] !== 'undefined') {
-            linkName = name[0];
-            label = name[1];
-        }
+        if(linkData == null) linkData = 'empty';
+        let data = linkData.split('|');
+        let linkName = data[0] || 'CustomLink';
+        let label = data[1] || '';
         NCIAnalytics.GenericLinkTrack(sender, label, linkName);
     },
 
@@ -1187,7 +1184,7 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    ContainerItemClick: function(sender, title, text, linkName, index) {
+    CustomIndexedItemClick: function(sender, title, text, linkName, index) {
         NCIAnalytics.IndexedItemClick(sender, title, text, linkName, index, linkName);
     },
 
