@@ -896,13 +896,10 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CustomLink: function(sender, linkData) {
-        let name = linkData.split('|');
-        let label = '';
-        let linkName = linkData;
-        if(name[1] !== 'undefined') {
-            linkName = name[0];
-            label = name[1];
-        }
+        if(linkData == null) linkData = 'empty';
+        let data = linkData.split('|');
+        let linkName = data[0] || 'CustomLink';
+        let label = data[1] || '';
         NCIAnalytics.GenericLinkTrack(sender, label, linkName);
     },
 
@@ -911,11 +908,24 @@ var NCIAnalytics = {
         let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'GovDelivery');
         clickParams.Props = {
             4: label,
-            5: pageName,
+            5: pageName
         };
         clickParams.LogToOmniture();
     },
     
+    //******************************************************************************************************
+    CalloutBoxLinkTrack: function(sender, label, linkName) {
+        let callOut = 'CallOut';
+        let link = linkName + callOut;
+        let text = [linkName, callOut, label].join('_');
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', link);
+        
+        clickParams.Props = {
+            66: text
+        };
+        clickParams.LogToOmniture();
+    },
+
     //******************************************************************************************************
     /**
      * Generic / global link tracking method
@@ -1174,7 +1184,7 @@ var NCIAnalytics = {
     },
 
     //******************************************************************************************************
-    ContainerItemClick: function(sender, title, text, linkName, index) {
+    CustomIndexedItemClick: function(sender, title, text, linkName, index) {
         NCIAnalytics.IndexedItemClick(sender, title, text, linkName, index, linkName);
     },
 
@@ -1476,15 +1486,6 @@ var NCIAnalytics = {
         clickParams.Props = {
             42: fontSize,
             66: ((NCIAnalytics.siteSection) ? NCIAnalytics.siteSection + '_' : '') + 'font-resize_' + ((fontSize) ? fontSize.toLowerCase() : '')
-        };
-        clickParams.LogToOmniture();
-    },
-
-    //******************************************************************************************************
-    CalloutBoxClick: function(sender, value, linkName) {
-        var clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', linkName);
-        clickParams.Props = {
-            66: value
         };
         clickParams.LogToOmniture();
     },
@@ -1801,10 +1802,12 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     TableSortHeaderClick: function(sender) {
-        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SortTableHeaderClick');
+        let clickParams = new NCIAnalytics.ClickParams(sender,
+            'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
             5: 'table_sort',
         };
+
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
