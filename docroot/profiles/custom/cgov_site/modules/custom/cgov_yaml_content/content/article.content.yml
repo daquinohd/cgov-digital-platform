@@ -201,6 +201,10 @@
             computed_path: '/pets'
   field_pretty_url:
     value: 'test-content'
+  field_intro_text:
+    - format: "streamlined"
+      value: |
+        <p>Click links on this page to test custom analytics data attributes. Use of a multipronged approach within hospitals, including community centers, not only eliminated treatment disparities among black and white patients with early-stage lung cancer, it also improved treatment rates for all patients.</p>
   field_article_body:
     ### Data attributes / custom links
     - entity: 'paragraph'
