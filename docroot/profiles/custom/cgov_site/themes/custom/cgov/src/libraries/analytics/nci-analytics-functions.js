@@ -912,19 +912,6 @@ var NCIAnalytics = {
         };
         clickParams.LogToOmniture();
     },
-    
-    //******************************************************************************************************
-    CalloutBoxLinkTrack: function(sender, label, linkName) {
-        let callOut = 'CallOut';
-        let link = linkName + callOut;
-        let text = [linkName, callOut, label].join('_');
-        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', link);
-        
-        clickParams.Props = {
-            66: text
-        };
-        clickParams.LogToOmniture();
-    },
 
     //******************************************************************************************************
     /**
@@ -1486,6 +1473,19 @@ var NCIAnalytics = {
         clickParams.Props = {
             42: fontSize,
             66: ((NCIAnalytics.siteSection) ? NCIAnalytics.siteSection + '_' : '') + 'font-resize_' + ((fontSize) ? fontSize.toLowerCase() : '')
+        };
+        clickParams.LogToOmniture();
+    },
+
+    //******************************************************************************************************
+    CalloutBoxLinkTrack: function(sender, label, linkName) {
+        let callOut = 'CallOut';
+        let link = linkName + callOut;
+        let value = [linkName, callOut, label].join('_');
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', link);
+
+        clickParams.Props = {
+            66: value
         };
         clickParams.LogToOmniture();
     },
