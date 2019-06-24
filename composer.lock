@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "585cc7670852601c3c95d78f2746c8ac",
+    "content-hash": "2ba3cf0f63f83cef17470416fe3d1996",
     "packages": [
         {
             "name": "acquia/acsf-tools",
@@ -5859,6 +5859,9 @@
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "2921309: Port purge_drush commands to Drush 9": "https://www.drupal.org/files/issues/2019-03-11/2921309-30.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -13178,11 +13181,6 @@
         {
             "name": "webflo/drupal-core-require-dev",
             "version": "8.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webflo/drupal-core-require-dev.git",
-                "reference": "0f1f36e71d63e05f1bb599e0bfd20f7722b700a2"
-            },
             "require": {
                 "behat/mink": "1.7.x-dev",
                 "behat/mink-goutte-driver": "^1.2",
