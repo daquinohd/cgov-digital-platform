@@ -43,6 +43,7 @@ function _cgov_core_install_permissions(CgovCoreTools $siteHelper) {
       'access cgov_content_browser entity browser pages',
       'access cgov_embedded_content_browser entity browser pages',
       'access toolbar',
+      'use moderation sidebar',
       'link to any page',
       'use text format full_html',
       'use text format raw_html',
@@ -53,10 +54,13 @@ function _cgov_core_install_permissions(CgovCoreTools $siteHelper) {
       'access taxonomy overview',
       'administer taxonomy',
       'administer blocks',
+      'translate block_content',
       'administer menu',
       'delete content translations',
       'use editorial_workflow transition quick_publish_replace',
       'use editorial_workflow transition quick_publish',
+      'use simple_workflow transition create_new_draft',
+      'use simple_workflow transition publish',
     ],
     'authenticated' => [
       'access content',
@@ -102,6 +106,26 @@ function _cgov_core_install_permissions(CgovCoreTools $siteHelper) {
       // Set microsite theme colors after provisioning.
       'administer themes',
       'administer frontend globals',
+      // Let site_admin assign roles.
+      'assign admin_ui role',
+      'assign advanced_editor role',
+      'assign blog_manager role',
+      'assign content_author role',
+      'assign content_editor role',
+      'assign content_previewer role',
+      'assign image_manager role',
+      'assign layout_manager role',
+      'assign pdq_importer role',
+      'assign site_admin role',
+      'access site in maintenance mode',
+      'access files overview',
+      // Custom permissions.
+      'Basic site settings',
+      'File system',
+      'Logging and errors',
+      'RSS publishing',
+      'View plugins',
+      'Field list report',
     ],
   ];
 

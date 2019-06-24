@@ -30,6 +30,7 @@ dependencies:
       - cgov_core
   module:
     - cgov_syndication
+    - content_moderation
     - datetime
     - entity_browser
     - paragraphs_asymmetric_translation_widgets
@@ -274,9 +275,9 @@ content:
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_meta_tags: true
   promote: true

@@ -62,6 +62,8 @@ install:
   - metatag_dc_advanced
   - metatag_open_graph
   - metatag_twitter_cards
+  - moderation_sidebar
+  - role_delegation
   # from CGOV
   - cgov_core
   - cgov_site_section
