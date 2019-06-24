@@ -896,7 +896,9 @@ var NCIAnalytics = {
 
     //******************************************************************************************************
     CustomLink: function(sender, linkData) {
-        if(linkData == null) linkData = 'empty';
+        if (linkData == null || typeof(linkData) === 'undefined') {
+            linkData = '';
+        }
         let data = linkData.split('|');
         let linkName = data[0] || 'CustomLink';
         let label = data[1] || '';
