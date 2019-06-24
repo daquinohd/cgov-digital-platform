@@ -35,6 +35,12 @@ if [[ $target_env =~ ^ode\d* ]]; then
   target_env="ode";
 fi
 
+## Clear last install out of Memcache.
+## Drush CR will not work on a non-existant site. Drush CC will not find the memcached
+## backed bins if the site is not installed. So we made our own to work with empty sites
+## to clean out memcache. (DB backing stores disappear as soon as the DB is dropped.)
+drush cgov:destroy-cache
+
 ## Perform a fresh install.
 blt artifact:install:drupal --environment=$target_env -v --yes --no-interaction -D drush.ansi=false
 
