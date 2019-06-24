@@ -5,7 +5,59 @@
  * Contains the cgov_file functions.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function cgov_file_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity == NULL) {
+    return;
+  }
+
+  // Display mode of the _non-image_ entity.
+  $display_modes = [
+    'feature_card_image',
+    'thumbnail_card_image',
+    'panoramic_image',
+  ];
+
+  // If the promo image is set, remove field_image_article.
+  if (in_array($view_mode, $display_modes)) {
+    if ($entity->field_image_promotional->target_id) {
+      unset($build['field_image_article']);
+    }
+    // Otherwise, remove field_image_promotiona.
+    else {
+      unset($build['field_image_promotional']);
+    }
+  }
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function cgov_file_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity == NULL || $entity->bundle() != 'cgov_image') {
+    return;
+  }
+
+  // Display mode of the _non-image_ entity.
+  $display_modes = [
+    'field_media_image',
+    'field_override_img_featured',
+    'field_override_img_panoramic',
+    'field_override_img_social_media',
+    'field_override_img_thumbnail',
+  ];
+
+  if (!in_array($view_mode, $display_modes)) {
+    return;
+  }
+}
 
 /**
  * Implements hook_form_alter().
