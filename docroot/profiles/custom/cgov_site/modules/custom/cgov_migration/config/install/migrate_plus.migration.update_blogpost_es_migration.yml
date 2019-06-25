@@ -202,10 +202,23 @@ process:
   langcode: langcode
   field_author: author
 
+
+  field_intro_text/value:
+    -
+      plugin: replace_links
+      source: field_intro_text
+    -
+      plugin: remove_rx_wrapper
+
+
+  field_intro_text/format:
+    plugin: default_value
+    default_value: streamlined
+
   body/value:
     -
       plugin: generate_placeholders
-      source: field_body_section_content
+      source: body
     -
       plugin: replace_embeds
     -
