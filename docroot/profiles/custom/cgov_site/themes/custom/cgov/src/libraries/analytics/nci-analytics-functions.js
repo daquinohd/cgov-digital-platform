@@ -1804,12 +1804,10 @@ var NCIAnalytics = {
     },
     /* ********************************************************************** */
     TableSortHeaderClick: function(sender) {
-        let clickParams = new NCIAnalytics.ClickParams(sender,
-            'nciglobal', 'o', 'SortTableHeaderClick');
+        let clickParams = new NCIAnalytics.ClickParams(sender, 'nciglobal', 'o', 'SortTableHeaderClick');
         clickParams.Props = {
-            5: 'table_sort',
+            5: 'table_sort'
         };
-
         clickParams.LogToOmniture();
     },
     /* ********************************************************************** */
