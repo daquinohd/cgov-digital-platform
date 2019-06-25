@@ -751,7 +751,7 @@ var NCIAnalytics = {
         };            
         
         clickParams.Evars = {
-            62: 'Clinical Trials: Print Results Page',
+            62: 'Clinical Trials: Print Results Page'
         };
         if(linkVal == "Email" || linkVal == "Print Page"){
             clickParams.Events = [17];
