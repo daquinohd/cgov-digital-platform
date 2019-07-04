@@ -73,15 +73,15 @@ function _get_blog_post_path($node) {
       $seriesEntity = $node->field_blog_series->entity;
       $seriesEntity = $entityRepository->getTranslationFromContext($seriesEntity, $lang);
 
-      // Get the computed path of the series and append year.
+      // Get the computed path of the series and pretty URL if not empty.
       $tid = $seriesEntity->field_site_section->target_id;
-      $path = Term::load($tid)->get('computed_path')->value . '/' . $year;
-
-      // Get the pretty URL if not empty.
+      $path = Term::load($tid)->get('computed_path')->value;
       $purl = $seriesEntity->field_pretty_url->value;
       if (!empty($purl)) {
         $path .= ('/' . $purl);
       }
+      // Append year.
+      $path .= ('/' . $year);
     }
     catch (Exception $e) {
       \Drupal::logger('cgov_blog')
