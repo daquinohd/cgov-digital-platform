@@ -64,7 +64,7 @@ function cgov_blog_tokens($type, $tokens, array $data, array $options, Bubbleabl
 function _get_blog_post_path($node) {
   $entityRepository = \Drupal::service('entity.repository');
   $lang = $node->language()->getId();
-  $year = '/' . substr($node->field_date_posted->value, 0, 4);
+  $year = substr($node->field_date_posted->value, 0, 4);
   $path = FALSE;
 
   if (!empty($node->get('field_blog_series')->first())) {
@@ -73,14 +73,15 @@ function _get_blog_post_path($node) {
       $seriesEntity = $node->field_blog_series->entity;
       $seriesEntity = $entityRepository->getTranslationFromContext($seriesEntity, $lang);
 
-      // Get the computed path of the series.
+      // Get the computed path of the series and append year.
       $tid = $seriesEntity->field_site_section->target_id;
+      $path = Term::load($tid)->get('computed_path')->value . '/' . $year;
+
+      // Get the pretty URL if not empty.
       $purl = $seriesEntity->field_pretty_url->value;
-      $path = Term::load($tid)->get('computed_path')->value;
       if (!empty($purl)) {
         $path .= ('/' . $purl);
       }
-      $path .= $year;
     }
     catch (Exception $e) {
       \Drupal::logger('cgov_blog')
