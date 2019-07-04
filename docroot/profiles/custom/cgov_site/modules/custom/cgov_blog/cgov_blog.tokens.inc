@@ -47,11 +47,7 @@ function cgov_blog_tokens($type, $tokens, array $data, array $options, Bubbleabl
         }
         break;
 
-      // Replace 'taxonomy/term/[tid]' with owner Site Section and Pretty URL.
-      case 'blog-topic-path':
-        if (!empty($data['term'])) {
-          $replacements[$original] = _get_blog_topic_path($data['term'] ?: $replacements[$original]);
-        }
+      default;
         break;
     }
   }
@@ -79,36 +75,16 @@ function _get_blog_post_path($node) {
 
       // Get the computed path of the series.
       $tid = $seriesEntity->field_site_section->target_id;
+      $purl = $seriesEntity->field_pretty_url->value;
       $path = Term::load($tid)->get('computed_path')->value;
-      $path = $path . $year;
+      if (!empty($purl)) {
+        $path .= ('/' . $purl);
+      }
+      $path .= $year;
     }
     catch (Exception $e) {
       \Drupal::logger('cgov_blog')
         ->notice('Could not retrieve blog computed path: ' . $path);
-    }
-  }
-  return $path;
-}
-
-/**
- * Get the path for a blog taxnomy term.
- *
- * @throws \Drupal\Core\TypedData\Exception\MissingDataException
- *   Error for missing data.
- */
-function _get_blog_topic_path($term) {
-  $path = FALSE;
-
-  if (!empty($term->field_pretty_url->value)) {
-    try {
-      $nid = $term->get('field_owner_blog')->first()->getValue()['target_id'];
-      $name = $term->field_pretty_url->value;
-      $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-      $path = $alias . '/' . $name;
-    }
-    catch (Exception $e) {
-      \Drupal::logger('cgov_blog')
-        ->notice('Could not retrieve computed path for Blog Topic nid: ' . $nid);
     }
   }
   return $path;
