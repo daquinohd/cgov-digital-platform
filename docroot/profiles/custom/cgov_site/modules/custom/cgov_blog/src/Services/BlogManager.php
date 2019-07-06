@@ -256,47 +256,6 @@ class BlogManager implements BlogManagerInterface {
   }
 
   /**
-   * Get Blog Series topic (category) descriptions.
-   */
-  public function getSeriesTopicDescription() {
-    $topics = $this->getSeriesTopics();
-    $descriptions = [];
-
-    // Create an array of topics that match the owner Blog Series.
-    foreach ($topics as $topic) {
-      $tid = $topic->tid;
-      $url = $this->loadBlogTopic($tid)->field_topic_pretty_url->value ?? $tid;
-      $desc = $this->loadBlogTopic($tid)->description->value;
-      $descriptions[$url] = $desc;
-    }
-    return $descriptions;
-  }
-
-  /**
-   * Get Blog Series topic (category) names.
-   */
-  public function getSeriesTopicTitle() {
-    $topics = $this->getSeriesTopics();
-    $names = [];
-
-    // Create an array of topics that match the owner Blog Series.
-    foreach ($topics as $topic) {
-      // Build tid-based titles.
-      $tid = $topic->tid;
-      $name = $this->loadBlogTopic($tid)->getName();
-      $names[$tid] = $name;
-
-      // Build url-based titles.
-      $url = $this->loadBlogTopic($tid)->field_topic_pretty_url->value ?? FALSE;
-      if ($url) {
-        $names[$url] = $name;
-      }
-    }
-
-    return $names;
-  }
-
-  /**
    * The the URL path for a node based on NID.
    *
    * @param string $nid
