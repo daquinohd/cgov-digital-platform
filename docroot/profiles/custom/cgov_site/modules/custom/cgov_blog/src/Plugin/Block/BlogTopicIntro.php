@@ -71,9 +71,9 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
     $build = [];
 
     // Return collection of intros.
-    $topic_intros = $this->getTopicIntros();
+    $topic_intro = $this->getTopicIntro();
     $build = [
-      'topic_intros' => $topic_intros,
+      'topic_intro' => $topic_intro,
     ];
     return $build;
   }
@@ -83,19 +83,27 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
    *
    * {@inheritdoc}
    */
-  private function getTopicIntros() {
-    // Get all of the associated categories their description fields.
+  private function getTopicIntro() {
+    // Get collection of associated topics and the filter from the URL.
+    $description = '';
     $topics = $this->blogManager->getSeriesTopics();
-    $descriptions = [];
-
-    // Create an array of topics that match the owner Blog Series.
+    $filter = 'biology';
+    /*
+     * $filter = \Drupal::request()->query->get('topic');
+     */
+    // Get Blog Topic taxonomy terms in English and Spanish.
     foreach ($topics as $topic) {
       $tid = $topic->tid;
-      $url = $this->blogManager->loadBlogTopic($tid)->field_topic_pretty_url->value ?? $tid;
-      $desc = $this->blogManager->loadBlogTopic($tid)->description->value;
-      $descriptions[$url] = $desc;
+      $urlEn = $this->blogManager->loadBlogTopic($tid, 'en')->field_topic_pretty_url->value ?? $tid;
+      $urlEs = $this->blogManager->loadBlogTopic($tid, 'es')->field_topic_pretty_url->value ?? $tid;
+
+      // If a pretty URL / filter match is found, return the description field.
+      if ($urlEn == $filter || $urlEs == $filter) {
+        $description = $this->blogManager->loadBlogTopic($tid)->description->value;
+        break;
+      }
     }
-    return $descriptions;
+    return $description;
   }
 
 }

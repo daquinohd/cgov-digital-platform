@@ -168,8 +168,10 @@ class BlogManager implements BlogManagerInterface {
    *
    * @param string $tid
    *   A taxonomy term ID.
+   * @param string $lang
+   *   A language code (optional).
    */
-  public function loadBlogTopic($tid) {
+  public function loadBlogTopic($tid, $lang = FALSE) {
     $taxonomy_storage = $this->entityTypeManager->getStorage('taxonomy_term');
     $topic = $taxonomy_storage->load($tid) ?? NULL;
 
@@ -179,8 +181,8 @@ class BlogManager implements BlogManagerInterface {
      * language if translation not exists.
      */
     if ($topic != NULL) {
-      $lang = $this->getCurrentLang();
-      $topic = $this->entityRepository->getTranslationFromContext($topic, $lang);
+      $langs = $lang ?? $this->getCurrentLang();
+      $topic = $this->entityRepository->getTranslationFromContext($topic, $langs);
     }
 
     return $topic;
