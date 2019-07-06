@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\TypedData\TranslatableInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Blog Manager Service.
@@ -51,6 +52,13 @@ class BlogManager implements BlogManagerInterface {
   protected $aliasManager;
 
   /**
+   * An HTTP request.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * Constructor for BlogManager object.
    *
    * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
@@ -63,19 +71,23 @@ class BlogManager implements BlogManagerInterface {
    *   The route matcher.
    * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
    *   The path alias manager.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
+   *   An HTTP request.
    */
   public function __construct(
     QueryFactory $entity_query,
     EntityRepositoryInterface $entity_repository,
     EntityTypeManagerInterface $entity_type_manager,
     RouteMatchInterface $route_matcher,
-    AliasManagerInterface $alias_manager
+    AliasManagerInterface $alias_manager,
+    RequestStack $request_stack
   ) {
     $this->entityQuery = $entity_query;
     $this->entityRepository = $entity_repository;
     $this->entityTypeManager = $entity_type_manager;
     $this->routeMatcher = $route_matcher;
     $this->aliasManager = $alias_manager;
+    $this->requestStack = $request_stack;
   }
 
   /**
@@ -255,6 +267,38 @@ class BlogManager implements BlogManagerInterface {
       }
     }
     return $topics;
+  }
+
+  /**
+   * Get Blog Series topic based on field_pretty_url.
+   */
+  public function getSeriesTopicByUrl() {
+    // Get collection of associated topics and the filter from the URL.
+    $rtn = NULL;
+    $filter = $this->requestStack->getCurrentRequest()->query->get('topic');
+    $topics = $this->getSeriesTopics();
+
+    // Get Blog Topic taxonomy terms in English and Spanish.
+    foreach ($topics as $topic) {
+      $tid = $topic->tid;
+
+      /*
+       * If a filter match is found, return topic with the matching pretty URL.
+       * LoadBlogTopic() returns the term matching the current node language.
+       */
+      $urlEn = $this->loadBlogTopic($tid, 'en')->field_topic_pretty_url->value ?? $tid;
+      if ($urlEn === $filter) {
+        $rtn = $this->loadBlogTopic($tid);
+        break;
+      }
+      $urlEs = $this->loadBlogTopic($tid, 'es')->field_topic_pretty_url->value ?? $tid;
+      if ($urlEs === $filter) {
+        $rtn = $this->loadBlogTopic($tid);
+        break;
+      }
+
+    }
+    return $rtn;
   }
 
   /**

@@ -67,43 +67,25 @@ class BlogTopicIntro extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   public function build() {
-    // Empty build object.
-    $build = [];
-
-    // Return collection of intros.
     $topic_intro = $this->getTopicIntro();
     $build = [
       'topic_intro' => $topic_intro,
+      '#cache' => [
+        'tags' => [
+          'node_list',
+        ],
+      ],
     ];
     return $build;
   }
 
   /**
-   * Get category descriptions.
-   *
-   * {@inheritdoc}
+   * Get category description for intro text.
    */
   private function getTopicIntro() {
-    // Get collection of associated topics and the filter from the URL.
-    $description = '';
-    $topics = $this->blogManager->getSeriesTopics();
-    $filter = 'biology';
-    /*
-     * $filter = \Drupal::request()->query->get('topic');
-     */
-    // Get Blog Topic taxonomy terms in English and Spanish.
-    foreach ($topics as $topic) {
-      $tid = $topic->tid;
-      $urlEn = $this->blogManager->loadBlogTopic($tid, 'en')->field_topic_pretty_url->value ?? $tid;
-      $urlEs = $this->blogManager->loadBlogTopic($tid, 'es')->field_topic_pretty_url->value ?? $tid;
-
-      // If a pretty URL / filter match is found, return the description field.
-      if ($urlEn == $filter || $urlEs == $filter) {
-        $description = $this->blogManager->loadBlogTopic($tid)->description->value;
-        break;
-      }
-    }
-    return $description;
+    $topic = $this->blogManager->getSeriesTopicByUrl();
+    $intro = $topic->description->value ?? '';
+    return $intro;
   }
 
 }

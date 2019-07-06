@@ -67,37 +67,25 @@ class BlogTopicTitle extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   public function build() {
-    $topic_titles = $this->getTopicTitles();
+    $topic_title = $this->getTopicTitle();
     $build = [
-      'topic_titles' => $topic_titles,
+      'topic_title' => $topic_title,
+      '#cache' => [
+        'tags' => [
+          'node_list',
+        ],
+      ],
     ];
     return $build;
   }
 
   /**
-   * Get category descriptions.
-   *
-   * {@inheritdoc}
+   * Get topic title.
    */
-  private function getTopicTitles() {
-    // Get all of the associated categories their description fields.
-    $topics = $this->blogManager->getSeriesTopics();
-    $names = [];
-
-    // Create an array of topics that match the owner Blog Series.
-    foreach ($topics as $topic) {
-      // Build tid-based titles.
-      $tid = $topic->tid;
-      $name = $this->blogManager->loadBlogTopic($tid)->getName();
-      $names[$tid] = $name;
-
-      // Build url-based titles.
-      $url = $this->blogManager->loadBlogTopic($tid)->field_topic_pretty_url->value ?? FALSE;
-      if ($url) {
-        $names[$url] = $name;
-      }
-    }
-    return $names;
+  private function getTopicTitle() {
+    $topic = $this->blogManager->getSeriesTopicByUrl();
+    $title = (!empty($topic) ? $topic->getName() : '');
+    return $title;
   }
 
 }
