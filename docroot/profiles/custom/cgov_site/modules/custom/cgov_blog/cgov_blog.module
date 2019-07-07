@@ -96,6 +96,21 @@ function cgov_blog_views_pre_view(ViewExecutable $view, $display_id, array &$arg
 }
 
 /**
+ * Preprocess function for block templates.
+ */
+function cgov_blog_preprocess_block(&$variables) {
+  if (!empty($_GET['topic']) || !empty($_GET['year'])) {
+    if ($variables['plugin_id'] == 'cgov_breadcrumb') {
+      $variables['content']['breadcrumbs'][] = [
+        'href' => '#',
+        'label' => 'Test Dion',
+      ];
+
+    }
+  }
+}
+
+/**
  * Get an array of all taxonomy/owner blog pairs.
  */
 function _get_id_pairs(array $form) {
