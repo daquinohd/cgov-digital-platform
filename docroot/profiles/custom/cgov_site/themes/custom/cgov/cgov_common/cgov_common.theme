@@ -128,3 +128,16 @@ function cgov_common_preprocess_field(&$variables) {
     $variables['node_id'] = $nid;
   }
 }
+
+/**
+ * Preprocess function for block templates.
+ */
+function cgov_common_preprocess_block(&$variables) {
+  if ($variables['plugin_id'] == 'cgov_breadcrumb') {
+    $variables['content']['breadcrumbs'][] = [
+      'href' => '#',
+      'label' => 'Test',
+    ];
+  }
+
+}
