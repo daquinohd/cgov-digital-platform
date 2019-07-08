@@ -147,7 +147,7 @@ function cgov_blog_preprocess_block(&$variables) {
     // Proceed only if the view contains query params.
     if (!empty($_GET['topic']) || !empty($_GET['year'])) {
       $nid = \Drupal::routeMatch()->getRawParameter('node');
-      $node = entity_load('node', $nid);
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
 
       // Limit to Blog Series content type.
       if ($node->bundle() === 'cgov_blog_series') {
