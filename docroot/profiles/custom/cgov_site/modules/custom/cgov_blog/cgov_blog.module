@@ -99,17 +99,22 @@ function cgov_blog_views_pre_view(ViewExecutable $view, $display_id, array &$arg
  * Preprocess function for block templates.
  */
 function cgov_blog_preprocess_block(&$variables) {
+  // Draw extra breadcrumb level for Blog Series views containing query params.
   if (!empty($_GET['topic']) || !empty($_GET['year'])) {
+    $nid = \Drupal::routeMatch()->getRawParameter('node');
+    $node = entity_load('node', $nid);
 
-    if ($variables['plugin_id'] == 'cgov_breadcrumb') {
-
-      $nid = \Drupal::routeMatch()->getRawParameter('node');
-      $href = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-      $title = 'NOT CancerGov';
-      $variables['content']['breadcrumbs'][] = [
-        'href' => $href,
-        'label' => $title,
-      ];
+    // Limit to Blog Series content type.
+    if ($node->bundle() === 'cgov_blog_series') {
+      // Update the breadcrumb block only.
+      if ($variables['plugin_id'] == 'cgov_breadcrumb') {
+        $href = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+        $label = $node->field_card_title->value ?? $node->field_Browser_title->value;
+        $variables['content']['breadcrumbs'][] = [
+          'href' => $href,
+          'label' => $label,
+        ];
+      }
     }
   }
 }
