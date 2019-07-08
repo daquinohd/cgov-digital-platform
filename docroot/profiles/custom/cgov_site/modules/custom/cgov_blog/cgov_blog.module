@@ -147,6 +147,7 @@ function cgov_blog_preprocess_block(&$variables) {
     // Proceed only if the view contains query params.
     if (!empty($_GET['topic']) || !empty($_GET['year'])) {
       $nid = \Drupal::routeMatch()->getRawParameter('node');
+      $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
 
       // Limit to Blog Series content type.
@@ -154,6 +155,7 @@ function cgov_blog_preprocess_block(&$variables) {
         $section = $node->field_site_section->entity;
         $label = $section->field_navigation_label->value ?? $section->name->value;
         $href = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+        $lang = $lang ?? '';
         $variables['content']['breadcrumbs'][] = [
           'href' => $href,
           'label' => $label,
