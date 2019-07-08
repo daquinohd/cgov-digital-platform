@@ -151,9 +151,9 @@ function cgov_blog_preprocess_block(&$variables) {
 
       // Limit to Blog Series content type.
       if ($node->bundle() === 'cgov_blog_series') {
+        $section = $node->field_site_section->entity;
+        $label = $section->field_navigation_label->value ?? $section->name->value;
         $href = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-        $sect = $node->field_site_section->entity;
-        $label = $sect->field_navigation_label->value;
         $variables['content']['breadcrumbs'][] = [
           'href' => $href,
           'label' => $label,
