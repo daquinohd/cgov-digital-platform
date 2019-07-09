@@ -5,6 +5,7 @@ namespace Drupal\cgov_core\Plugin\Block;
 use Drupal\cgov_core\CgovCoreTools;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityRepository;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -19,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   category = @Translation("Cgov Digital Platform"),
  * )
  */
-class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
+class DisqusComments extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Cgov core site helper tools.
    *
@@ -42,7 +43,7 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
   protected $entityTypeManager;
 
   /**
-   * Constructs a CgovDisqus object.
+   * Constructs a DisqusComments object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -124,36 +125,42 @@ class CgovDisqus extends BlockBase implements ContainerFactoryPluginInterface {
     // Get entity object.
     if ($current = $this->getCurrEntity()) {
       $content_type = $current->bundle();
+      $lang = $current->language()->getId();
+      if (!isset($content_type)) {
+        return $build;
+      }
     }
 
     // Draw the Disqus block for a given content type.
-    if (isset($content_type)) {
-      switch ($content_type) {
+    switch ($content_type) {
 
-        // Disqus settings for a Blog Post.
-        case 'cgov_blog_post':
-          $series_nid = $current->get('field_blog_series')->target_id;
-          $series_node = $this->getNodeStorage()->load($series_nid);
-          if ($series_node) {
-            // Check that "Allow comments" is true.
-            if (intval($series_node->get('field_allow_comments')->value) == 1) {
-              // Check that the Series Shortname field has a value.
-              $shortname = $series_node->get('field_blog_series_shortname')->value;
-              if (strlen($shortname) > 0) {
-                $tier = $this->cgovCoreTools->isProd() ? 'prod' : 'dev';
-                $build = [
-                  '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
-                ];
-              }
+      // Disqus settings for a Blog Post.
+      case 'cgov_blog_post':
+        $series_nid = $current->get('field_blog_series')->target_id;
+        $series_node = $this->getNodeStorage()->load($series_nid);
+        if ($series_node) {
+          // Check that "Allow comments" is true.
+          $series_node = \Drupal::service('entity.repository')->getTranslationFromContext($series_node, $lang);
+
+          if (intval($series_node->get('field_allow_comments')->value) == 1) {
+            // Check that the Series Shortname field has a value.
+            $shortname = $series_node->get('field_blog_series_shortname')->value;
+
+            if (strlen($shortname) > 0) {
+              $tier = $this->cgovCoreTools->isProd() ? 'prod' : 'dev';
+              $build = [
+                '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
+              ];
             }
           }
-          break;
+        }
+        break;
 
-        // No other Disqus content types atm.
-        default:
-          break;
-      }
+      // No other Disqus content types atm.
+      default:
+        break;
     }
+    
     return $build;
   }
 
