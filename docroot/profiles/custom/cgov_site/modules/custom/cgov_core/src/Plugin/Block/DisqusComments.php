@@ -43,6 +43,13 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
   protected $entityTypeManager;
 
   /**
+   * Entity Repository.
+   *
+   * @var \Drupal\Core\Entity\EntityRepository
+   */
+  protected $entityRepository;
+
+  /**
    * Constructs a DisqusComments object.
    *
    * @param array $configuration
@@ -55,6 +62,8 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
    *   The route matcher.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   * @param \Drupal\Core\Entity\EntityRepository $entity_repository
+   *   Entity repository.
    * @param Drupal\cgov_core\CgovCoreTools $cgov_core_tools
    *   Cgov core site helper tools.
    */
@@ -64,11 +73,13 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
     $plugin_definition,
     RouteMatchInterface $route_matcher,
     EntityTypeManagerInterface $entity_type_manager,
+    EntityRepository $entity_repository,
     CgovCoreTools $cgov_core_tools
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeMatcher = $route_matcher;
     $this->entityTypeManager = $entity_type_manager;
+    $this->entityRepository = $entity_repository;
     $this->cgovCoreTools = $cgov_core_tools;
   }
 
@@ -82,6 +93,7 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
       $plugin_definition,
       $container->get('current_route_match'),
       $container->get('entity_type.manager'),
+      $container->get('entity.repository'),
       $container->get('cgov_core.tools')
     );
   }
@@ -134,24 +146,25 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
     // Draw the Disqus block for a given content type.
     switch ($content_type) {
 
-      // Disqus settings for a Blog Post.
+      // Draw Disqus form on Blog Post per Blog Series settings.
       case 'cgov_blog_post':
         $series_nid = $current->get('field_blog_series')->target_id;
         $series_node = $this->getNodeStorage()->load($series_nid);
+
+        // Load the Blog Series node for the current language.
         if ($series_node) {
-          // Check that "Allow comments" is true.
-          $series_node = \Drupal::service('entity.repository')->getTranslationFromContext($series_node, $lang);
+          $series_node = $this->entityRepository->getTranslationFromContext($series_node, $lang);
+          $allow_comments = intval($series_node->field_allow_comments->value);
+          $shortname = $series_node->field_blog_series_shortname->value;
 
-          if (intval($series_node->get('field_allow_comments')->value) == 1) {
-            // Check that the Series Shortname field has a value.
-            $shortname = $series_node->get('field_blog_series_shortname')->value;
-
-            if (strlen($shortname) > 0) {
-              $tier = $this->cgovCoreTools->isProd() ? 'prod' : 'dev';
-              $build = [
-                '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
-              ];
-            }
+          /* If allow comments is TRUE and shortname value is set,
+           * draw Disqus embed tag.
+           */
+          if ($allow_comments == 1 && strlen($shortname) > 0) {
+            $tier = $this->cgovCoreTools->isProd() ? 'prod' : 'dev';
+            $build = [
+              '#markup' => 'https://' . $shortname . '-' . $tier . '.disqus.com/embed.js',
+            ];
           }
         }
         break;
@@ -160,7 +173,7 @@ class DisqusComments extends BlockBase implements ContainerFactoryPluginInterfac
       default:
         break;
     }
-    
+
     return $build;
   }
 
