@@ -225,8 +225,17 @@ var AppMeasurementCustom = {
             
             // Set pageType based on dcterms.type meta tag.
             s.pageType = getNciMetaTagContent('[name="dcterms.type"]');
-            if (s.pageType === 'cgvBlogPost') {
-                s.eVar48 = s.eVar44 + ' Viewer';
+
+            // Set pageType-specific values.
+            let s_pageType = s.pageType;
+            switch (s_pageType)
+            {
+                case 'cgvBlogPost':
+                    s.eVar48 = s.eVar44 + ' Viewer';
+                case 'errorpage':
+                    s.pageName = window.location.hostname + window.location.pathname;
+                default:
+                    break;
             }
 
             // Set concatenated events list.
