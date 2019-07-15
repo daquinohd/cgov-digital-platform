@@ -48,6 +48,7 @@ $(document).ready(function() {
 
     // Use the Adobe dynamic pageName value.
     var pageName = 'D=pageName';
+    var hostname = document.location.hostname;
     var trimmedPathname = document.location.pathname.replace(/\/$/, '');
 
     // PAGE OPTIONS MODULE
@@ -58,7 +59,7 @@ $(document).ready(function() {
 
     // FLOATING DELIGHTER MODULE
     registerCustomEventListener('NCI.floating-delighter.click', target => {
-        NCIAnalytics.HomePageDelighterClick(target, 'hp_find', pageName);
+        NCIAnalytics.HomePageDelighterClick(target, 'hp_find', hostname + trimmedPathname);
     });
 
     // If the screen is resized past a different breakpoint, track the variable and event
